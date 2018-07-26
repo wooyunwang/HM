@@ -57,9 +57,18 @@
   <ItemGroup>
     <Compile Include="Class1Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebApi\AuthControllerTests.cs" />
+    <Compile Include="WebApi\InfoControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HM.MasterControl\HM.MasterControl.csproj">
+      <Project>{30AFD40B-AC57-47FE-8A07-E6FBA341FC71}</Project>
+      <Name>HM.MasterControl</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

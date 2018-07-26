@@ -30,6 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.pnlMain = new HM.Form_.HMPanel();
+            this.GbxConsole = new System.Windows.Forms.GroupBox();
+            this.LabKey = new HM.Form_.HMLabel();
+            this.TxtMsg = new HM.Form_.HMTextBox();
+            this.TxtKey = new HM.Form_.HMTextBox();
+            this.BtnOpenDir = new HM.Form_.HMButton();
+            this.BtnClear = new HM.Form_.HMButton();
             this.GbxTestAction = new System.Windows.Forms.GroupBox();
             this.TxtBDoorTimes = new HM.Form_.HMTextBox();
             this.TxtADoorTimes = new HM.Form_.HMTextBox();
@@ -45,7 +51,6 @@
             this.BtnBothDirection = new HM.Form_.HMButton();
             this.BtnInDirection = new HM.Form_.HMButton();
             this.BtnOutDirection = new HM.Form_.HMButton();
-            this.BtnClear = new HM.Form_.HMButton();
             this.GbxMode = new System.Windows.Forms.GroupBox();
             this.TogMode = new HM.Form_.HMToggle();
             this.BtnBPeakMode = new HM.Form_.HMButton();
@@ -135,12 +140,8 @@
             this.MtpHome = new MetroFramework.Controls.MetroTabPage();
             this.MtpParts = new MetroFramework.Controls.MetroTabPage();
             this.MtpSetting = new MetroFramework.Controls.MetroTabPage();
-            this.BtnOpenDir = new HM.Form_.HMButton();
-            this.TxtMsg = new HM.Form_.HMTextBox();
-            this.TxtKey = new HM.Form_.HMTextBox();
-            this.LabKey = new HM.Form_.HMLabel();
-            this.GbxConsole = new System.Windows.Forms.GroupBox();
             this.pnlMain.SuspendLayout();
+            this.GbxConsole.SuspendLayout();
             this.GbxTestAction.SuspendLayout();
             this.GbxDirect.SuspendLayout();
             this.GbxMode.SuspendLayout();
@@ -151,11 +152,13 @@
             this.GbxPassengerFlow.SuspendLayout();
             this.HtcMain.SuspendLayout();
             this.MtpHome.SuspendLayout();
-            this.GbxConsole.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMain
             // 
+            this.pnlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMain.BackColor = System.Drawing.Color.White;
             this.pnlMain.Controls.Add(this.GbxConsole);
             this.pnlMain.Controls.Add(this.GbxTestAction);
@@ -166,18 +169,81 @@
             this.pnlMain.Controls.Add(this.GbxInputScan);
             this.pnlMain.Controls.Add(this.GbxOutPutControl);
             this.pnlMain.Controls.Add(this.GbxPassengerFlow);
-            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.HorizontalScrollbarBarColor = true;
             this.pnlMain.HorizontalScrollbarHighlightOnWheel = false;
             this.pnlMain.HorizontalScrollbarSize = 8;
-            this.pnlMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlMain.Location = new System.Drawing.Point(2, 12);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1180, 643);
+            this.pnlMain.Size = new System.Drawing.Size(1176, 635);
             this.pnlMain.TabIndex = 0;
             this.pnlMain.VerticalScrollbarBarColor = true;
             this.pnlMain.VerticalScrollbarHighlightOnWheel = false;
             this.pnlMain.VerticalScrollbarSize = 8;
+            // 
+            // GbxConsole
+            // 
+            this.GbxConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GbxConsole.Controls.Add(this.LabKey);
+            this.GbxConsole.Controls.Add(this.TxtMsg);
+            this.GbxConsole.Controls.Add(this.TxtKey);
+            this.GbxConsole.Controls.Add(this.BtnOpenDir);
+            this.GbxConsole.Controls.Add(this.BtnClear);
+            this.GbxConsole.Location = new System.Drawing.Point(506, 120);
+            this.GbxConsole.Name = "GbxConsole";
+            this.GbxConsole.Size = new System.Drawing.Size(659, 504);
+            this.GbxConsole.TabIndex = 80;
+            this.GbxConsole.TabStop = false;
+            this.GbxConsole.Text = "输出窗口";
+            // 
+            // LabKey
+            // 
+            this.LabKey.AutoSize = true;
+            this.LabKey.Location = new System.Drawing.Point(12, 34);
+            this.LabKey.Name = "LabKey";
+            this.LabKey.Size = new System.Drawing.Size(51, 19);
+            this.LabKey.TabIndex = 79;
+            this.LabKey.Text = "关键字";
+            // 
+            // TxtMsg
+            // 
+            this.TxtMsg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtMsg.Location = new System.Drawing.Point(6, 68);
+            this.TxtMsg.Multiline = true;
+            this.TxtMsg.Name = "TxtMsg";
+            this.TxtMsg.ReadOnly = true;
+            this.TxtMsg.Size = new System.Drawing.Size(647, 430);
+            this.TxtMsg.TabIndex = 77;
+            // 
+            // TxtKey
+            // 
+            this.TxtKey.Location = new System.Drawing.Point(75, 33);
+            this.TxtKey.Name = "TxtKey";
+            this.TxtKey.Size = new System.Drawing.Size(167, 20);
+            this.TxtKey.TabIndex = 78;
+            // 
+            // BtnOpenDir
+            // 
+            this.BtnOpenDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnOpenDir.Location = new System.Drawing.Point(544, 30);
+            this.BtnOpenDir.Name = "BtnOpenDir";
+            this.BtnOpenDir.Size = new System.Drawing.Size(110, 23);
+            this.BtnOpenDir.TabIndex = 76;
+            this.BtnOpenDir.Text = "打开日志文件夹";
+            // 
+            // BtnClear
+            // 
+            this.BtnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnClear.Location = new System.Drawing.Point(457, 30);
+            this.BtnClear.Name = "BtnClear";
+            this.BtnClear.Size = new System.Drawing.Size(75, 23);
+            this.BtnClear.TabIndex = 32;
+            this.BtnClear.Text = "全部清空";
+            this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // GbxTestAction
             // 
@@ -197,7 +263,7 @@
             this.GbxTestAction.Margin = new System.Windows.Forms.Padding(2);
             this.GbxTestAction.Name = "GbxTestAction";
             this.GbxTestAction.Padding = new System.Windows.Forms.Padding(2);
-            this.GbxTestAction.Size = new System.Drawing.Size(663, 105);
+            this.GbxTestAction.Size = new System.Drawing.Size(659, 105);
             this.GbxTestAction.TabIndex = 74;
             this.GbxTestAction.TabStop = false;
             this.GbxTestAction.Text = "测试操作&系统配置";
@@ -218,7 +284,6 @@
             // 
             // BtnEmu
             // 
-            this.BtnEmu.Highlight = true;
             this.BtnEmu.Location = new System.Drawing.Point(309, 20);
             this.BtnEmu.Name = "BtnEmu";
             this.BtnEmu.Size = new System.Drawing.Size(106, 48);
@@ -227,7 +292,6 @@
             // 
             // BtnStartTest
             // 
-            this.BtnStartTest.Highlight = true;
             this.BtnStartTest.Location = new System.Drawing.Point(201, 20);
             this.BtnStartTest.Name = "BtnStartTest";
             this.BtnStartTest.Size = new System.Drawing.Size(106, 48);
@@ -255,7 +319,6 @@
             // button38
             // 
             this.button38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button38.Highlight = true;
             this.button38.Location = new System.Drawing.Point(218, 74);
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(75, 23);
@@ -265,7 +328,6 @@
             // button36
             // 
             this.button36.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button36.Highlight = true;
             this.button36.Location = new System.Drawing.Point(14, 74);
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(102, 23);
@@ -275,7 +337,6 @@
             // button37
             // 
             this.button37.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button37.Highlight = true;
             this.button37.Location = new System.Drawing.Point(130, 74);
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(75, 23);
@@ -285,7 +346,6 @@
             // btnVoice
             // 
             this.btnVoice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnVoice.Highlight = true;
             this.btnVoice.Location = new System.Drawing.Point(307, 74);
             this.btnVoice.Name = "btnVoice";
             this.btnVoice.Size = new System.Drawing.Size(106, 23);
@@ -308,7 +368,6 @@
             // 
             // BtnBothDirection
             // 
-            this.BtnBothDirection.Highlight = true;
             this.BtnBothDirection.Location = new System.Drawing.Point(22, 28);
             this.BtnBothDirection.Name = "BtnBothDirection";
             this.BtnBothDirection.Size = new System.Drawing.Size(75, 23);
@@ -318,7 +377,6 @@
             // 
             // BtnInDirection
             // 
-            this.BtnInDirection.Highlight = true;
             this.BtnInDirection.Location = new System.Drawing.Point(106, 28);
             this.BtnInDirection.Name = "BtnInDirection";
             this.BtnInDirection.Size = new System.Drawing.Size(75, 23);
@@ -328,24 +386,12 @@
             // 
             // BtnOutDirection
             // 
-            this.BtnOutDirection.Highlight = true;
             this.BtnOutDirection.Location = new System.Drawing.Point(193, 28);
             this.BtnOutDirection.Name = "BtnOutDirection";
             this.BtnOutDirection.Size = new System.Drawing.Size(75, 23);
             this.BtnOutDirection.TabIndex = 2;
             this.BtnOutDirection.Text = "单出模式";
             this.BtnOutDirection.Click += new System.EventHandler(this.BtnOutDirection_Click);
-            // 
-            // BtnClear
-            // 
-            this.BtnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnClear.Highlight = true;
-            this.BtnClear.Location = new System.Drawing.Point(461, 30);
-            this.BtnClear.Name = "BtnClear";
-            this.BtnClear.Size = new System.Drawing.Size(75, 23);
-            this.BtnClear.TabIndex = 32;
-            this.BtnClear.Text = "全部清空";
-            this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // GbxMode
             // 
@@ -376,7 +422,6 @@
             // 
             // BtnBPeakMode
             // 
-            this.BtnBPeakMode.Highlight = true;
             this.BtnBPeakMode.Location = new System.Drawing.Point(106, 28);
             this.BtnBPeakMode.Name = "BtnBPeakMode";
             this.BtnBPeakMode.Size = new System.Drawing.Size(105, 23);
@@ -385,7 +430,6 @@
             // 
             // BtnPeakMode
             // 
-            this.BtnPeakMode.Highlight = true;
             this.BtnPeakMode.Location = new System.Drawing.Point(22, 28);
             this.BtnPeakMode.Name = "BtnPeakMode";
             this.BtnPeakMode.Size = new System.Drawing.Size(75, 23);
@@ -395,7 +439,6 @@
             // 
             // BtnCloseMode
             // 
-            this.BtnCloseMode.Highlight = true;
             this.BtnCloseMode.Location = new System.Drawing.Point(222, 28);
             this.BtnCloseMode.Name = "BtnCloseMode";
             this.BtnCloseMode.Size = new System.Drawing.Size(104, 23);
@@ -405,7 +448,6 @@
             // 
             // BtnFireMode
             // 
-            this.BtnFireMode.Highlight = true;
             this.BtnFireMode.Location = new System.Drawing.Point(338, 28);
             this.BtnFireMode.Name = "BtnFireMode";
             this.BtnFireMode.Size = new System.Drawing.Size(78, 23);
@@ -427,7 +469,6 @@
             // 
             // BtnTestTVSmile
             // 
-            this.BtnTestTVSmile.Highlight = true;
             this.BtnTestTVSmile.Location = new System.Drawing.Point(29, 18);
             this.BtnTestTVSmile.Name = "BtnTestTVSmile";
             this.BtnTestTVSmile.Size = new System.Drawing.Size(107, 23);
@@ -437,7 +478,6 @@
             // 
             // BtnTestTVCry
             // 
-            this.BtnTestTVCry.Highlight = true;
             this.BtnTestTVCry.Location = new System.Drawing.Point(29, 46);
             this.BtnTestTVCry.Name = "BtnTestTVCry";
             this.BtnTestTVCry.Size = new System.Drawing.Size(107, 23);
@@ -447,7 +487,6 @@
             // 
             // BtnTestTVSleep
             // 
-            this.BtnTestTVSleep.Highlight = true;
             this.BtnTestTVSleep.Location = new System.Drawing.Point(29, 74);
             this.BtnTestTVSleep.Name = "BtnTestTVSleep";
             this.BtnTestTVSleep.Size = new System.Drawing.Size(107, 23);
@@ -478,7 +517,6 @@
             // 
             // btnV3
             // 
-            this.btnV3.Highlight = true;
             this.btnV3.Location = new System.Drawing.Point(186, 74);
             this.btnV3.Name = "btnV3";
             this.btnV3.Size = new System.Drawing.Size(75, 23);
@@ -488,7 +526,6 @@
             // 
             // btnB
             // 
-            this.btnB.Highlight = true;
             this.btnB.Location = new System.Drawing.Point(124, 74);
             this.btnB.Name = "btnB";
             this.btnB.Size = new System.Drawing.Size(55, 23);
@@ -507,7 +544,6 @@
             // 
             // btnV2
             // 
-            this.btnV2.Highlight = true;
             this.btnV2.Location = new System.Drawing.Point(186, 46);
             this.btnV2.Name = "btnV2";
             this.btnV2.Size = new System.Drawing.Size(75, 23);
@@ -517,7 +553,6 @@
             // 
             // btnM
             // 
-            this.btnM.Highlight = true;
             this.btnM.Location = new System.Drawing.Point(124, 46);
             this.btnM.Name = "btnM";
             this.btnM.Size = new System.Drawing.Size(56, 23);
@@ -555,7 +590,6 @@
             // 
             // btnV1
             // 
-            this.btnV1.Highlight = true;
             this.btnV1.Location = new System.Drawing.Point(186, 18);
             this.btnV1.Name = "btnV1";
             this.btnV1.Size = new System.Drawing.Size(75, 23);
@@ -565,7 +599,6 @@
             // 
             // btnF
             // 
-            this.btnF.Highlight = true;
             this.btnF.Location = new System.Drawing.Point(124, 18);
             this.btnF.Name = "btnF";
             this.btnF.Size = new System.Drawing.Size(55, 23);
@@ -954,7 +987,6 @@
             // 
             // BtnSetGreen
             // 
-            this.BtnSetGreen.Highlight = true;
             this.BtnSetGreen.Location = new System.Drawing.Point(337, 52);
             this.BtnSetGreen.Name = "BtnSetGreen";
             this.BtnSetGreen.Size = new System.Drawing.Size(87, 23);
@@ -964,7 +996,6 @@
             // 
             // BtnOpenADoor
             // 
-            this.BtnOpenADoor.Highlight = true;
             this.BtnOpenADoor.Location = new System.Drawing.Point(22, 22);
             this.BtnOpenADoor.Name = "BtnOpenADoor";
             this.BtnOpenADoor.Size = new System.Drawing.Size(87, 23);
@@ -974,7 +1005,6 @@
             // 
             // BtnSetRed
             // 
-            this.BtnSetRed.Highlight = true;
             this.BtnSetRed.Location = new System.Drawing.Point(337, 22);
             this.BtnSetRed.Name = "BtnSetRed";
             this.BtnSetRed.Size = new System.Drawing.Size(87, 23);
@@ -984,7 +1014,6 @@
             // 
             // BtnCloseADoor
             // 
-            this.BtnCloseADoor.Highlight = true;
             this.BtnCloseADoor.Location = new System.Drawing.Point(22, 52);
             this.BtnCloseADoor.Name = "BtnCloseADoor";
             this.BtnCloseADoor.Size = new System.Drawing.Size(87, 23);
@@ -994,7 +1023,6 @@
             // 
             // BtnCloseLamp
             // 
-            this.BtnCloseLamp.Highlight = true;
             this.BtnCloseLamp.Location = new System.Drawing.Point(232, 52);
             this.BtnCloseLamp.Name = "BtnCloseLamp";
             this.BtnCloseLamp.Size = new System.Drawing.Size(87, 23);
@@ -1004,7 +1032,6 @@
             // 
             // BtnOpenBDoor
             // 
-            this.BtnOpenBDoor.Highlight = true;
             this.BtnOpenBDoor.Location = new System.Drawing.Point(127, 22);
             this.BtnOpenBDoor.Name = "BtnOpenBDoor";
             this.BtnOpenBDoor.Size = new System.Drawing.Size(87, 23);
@@ -1014,7 +1041,6 @@
             // 
             // BtnOpenLamp
             // 
-            this.BtnOpenLamp.Highlight = true;
             this.BtnOpenLamp.Location = new System.Drawing.Point(232, 22);
             this.BtnOpenLamp.Name = "BtnOpenLamp";
             this.BtnOpenLamp.Size = new System.Drawing.Size(87, 23);
@@ -1024,7 +1050,6 @@
             // 
             // BtnCloseBDoor
             // 
-            this.BtnCloseBDoor.Highlight = true;
             this.BtnCloseBDoor.Location = new System.Drawing.Point(127, 52);
             this.BtnCloseBDoor.Name = "BtnCloseBDoor";
             this.BtnCloseBDoor.Size = new System.Drawing.Size(87, 23);
@@ -1261,6 +1286,7 @@
             this.HtcMain.Controls.Add(this.MtpHome);
             this.HtcMain.Controls.Add(this.MtpParts);
             this.HtcMain.Controls.Add(this.MtpSetting);
+            this.HtcMain.ItemSize = new System.Drawing.Size(72, 32);
             this.HtcMain.Location = new System.Drawing.Point(5, 63);
             this.HtcMain.Name = "HtcMain";
             this.HtcMain.SelectedIndex = 0;
@@ -1283,7 +1309,7 @@
             this.MtpParts.HorizontalScrollbarBarColor = true;
             this.MtpParts.Location = new System.Drawing.Point(4, 36);
             this.MtpParts.Name = "MtpParts";
-            this.MtpParts.Size = new System.Drawing.Size(1156, 582);
+            this.MtpParts.Size = new System.Drawing.Size(1180, 643);
             this.MtpParts.TabIndex = 1;
             this.MtpParts.Text = "部件";
             this.MtpParts.VerticalScrollbarBarColor = true;
@@ -1293,65 +1319,10 @@
             this.MtpSetting.HorizontalScrollbarBarColor = true;
             this.MtpSetting.Location = new System.Drawing.Point(4, 36);
             this.MtpSetting.Name = "MtpSetting";
-            this.MtpSetting.Size = new System.Drawing.Size(1156, 582);
+            this.MtpSetting.Size = new System.Drawing.Size(1180, 643);
             this.MtpSetting.TabIndex = 2;
             this.MtpSetting.Text = "设置";
             this.MtpSetting.VerticalScrollbarBarColor = true;
-            // 
-            // BtnOpenDir
-            // 
-            this.BtnOpenDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnOpenDir.Highlight = true;
-            this.BtnOpenDir.Location = new System.Drawing.Point(548, 30);
-            this.BtnOpenDir.Name = "BtnOpenDir";
-            this.BtnOpenDir.Size = new System.Drawing.Size(110, 23);
-            this.BtnOpenDir.TabIndex = 76;
-            this.BtnOpenDir.Text = "打开日志文件夹";
-            // 
-            // TxtMsg
-            // 
-            this.TxtMsg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.TxtMsg.Location = new System.Drawing.Point(6, 68);
-            this.TxtMsg.Multiline = true;
-            this.TxtMsg.Name = "TxtMsg";
-            this.TxtMsg.ReadOnly = true;
-            this.TxtMsg.Size = new System.Drawing.Size(651, 438);
-            this.TxtMsg.TabIndex = 77;
-            // 
-            // TxtKey
-            // 
-            this.TxtKey.Location = new System.Drawing.Point(75, 33);
-            this.TxtKey.Name = "TxtKey";
-            this.TxtKey.Size = new System.Drawing.Size(167, 20);
-            this.TxtKey.TabIndex = 78;
-            // 
-            // LabKey
-            // 
-            this.LabKey.AutoSize = true;
-            this.LabKey.Location = new System.Drawing.Point(12, 34);
-            this.LabKey.Name = "LabKey";
-            this.LabKey.Size = new System.Drawing.Size(51, 19);
-            this.LabKey.TabIndex = 79;
-            this.LabKey.Text = "关键字";
-            // 
-            // GbxConsole
-            // 
-            this.GbxConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.GbxConsole.Controls.Add(this.LabKey);
-            this.GbxConsole.Controls.Add(this.TxtMsg);
-            this.GbxConsole.Controls.Add(this.TxtKey);
-            this.GbxConsole.Controls.Add(this.BtnOpenDir);
-            this.GbxConsole.Controls.Add(this.BtnClear);
-            this.GbxConsole.Location = new System.Drawing.Point(506, 120);
-            this.GbxConsole.Name = "GbxConsole";
-            this.GbxConsole.Size = new System.Drawing.Size(663, 512);
-            this.GbxConsole.TabIndex = 80;
-            this.GbxConsole.TabStop = false;
-            this.GbxConsole.Text = "输出窗口";
             // 
             // FrmMain
             // 
@@ -1368,6 +1339,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.pnlMain.ResumeLayout(false);
+            this.GbxConsole.ResumeLayout(false);
+            this.GbxConsole.PerformLayout();
             this.GbxTestAction.ResumeLayout(false);
             this.GbxTestAction.PerformLayout();
             this.GbxDirect.ResumeLayout(false);
@@ -1383,8 +1356,6 @@
             this.GbxPassengerFlow.PerformLayout();
             this.HtcMain.ResumeLayout(false);
             this.MtpHome.ResumeLayout(false);
-            this.GbxConsole.ResumeLayout(false);
-            this.GbxConsole.PerformLayout();
             this.ResumeLayout(false);
 
         }

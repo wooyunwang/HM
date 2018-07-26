@@ -35,7 +35,7 @@ namespace HM.Socket_
         /// </summary>
         IChannel boundChannel { get; set; }
 
-        public BlackCat01()
+        public BlackCat01(int port = 9009)
         {
             X509Certificate2 tlsCertificate = null;
             if (ServerSettings.IsSsl) //如果使用加密通道
@@ -49,25 +49,49 @@ namespace HM.Socket_
             .Option(ChannelOption.SoBacklog, 100) // 设置网络IO参数等，这里可以设置很多参数，当然你对网络调优和参数设置非常了解的话，你可以设置，或者就用默认参数吧
             .Handler(new LoggingHandler("SRV-LSTN")) //在主线程组上设置一个打印日志的处理器
             .ChildHandler(new ActionChannelInitializer<ISocketChannel>(channel =>
-            { //工作线程连接器 是设置了一个管道，服务端主线程所有接收到的信息都会通过这个管道一层层往下传输
-              //同时所有出栈的消息 也要这个管道的所有处理器进行一步步处理
+            {
                 IChannelPipeline pipeline = channel.Pipeline;
-                if (tlsCertificate != null) //Tls的加解密
-                {
-                    pipeline.AddLast("tls", TlsHandler.Server(tlsCertificate));
-                }
-                //日志拦截器
-                pipeline.AddLast(new LoggingHandler("SRV-CONN"));
-                //出栈消息，通过这个handler 在消息顶部加上消息的长度
-                pipeline.AddLast("framing-enc", new LengthFieldPrepender(2));
-                //入栈消息通过该Handler,解析消息的包长信息，并将正确的消息体发送给下一个处理Handler，该类比较常用，后面单独说明
-                pipeline.AddLast("framing-dec", new LengthFieldBasedFrameDecoder(ushort.MaxValue, 0, 2, 0, 2));
-                //业务handler ，这里是实际处理Echo业务的Handler
-                pipeline.AddLast("echo", new EchoServerHandler());
+                pipeline.AddLast(new BlackCat01ServerHandler());
             }));
 
             // bootstrap绑定到指定端口的行为 就是服务端启动服务，同样的Serverbootstrap可以bind到多个端口
-            boundChannel = bootstrap.BindAsync(ServerSettings.Port).Result;
+            boundChannel = bootstrap.BindAsync(port).Result;
+        }
+
+        /// <summary>
+        /// 析构函数
+        /// </summary>
+        ~BlackCat01()
+        {
+            Task.WhenAll(
+                boundChannel.CloseAsync(),
+                bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
+                workerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)));
+        }
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    public class BlackCat01ServerHandler : ChannelHandlerAdapter
+    {
+        public override void ChannelRead(IChannelHandlerContext context, object message)
+        {
+            var buffer = message as IByteBuffer;
+            if (buffer != null)
+            {
+                Console.WriteLine("Received from client: " + buffer.ToString(Encoding.UTF8));
+                Common_.LogHelper.GetIlog(Common_.LogType.Recive).Info(buffer.ToString(Encoding.UTF8));
+                //解析
+
+            }
+            context.WriteAsync(message);//写入输出流
+        }
+
+        public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
+        {
+            Console.WriteLine("Exception: " + exception);
+            Common_.LogHelper.GetIlog(Common_.LogType.SocketServer).Debug("BlackCat01ServerHandler.ExceptionCaught", exception);
+            context.CloseAsync();
         }
     }
 }

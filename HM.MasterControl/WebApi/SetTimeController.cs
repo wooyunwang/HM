@@ -7,7 +7,10 @@ using System.Web.Http;
 
 namespace HM.MasterControl.WebApi
 {
-    public class VersionController : ApiController
+    /// <summary>
+    ///  禁止（夜间）模式、高峰模式时间段、周期设置
+    /// </summary>
+    public class SetTimeController : BaseApiController
     {
         // GET api/<controller>
         public IEnumerable<string> Get()

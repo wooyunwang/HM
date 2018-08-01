@@ -1,4 +1,4 @@
-# 黑猫一号集中管控中心4.0开发文档-制作编辑流程
+# 黑猫一号集软件开发说明文档-制作编辑流程
 
 ## 1. 工具支持
 
@@ -67,11 +67,17 @@
     info: >> generation finished with success in 1.5s !
     ```
 
-### 常见问题
+### 导出Pdf
 
-1. gitbook build命令导出的html不能跳转?
+windows下gitbook转pdf
 
-    使用gitbook build --gitbook=2.6.7解决
+需要用到的工具:[calibre](https://www.fosshub.com/Calibre.html/calibre-2.77.0.msi),[phantomjs](http://phantomjs.org/download.html)
+
+1将上述2个安装,calibre默认安装的路径C:\Program Files\Calibre2,phantomjs为你解压路径;
+
+2并将其目录均加入到系统变量path中,参考:目录添加到系统变量path中;
+
+3在cmd打开你需要转pdf的文件夹,输入gitbook pdf即可;
 
 
 

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using HM.Enum_;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -41,10 +43,30 @@ namespace HM.MasterControl.WebApi
         {
             return Json(Utils_.System_.OSInfo());
         }
-
-        public string GetConfig()
+        /// <summary>
+        /// 获取配置
+        /// </summary>
+        /// <param name="lstConfigName">配置名称</param>
+        /// <returns></returns>
+        public Dictionary<MasterControlConfigFileName, string> GetConfig([FromUri]List<MasterControlConfigFileName> lstConfigName)
         {
-            return string.Empty;
+            var dic = new Dictionary<MasterControlConfigFileName, string>();
+            if (lstConfigName != null)
+            {
+                foreach (MasterControlConfigFileName configName in lstConfigName)
+                {
+                    string strPath = Path.Combine(Environment.CurrentDirectory, "Config", configName.ToString() + ".config");
+                    if (File.Exists(strPath))
+                    {
+                        dic.Add(configName, File.ReadAllText(strPath));
+                    }
+                    else
+                    {
+                        dic.Add(configName, "");
+                    }
+                }
+            }
+            return dic;
         }
     }
 }

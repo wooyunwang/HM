@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlackCat01.cs" />
-    <Compile Include="BlackCat02.cs" />
+    <Compile Include="BlackCat01CloudServer.cs" />
     <Compile Include="DemoClient.cs" />
     <Compile Include="DemoServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +97,14 @@
     <ProjectReference Include="..\HM.Common_\HM.Common_.csproj">
       <Project>{a3d97c81-7036-4645-a3cf-2c9a3a366cdb}</Project>
       <Name>HM.Common_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.Socket_.Common_\HM.Socket_.Common_.csproj">
+      <Project>{84d387c8-a1cd-4e0c-9d71-3c59c4a60ff4}</Project>
+      <Name>HM.Socket_.Common_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.Utils_\HM.Utils_.csproj">
+      <Project>{38f4f95a-f905-43e1-8ad0-4d7d4820edef}</Project>
+      <Name>HM.Utils_</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

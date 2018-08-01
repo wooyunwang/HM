@@ -7,15 +7,11 @@ using System.Threading.Tasks;
 
 namespace HM.Socket_.Common
 {
-    public class RequestBase
-    {
-        public RequestBase(object message)
-        {
-
-        }
-    }
     /// <summary>
     /// 请求基类
+    /// +------------+-------------+------------+------------+ 
+    /// |协议开始标志|   数据长度  |    数据    |   结束符   |
+    /// +------------+-------------+------------+------------+
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class RequestBase<T>

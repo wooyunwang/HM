@@ -5,31 +5,78 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Flurl.Http;
+using Flurl;
+using System.Diagnostics;
+using HM.Enum_;
 
 namespace HM.MasterControl.WebApi
 {
-    public class TestController : ApiController
+    public class TestController : BaseTestApiController
     {
+        //public TestController() : base()
+        //{
+        //}
+#if DEBUG
         /// <summary>
         /// 测试token
         /// </summary>
         /// <returns></returns>
-        public async Task<IHttpActionResult> GetTokenAsync()
+        public IHttpActionResult GetTokenTest()
         {
-            //获得token
-            var dict = new SortedDictionary<string, string>();
-            dict.Add("client_id", "VankeService");
-            dict.Add("client_secret", "Vanke123#");
-            dict.Add("grant_type", "client_credentials");
-            var data = await (@"http://" + Request.RequestUri.Authority + @"/token").PostUrlEncodedAsync(dict).ReceiveJson<Token>();
-            var versionInfo = await (@"http://" + Request.RequestUri.Authority + @"/api/Info/GetVersion").WithOAuthBearerToken(data.access_token).GetAsync().ReceiveString();
-            return Ok(new { data = versionInfo });
+            return Ok(_token);
         }
-    }
-    public class Token
-    {
-        public string access_token { get; set; }
-        public string token_type { get; set; }
-        public string expires_in { get; set; }
+
+
+        public IHttpActionResult GetVersionTest()
+        {
+            Version result = _baseUrl
+                .AppendPathSegment("api/Info/GetVersion")
+                .WithOAuthBearerToken(_token.access_token)
+                .GetJsonAsync<Version>().Result;
+
+            return Ok(result);
+        }
+
+
+        public IHttpActionResult GetOSInfoTest()
+        {
+            var result = _baseUrl
+               .AppendPathSegment("api/Info/GetOSInfo")
+               .WithOAuthBearerToken(_token.access_token)
+               .GetJsonAsync<object>().Result;
+
+            return Ok(result);
+        }
+
+
+        public IHttpActionResult GetFileVersionInfoTest()
+        {
+            FileVersionInfo result = _baseUrl
+               .AppendPathSegment("api/Info/GetFileVersionInfo")
+               .WithOAuthBearerToken(_token.access_token)
+               .GetJsonAsync<FileVersionInfo>().Result;
+
+            return Ok(result);
+        }
+
+
+        public IHttpActionResult GetConfigTest()
+        {
+            var lst = new List<MasterControlConfigFileName>() {
+                MasterControlConfigFileName.VoiceConfigInfo
+            };
+            Dictionary<MasterControlConfigFileName, string> result = _baseUrl
+               .AppendPathSegment("api/Info/GetConfig")
+               .SetQueryParams(new
+               {
+                   lstConfigName = lst
+               })
+               .WithOAuthBearerToken(_token.access_token)
+               .GetJsonAsync<Dictionary<MasterControlConfigFileName, string>>().Result;
+
+            return Ok(result);
+        }
+
+#endif
     }
 }

@@ -38,13 +38,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Flurl, Version=2.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.2.8.0\lib\net40\Flurl.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl.Http, Version=2.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.Http.2.3.2\lib\net45\Flurl.Http.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.2.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.2.1\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -58,16 +68,30 @@
     <Compile Include="Class1Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebApi\AuthControllerTests.cs" />
+    <Compile Include="WebApi\DownloadFileControllerTests.cs" />
     <Compile Include="WebApi\InfoControllerTests.cs" />
+    <Compile Include="WebApi\MasterControlTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HM.ControlCenter\HM.ControlCenter.csproj">
+      <Project>{C1E7C5B7-0BFA-4F28-B441-C66D76B538BE}</Project>
+      <Name>HM.ControlCenter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.Enum_\HM.Enum_.csproj">
+      <Project>{F26F1383-FCCA-410D-8E7E-376FAED6B8F1}</Project>
+      <Name>HM.Enum_</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HM.MasterControl\HM.MasterControl.csproj">
       <Project>{30AFD40B-AC57-47FE-8A07-E6FBA341FC71}</Project>
       <Name>HM.MasterControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.Utils_\HM.Utils_.csproj">
+      <Project>{38f4f95a-f905-43e1-8ad0-4d7d4820edef}</Project>
+      <Name>HM.Utils_</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

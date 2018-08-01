@@ -35,6 +35,19 @@ namespace HM.Socket_.Common
     /// </summary>
     public class OpenCloseDoorCMD
     {
+        public OpenCloseDoorCMD(byte[] data)
+        {
+            if (data != null && data.Length != 3)
+            {
+                throw new Exception("数据异常");
+            }
+            else
+            {
+                CatCode = data[0];
+                DoorLocation = (OpenCloseDoorCMD_DoorLocation)data[1];
+                Switch = (OpenCloseDoorCMD_Switch)data[2];
+            }
+        }
         /// <summary>
         /// 黑猫编号
         /// </summary>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.hmTabControl1 = new HM.Form_.HMTabControl();
             this.stpMoniter = new MetroFramework.Controls.MetroTabPage();
             this.stpLiveVideo = new MetroFramework.Controls.MetroTabPage();
@@ -44,15 +45,14 @@
             this.hmTabControl1.Controls.Add(this.stpVisitor);
             this.hmTabControl1.Controls.Add(this.metroTabPage4);
             this.hmTabControl1.Controls.Add(this.metroTabPage5);
-            this.hmTabControl1.CustomBackground = true;
             this.hmTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hmTabControl1.FontSize = MetroFramework.MetroTabControlSize.Tall;
             this.hmTabControl1.ItemSize = new System.Drawing.Size(150, 36);
-            this.hmTabControl1.Location = new System.Drawing.Point(15, 48);
+            this.hmTabControl1.Location = new System.Drawing.Point(15, 60);
             this.hmTabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.hmTabControl1.Name = "hmTabControl1";
-            this.hmTabControl1.SelectedIndex = 0;
-            this.hmTabControl1.Size = new System.Drawing.Size(1095, 576);
+            this.hmTabControl1.SelectedIndex = 1;
+            this.hmTabControl1.Size = new System.Drawing.Size(1095, 564);
             this.hmTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.hmTabControl1.TabIndex = 0;
             this.hmTabControl1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -63,10 +63,10 @@
             this.stpMoniter.HorizontalScrollbarHighlightOnWheel = true;
             this.stpMoniter.HorizontalScrollbarSize = 8;
             this.stpMoniter.Location = new System.Drawing.Point(4, 40);
-            this.stpMoniter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stpMoniter.Margin = new System.Windows.Forms.Padding(2);
             this.stpMoniter.Name = "stpMoniter";
             this.stpMoniter.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.stpMoniter.Size = new System.Drawing.Size(1087, 532);
+            this.stpMoniter.Size = new System.Drawing.Size(1087, 520);
             this.stpMoniter.TabIndex = 0;
             this.stpMoniter.Tag = "HM.ControlCenter.UCs.ucMoniter";
             this.stpMoniter.Text = "运行监控";
@@ -78,9 +78,9 @@
             this.stpLiveVideo.HorizontalScrollbarBarColor = true;
             this.stpLiveVideo.HorizontalScrollbarSize = 8;
             this.stpLiveVideo.Location = new System.Drawing.Point(4, 40);
-            this.stpLiveVideo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stpLiveVideo.Margin = new System.Windows.Forms.Padding(2);
             this.stpLiveVideo.Name = "stpLiveVideo";
-            this.stpLiveVideo.Size = new System.Drawing.Size(1087, 532);
+            this.stpLiveVideo.Size = new System.Drawing.Size(1087, 520);
             this.stpLiveVideo.TabIndex = 1;
             this.stpLiveVideo.Tag = "HM.ControlCenter.UCs.ucLiveVideo";
             this.stpLiveVideo.Text = "现场视频";
@@ -92,9 +92,9 @@
             this.stpVisitor.HorizontalScrollbarBarColor = true;
             this.stpVisitor.HorizontalScrollbarSize = 8;
             this.stpVisitor.Location = new System.Drawing.Point(4, 40);
-            this.stpVisitor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.stpVisitor.Margin = new System.Windows.Forms.Padding(2);
             this.stpVisitor.Name = "stpVisitor";
-            this.stpVisitor.Size = new System.Drawing.Size(1087, 532);
+            this.stpVisitor.Size = new System.Drawing.Size(1087, 520);
             this.stpVisitor.TabIndex = 2;
             this.stpVisitor.Tag = "HM.ControlCenter.UCs.ucVisitor";
             this.stpVisitor.Text = "访客管理";
@@ -106,9 +106,9 @@
             this.metroTabPage4.HorizontalScrollbarBarColor = true;
             this.metroTabPage4.HorizontalScrollbarSize = 8;
             this.metroTabPage4.Location = new System.Drawing.Point(4, 40);
-            this.metroTabPage4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.metroTabPage4.Margin = new System.Windows.Forms.Padding(2);
             this.metroTabPage4.Name = "metroTabPage4";
-            this.metroTabPage4.Size = new System.Drawing.Size(1087, 532);
+            this.metroTabPage4.Size = new System.Drawing.Size(1087, 520);
             this.metroTabPage4.TabIndex = 3;
             this.metroTabPage4.Text = "内容发布";
             this.metroTabPage4.VerticalScrollbarBarColor = true;
@@ -119,9 +119,9 @@
             this.metroTabPage5.HorizontalScrollbarBarColor = true;
             this.metroTabPage5.HorizontalScrollbarSize = 8;
             this.metroTabPage5.Location = new System.Drawing.Point(4, 40);
-            this.metroTabPage5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.metroTabPage5.Margin = new System.Windows.Forms.Padding(2);
             this.metroTabPage5.Name = "metroTabPage5";
-            this.metroTabPage5.Size = new System.Drawing.Size(1087, 532);
+            this.metroTabPage5.Size = new System.Drawing.Size(1087, 520);
             this.metroTabPage5.TabIndex = 4;
             this.metroTabPage5.Text = "系统管理";
             this.metroTabPage5.VerticalScrollbarBarColor = true;
@@ -135,10 +135,12 @@
             this.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(1125, 640);
             this.Controls.Add(this.hmTabControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmMain";
-            this.Padding = new System.Windows.Forms.Padding(15, 48, 15, 16);
-            this.Text = "黑猫一号集中管控中心";
+            this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 16);
+            this.Style = MetroFramework.MetroColorStyle.Orange;
+            this.Text = "黑猫一号 · 集中管控中心";
             this.hmTabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 

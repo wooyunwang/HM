@@ -175,7 +175,7 @@
             this.pnlMain.Location = new System.Drawing.Point(2, 12);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1176, 635);
+            this.pnlMain.Size = new System.Drawing.Size(1158, 628);
             this.pnlMain.TabIndex = 0;
             this.pnlMain.VerticalScrollbarBarColor = true;
             this.pnlMain.VerticalScrollbarHighlightOnWheel = false;
@@ -193,7 +193,7 @@
             this.GbxConsole.Controls.Add(this.BtnClear);
             this.GbxConsole.Location = new System.Drawing.Point(506, 120);
             this.GbxConsole.Name = "GbxConsole";
-            this.GbxConsole.Size = new System.Drawing.Size(659, 504);
+            this.GbxConsole.Size = new System.Drawing.Size(641, 497);
             this.GbxConsole.TabIndex = 80;
             this.GbxConsole.TabStop = false;
             this.GbxConsole.Text = "输出窗口";
@@ -216,7 +216,7 @@
             this.TxtMsg.Multiline = true;
             this.TxtMsg.Name = "TxtMsg";
             this.TxtMsg.ReadOnly = true;
-            this.TxtMsg.Size = new System.Drawing.Size(647, 430);
+            this.TxtMsg.Size = new System.Drawing.Size(629, 423);
             this.TxtMsg.TabIndex = 77;
             // 
             // TxtKey
@@ -229,7 +229,7 @@
             // BtnOpenDir
             // 
             this.BtnOpenDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnOpenDir.Location = new System.Drawing.Point(544, 30);
+            this.BtnOpenDir.Location = new System.Drawing.Point(526, 30);
             this.BtnOpenDir.Name = "BtnOpenDir";
             this.BtnOpenDir.Size = new System.Drawing.Size(110, 23);
             this.BtnOpenDir.TabIndex = 76;
@@ -238,7 +238,7 @@
             // BtnClear
             // 
             this.BtnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnClear.Location = new System.Drawing.Point(457, 30);
+            this.BtnClear.Location = new System.Drawing.Point(439, 30);
             this.BtnClear.Name = "BtnClear";
             this.BtnClear.Size = new System.Drawing.Size(75, 23);
             this.BtnClear.TabIndex = 32;
@@ -263,7 +263,7 @@
             this.GbxTestAction.Margin = new System.Windows.Forms.Padding(2);
             this.GbxTestAction.Name = "GbxTestAction";
             this.GbxTestAction.Padding = new System.Windows.Forms.Padding(2);
-            this.GbxTestAction.Size = new System.Drawing.Size(659, 105);
+            this.GbxTestAction.Size = new System.Drawing.Size(641, 105);
             this.GbxTestAction.TabIndex = 74;
             this.GbxTestAction.TabStop = false;
             this.GbxTestAction.Text = "测试操作&系统配置";
@@ -1280,26 +1280,27 @@
             // 
             // HtcMain
             // 
-            this.HtcMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.HtcMain.Controls.Add(this.MtpHome);
             this.HtcMain.Controls.Add(this.MtpParts);
             this.HtcMain.Controls.Add(this.MtpSetting);
-            this.HtcMain.ItemSize = new System.Drawing.Size(72, 32);
-            this.HtcMain.Location = new System.Drawing.Point(5, 63);
+            this.HtcMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HtcMain.FontSize = MetroFramework.MetroTabControlSize.Tall;
+            this.HtcMain.ItemSize = new System.Drawing.Size(150, 36);
+            this.HtcMain.Location = new System.Drawing.Point(15, 60);
             this.HtcMain.Name = "HtcMain";
-            this.HtcMain.SelectedIndex = 0;
-            this.HtcMain.Size = new System.Drawing.Size(1188, 683);
+            this.HtcMain.SelectedIndex = 1;
+            this.HtcMain.Size = new System.Drawing.Size(1170, 680);
+            this.HtcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.HtcMain.TabIndex = 1;
+            this.HtcMain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MtpHome
             // 
             this.MtpHome.Controls.Add(this.pnlMain);
             this.MtpHome.HorizontalScrollbarBarColor = true;
-            this.MtpHome.Location = new System.Drawing.Point(4, 36);
+            this.MtpHome.Location = new System.Drawing.Point(4, 40);
             this.MtpHome.Name = "MtpHome";
-            this.MtpHome.Size = new System.Drawing.Size(1180, 643);
+            this.MtpHome.Size = new System.Drawing.Size(1162, 636);
             this.MtpHome.TabIndex = 0;
             this.MtpHome.Text = "工作面板";
             this.MtpHome.VerticalScrollbarBarColor = true;
@@ -1307,9 +1308,9 @@
             // MtpParts
             // 
             this.MtpParts.HorizontalScrollbarBarColor = true;
-            this.MtpParts.Location = new System.Drawing.Point(4, 36);
+            this.MtpParts.Location = new System.Drawing.Point(4, 40);
             this.MtpParts.Name = "MtpParts";
-            this.MtpParts.Size = new System.Drawing.Size(1180, 643);
+            this.MtpParts.Size = new System.Drawing.Size(1162, 636);
             this.MtpParts.TabIndex = 1;
             this.MtpParts.Text = "部件";
             this.MtpParts.VerticalScrollbarBarColor = true;
@@ -1317,9 +1318,9 @@
             // MtpSetting
             // 
             this.MtpSetting.HorizontalScrollbarBarColor = true;
-            this.MtpSetting.Location = new System.Drawing.Point(4, 36);
+            this.MtpSetting.Location = new System.Drawing.Point(4, 40);
             this.MtpSetting.Name = "MtpSetting";
-            this.MtpSetting.Size = new System.Drawing.Size(1180, 643);
+            this.MtpSetting.Size = new System.Drawing.Size(1162, 636);
             this.MtpSetting.TabIndex = 2;
             this.MtpSetting.Text = "设置";
             this.MtpSetting.VerticalScrollbarBarColor = true;
@@ -1335,7 +1336,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmMain";
             this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 16);
-            this.Text = "黑猫一号主控程序4.0";
+            this.Text = "黑猫一号 · 主控程序 · 4.0";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.pnlMain.ResumeLayout(false);

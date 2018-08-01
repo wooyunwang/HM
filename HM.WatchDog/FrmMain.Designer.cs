@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(300, 300);
             this.Name = "FrmMain";
+            this.Style = MetroFramework.MetroColorStyle.Silver;
             this.Text = "看门狗";
             this.ResumeLayout(false);
 

@@ -1,6 +1,6 @@
-﻿# HM.MasterControl说明
+﻿# HM.FacePlatForm说明
 
-黑猫一号主控程序
+黑猫一号人脸客户端
 
 # 使用OWIN 为WebAPI 宿主 跨平台
 

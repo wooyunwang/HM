@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace HM.Cloud.Server
 {
-    public partial class FrmMain : Form
+    public partial class FrmMain : HM.Form_.HMForm
     {
         public FrmMain()
         {

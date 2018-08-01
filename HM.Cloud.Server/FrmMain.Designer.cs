@@ -28,9 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // FrmMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(1190, 766);
+            this.Name = "FrmMain";
+            this.Style = MetroFramework.MetroColorStyle.Pink;
+            this.Text = "黑猫一号 · 数据上云 · 服务端";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

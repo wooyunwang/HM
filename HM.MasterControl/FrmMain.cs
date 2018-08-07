@@ -10,6 +10,7 @@ using System.Text;
 using System.Windows.Forms;
 using DotNetty.Transport.Bootstrapping;
 using HM.Socket_;
+using HM.Socket_.Common_;
 
 namespace HM.MasterControl
 {
@@ -20,7 +21,14 @@ namespace HM.MasterControl
         public FrmMain()
         {
             InitializeComponent();
-            this.Text = this.Text + "";
+            //设置名称
+            this.Text = FormHelper.GetAppName();
+            //设置主题
+            this._Msm.Style = MetroFramework.MetroColorStyle.Pink;
+            //默认最大化
+            this.WindowState = FormWindowState.Maximized;
+            //选中第一项
+            this.HtcMain.SelectedIndex = 0;
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -166,98 +174,98 @@ namespace HM.MasterControl
 
         }
 
-        public Socket_.Common.ResponseBase<bool> _RealHandler(Socket_.Common.RequestBase<byte[]> request)
+        ResponseBase<bool> _RealHandler(RequestBase<byte[]> request)
         {
             switch (request.CmdCode)
             {
-                case Socket_.Common.CmdCode.OpenCloseDoorCMD:
+                case CmdCode.OpenCloseDoorCMD:
                     {
-                        var result = new Socket_.Common.OpenCloseDoorCMD(request.Data);
+                        var result = new OpenCloseDoorCMD(request.Data);
                         switch (result.DoorLocation)
                         {
-                            case Socket_.Common.OpenCloseDoorCMD_DoorLocation.前门:
-                                if (result.Switch == Socket_.Common.OpenCloseDoorCMD_Switch.开门)
+                            case OpenCloseDoorCMD_DoorLocation.前门:
+                                if (result.Switch == OpenCloseDoorCMD_Switch.开门)
                                 {
 
                                 }
-                                else if (result.Switch == Socket_.Common.OpenCloseDoorCMD_Switch.关门)
+                                else if (result.Switch == OpenCloseDoorCMD_Switch.关门)
                                 {
 
                                 }
                                 break;
-                            case Socket_.Common.OpenCloseDoorCMD_DoorLocation.后门:
+                            case OpenCloseDoorCMD_DoorLocation.后门:
                                 break;
                             default:
                                 break;
                         }
                     }
                     break;
-                case Socket_.Common.CmdCode.OpenCloseDoorCMD_:
+                case CmdCode.OpenCloseDoorCMD_:
                     break;
-                case Socket_.Common.CmdCode.SetTimeCMD:
+                case CmdCode.SetTimeCMD:
                     break;
-                case Socket_.Common.CmdCode.SetTimeCMD_:
+                case CmdCode.SetTimeCMD_:
                     break;
-                case Socket_.Common.CmdCode.SetDateNormalCMD:
+                case CmdCode.SetDateNormalCMD:
                     break;
-                case Socket_.Common.CmdCode.SetDateNormalCMD_:
+                case CmdCode.SetDateNormalCMD_:
                     break;
-                case Socket_.Common.CmdCode.SetRunModeCMD:
+                case CmdCode.SetRunModeCMD:
                     break;
-                case Socket_.Common.CmdCode.SetRunModeCMD_:
+                case CmdCode.SetRunModeCMD_:
                     break;
-                case Socket_.Common.CmdCode.SetHighLevelCMD:
+                case CmdCode.SetHighLevelCMD:
                     break;
-                case Socket_.Common.CmdCode.SetHighLevelCMD_:
+                case CmdCode.SetHighLevelCMD_:
                     break;
-                case Socket_.Common.CmdCode.SetNoticeCMD:
+                case CmdCode.SetNoticeCMD:
                     break;
-                case Socket_.Common.CmdCode.SetNoticeCMD_:
+                case CmdCode.SetNoticeCMD_:
                     break;
-                case Socket_.Common.CmdCode.GetPeopleNumCMD:
+                case CmdCode.GetPeopleNumCMD:
                     break;
-                case Socket_.Common.CmdCode.GetPeopleNumCMD_:
+                case CmdCode.GetPeopleNumCMD_:
                     break;
-                case Socket_.Common.CmdCode.SetDirectionCMD:
+                case CmdCode.SetDirectionCMD:
                     break;
-                case Socket_.Common.CmdCode.SetDirectionCMD_:
+                case CmdCode.SetDirectionCMD_:
                     break;
-                case Socket_.Common.CmdCode.GetAbnormalSignalCMD:
+                case CmdCode.GetAbnormalSignalCMD:
                     break;
-                case Socket_.Common.CmdCode.GetAbnormalSignalCMD_:
+                case CmdCode.GetAbnormalSignalCMD_:
                     break;
-                case Socket_.Common.CmdCode.SynchronizeModeCMD:
+                case CmdCode.SynchronizeModeCMD:
                     break;
-                case Socket_.Common.CmdCode.SynchronizeModeCMD_:
+                case CmdCode.SynchronizeModeCMD_:
                     break;
-                case Socket_.Common.CmdCode.SetBlackCatBackGroundCMD:
+                case CmdCode.SetBlackCatBackGroundCMD:
                     break;
-                case Socket_.Common.CmdCode.SetBlackCatBackGroundCMD_:
+                case CmdCode.SetBlackCatBackGroundCMD_:
                     break;
-                case Socket_.Common.CmdCode.SetBlackCatBackVideoCMD:
+                case CmdCode.SetBlackCatBackVideoCMD:
                     break;
-                case Socket_.Common.CmdCode.SetBlackCatBackVideoCMD_:
+                case CmdCode.SetBlackCatBackVideoCMD_:
                     break;
-                case Socket_.Common.CmdCode.GetUserDefineAbnormalSignalCMD:
+                case CmdCode.GetUserDefineAbnormalSignalCMD:
                     break;
-                case Socket_.Common.CmdCode.GetUserDefineAbnormalSignalCMD_:
+                case CmdCode.GetUserDefineAbnormalSignalCMD_:
                     break;
-                case Socket_.Common.CmdCode.GetConfigInfoCMD:
+                case CmdCode.GetConfigInfoCMD:
                     break;
-                case Socket_.Common.CmdCode.GetConfigInfoCMD_:
+                case CmdCode.GetConfigInfoCMD_:
                     break;
-                case Socket_.Common.CmdCode.GetFaceEntranceDetailCMD:
+                case CmdCode.GetFaceEntranceDetailCMD:
                     break;
-                case Socket_.Common.CmdCode.GetFaceEntranceDetailCMD_:
+                case CmdCode.GetFaceEntranceDetailCMD_:
                     break;
-                case Socket_.Common.CmdCode.GetICCardEntranceDetailCMD:
+                case CmdCode.GetICCardEntranceDetailCMD:
                     break;
-                case Socket_.Common.CmdCode.GetICCardEntranceDetailCMD_:
+                case CmdCode.GetICCardEntranceDetailCMD_:
                     break;
                 default:
                     break;
             }
-            return new Socket_.Common.ResponseBase<bool>(request.CmdCode + 1, true);
+            return new ResponseBase<bool>(request.CmdCode + 1, true);
         }
     }
 }

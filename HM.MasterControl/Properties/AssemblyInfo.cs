@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("HM.MasterControl")]
-[assembly: AssemblyDescription("主控程序")]
+[assembly: AssemblyTitle("黑猫一号 · 主控程序")]
+[assembly: AssemblyDescription("黑猫一号 · 主控程序")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("万科物业")]
-[assembly: AssemblyProduct("HM.MasterControl")]
+[assembly: AssemblyProduct("黑猫一号 · 主控程序")]
 [assembly: AssemblyCopyright("Copyright ©  2018 - 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1288,7 +1288,7 @@
             this.HtcMain.ItemSize = new System.Drawing.Size(150, 36);
             this.HtcMain.Location = new System.Drawing.Point(15, 60);
             this.HtcMain.Name = "HtcMain";
-            this.HtcMain.SelectedIndex = 1;
+            this.HtcMain.SelectedIndex = 0;
             this.HtcMain.Size = new System.Drawing.Size(1170, 680);
             this.HtcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.HtcMain.TabIndex = 1;

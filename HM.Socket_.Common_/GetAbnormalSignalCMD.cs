@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HM.Socket_.Common
+namespace HM.Socket_.Common_
 {
     public enum SignalType : byte
     {
@@ -152,7 +152,7 @@ namespace HM.Socket_.Common
         /// <returns></returns>
         public bool IsOK()
         {
-            if (this.SignalType == (byte)Common.SignalType.网络异常)
+            if (this.SignalType == (byte)Common_.SignalType.网络异常)
             {
                 return false;
             }

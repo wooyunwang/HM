@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace HM.Socket_.Common
+namespace HM.Socket_.Common_
 {
     public static class Utils
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HM.Socket_.Common
+namespace HM.Socket_.Common_
 {
     /// <summary>
     /// 响应基类

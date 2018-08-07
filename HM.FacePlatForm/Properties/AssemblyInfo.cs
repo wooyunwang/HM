@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("HM.FacePlatForm")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("黑猫一号 · 人脸综合管理平台")]
+[assembly: AssemblyDescription("黑猫一号 · 人脸综合管理平台")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HM.FacePlatForm")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyProduct("黑猫一号 · 人脸综合管理平台")]
+[assembly: AssemblyCopyright("Copyright ©  2018 - 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -5,6 +5,9 @@ using DotNetty.Handlers.Tls;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
+using HM.Common_;
+using HM.Enum_;
+using HM.Socket_.Common_;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,9 +23,13 @@ namespace HM.Socket_
     public class BlackCat01 : IDisposable
     {
         /// <summary>
-        /// 
+        /// 处理事件
         /// </summary>
-        public Func<Common.RequestBase<byte[]>, Common.ResponseBase<bool>> _RealHandler { get; set; }
+        public Func<RequestBase<byte[]>, ResponseBase<bool>> _RealHandler { get; set; }
+        /// <summary>
+        /// 返回消息
+        /// </summary>
+        public Action<string> _OnMessage { get; set; }
         /// <summary>
         /// 主工作线程组，设置为1个线程
         /// </summary>
@@ -44,29 +51,39 @@ namespace HM.Socket_
 
         public BlackCat01(int port = 7300)
         {
+            string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.Name;
             Task.Run(() =>
             {
-                X509Certificate2 tlsCertificate = null;
-                if (ServerSettings.IsSsl) //如果使用加密通道
+                try
                 {
-                    tlsCertificate = new X509Certificate2(Path.Combine(Environment.CurrentDirectory, "dotnetty.com.pfx"), "password");
-                }
-                bootstrap
-                .Group(bossGroup, workerGroup) // 设置主和工作线程组
-                .Channel<TcpServerSocketChannel>() // 设置通道模式为TcpSocket
-                .Option(ChannelOption.SoBacklog, 100) // 设置网络IO参数等，这里可以设置很多参数，当然你对网络调优和参数设置非常了解的话，你可以设置，或者就用默认参数吧
-                .Handler(new LoggingHandler("VankeService")) //在主线程组上设置一个打印日志的处理器
-                .ChildHandler(new ActionChannelInitializer<ISocketChannel>(channel =>
-                {
-                    IChannelPipeline pipeline = channel.Pipeline;
-                    pipeline.AddLast("BlackCat01Decoder", new BlackCat01Decoder(1024, 4, 5, 0, 0, true));
-                    var blackCat01ServerHandler = new BlackCat01ServerHandler();
-                    blackCat01ServerHandler._RealHandler = _RealHandler;
-                    pipeline.AddLast(blackCat01ServerHandler);
-                }));
+                    X509Certificate2 tlsCertificate = null;
+                    if (ServerSettings.IsSsl) //如果使用加密通道
+                    {
+                        tlsCertificate = new X509Certificate2(Path.Combine(Environment.CurrentDirectory, "dotnetty.com.pfx"), "password");
+                    }
+                    bootstrap
+                    .Group(bossGroup, workerGroup) // 设置主和工作线程组
+                    .Channel<TcpServerSocketChannel>() // 设置通道模式为TcpSocket
+                    .Option(ChannelOption.SoBacklog, 100) // 设置网络IO参数等，这里可以设置很多参数，当然你对网络调优和参数设置非常了解的话，你可以设置，或者就用默认参数吧
+                    .Handler(new LoggingHandler("VankeService")) //在主线程组上设置一个打印日志的处理器
+                    .ChildHandler(new ActionChannelInitializer<ISocketChannel>(channel =>
+                    {
+                        IChannelPipeline pipeline = channel.Pipeline;
+                        pipeline.AddLast("BlackCat01Decoder", new BlackCat01Decoder(1024, 4, 5, 0, 0, true));
+                        var blackCat01ServerHandler = new BlackCat01ServerHandler();
+                        blackCat01ServerHandler._RealHandler = _RealHandler;
+                        pipeline.AddLast(blackCat01ServerHandler);
+                    }));
 
-                // bootstrap绑定到指定端口的行为 就是服务端启动服务，同样的Serverbootstrap可以bind到多个端口
-                boundChannel = bootstrap.BindAsync(port).Result;
+                    // bootstrap绑定到指定端口的行为 就是服务端启动服务，同样的Serverbootstrap可以bind到多个端口
+                    boundChannel = bootstrap.BindAsync(port).Result;
+
+                    _OnMessage?.Invoke($"启动Socket服务【{ className }】【端口：{ port }】成功");
+                }
+                catch (Exception ex)
+                {
+                    _OnMessage?.Invoke($"启动Socket服务【{ className }】【端口：{ port }】失败，原因：{ Environment.NewLine } { ex.Message }");
+                }
             });
         }
         public void Dispose()
@@ -80,9 +97,9 @@ namespace HM.Socket_
     /// <summary>
     /// 黑猫一号专属编码器
     /// </summary>
-    public class BlackCat01Encoder : MessageToByteEncoder<Common.RequestBase<byte[]>>
+    public class BlackCat01Encoder : MessageToByteEncoder<RequestBase<byte[]>>
     {
-        protected override void Encode(IChannelHandlerContext context, Common.RequestBase<byte[]> message, IByteBuffer output)
+        protected override void Encode(IChannelHandlerContext context, RequestBase<byte[]> message, IByteBuffer output)
         {
             output.WriteBytes(message.ToBytes());
         }
@@ -146,13 +163,13 @@ namespace HM.Socket_
             byte[] symbol = new byte[4];
             input.ReadBytes(symbol, 0, symbol.Length);
 
-            if (Common.Utils.PrintByte(symbol) != Common.Utils.PrintByte(Common.Constant.VKHM))
+            if (Utils.PrintByte(symbol) != Utils.PrintByte(Constant.VKHM))
             {
                 //非黑猫一号指定指令
                 return null;
             }
             byte command = input.ReadByte();
-            Common.CmdCode cmdCode = default(Common.CmdCode);
+            CmdCode cmdCode = default(CmdCode);
             if (!Enum.TryParse(command.ToString(), out cmdCode))
             {
                 return null;
@@ -161,7 +178,7 @@ namespace HM.Socket_
             {
                 byte[] packNum = new byte[4];
                 input.ReadBytes(packNum, 0, packNum.Length);
-                int length = Common.Utils.ByteToInt(packNum);
+                int length = Utils.ByteToInt(packNum);
                 if (input.ReadableBytes < length)
                 {
                     //长度不对
@@ -172,14 +189,14 @@ namespace HM.Socket_
                     byte[] data = new byte[length - 1];
                     input.ReadBytes(data, 0, data.Length - 1);
                     var postamble = input.ReadByte();
-                    if (postamble != Common.Constant.postamble[0])
+                    if (postamble != Constant.postamble[0])
                     {
                         //结束符不对
                         return null;
                     }
                     else
                     {
-                        return new Common.RequestBase<byte[]>(symbol, cmdCode, data, packNum);
+                        return new RequestBase<byte[]>(symbol, cmdCode, data, packNum);
                     }
                 }
             }
@@ -190,7 +207,7 @@ namespace HM.Socket_
     /// </summary>
     public class BlackCat01ServerHandler : ChannelHandlerAdapter
     {
-        public Func<Common.RequestBase<byte[]>, Common.ResponseBase<bool>> _RealHandler { get; set; }
+        public Func<RequestBase<byte[]>, ResponseBase<bool>> _RealHandler { get; set; }
 
         public override void ChannelInactive(IChannelHandlerContext context)
         {
@@ -220,13 +237,13 @@ namespace HM.Socket_
         /// <param name="message"></param>
         public override void ChannelRead(IChannelHandlerContext context, object message)
         {
-            var requestBase = message as Common.RequestBase<byte[]>;
+            var requestBase = message as RequestBase<byte[]>;
             if (requestBase != null)
             {
 #if DEBUG
                 Console.WriteLine(Utils_.Json_.GetString(requestBase));
 #endif
-                Common_.LogHelper.GetIlog(Common_.LogType.Recive).Info(Utils_.Json_.GetString(requestBase));
+                LogHelper.GetIlog(LogType.Recive).Info(Utils_.Json_.GetString(requestBase));
 
                 if (_RealHandler != null)
                 {
@@ -235,7 +252,7 @@ namespace HM.Socket_
                 }
                 else
                 {
-                    context.WriteAsync(new Common.ResponseBase<bool>((requestBase.CmdCode + 1), false));
+                    context.WriteAsync(new ResponseBase<bool>((requestBase.CmdCode + 1), false));
                 }
             }
             else
@@ -262,7 +279,7 @@ namespace HM.Socket_
 #if DEBUG
             Console.WriteLine("Exception: " + exception.Message);
 #endif
-            Common_.LogHelper.GetIlog(Common_.LogType.SocketServer).Debug("BlackCat01ServerHandler.ExceptionCaught", exception);
+            LogHelper.GetIlog(LogType.SocketServer).Debug("BlackCat01ServerHandler.ExceptionCaught", exception);
             context.CloseAsync();
         }
     }

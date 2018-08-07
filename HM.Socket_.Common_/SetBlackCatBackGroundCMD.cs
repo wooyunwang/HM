@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HM.Socket_.Common
+namespace HM.Socket_.Common_
 {
     /// <summary>
     /// 设置黑猫背景图片

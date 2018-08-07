@@ -1,49 +1,12 @@
-﻿using System;
+﻿using HM.Enum_;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace HM.Common_
 {
-    /// <summary>
-    /// 日志类型
-    /// </summary>
-    public enum LogType
-    {
-        /// <summary>
-        /// 默认
-        /// </summary>
-        Default,
-        /// <summary>
-        /// Socket客户端
-        /// </summary>
-        SocketClient,
-        /// <summary>
-        /// Socket服务端
-        /// </summary>
-        SocketServer,
-        /// <summary>
-        /// 接收日志
-        /// </summary>
-        Recive,
-        /// <summary>
-        /// 连接日志
-        /// </summary>
-        Connect,
-        /// <summary>
-        /// 任务日志
-        /// </summary>
-        Job
-    }
-    /// <summary>
-    /// 日志等级
-    /// </summary>
-    public enum LogLevel
-    {
-        Error,
-        Debug,
-        Warning,
-        Info
-    }
+    
+
     /// <summary>
     /// 日志记录服务
     /// </summary>

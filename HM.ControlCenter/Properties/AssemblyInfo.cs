@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("黑猫一号集中管控中心")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("黑猫一号 · 集中管控中心")]
+[assembly: AssemblyDescription("黑猫一号 · 集中管控中心")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("黑猫一号集中管控中心")]
+[assembly: AssemblyCompany("万科物业")]
+[assembly: AssemblyProduct("黑猫一号 · 集中管控中心")]
 [assembly: AssemblyCopyright("Copyright ©  2018-2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

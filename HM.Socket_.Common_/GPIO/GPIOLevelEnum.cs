@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HM.Socket_.Common
+namespace HM.Socket_.Common_
 {
     public enum GPIOLevelEnum : byte
     {

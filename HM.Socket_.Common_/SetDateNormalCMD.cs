@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HM.Socket_.Common
+namespace HM.Socket_.Common_
 {
     /// <summary>
     /// 正常设置日期命令-节假日设置某天全天为正常模式 

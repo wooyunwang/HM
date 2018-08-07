@@ -15,7 +15,7 @@ namespace HM.ControlCenter
         /// <summary>
         /// 主控程序WebAPI本地测试url
         /// </summary>
-        protected readonly string _baseUrl = "http://localhost:9100";
+        protected readonly string _baseUrl = "http://localhost:9200";
         protected Token _token { get; set; }
 
         public BaseTestApiController()

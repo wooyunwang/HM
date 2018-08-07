@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HM.Socket_.Common
+namespace HM.Socket_.Common_
 {
     /// <summary>
     /// 请求基类

@@ -68,6 +68,7 @@
     <Compile Include="Convert_.cs" />
     <Compile Include="EnumHelper.cs" />
     <Compile Include="ExcelHelper.cs" />
+    <Compile Include="Image_.cs" />
     <Compile Include="INetFwManger.cs" />
     <Compile Include="IniHelper.cs" />
     <Compile Include="Json_.cs" />

@@ -53,6 +53,7 @@
     <Compile Include="GPIO\In_Port_Info.cs" />
     <Compile Include="GPIO\Out_Port_Info.cs" />
     <Compile Include="LogHelper.cs" />
+    <Compile Include="LogLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

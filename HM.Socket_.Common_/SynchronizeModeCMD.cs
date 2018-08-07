@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HM.Socket_.Common
+namespace HM.Socket_.Common_
 {
     /// <summary>
     /// 模式
@@ -19,7 +19,7 @@ namespace HM.Socket_.Common
         高峰模式 = 0x01,
         正常模式 = 0x02,
 
-        #region 新增，参考HM.Socket_.Common.ABDoorModeEnum
+        #region 新增，参考HM.Socket_.Common_.ABDoorModeEnum
         消防模式 = 0x04,
         单进 = 0x06,
         单出 = 0x05,

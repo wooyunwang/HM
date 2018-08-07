@@ -113,6 +113,17 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HMPager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HMPager.designer.cs">
+      <DependentUpon>HMPager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -122,6 +133,28 @@
     <EmbeddedResource Include="HMForm.resx">
       <DependentUpon>HMForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HMPager.resx">
+      <DependentUpon>HMPager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page-first.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page-last.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page-next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page-pre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page-refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

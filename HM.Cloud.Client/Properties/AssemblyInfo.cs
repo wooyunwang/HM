@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("HM.Cloud.Client")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("黑猫一号 · 数据上云 · 客户端")]
+[assembly: AssemblyDescription("黑猫一号 · 数据上云 · 客户端")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HM.Cloud.Client")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCompany("万科物业")]
+[assembly: AssemblyProduct("黑猫一号 · 数据上云 · 客户端")]
+[assembly: AssemblyCopyright("Copyright ©  2018 - 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

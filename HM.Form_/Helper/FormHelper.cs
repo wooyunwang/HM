@@ -36,13 +36,29 @@ namespace HM.Form_
                 }
             }
             else methodInvoker();
-
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tb"></param>
+        /// <param name="msg"></param>
+        public static void OnMessage(this HMTextBox tb, string msg)
+        {
+            tb.UIThread(() =>
+            {
+                if (tb.Text.Length > 2000) { tb.Text = ""; }
+                tb.Text = DateTime.Now.ToString("hh:mm:ss") + "：" + msg + Environment.NewLine + tb.Text;
+            });
         }
 
+        /// <summary>
+        /// 获取应用名称
+        /// </summary>
+        /// <returns></returns>
         public static string GetAppName()
         {
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(Application.ExecutablePath);
-            return fvi.ProductName + " " + fvi.ProductVersion;
+            return fvi.ProductName + " · v" + fvi.ProductVersion;
         }
 
         /// <summary>

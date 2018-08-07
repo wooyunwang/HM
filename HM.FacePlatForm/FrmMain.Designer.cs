@@ -29,88 +29,88 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            this.htcMain = new HM.Form_.HMTabControl();
-            this.mtpDataBase = new MetroFramework.Controls.MetroTabPage();
-            this.mtpRegister = new MetroFramework.Controls.MetroTabPage();
-            this.mtpCheck = new MetroFramework.Controls.MetroTabPage();
-            this.mtpRegisterManage = new MetroFramework.Controls.MetroTabPage();
-            this.mtpLog = new MetroFramework.Controls.MetroTabPage();
-            this.htcMain.SuspendLayout();
+            this.HtcMain = new HM.Form_.HMTabControl();
+            this.MtpDataBase = new MetroFramework.Controls.MetroTabPage();
+            this.MtpCheck = new MetroFramework.Controls.MetroTabPage();
+            this.MtpRegister = new MetroFramework.Controls.MetroTabPage();
+            this.MtpRegisterManage = new MetroFramework.Controls.MetroTabPage();
+            this.MtpLog = new MetroFramework.Controls.MetroTabPage();
+            this.HtcMain.SuspendLayout();
             this.SuspendLayout();
             // 
-            // htcMain
+            // HtcMain
             // 
-            this.htcMain.Controls.Add(this.mtpDataBase);
-            this.htcMain.Controls.Add(this.mtpCheck);
-            this.htcMain.Controls.Add(this.mtpRegister);
-            this.htcMain.Controls.Add(this.mtpRegisterManage);
-            this.htcMain.Controls.Add(this.mtpLog);
-            this.htcMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.htcMain.FontSize = MetroFramework.MetroTabControlSize.Tall;
-            this.htcMain.ItemSize = new System.Drawing.Size(150, 36);
-            this.htcMain.Location = new System.Drawing.Point(20, 60);
-            this.htcMain.Margin = new System.Windows.Forms.Padding(2);
-            this.htcMain.Name = "htcMain";
-            this.htcMain.SelectedIndex = 2;
-            this.htcMain.Size = new System.Drawing.Size(1160, 676);
-            this.htcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.htcMain.TabIndex = 0;
-            this.htcMain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.HtcMain.Controls.Add(this.MtpDataBase);
+            this.HtcMain.Controls.Add(this.MtpRegister);
+            this.HtcMain.Controls.Add(this.MtpCheck);
+            this.HtcMain.Controls.Add(this.MtpRegisterManage);
+            this.HtcMain.Controls.Add(this.MtpLog);
+            this.HtcMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HtcMain.FontSize = MetroFramework.MetroTabControlSize.Tall;
+            this.HtcMain.ItemSize = new System.Drawing.Size(150, 36);
+            this.HtcMain.Location = new System.Drawing.Point(20, 60);
+            this.HtcMain.Margin = new System.Windows.Forms.Padding(2);
+            this.HtcMain.Name = "HtcMain";
+            this.HtcMain.SelectedIndex = 2;
+            this.HtcMain.Size = new System.Drawing.Size(1160, 676);
+            this.HtcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.HtcMain.TabIndex = 0;
+            this.HtcMain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // mtpDataBase
             // 
-            this.mtpDataBase.HorizontalScrollbarBarColor = true;
-            this.mtpDataBase.Location = new System.Drawing.Point(4, 40);
-            this.mtpDataBase.Name = "mtpDataBase";
-            this.mtpDataBase.Size = new System.Drawing.Size(1152, 632);
-            this.mtpDataBase.TabIndex = 0;
-            this.mtpDataBase.Tag = "HM.FacePlatform.DataBase";
-            this.mtpDataBase.Text = "基础数据";
-            this.mtpDataBase.VerticalScrollbarBarColor = true;
-            // 
-            // mtpRegister
-            // 
-            this.mtpRegister.HorizontalScrollbarBarColor = true;
-            this.mtpRegister.Location = new System.Drawing.Point(4, 40);
-            this.mtpRegister.Name = "mtpRegister";
-            this.mtpRegister.Size = new System.Drawing.Size(1152, 632);
-            this.mtpRegister.TabIndex = 1;
-            this.mtpRegister.Tag = "HM.FacePlatform.Register";
-            this.mtpRegister.Text = "注册";
-            this.mtpRegister.VerticalScrollbarBarColor = true;
+            this.MtpDataBase.HorizontalScrollbarBarColor = true;
+            this.MtpDataBase.Location = new System.Drawing.Point(4, 40);
+            this.MtpDataBase.Name = "mtpDataBase";
+            this.MtpDataBase.Size = new System.Drawing.Size(1152, 632);
+            this.MtpDataBase.TabIndex = 0;
+            this.MtpDataBase.Tag = "HM.FacePlatform.DataBase";
+            this.MtpDataBase.Text = "基础数据";
+            this.MtpDataBase.VerticalScrollbarBarColor = true;
             // 
             // mtpCheck
             // 
-            this.mtpCheck.HorizontalScrollbarBarColor = true;
-            this.mtpCheck.Location = new System.Drawing.Point(4, 40);
-            this.mtpCheck.Name = "mtpCheck";
-            this.mtpCheck.Size = new System.Drawing.Size(1152, 632);
-            this.mtpCheck.TabIndex = 2;
-            this.mtpCheck.Tag = "HM.FacePlatform.Check";
-            this.mtpCheck.Text = "审核";
-            this.mtpCheck.VerticalScrollbarBarColor = true;
+            this.MtpCheck.HorizontalScrollbarBarColor = true;
+            this.MtpCheck.Location = new System.Drawing.Point(4, 40);
+            this.MtpCheck.Name = "mtpCheck";
+            this.MtpCheck.Size = new System.Drawing.Size(1152, 632);
+            this.MtpCheck.TabIndex = 2;
+            this.MtpCheck.Tag = "HM.FacePlatform.Check";
+            this.MtpCheck.Text = "审核";
+            this.MtpCheck.VerticalScrollbarBarColor = true;
+            // 
+            // mtpRegister
+            // 
+            this.MtpRegister.HorizontalScrollbarBarColor = true;
+            this.MtpRegister.Location = new System.Drawing.Point(4, 40);
+            this.MtpRegister.Name = "mtpRegister";
+            this.MtpRegister.Size = new System.Drawing.Size(1152, 632);
+            this.MtpRegister.TabIndex = 1;
+            this.MtpRegister.Tag = "HM.FacePlatform.Register";
+            this.MtpRegister.Text = "注册";
+            this.MtpRegister.VerticalScrollbarBarColor = true;
             // 
             // mtpRegisterManage
             // 
-            this.mtpRegisterManage.HorizontalScrollbarBarColor = true;
-            this.mtpRegisterManage.Location = new System.Drawing.Point(4, 40);
-            this.mtpRegisterManage.Name = "mtpRegisterManage";
-            this.mtpRegisterManage.Size = new System.Drawing.Size(1152, 632);
-            this.mtpRegisterManage.TabIndex = 3;
-            this.mtpRegisterManage.Tag = "HM.FacePlatform.RegisterManage";
-            this.mtpRegisterManage.Text = "注册管理";
-            this.mtpRegisterManage.VerticalScrollbarBarColor = true;
+            this.MtpRegisterManage.HorizontalScrollbarBarColor = true;
+            this.MtpRegisterManage.Location = new System.Drawing.Point(4, 40);
+            this.MtpRegisterManage.Name = "mtpRegisterManage";
+            this.MtpRegisterManage.Size = new System.Drawing.Size(1152, 632);
+            this.MtpRegisterManage.TabIndex = 3;
+            this.MtpRegisterManage.Tag = "HM.FacePlatform.RegisterManage";
+            this.MtpRegisterManage.Text = "注册管理";
+            this.MtpRegisterManage.VerticalScrollbarBarColor = true;
             // 
             // mtpLog
             // 
-            this.mtpLog.HorizontalScrollbarBarColor = true;
-            this.mtpLog.Location = new System.Drawing.Point(4, 40);
-            this.mtpLog.Name = "mtpLog";
-            this.mtpLog.Size = new System.Drawing.Size(1152, 632);
-            this.mtpLog.TabIndex = 4;
-            this.mtpLog.Tag = "HM.FacePlatform.Log";
-            this.mtpLog.Text = "日志";
-            this.mtpLog.VerticalScrollbarBarColor = true;
+            this.MtpLog.HorizontalScrollbarBarColor = true;
+            this.MtpLog.Location = new System.Drawing.Point(4, 40);
+            this.MtpLog.Name = "mtpLog";
+            this.MtpLog.Size = new System.Drawing.Size(1152, 632);
+            this.MtpLog.TabIndex = 4;
+            this.MtpLog.Tag = "HM.FacePlatform.Log";
+            this.MtpLog.Text = "日志";
+            this.MtpLog.VerticalScrollbarBarColor = true;
             // 
             // FrmMain
             // 
@@ -118,24 +118,23 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(1200, 756);
-            this.Controls.Add(this.htcMain);
+            this.Controls.Add(this.HtcMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmMain";
-            this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "黑猫一号 · 人脸综合管理平台";
-            this.htcMain.ResumeLayout(false);
+            this.HtcMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Form_.HMTabControl htcMain;
-        private MetroFramework.Controls.MetroTabPage mtpDataBase;
-        private MetroFramework.Controls.MetroTabPage mtpRegister;
-        private MetroFramework.Controls.MetroTabPage mtpCheck;
-        private MetroFramework.Controls.MetroTabPage mtpRegisterManage;
-        private MetroFramework.Controls.MetroTabPage mtpLog;
+        private Form_.HMTabControl HtcMain;
+        private MetroFramework.Controls.MetroTabPage MtpDataBase;
+        private MetroFramework.Controls.MetroTabPage MtpRegister;
+        private MetroFramework.Controls.MetroTabPage MtpCheck;
+        private MetroFramework.Controls.MetroTabPage MtpRegisterManage;
+        private MetroFramework.Controls.MetroTabPage MtpLog;
     }
 }
 

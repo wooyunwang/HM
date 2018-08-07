@@ -98,6 +98,10 @@
       <Project>{a3d97c81-7036-4645-a3cf-2c9a3a366cdb}</Project>
       <Name>HM.Common_</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HM.Enum_\HM.Enum_.csproj">
+      <Project>{f26f1383-fcca-410d-8e7e-376faed6b8f1}</Project>
+      <Name>HM.Enum_</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HM.Socket_.Common_\HM.Socket_.Common_.csproj">
       <Project>{84d387c8-a1cd-4e0c-9d71-3c59c4a60ff4}</Project>
       <Name>HM.Socket_.Common_</Name>

@@ -46,6 +46,7 @@ namespace HM.Socket_
         ServerBootstrap bootstrap = new ServerBootstrap();
         /// <summary>
         /// 
+        /// 
         /// </summary>
         IChannel boundChannel { get; set; }
 
@@ -243,7 +244,7 @@ namespace HM.Socket_
 #if DEBUG
                 Console.WriteLine(Utils_.Json_.GetString(requestBase));
 #endif
-                LogHelper.GetIlog(LogType.Recive).Info(Utils_.Json_.GetString(requestBase));
+                LogHelper.GetIlog(LogType.Default).Info(Utils_.Json_.GetString(requestBase));
 
                 if (_RealHandler != null)
                 {

@@ -63,6 +63,8 @@
     <Compile Include="EyeCool\Base\Constant.cs" />
     <Compile Include="EyeCool\Base\RequestBase.cs" />
     <Compile Include="EyeCool\Base\ResponseBase.cs" />
+    <Compile Include="EyeCool\EyeCoolAPI.cs" />
+    <Compile Include="EyeCool\EyeCoolAPI.Async.cs" />
     <Compile Include="EyeCool\FaceEnum\RCType.cs" />
     <Compile Include="EyeCool\InputOutput\ReviewPeopleOutput.cs" />
     <Compile Include="EyeCool\InputOutput\GetRegisterDataInput.cs" />
@@ -95,7 +97,7 @@
     <Compile Include="EyeCool\InputOutput\PeopleUpdateInput.cs" />
     <Compile Include="EyeCool\InputOutput\PeopleUpdateOutput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EyeCool\EyeCoolAPI.cs" />
+    <Compile Include="EyeCool\EyeCoolAPI.Syn.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HM.Common_\HM.Common_.csproj">

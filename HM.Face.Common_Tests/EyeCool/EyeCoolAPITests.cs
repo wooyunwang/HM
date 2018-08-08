@@ -54,7 +54,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                 sex = 1,
                 tip = "拥有"
             };
-            var result = api.PeopleCreate(input).Result;
+            var result = api.PeopleCreate(input);
         }
 
         [TestMethod()]
@@ -70,7 +70,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                     rctype = RCType.手动注册,
                     tip = "单元测试"
                 };
-                var result = api.Checking(input).Result;
+                var result = api.Checking(input);
             }
             else
             {
@@ -100,7 +100,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                     sex = 1,
                     tip = "拥有"
                 };
-                var result0 = api.PeopleCreate(input0).Result;
+                var result0 = api.PeopleCreate(input0);
                 if (result0.res_code_enum == ResponseCode._0000)
                 {
                     var input1 = new CheckingInput()
@@ -110,7 +110,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                         rctype = RCType.手动注册,
                         tip = "单元测试"
                     };
-                    var result1 = api.Checking(input1).Result;
+                    var result1 = api.Checking(input1);
                     if (result1.res_code_enum == ResponseCode._0000)
                     {
                         if (result1.face != null && result1.face.Any())
@@ -120,7 +120,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                                 face_id = result1.face[0].face_id,
                                 is_audit = true,
                                 people_id = result0.people_id
-                            }).Result;
+                            });
                             if (result2.res_code_enum == ResponseCode._0000)
                             {
 
@@ -159,7 +159,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                 crowd_name = "00000000",
                 tip = "单元测试项目"
             };
-            var result = api.CrowdCreate(input).Result;
+            var result = api.CrowdCreate(input);
         }
 
         [TestMethod()]
@@ -181,7 +181,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                 sex = 1,
                 tip = "拥有"
             };
-            var result0 = api.PeopleCreate(input0).Result;
+            var result0 = api.PeopleCreate(input0);
             if (result0.res_code_enum == ResponseCode._0000)
             {
                 var input1 = new CrowdAddInput()
@@ -192,7 +192,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                 //crowd_name为空字符串时：“API接口错误:Index: 0, Size: 0”
                 //people_id为空字符串时：“API接口错误:Index: 0, Size: 0”
                 //重复执行时，达到期望
-                var result1 = api.CrowdAdd(input1).Result;
+                var result1 = api.CrowdAdd(input1);
 
                 if (result1.res_code_enum == ResponseCode._0000)
                 {
@@ -236,7 +236,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                         rctype = null,
                         updateTime = DateTime.Now.AddDays(-60)
                     };
-                    var result0 = api.GetRegisterData(input0).Result;
+                    var result0 = api.GetRegisterData(input0);
 
                     foreach (RCType rctype in Enum.GetValues(typeof(RCType)))
                     {
@@ -250,7 +250,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                             rctype = rctype,
                             updateTime = DateTime.Now.AddDays(-60)
                         };
-                        var result = api.GetRegisterData(input).Result;
+                        var result = api.GetRegisterData(input);
                     }
                 }
             }
@@ -278,7 +278,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                     sex = 1,
                     tip = "拥有"
                 };
-                var result0 = api.PeopleCreate(input0).Result;
+                var result0 = api.PeopleCreate(input0);
                 if (result0.res_code_enum == ResponseCode._0000)
                 {
                     var input1 = new CheckingInput()
@@ -288,7 +288,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                         rctype = RCType.手动注册,
                         tip = "单元测试"
                     };
-                    var result1 = api.Checking(input1).Result;
+                    var result1 = api.Checking(input1);
                     if (result1.res_code_enum == ResponseCode._0000)
                     {
                         if (result1.face != null && result1.face.Any())
@@ -298,7 +298,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                                 face_id = result1.face[0].face_id,
                                 is_audit = true,
                                 people_id = result0.people_id
-                            }).Result;
+                            });
                             if (result2.res_code_enum == ResponseCode._0000)
                             {
                                 var result3 = api.ReviewPeople(new ReviewPeopleInput()
@@ -307,7 +307,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                                     crowd_name = "",
                                     people_id = result0.people_id,
                                     state = ReviewState.不通过
-                                }).Result;
+                                });
 
                                 if (result3.res_code_enum == ResponseCode._0000)
                                 {
@@ -353,7 +353,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                 crowd_name = "",
                 people_id = "e8cfc9b179b44bd1a1e5f4eb673a05b6",
                 state = ReviewState.待审核
-            }).Result;
+            });
         }
 
 
@@ -369,7 +369,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                 pageSize = 50,
                 //crowd_name = ""
             };
-            var result = api.CurrentDetail(input).Result;
+            var result = api.CurrentDetail(input);
         }
 
         [TestMethod()]
@@ -379,9 +379,9 @@ namespace HM.Face.Common_.EyeCool.Tests
             {
                 people_id = "5708314bf980474a978b68e436d55944"
             };
-            var result1 = api.PeopleDelete(input).Result;
+            var result1 = api.PeopleDelete(input);
 
-            var result2 = api.PeopleDelete(input, false).Result;
+            var result2 = api.PeopleDelete(input, false);
         }
 
         [TestMethod()]
@@ -392,9 +392,9 @@ namespace HM.Face.Common_.EyeCool.Tests
                 people_id = "e8cfc9b179b44bd1a1e5f4eb673a05b6",
                 faceIds = new List<string>() { "e2080713-3532-44f2-a619-24acf3f1ab03" }
             };
-            var result1 = api.PeopleRemove(input).Result;
+            var result1 = api.PeopleRemove(input);
 
-            var result2 = api.PeopleRemove(input, false).Result;
+            var result2 = api.PeopleRemove(input, false);
         }
 
         [TestMethod()]
@@ -407,7 +407,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                 birthday = new DateTime(1986, 8, 1),
                 phone = "15112296571"
             };
-            var result1 = api.PeopleUpdate(input).Result;
+            var result1 = api.PeopleUpdate(input);
         }
 
         [TestMethod()]
@@ -418,7 +418,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                 face_id1 = "be3912ee-98ae-40c0-8c02-717bb1515751",
                 face_id2 = "0b4c487c0c894421984da11b06ce0f0f",
             };
-            var result1 = api.MatchCompare(input).Result;
+            var result1 = api.MatchCompare(input);
         }
 
         [TestMethod()]
@@ -428,7 +428,7 @@ namespace HM.Face.Common_.EyeCool.Tests
             if (File.Exists(path))
             {
                 var input = new PersonCardSnapshotInput(path);
-                var result = api.PersonCardSnapshot(input).Result;
+                var result = api.PersonCardSnapshot(input);
                 Assert.IsTrue(result.success);
             }
             else

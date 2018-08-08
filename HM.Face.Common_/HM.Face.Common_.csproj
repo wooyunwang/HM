@@ -11,6 +11,8 @@
     <AssemblyName>HM.Face.Common_</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +38,9 @@
     <Reference Include="Flurl.Http, Version=2.3.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Flurl.Http.2.3.2\lib\net45\Flurl.Http.dll</HintPath>
     </Reference>
+    <Reference Include="MrAdvice, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c0e7e6eab6f293d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\MrAdvice.2.5.24\lib\net40-client\MrAdvice.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -51,7 +56,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\RandomGenerator.cs" />
+    <Compile Include="Base\EyeCoolRequestAttribute.cs" />
     <Compile Include="Base\Warn.cs" />
+    <Compile Include="EyeCool\Base\EyeCoolDateConverter.cs" />
+    <Compile Include="EyeCool\Base\EyeCoolDateTimeConverter.cs" />
     <Compile Include="EyeCool\Base\Constant.cs" />
     <Compile Include="EyeCool\Base\RequestBase.cs" />
     <Compile Include="EyeCool\Base\ResponseBase.cs" />
@@ -90,6 +98,10 @@
     <Compile Include="EyeCool\EyeCoolAPI.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HM.Common_\HM.Common_.csproj">
+      <Project>{A3D97C81-7036-4645-A3CF-2C9A3A366CDB}</Project>
+      <Name>HM.Common_</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HM.Utils_\HM.Utils_.csproj">
       <Project>{38f4f95a-f905-43e1-8ad0-4d7d4820edef}</Project>
       <Name>HM.Utils_</Name>
@@ -100,4 +112,11 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MrAdvice.2.5.24\build\MrAdvice.targets" Condition="Exists('..\packages\MrAdvice.2.5.24\build\MrAdvice.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MrAdvice.2.5.24\build\MrAdvice.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MrAdvice.2.5.24\build\MrAdvice.targets'))" />
+  </Target>
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace HM.Face.Common_.EyeCool
@@ -46,6 +47,7 @@ namespace HM.Face.Common_.EyeCool
         /// <summary>
         /// 出生日期(yyyy-MM-dd)
         /// </summary>
+        [JsonConverter(typeof(EyeCoolDateConverter))]
         public DateTime? birthday { get; set; }
         /// <summary>
         /// 注册渠道
@@ -56,8 +58,9 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         public string phone { get; set; }
         /// <summary>
-        /// 到期日期(yyyy-MM-dd)
+        /// 到期日期
         /// </summary>
+        [JsonConverter(typeof(EyeCoolDateTimeConverter))]
         public DateTime activeTime { get; set; }
         /// <summary>
         /// 猫编号

@@ -18,6 +18,7 @@ namespace HM.Face.Common_.EyeCool.Tests
         EyeCoolAPI api { get; set; }
         public EyeCoolAPITests()
         {
+            log4net.Config.XmlConfigurator.Configure();
             SetZhCnCulturInfo();
             api = new EyeCoolAPI("192.168.1.180", 8080);
         }
@@ -211,30 +212,48 @@ namespace HM.Face.Common_.EyeCool.Tests
         [TestMethod()]
         public void GetRegisterDataTest()
         {
-            var input0 = new GetRegisterDataInput()
-            {
-                crowd_name = "00000000",
-                dataType = null,
-                pageNumber = 1,
-                pageSize = 50,
-                endtime = null,
-                rctype = null,
-                updateTime = DateTime.Now.AddDays(-60).ToString("yyyy-MM-dd")
-            };
-            var result0 = api.GetRegisterData(input0).Result;
+            List<string> lstcrowd_name = new List<string>() { "44039999", null };
+            List<List<int>> lstdataType = new List<List<int>>();
+            lstdataType.Add(new List<int>() { 0 });
+            lstdataType.Add(new List<int>() { 1 });
+            lstdataType.Add(new List<int>() { 2 });
+            lstdataType.Add(new List<int>() { 1, 2 });
+            lstdataType.Add(new List<int>() { 0, 1 });
+            lstdataType.Add(new List<int>() { 0, 2 });
+            lstdataType.Add(new List<int>() { 0, 1, 2 });
 
-            var input1 = new GetRegisterDataInput()
+            foreach (var crowd_name in lstcrowd_name)
             {
-                //0 -注册审核已通过数据，1-注册审核未通过数据，2-注册待审核数据
-                crowd_name = null,
-                dataType = new List<int>() { 0, 1, 2 }.ToArray(),
-                pageNumber = 1,
-                pageSize = 50,
-                endtime = null,
-                rctype = RCType.手动注册,
-                updateTime = DateTime.Now.AddDays(-60).ToString("yyyy-MM-dd")
-            };
-            var result1 = api.GetRegisterData(input1).Result;
+                foreach (var dataType in lstdataType)
+                {
+                    var input0 = new GetRegisterDataInput()
+                    {
+                        crowd_name = crowd_name,
+                        dataType = dataType.ToArray(),
+                        pageNumber = 1,
+                        pageSize = 50,
+                        endtime = null,
+                        rctype = null,
+                        updateTime = DateTime.Now.AddDays(-60)
+                    };
+                    var result0 = api.GetRegisterData(input0).Result;
+
+                    foreach (RCType rctype in Enum.GetValues(typeof(RCType)))
+                    {
+                        var input = new GetRegisterDataInput()
+                        {
+                            crowd_name = crowd_name,
+                            dataType = dataType.ToArray(),
+                            pageNumber = 1,
+                            pageSize = 50,
+                            endtime = null,
+                            rctype = rctype,
+                            updateTime = DateTime.Now.AddDays(-60)
+                        };
+                        var result = api.GetRegisterData(input).Result;
+                    }
+                }
+            }
         }
 
         [TestMethod()]
@@ -344,11 +363,11 @@ namespace HM.Face.Common_.EyeCool.Tests
         {
             var input = new CurrentDetailInput()
             {
-                updateTime = DateTime.Now.AddMonths(-6).ToString("yyyy-MM-dd"),
-                endtime = DateTime.Now.ToString("yyyy-MM-dd"),
+                updateTime = DateTime.Now.AddMonths(-6),
+                endtime = DateTime.Now,
                 pageNumber = 1,
                 pageSize = 50,
-                crowdname = ""
+                //crowd_name = ""
             };
             var result = api.CurrentDetail(input).Result;
         }
@@ -384,7 +403,8 @@ namespace HM.Face.Common_.EyeCool.Tests
             var input = new PeopleUpdateInput()
             {
                 people_id = "e8cfc9b179b44bd1a1e5f4eb673a05b6",
-                activeTime = DateTime.Now.AddYears(1).ToString("yyyy-MM-dd 23:59:59"),
+                activeTime = DateTime.Now.AddYears(1),//.ToString("yyyy-MM-dd 23:59:59"),
+                birthday = new DateTime(1986, 8, 1),
                 phone = "15112296571"
             };
             var result1 = api.PeopleUpdate(input).Result;
@@ -404,11 +424,12 @@ namespace HM.Face.Common_.EyeCool.Tests
         [TestMethod()]
         public void PersonCardSnapshotTest()
         {
-            string path = Path.Combine(Environment.CurrentDirectory, "Picture", "male.jpg");
+            string path = Path.Combine(Environment.CurrentDirectory, "Picture", "蔡泽智.jpg");
             if (File.Exists(path))
             {
                 var input = new PersonCardSnapshotInput(path);
-                var result1 = api.PersonCardSnapshot(input).Result;
+                var result = api.PersonCardSnapshot(input).Result;
+                Assert.IsTrue(result.success);
             }
             else
             {

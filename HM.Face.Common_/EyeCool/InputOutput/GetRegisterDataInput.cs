@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace HM.Face.Common_.EyeCool
 {
@@ -8,18 +9,23 @@ namespace HM.Face.Common_.EyeCool
         {
             pageNumber = 1;
             pageSize = 50;
+            app_id = Constant.APP_ID;
+            app_key = Constant.APP_KEY;
         }
         /// <summary>
         /// 更新时间
         /// </summary>
-        public string updateTime { get; set; }
+        [JsonConverter(typeof(EyeCoolDateTimeConverter))]
+        public DateTime updateTime { get; set; }
         /// <summary>
         /// 结束时间，为空则查询到当前时间
         /// </summary>
-        public string endtime { get; set; }
+        [JsonConverter(typeof(EyeCoolDateTimeConverter))]
+        public DateTime? endtime { get; set; }
         /// <summary>
         /// 创建人来源，0自动注册、1微信注册、2手动注册，为空则为所有类型
         /// </summary>
+        [Obsolete("2018-08-08此属性已确认作废")]
         public RCType? rctype { get; set; }
         /// <summary>
         /// 每页记录数，为空则默认为50

@@ -3,9 +3,9 @@ using HM.Common_;
 using HM.Utils_;
 using System;
 
-namespace HM.Common_
+namespace HM.Face.Common_
 {
-    public class TryCatchAttrubute : Attribute, IMethodAdvice
+    public class EyeCoolRequestAttribute : Attribute, IMethodAdvice
     {
         public void Advise(MethodAdviceContext context)
         {

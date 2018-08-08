@@ -1,4 +1,7 @@
-﻿namespace HM.Face.Common_.EyeCool
+﻿using Newtonsoft.Json;
+using System;
+
+namespace HM.Face.Common_.EyeCool
 {
     public class CurrentDetailInput : RequestBase
     {
@@ -6,19 +9,22 @@
         {
             pageSize = 50;
             pageNumber = 1;
+            crowd_name = null;
         }
         /// <summary>
-        /// 组名，黑猫一号以项目编号作为组名
+        /// 组名，黑猫一号以项目编号作为组名，为null时此字段不筛选
         /// </summary>
-        public string crowdname { set; get; }
+        public string crowd_name { set; get; }
         /// <summary>
         /// 开始时间
         /// </summary>
-        public string updateTime { set; get; }
+        [JsonConverter(typeof(EyeCoolDateTimeConverter))]
+        public DateTime updateTime { set; get; }
         /// <summary>
         /// 截止时间
         /// </summary>
-        public string endtime { set; get; }
+        [JsonConverter(typeof(EyeCoolDateTimeConverter))]
+        public DateTime? endtime { set; get; }
         /// <summary>
         /// 每页展示数量，为空则默认为50
         /// </summary>

@@ -50,14 +50,8 @@ namespace HM.Face.Common_.EyeCool
         /// <param name="request"></param>
         private void FillIDAndKey(RequestBase request)
         {
-            if (string.IsNullOrWhiteSpace(request.app_id))
-            {
-                request.app_id = APP_ID;
-            }
-            if (string.IsNullOrWhiteSpace(request.app_key))
-            {
-                request.app_key = APP_KEY;
-            }
+            request.app_id = APP_ID;
+            request.app_key = APP_KEY;
         }
 
         /// <summary>
@@ -65,6 +59,7 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<PeopleCreateOutput> PeopleCreate(PeopleCreateInput input)
         {
             FillIDAndKey(input);
@@ -82,6 +77,7 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<CheckingOutput> Checking(CheckingInput input)
         {
             FillIDAndKey(input);
@@ -97,6 +93,7 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<PeopleAddOutput> PeopleAdd(PeopleAddInput input)
         {
             FillIDAndKey(input);
@@ -108,6 +105,7 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<CrowdCreateOutput> CrowdCreate(CrowdCreateInput input)
         {
             FillIDAndKey(input);
@@ -123,6 +121,7 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<CrowdAddOutput> CrowdAdd(CrowdAddInput input)
         {
             FillIDAndKey(input);
@@ -134,6 +133,7 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<List<GetRegisterDataOutput>> GetRegisterData(GetRegisterDataInput input)
         {
             FillIDAndKey(input);
@@ -144,6 +144,7 @@ namespace HM.Face.Common_.EyeCool
         /// 审核
         /// </summary>
         /// <param name="input"></param>
+        [EyeCoolRequest]
         public Task<ReviewPeopleOutput> ReviewPeople(ReviewPeopleInput input)
         {
             FillIDAndKey(input);
@@ -155,6 +156,7 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<List<CurrentDetailOutput>> CurrentDetail(CurrentDetailInput input)
         {
             FillIDAndKey(input);
@@ -166,6 +168,7 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<PeopleDeleteOutput> PeopleDelete(PeopleDeleteInput input, bool softDelete = true)
         {
             FillIDAndKey(input);
@@ -186,6 +189,7 @@ namespace HM.Face.Common_.EyeCool
         /// <param name="input"></param>
         /// <param name="softDelete"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<PeopleRemoveOutput> PeopleRemove(PeopleRemoveInput input, bool softDelete = true)
         {
             FillIDAndKey(input);
@@ -206,6 +210,7 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         /// <param name="inVO"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<PeopleUpdateOutput> PeopleUpdate(PeopleUpdateInput input)
         {
             FillIDAndKey(input);
@@ -217,6 +222,7 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<MatchCompareOutput> MatchCompare(MatchCompareInput input)
         {
             FillIDAndKey(input);
@@ -228,6 +234,7 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [EyeCoolRequest]
         public Task<PersonCardSnapshotOutput> PersonCardSnapshot(PersonCardSnapshotInput input)
         {
             FillIDAndKey(input);

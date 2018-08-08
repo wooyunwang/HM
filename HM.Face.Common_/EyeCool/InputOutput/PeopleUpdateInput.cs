@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace HM.Face.Common_.EyeCool
 {
@@ -43,15 +45,17 @@ namespace HM.Face.Common_.EyeCool
         /// <summary>
         /// 出生日期(yyyy-MM-dd)
         /// </summary>
-        public string birthday { set; get; }
+        [JsonConverter(typeof(EyeCoolDateConverter))]
+        public DateTime? birthday { set; get; }
         /// <summary>
         /// 手机号码
         /// </summary>
         public string phone { set; get; }
         /// <summary>
-        /// 到期日期(yyyy-MM-dd)
+        /// 到期日期(yyyy-MM-dd HH:mm:ss)
         /// </summary>
-        public string activeTime { set; get; }
+        [JsonConverter(typeof(EyeCoolDateTimeConverter))]
+        public DateTime? activeTime { set; get; }
         /// <summary>
         /// 猫编号
         /// </summary>

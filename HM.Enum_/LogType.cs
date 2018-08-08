@@ -24,16 +24,20 @@ namespace HM.Enum_
         /// </summary>
         SocketServer,
         /// <summary>
-        /// 接收日志
-        /// </summary>
-        Recive,
-        /// <summary>
         /// 连接日志
         /// </summary>
         Connect,
         /// <summary>
         /// 任务日志
         /// </summary>
-        Job
+        Job,
+        /// <summary>
+        /// 输入输出日志
+        /// </summary>
+        InputOutput,
+        /// <summary>
+        /// 时间日志
+        /// </summary>
+        Stopwatch
     }
 }

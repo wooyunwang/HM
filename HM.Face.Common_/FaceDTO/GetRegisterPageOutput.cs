@@ -1,97 +1,95 @@
-﻿using System;
+﻿using HM.Face.Common_.EyeCool;
+using System;
 using System.Collections.Generic;
 
-namespace HM.Face.Common_.EyeCool
+namespace HM.Face.Common_
 {
-    public class GetRegisterDataOutput : ResponseBase
+    public class GetRegisterPageOutput
     {
         /// <summary>
         /// 所有已经注册的记录条数
         /// </summary>
-        public int maxnumber { set; get; }
+        public int MaxNumber { set; get; }
         /// <summary>
-        /// 卡类型：1-业主卡、2-身份证、3-唯一标识、4-其他卡号、5-共有卡
+        /// 卡类型
         /// </summary>
-        public CertificateType cid { set; get; }
+        public CertificateType CertificateType { set; get; }
         /// <summary>
         /// 用户唯一值（包括userID）
         /// </summary>
-        public string cardNo { set; get; }
+        public string CardNo { set; get; }
         /// <summary>
         /// 注册方式
-        /// <!--
-        /// 0自动注册、1微信注册、2手动注册
-        /// -->
         /// </summary>
-        public RCType rctype { set; get; }
+        public RegisterType RegisterType { set; get; }
         /// <summary>
         /// 注册猫ID
         /// <!--
         /// 猫编号catid-->cNo
         /// -->
         /// </summary>
-        public string cNo { set; get; }
+        public string CatCode { set; get; }
         /// <summary>
         /// 注册房号
         /// </summary>
-        public string fNo { set; get; }
+        public string RoomNo { set; get; }
         /// <summary>
         /// 注册时间(格式: yyyy-MM-dd HH:mm:ss)
         /// </summary>
-        public string regTime { set; get; }
+        public string RegisterTime { set; get; }
         /// <summary>
         /// 有效期(格式: yyyy-MM-dd)
         /// </summary>
-        public DateTime? activeTime { set; get; }
+        public string ActiveTime { set; get; }
         /// <summary>
         /// 审核状态
         /// <!--
         /// 0待审核、1通过、2不通过
         /// -->
         /// </summary>
-        public ReviewState? state { set; get; }
+        public ReviewState? CheckState { set; get; }
         /// <summary>
         /// 审核时间(格式: yyyy-MM-dd HH:mm:ss)
         /// </summary>
-        public DateTime? checkTime { set; get; }
+        public DateTime? CheckTime { set; get; }
         /// <summary>
         /// 审核备注
         /// <!--
         /// checkMessage-->comments-->_checkMessage
         /// -->
         /// </summary>
-        public string checkMessage { set; get; }
+        public string CheckMessage { set; get; }
         /// <summary>
         /// 更新时间(格式: yyyy-MM-dd HH:mm:ss)
         /// <!--
         /// 增、删、改的时间(数据同步用)change_time-->updateTime
         /// -->
         /// </summary>
-        public DateTime? updateTime { set; get; }
+        public DateTime? UpdateTime { set; get; }
         /// <summary>
         /// 图片属性对象
         /// </summary>
-        public List<EyeCoolFaceObj> face_obj { get; set; } = new List<EyeCoolFaceObj>();
+        public List<HMFaceObj> HMFaceObj { get; set; } = new List<HMFaceObj>();
         /// <summary>
         /// 人员ID
         /// </summary>
-        public int id { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// 人员名称
         /// </summary>
-        public string people_name { get; set; }
+        public string PeopleName { get; set; }
         /// <summary>
         /// 对外公布人员ID
         /// </summary>
-        public string people_id { set; get; }
+        public string PeopleId { set; get; }
         /// <summary>
         /// 性别，1：男，0：女
         /// </summary>
-        public int sex { get; set; }
+        public int Sex { get; set; }
         /// <summary>
         /// 人员手机号码
         /// </summary>
-        public string phone { get; set; }
+        public string Phone { get; set; }
         /// <summary>
         /// 用户类型
         /// </summary>
@@ -100,7 +98,7 @@ namespace HM.Face.Common_.EyeCool
     /// <summary>
     /// 
     /// </summary>
-    public enum EyeCoolFaceState
+    public enum HMFaceState
     {
         正常使用 = 0,
         删除的数据 = 1,
@@ -109,27 +107,34 @@ namespace HM.Face.Common_.EyeCool
     /// <summary>
     /// 
     /// </summary>
-    public class EyeCoolFaceObj
+    public class HMFaceObj
     {
         /// <summary>
         /// 图片注册来源
         /// </summary>
-        public RCType face_type { get; set; }
+        public RegisterType RegisterType { get; set; }
         /// <summary>
-        /// 0:正常使用；1:删除的数据2:待审核、禁用数据
+        /// 人脸状态
         /// </summary>
-        public int is_del { set; get; }
+        public HMFaceState FaceState { set; get; }
         /// <summary>
         /// 用户照片访问URL地址
         /// </summary>
-        public string imageUrl { set; get; }
+        public string ImageUrl { set; get; }
         /// <summary>
         /// 照片Id
         /// </summary>
-        public string face_id { set; get; }
+        public string FaceId { set; get; }
         /// <summary>
-        /// 照片注册时间(格式: yyyy-MM-dd HH:mm:ss)
+        /// 图片文件名(只读)
         /// </summary>
-        public DateTime imgRegTime { set; get; }
+        public string PicFileName
+        {
+            get { return System.IO.Path.GetFileName(ImageUrl); }
+        }
+        /// <summary>
+        /// 照片注册时间
+        /// </summary>
+        public DateTime ImageRegisterTime { set; get; }
     }
 }

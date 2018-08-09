@@ -59,6 +59,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="EyeCool\EyeCoolFaceTests.cs" />
     <Compile Include="EyeCool\EyeCoolAPITests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,6 +70,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HM.Common_\HM.Common_.csproj">
+      <Project>{a3d97c81-7036-4645-a3cf-2c9a3a366cdb}</Project>
+      <Name>HM.Common_</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HM.Face.Common_\HM.Face.Common_.csproj">
       <Project>{52CC6BDC-99B7-4A88-B3CA-BBE35CD22D0A}</Project>
       <Name>HM.Face.Common_</Name>

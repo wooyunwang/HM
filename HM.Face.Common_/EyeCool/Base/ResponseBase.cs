@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HM.Common_.DTO;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,35 @@ namespace HM.Face.Common_.EyeCool
                     return null;
                 }
             }
+        }
+        /// <summary>
+        /// 传化为结果对象
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ToActionResult()
+        {
+            ActionResult ar = new ActionResult()
+            {
+                IsSuccess = res_code_enum == ResponseCode._0000
+            };
+            ar.Add(res_msg);
+            return ar;
+        }
+        /// <summary>
+        /// 传化为结果对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public ActionResult<T> ToActionResult<T>(T obj) where T : class
+        {
+            ActionResult<T> ar = new ActionResult<T>()
+            {
+                IsSuccess = res_code_enum == ResponseCode._0000
+            };
+            ar.Obj = obj;
+            ar.Add(res_msg);
+            return ar;
         }
     }
 }

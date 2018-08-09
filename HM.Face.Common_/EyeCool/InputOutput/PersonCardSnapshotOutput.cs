@@ -30,6 +30,6 @@ namespace HM.Face.Common_.EyeCool
         /// <summary>
         /// 匹配得分
         /// </summary>
-        public string matchScore { get; set; }
+        public int? matchScore { get; set; }
     }
 }

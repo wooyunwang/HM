@@ -4,7 +4,7 @@ namespace HM.Face.Common_.EyeCool
 {
     public class PeopleAddOutput : ResponseBase
     {
-        public string face_added { get; set; }
+        public int face_added { get; set; }
         /// <summary>
         /// 表示操作是否成功 true/false
         /// </summary>

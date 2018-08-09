@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Flurl, Version=2.7.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Flurl.2.7.1\lib\net40\Flurl.dll</HintPath>
     </Reference>
@@ -47,6 +50,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,9 +62,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\FaceActionResultAttribute.cs" />
+    <Compile Include="Base\FaceSource.cs" />
     <Compile Include="Base\RandomGenerator.cs" />
     <Compile Include="Base\EyeCoolRequestAttribute.cs" />
+    <Compile Include="Base\RegisterType.cs" />
     <Compile Include="Base\Warn.cs" />
+    <Compile Include="Base\DTOMapConfig.cs" />
+    <Compile Include="EyeCool\EyeCoolAPI.Orginal.cs" />
+    <Compile Include="FaceFactory.cs" />
+    <Compile Include="EyeCoolFace.cs" />
     <Compile Include="EyeCool\Base\EyeCoolDateConverter.cs" />
     <Compile Include="EyeCool\Base\EyeCoolDateTimeConverter.cs" />
     <Compile Include="EyeCool\Base\Constant.cs" />
@@ -89,7 +103,14 @@
     <Compile Include="EyeCool\InputOutput\PeopleRemoveOutput.cs" />
     <Compile Include="EyeCool\InputOutput\PersonCardSnapshotInput.cs" />
     <Compile Include="EyeCool\InputOutput\PersonCardSnapshotOutput.cs" />
-    <Compile Include="IFace.cs" />
+    <Compile Include="FaceDTO\RegisterInput.cs" />
+    <Compile Include="FaceDTO\RegisterOutput.cs" />
+    <Compile Include="FaceDTO\GetFacePassDataInput.cs" />
+    <Compile Include="FaceDTO\GetFacePassDataOutput.cs" />
+    <Compile Include="FaceDTO\GetRegisterPageInput.cs" />
+    <Compile Include="FaceDTO\GetRegisterPageOutput.cs" />
+    <Compile Include="VanRuiFace.cs" />
+    <Compile Include="Face.cs" />
     <Compile Include="EyeCool\InputOutput\ReviewPeopleInput.cs" />
     <Compile Include="EyeCool\InputOutput\CurrentDetailInput.cs" />
     <Compile Include="EyeCool\InputOutput\CurrentDetailOutput.cs" />

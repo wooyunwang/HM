@@ -436,5 +436,53 @@ namespace HM.Face.Common_.EyeCool.Tests
                 Assert.Fail("找不到单元测试所需图片");
             }
         }
+#if DEBUG
+        [TestMethod()]
+        public void GetRegisterData_DebugTest()
+        {
+            List<string> lstcrowd_name = new List<string>() { "44039999", null };
+            List<List<int>> lstdataType = new List<List<int>>();
+            lstdataType.Add(new List<int>() { 0 });
+            lstdataType.Add(new List<int>() { 1 });
+            lstdataType.Add(new List<int>() { 2 });
+            lstdataType.Add(new List<int>() { 1, 2 });
+            lstdataType.Add(new List<int>() { 0, 1 });
+            lstdataType.Add(new List<int>() { 0, 2 });
+            lstdataType.Add(new List<int>() { 0, 1, 2 });
+
+            foreach (var crowd_name in lstcrowd_name)
+            {
+                foreach (var dataType in lstdataType)
+                {
+                    var input0 = new GetRegisterDataInput()
+                    {
+                        crowd_name = crowd_name,
+                        dataType = dataType.ToArray(),
+                        pageNumber = 1,
+                        pageSize = 50,
+                        endtime = null,
+                        rctype = null,
+                        updateTime = DateTime.Now.AddDays(-60)
+                    };
+                    var result0 = api.GetRegisterData_Debug(input0);
+
+                    foreach (RCType rctype in Enum.GetValues(typeof(RCType)))
+                    {
+                        var input = new GetRegisterDataInput()
+                        {
+                            crowd_name = crowd_name,
+                            dataType = dataType.ToArray(),
+                            pageNumber = 1,
+                            pageSize = 50,
+                            endtime = null,
+                            rctype = rctype,
+                            updateTime = DateTime.Now.AddDays(-60)
+                        };
+                        var result = api.GetRegisterData_Debug(input);
+                    }
+                }
+            }
+        }
+#endif
     }
 }

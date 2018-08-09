@@ -11,7 +11,10 @@
         /// </summary>
         public string file { set; get; }
         /// <summary>
-        /// tip字符串，不能包含^,&=*'"等非法字符，长度不能超过255，系统预留字段。
+        /// tip字符串，不能包含非法字符，长度不能超过255，系统预留字段。
+        /// <!--
+        /// 非法字符，指^,&=*'"等
+        /// -->
         /// </summary>
         public string tip { set; get; }
         /// <summary>

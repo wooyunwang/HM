@@ -1,4 +1,5 @@
 ﻿
+using HM.Utils_;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,7 @@ namespace HM.Common_.DTO
         public virtual ActionResult Add(Exception ex)
         {
             IsSuccess = false;
-            LstMsg.Add(GetExceptionMessage(ex));
+            LstMsg.Add(Exception_.GetInnerException(ex).Message);
             return this;
         }
         /// <summary>
@@ -78,34 +79,10 @@ namespace HM.Common_.DTO
         public virtual ActionResult Add(string errorPrex, Exception ex)
         {
             IsSuccess = false;
-            LstMsg.Add(errorPrex + GetExceptionMessage(ex));
+            LstMsg.Add(errorPrex + Exception_.GetInnerException(ex).Message);
             return this;
         }
 
-        /// <summary>获得深层次的错误提示
-        /// </summary>
-        /// <param name="ex"></param>
-        /// <returns></returns>
-        private string GetExceptionMessage(Exception ex)
-        {
-            string str = string.Empty;
-            if (ex.InnerException != null)
-            {
-                if (ex.InnerException.InnerException != null)
-                {
-                    str = ex.InnerException.InnerException.Message;
-                }
-                else
-                {
-                    str = ex.InnerException.Message;
-                }
-            }
-            else
-            {
-                str = ex.Message;
-            }
-            return str;
-        }
         /// <summary>转换为以换行隔开的字符串
         /// </summary>
         /// <returns></returns>
@@ -142,7 +119,7 @@ namespace HM.Common_.DTO
         /// <param name="isSuccess"></param>
         public new ActionResult<T> Add(string str, bool isSuccess = false)
         {
-            base.Add(str,isSuccess);
+            base.Add(str, isSuccess);
             return this;
         }
         /// <summary>添加异常信息

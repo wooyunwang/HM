@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HM.Common_
 {
-    
+
 
     /// <summary>
     /// 日志记录服务
@@ -28,9 +28,35 @@ namespace HM.Common_
         /// 输出错误级别日志
         /// </summary>
         /// <param name="message">输出的消息</param>
+        public static void Fatal(string message)
+        {
+            GetIlog(LogType.Fatal).Fatal(message);
+        }
+        /// <summary>
+        /// 输出错误级别日志
+        /// </summary>
+        /// <param name="ex">异常</param>
+        public static void Fatal(Exception ex)
+        {
+            GetIlog(LogType.Fatal).Fatal(ex);
+        }
+        /// <summary>
+        /// 输出错误级别日志
+        /// </summary>
+        /// <param name="message">输出的消息</param>
+        /// <param name="ex">异常</param>
+        public static void Fatal(string message, Exception ex)
+        {
+            GetIlog(LogType.Fatal).Fatal(message, ex);
+        }
+
+        /// <summary>
+        /// 输出错误级别日志
+        /// </summary>
+        /// <param name="message">输出的消息</param>
         public static void Error(string message)
         {
-            GetIlog().Error(message);
+            GetIlog(LogType.Error).Error(message);
         }
         /// <summary>
         /// 输出错误级别日志
@@ -38,7 +64,7 @@ namespace HM.Common_
         /// <param name="ex">异常</param>
         public static void Error(Exception ex)
         {
-            GetIlog().Error(ex);
+            GetIlog(LogType.Error).Error(ex);
         }
         /// <summary>
         /// 输出错误级别日志
@@ -47,7 +73,7 @@ namespace HM.Common_
         /// <param name="ex">异常</param>
         public static void Error(string message, Exception ex)
         {
-            GetIlog().Error(message, ex);
+            GetIlog(LogType.Error).Error(message, ex);
         }
 
         /// <summary>

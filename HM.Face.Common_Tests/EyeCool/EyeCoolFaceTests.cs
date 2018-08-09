@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using HM.Utils_;
+using AutoMapper;
+using AutoMapper;
 
 namespace HM.Face.Common_.Tests
 {
@@ -17,7 +19,13 @@ namespace HM.Face.Common_.Tests
         public EyeCoolFaceTests()
         {
             log4net.Config.XmlConfigurator.Configure();
+            AutoMapperConfiguration.Configure();
             api = FaceFactory.CreateFace("192.168.1.180", 8080, FaceVender.EyeCool);
+            bool isNetOK = api.VisualTelnet("192.168.1.180", 8080);
+            if (!isNetOK)
+            {
+                Assert.Fail("目标网络端口不通畅，测了也是白测");
+            }
         }
 
         [TestMethod()]
@@ -29,7 +37,7 @@ namespace HM.Face.Common_.Tests
                 var result = api.Checking(
                     RandomGenerator.SequentialGuid(),
                     RegisterType.手动注册,
-                    Image_.ImageToBase64(path),
+                    path,
                     "单元测试"
                     );
             }

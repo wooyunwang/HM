@@ -29,7 +29,7 @@ namespace HM.Face.Common_
         /// <summary>
         /// 人脸通行集合
         /// </summary>
-        public List<FacePassDataFaceObj> face_obj { get; set; }
+        public List<FacePassDataFaceObj> FaceObj { get; set; }
     }
 
     /// <summary>

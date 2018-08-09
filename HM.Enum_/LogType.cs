@@ -16,28 +16,12 @@ namespace HM.Enum_
         /// </summary>
         Default,
         /// <summary>
-        /// Socket客户端
+        /// Error
         /// </summary>
-        SocketClient,
+        Error,
         /// <summary>
-        /// Socket服务端
+        /// Fatal
         /// </summary>
-        SocketServer,
-        /// <summary>
-        /// 连接日志
-        /// </summary>
-        Connect,
-        /// <summary>
-        /// 任务日志
-        /// </summary>
-        Job,
-        /// <summary>
-        /// 输入输出日志
-        /// </summary>
-        InputOutput,
-        /// <summary>
-        /// 时间日志
-        /// </summary>
-        Stopwatch
+        Fatal,
     }
 }

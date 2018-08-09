@@ -25,6 +25,7 @@ namespace HM.Face.Common_.EyeCool
             APP_KEY = Constant.APP_KEY;
             ROOT_URL = rootUrl;
         }
+
         public EyeCoolAPI(string ip, int port)
         {
             APP_ID = Constant.APP_ID;

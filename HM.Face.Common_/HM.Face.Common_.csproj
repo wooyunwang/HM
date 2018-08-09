@@ -62,14 +62,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="EyeCool\EyeCoolDtoMappingProfile.cs" />
     <Compile Include="Base\FaceActionResultAttribute.cs" />
     <Compile Include="Base\FaceSource.cs" />
     <Compile Include="Base\RandomGenerator.cs" />
     <Compile Include="Base\EyeCoolRequestAttribute.cs" />
     <Compile Include="Base\RegisterType.cs" />
     <Compile Include="Base\Warn.cs" />
-    <Compile Include="Base\DTOMapConfig.cs" />
-    <Compile Include="EyeCool\EyeCoolAPI.Orginal.cs" />
+    <Compile Include="EyeCool\EyeCoolAPI.Debug.cs" />
     <Compile Include="FaceFactory.cs" />
     <Compile Include="EyeCoolFace.cs" />
     <Compile Include="EyeCool\Base\EyeCoolDateConverter.cs" />

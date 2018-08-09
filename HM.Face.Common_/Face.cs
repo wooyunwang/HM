@@ -25,6 +25,33 @@ namespace HM.Face.Common_
         /// </summary>
         /// <returns></returns>
         public abstract string GetVendorKey();
+
+        protected System.Net.IPEndPoint _IPEndPoint;
+        /// <summary>
+        /// Telnet，可用于批量处理前做网络检测
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="port"></param>
+        /// <returns></returns>
+        public bool VisualTelnet(string host, int port)
+        {
+            int millisecondsTimeout = 50;//等待时间
+            System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient();
+            try
+            {
+                var ar = client.BeginConnect(host, port, null, null);
+                ar.AsyncWaitHandle.WaitOne(millisecondsTimeout);
+                return client.Connected;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            finally
+            {
+                client.Close();
+            }
+        }
         /// <summary>
         /// 检查图片是否包含人脸
         /// </summary>
@@ -33,7 +60,7 @@ namespace HM.Face.Common_
         /// <param name="filePath">文件路径或者下载地址</param>
         /// <param name="tip">备注</param>
         /// <returns></returns>
-        public abstract ActionResult Checking(string faceId, RegisterType registerType, string imageBase64, string tip = "");
+        public abstract ActionResult Checking(string faceId, RegisterType registerType, string filePath, string tip = "");
         /// <summary>
         /// 两张图片内容比较是否为同一个人
         /// </summary>

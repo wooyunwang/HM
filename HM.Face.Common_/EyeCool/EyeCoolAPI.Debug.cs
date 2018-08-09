@@ -14,6 +14,24 @@ namespace HM.Face.Common_.EyeCool
     public partial class EyeCoolAPI//Orginal为测试类
     {
 #if DEBUG
+        [EyeCoolRequest]
+        public void VoidReturn_Debug()
+        {
+            throw new Exception("测试异常时候EyeCoolRequest特性的捕捉情况！");
+        }
+
+        [EyeCoolRequest]
+        public dynamic DynamicReturn_Debug()
+        {
+            throw new Exception("测试异常时候EyeCoolRequest特性的捕捉情况！");
+        }
+
+        [EyeCoolRequest]
+        public ResponseBase ResponseBaseReturn_Debug()
+        {
+            throw new Exception("测试异常时候EyeCoolRequest特性的捕捉情况！");
+        }
+
         /// <summary>
         /// 用于采集人员(如业主)身份基础信息（注册）
         /// </summary>

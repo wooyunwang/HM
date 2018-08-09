@@ -280,7 +280,7 @@ namespace HM.Socket_
 #if DEBUG
             Console.WriteLine("Exception: " + exception.Message);
 #endif
-            LogHelper.GetIlog(LogType.SocketServer).Debug("BlackCat01ServerHandler.ExceptionCaught", exception);
+            LogHelper.GetIlog().Debug("BlackCat01ServerHandler.ExceptionCaught", exception);
             context.CloseAsync();
         }
     }

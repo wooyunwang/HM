@@ -30,7 +30,6 @@ namespace HM.Face.Common_
         /// <param name="port"></param>
         public EyeCoolFace(string ip, int port)
         {
-            DTOMapConfig.EyeCoolToFace();
             _API = new EyeCoolAPI(ip, port);
         }
         /// <summary>
@@ -39,7 +38,6 @@ namespace HM.Face.Common_
         /// <param name="rootUrl"></param>
         public EyeCoolFace(string rootUrl)
         {
-            DTOMapConfig.EyeCoolToFace();
             _API = new EyeCoolAPI(new Uri(rootUrl));
         }
         /// <summary>
@@ -114,7 +112,7 @@ namespace HM.Face.Common_
                 }
                 else
                 {
-                    imageBase64 = Utils_.Image_.ImageToBase64(File.ReadAllText(filePath));
+                    imageBase64 = Utils_.Image_.ImageToBase64(filePath);
                 }
 
                 CheckingOutput output = _API.Checking(new CheckingInput()
@@ -214,7 +212,7 @@ namespace HM.Face.Common_
                 Task<CheckingOutput> task1 = _API.CheckingAsync(new CheckingInput()
                 {
                     face_id = RandomGenerator.SequentialGuid(),
-                    file = Utils_.Image_.ImageToBase64(File.ReadAllText(filePath1)),
+                    file = Utils_.Image_.ImageToBase64(filePath1),
                     rctype = RCType.自动注册,
                     tip = "图片比较"
                 });
@@ -222,7 +220,7 @@ namespace HM.Face.Common_
                 Task<CheckingOutput> task2 = _API.CheckingAsync(new CheckingInput()
                 {
                     face_id = Common_.RandomGenerator.SequentialGuid(),
-                    file = Utils_.Image_.ImageToBase64(File.ReadAllText(filePath1)),
+                    file = Utils_.Image_.ImageToBase64(filePath1),
                     rctype = RCType.自动注册,
                     tip = "图片比较"
                 });
@@ -265,7 +263,7 @@ namespace HM.Face.Common_
                 CheckingOutput output = _API.Checking(new CheckingInput()
                 {
                     face_id = RandomGenerator.SequentialGuid(),
-                    file = Utils_.Image_.ImageToBase64(File.ReadAllText(filePath)),
+                    file = Utils_.Image_.ImageToBase64(filePath),
                     rctype = RCType.自动注册,
                     tip = "图片比较"
                 });

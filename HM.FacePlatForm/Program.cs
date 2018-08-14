@@ -1,17 +1,35 @@
-﻿using HM.Form_;
+﻿using HM.Enum_.FacePlatform;
+using HM.FacePlatform.Model;
+using HM.Form_;
 using Microsoft.Owin.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HM.FacePlatForm
+namespace HM.FacePlatform
 {
     static class Program
     {
+        public static FrmLogin _Login = null;
+        public static FrmMain _Mainform = null;
+        /// <summary>
+        /// 已登陆账号信息
+        /// </summary>
+        public static SystemUser _Account = null;
+
+        /// <summary>
+        /// 是否管理员
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsAdmin()
+        {
+            if (_Account != null)
+            {
+                return _Account.is_admin == IsAdminType.是;
+            }
+            return false;
+        }
+
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -38,7 +56,7 @@ namespace HM.FacePlatForm
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
                 AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
-                Application.Run(new FrmMain());
+                Application.Run(new FrmLogin());
             }
         }
 

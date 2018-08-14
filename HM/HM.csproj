@@ -41,10 +41,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\FaceConfigInfo.cs" />
+    <Compile Include="DTO\ActionResult.cs" />
+    <Compile Include="DTO\FaceForm\ActionLogDto.cs" />
+    <Compile Include="DTO\FaceForm\RegisterActionLogDto.cs" />
+    <Compile Include="DTO\PagerData.cs" />
+    <Compile Include="GPIO\In_Port_Info.cs" />
+    <Compile Include="GPIO\Out_Port_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DTO\FaceForm\UserDto.cs" />
+    <Compile Include="DTO\FaceForm\UserHouseDto.cs" />
+    <Compile Include="DTO\FaceForm\UserRegisterDto.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DTO\README.md" />
     <None Include="README.md" />
+    <None Include="VO\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HM.Enum_\HM.Enum_.csproj">
+      <Project>{F26F1383-FCCA-410D-8E7E-376FAED6B8F1}</Project>
+      <Name>HM.Enum_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.Utils_\HM.Utils_.csproj">
+      <Project>{38F4F95A-F905-43E1-8AD0-4D7D4820EDEF}</Project>
+      <Name>HM.Utils_</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

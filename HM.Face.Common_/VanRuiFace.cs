@@ -1,7 +1,9 @@
-﻿using System;
+﻿using HM.DTO;
+using HM.Enum_.FacePlatform;
+using System;
 using System.Collections.Generic;
-using HM.Common_.DTO;
-using Newtonsoft.Json;
+using HM.Face.Common_.EyeCool;
+using HM.Common_;
 
 namespace HM.Face.Common_
 {
@@ -62,7 +64,7 @@ namespace HM.Face.Common_
         /// <param name="filePath">文件路径或者下载地址</param>
         /// <param name="tip">备注</param>
         /// <returns></returns>
-        public override ActionResult Checking(string faceId, RegisterType registerType, string imageBase64, string tip = "")
+        public override ActionResult<CheckingOutput> Checking(string faceId, RegisterType registerType, string imageBase64, string tip = "")
         {
             throw new NotImplementedException("未对接");
         }
@@ -111,7 +113,7 @@ namespace HM.Face.Common_
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [FaceActionResult]
+        [ActionResultTryCatch]
         public override ActionResult<List<GetRegisterPageOutput>> GetRegisterPage(GetRegisterPageInput input)
         {
             throw new NotImplementedException("未对接");
@@ -125,7 +127,7 @@ namespace HM.Face.Common_
         /// <param name="state"></param>
         /// <param name="comments"></param>
         /// <returns></returns>
-        public override ActionResult Review(string projectCode, string peopleId, string state, string comments)
+        public override ActionResult Review(string projectCode, string peopleId, CheckType state, string comments)
         {
             throw new NotImplementedException("未对接");
         }

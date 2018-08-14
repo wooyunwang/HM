@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace HM.FacePlatForm
+namespace HM.FacePlatform
 {
     public class Startup
     {

@@ -52,13 +52,8 @@
     <Compile Include="GetPeopleNumCMD.cs" />
     <Compile Include="GetUserDefineAbnormalSignalCMD.cs" />
     <Compile Include="GPIO\GPIOConst.cs" />
-    <Compile Include="GPIO\GPIOInPinEnum.cs" />
-    <Compile Include="GPIO\GPIOLevelEnum.cs" />
-    <Compile Include="GPIO\GPIOOutPinEnum.cs" />
     <Compile Include="GPIO\GPIO_DicKey_Map.cs" />
-    <Compile Include="GPIO\In_Port_Info.cs" />
     <Compile Include="GPIO\IP_Net_Result.cs" />
-    <Compile Include="GPIO\Out_Port_Info.cs" />
     <Compile Include="GPIO\PINGConst.cs" />
     <Compile Include="OpenCloseDoorCMD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +73,12 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HM\HM.csproj">
+      <Project>{61d0f886-db69-45b7-ae4b-5405e6d58a8f}</Project>
+      <Name>HM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

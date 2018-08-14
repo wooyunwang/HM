@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HM.Face.Common_</RootNamespace>
     <AssemblyName>HM.Face.Common_</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,11 +65,7 @@
   <ItemGroup>
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="EyeCool\EyeCoolDtoMappingProfile.cs" />
-    <Compile Include="Base\FaceActionResultAttribute.cs" />
-    <Compile Include="Base\FaceSource.cs" />
-    <Compile Include="Base\RandomGenerator.cs" />
     <Compile Include="Base\EyeCoolRequestAttribute.cs" />
-    <Compile Include="Base\RegisterType.cs" />
     <Compile Include="Base\Warn.cs" />
     <Compile Include="EyeCool\EyeCoolAPI.Debug.cs" />
     <Compile Include="FaceFactory.cs" />
@@ -126,9 +123,17 @@
       <Project>{A3D97C81-7036-4645-A3CF-2C9A3A366CDB}</Project>
       <Name>HM.Common_</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HM.Enum_\HM.Enum_.csproj">
+      <Project>{F26F1383-FCCA-410D-8E7E-376FAED6B8F1}</Project>
+      <Name>HM.Enum_</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HM.Utils_\HM.Utils_.csproj">
       <Project>{38f4f95a-f905-43e1-8ad0-4d7d4820edef}</Project>
       <Name>HM.Utils_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM\HM.csproj">
+      <Project>{61D0F886-DB69-45B7-AE4B-5405E6D58A8F}</Project>
+      <Name>HM</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -5,9 +5,6 @@ using System.Text;
 
 namespace HM.Enum_
 {
-    /// <summary>
-    /// GPIO信号等级枚举
-    /// </summary>
     public enum GPIOLevelEnum : byte
     {
         /// <summary>
@@ -17,11 +14,6 @@ namespace HM.Enum_
         /// <summary>
         /// 高
         /// </summary>
-        LEVEL_HIGH = 1,
-        /// <summary>
-        /// ？
-        /// </summary>
-        LEVEL_BUTT
+        LEVEL_HIGH = 1
     }
-
 }

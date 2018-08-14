@@ -13,7 +13,7 @@ using System.Web.Http;
 using System.Net.Http.Headers;
 using HM.Enum_.ControlCenter;
 
-namespace HM.FacePlatForm.WebApi
+namespace HM.FacePlatform.WebApi
 {
     /// <summary>
     /// .Net WebAPI 高速下载文件接口实现

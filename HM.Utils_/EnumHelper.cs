@@ -120,14 +120,16 @@ namespace HM.Utils_
                 if (attr != null && !string.IsNullOrEmpty(attr.Description))
                 {
                     // 跳过过滤项
-                    if (Array.IndexOf<string>(filterItem, attr.Description) != -1)
+                    if (Array.IndexOf(filterItem, attr.Description) != -1)
                     {
                         continue;
                     }
                     // 添加
-                    EnumKeyValue<S> model = new EnumKeyValue<S>();
-                    model.Value = (S)Enum.Parse(typeof(T), item.Name);
-                    model.Name = attr.Description;
+                    EnumKeyValue<S> model = new EnumKeyValue<S>
+                    {
+                        Value = (S)Enum.Parse(typeof(T), item.Name),
+                        Name = attr.Description
+                    };
                     list.Add(model);
                 }
             }
@@ -165,28 +167,30 @@ namespace HM.Utils_
         /// <param name="isHasAll">是否包含“全部”</param>
         /// <param name="filterItem">过滤项</param>
         /// <returns></returns>
-        public static List<EnumKeyValue<Nullable<S>>> EnumToList<T, S>(bool isHasAll, params string[] filterItem) where S : struct
+        public static List<EnumKeyValue<S?>> EnumToList<T, S>(bool isHasAll, params string[] filterItem) where S : struct
         {
-            List<EnumKeyValue<Nullable<S>>> list = new List<EnumKeyValue<Nullable<S>>>();
+            List<EnumKeyValue<S?>> list = new List<EnumKeyValue<S?>>();
 
             // 如果包含全部则添加
             if (isHasAll)
             {
-                list.Add(new EnumKeyValue<Nullable<S>>() { Value = null, Name = "全部" });
+                list.Add(new EnumKeyValue<S?>() { Value = null, Name = "全部" });
             }
 
             foreach (S item in Enum.GetValues(typeof(T)))
             {
-                string name = Enum.GetName(typeof(T), item);
+                string name = GetName(item);
                 // 跳过过滤项
-                if (Array.IndexOf<string>(filterItem, name) != -1)
+                if (Array.IndexOf(filterItem, name) != -1)
                 {
                     continue;
                 }
                 // 添加
-                var model = new EnumKeyValue<Nullable<S>>();
-                model.Value = item;
-                model.Name = name;
+                var model = new EnumKeyValue<S?>
+                {
+                    Value = item,
+                    Name = name
+                };
                 list.Add(model);
             }
 
@@ -199,23 +203,24 @@ namespace HM.Utils_
         /// <typeparam name="T"></typeparam>
         /// <param name="isHasAll">是否包含“全部”</param>
         /// <returns></returns>
-        public static List<EnumKeyValue<Nullable<T>>> EnumToBind<T>(bool isHasAll) where T : struct
+        public static List<EnumKeyValue<T?>> EnumToBind<T>(bool isHasAll) where T : struct
         {
-            List<EnumKeyValue<Nullable<T>>> list = new List<EnumKeyValue<Nullable<T>>>();
+            List<EnumKeyValue<T?>> list = new List<EnumKeyValue<T?>>();
 
             // 如果包含全部则添加
             if (isHasAll)
             {
-                list.Add(new EnumKeyValue<Nullable<T>>() { Value = null, Name = "全部" });
+                list.Add(new EnumKeyValue<T?>() { Value = null, Name = "全部" });
             }
 
             foreach (T item in Enum.GetValues(typeof(T)))
             {
-                string name = Enum.GetName(typeof(T), item);
                 // 添加
-                var model = new EnumKeyValue<Nullable<T>>();
-                model.Value = item;
-                model.Name = name;
+                var model = new EnumKeyValue<T?>
+                {
+                    Value = item,
+                    Name = GetName(item)
+                };
                 list.Add(model);
             }
 

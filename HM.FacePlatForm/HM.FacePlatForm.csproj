@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5CF87282-4730-40ED-BD50-2C3BBB2261F2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>HM.FacePlatForm</RootNamespace>
-    <AssemblyName>HM.FacePlatForm</AssemblyName>
+    <RootNamespace>HM.FacePlatform</RootNamespace>
+    <AssemblyName>HM.FacePlatform</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,6 +35,30 @@
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Controls, Version=2.2.5.0, Culture=neutral, PublicKeyToken=a8ac264d1dc6b9d9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Controls.2.2.5\lib\AForge.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Imaging, Version=2.2.5.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Imaging.2.2.5\lib\AForge.Imaging.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math, Version=2.2.5.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -46,6 +70,9 @@
     </Reference>
     <Reference Include="Flurl.Http, Version=2.3.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Flurl.Http.2.3.2\lib\net45\Flurl.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll</HintPath>
@@ -87,8 +114,23 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=2.6.1.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.6.1\lib\net40\Quartz.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -111,23 +153,238 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph, Version=5.1.7.430, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZedGraph.5.1.7\lib\net35-Client\ZedGraph.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicData\FrmLoadBaseData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BasicData\FrmLoadBaseData.designer.cs">
+      <DependentUpon>FrmLoadBaseData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\BindHelper.cs" />
+    <Compile Include="DataCrypto.cs" />
+    <Compile Include="Forms\AddOrUpdateSystemUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddOrUpdateSystemUser.Designer.cs">
+      <DependentUpon>AddOrUpdateSystemUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddOrUpdateWorkerFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddOrUpdateWorkerFrm.Designer.cs">
+      <DependentUpon>AddOrUpdateWorkerFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddOrUpdateUserFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddOrUpdateUserFrm.Designer.cs">
+      <DependentUpon>AddOrUpdateUserFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Check.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Check.Designer.cs">
+      <DependentUpon>Check.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CheckNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CheckNote.Designer.cs">
+      <DependentUpon>CheckNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Count.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Count.Designer.cs">
+      <DependentUpon>Count.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DataBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\DataBase.Designer.cs">
+      <DependentUpon>DataBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_Loading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form_Loading.Designer.cs">
+      <DependentUpon>Form_Loading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Log.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Log.Designer.cs">
+      <DependentUpon>Log.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PhotoRegisterFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PhotoRegisterFrm.Designer.cs">
+      <DependentUpon>PhotoRegisterFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ucRegister.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ucRegister.designer.cs">
+      <DependentUpon>ucRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RegisterManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\RegisterManage.designer.cs">
+      <DependentUpon>RegisterManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ResetPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ResetPassword.Designer.cs">
+      <DependentUpon>ResetPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ShowCamera.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ShowCamera.designer.cs">
+      <DependentUpon>ShowCamera.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SystemUserManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\SystemUserManage.Designer.cs">
+      <DependentUpon>SystemUserManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PicUrlAndFaceIDVO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RichTextBoxExtensions.cs" />
+    <Compile Include="ScheduleJob\BaseJob.cs" />
+    <Compile Include="ScheduleJob\InitJob.cs" />
+    <Compile Include="ScheduleJob\PullJob.cs" />
+    <Compile Include="ScheduleJob\PushJob.cs" />
+    <Compile Include="ScheduleJob\ScheduleJob.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScheduleJob\ScheduleJob.Designer.cs">
+      <DependentUpon>ScheduleJob.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="UserControls\ImageDetailItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ImageDetailItem.Designer.cs">
+      <DependentUpon>ImageDetailItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ImageItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ImageItem.Designer.cs">
+      <DependentUpon>ImageItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucFamily.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucFamily.Designer.cs">
+      <DependentUpon>ucFamily.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucNoCheck.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucNoCheck.Designer.cs">
+      <DependentUpon>ucNoCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucNoData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucNoData.Designer.cs">
+      <DependentUpon>ucNoData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ucPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ucPanel.Designer.cs">
+      <DependentUpon>ucPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="WebApi\BaseTestApiController.cs" />
     <Compile Include="WebApi\DownloadFileController.cs" />
     <Compile Include="WebApi\TestController.cs" />
     <Compile Include="WebApi\TestFaceController.cs" />
+    <EmbeddedResource Include="BasicData\FrmLoadBaseData.resx">
+      <DependentUpon>FrmLoadBaseData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddOrUpdateSystemUser.resx">
+      <DependentUpon>AddOrUpdateSystemUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddOrUpdateWorkerFrm.resx">
+      <DependentUpon>AddOrUpdateWorkerFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddOrUpdateUserFrm.resx">
+      <DependentUpon>AddOrUpdateUserFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Check.resx">
+      <DependentUpon>Check.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CheckNote.resx">
+      <DependentUpon>CheckNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Count.resx">
+      <DependentUpon>Count.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DataBase.resx">
+      <DependentUpon>DataBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form_Loading.resx">
+      <DependentUpon>Form_Loading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Log.resx">
+      <DependentUpon>Log.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PhotoRegisterFrm.resx">
+      <DependentUpon>PhotoRegisterFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ucRegister.resx">
+      <DependentUpon>ucRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RegisterManage.resx">
+      <DependentUpon>RegisterManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ResetPassword.resx">
+      <DependentUpon>ResetPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ShowCamera.resx">
+      <DependentUpon>ShowCamera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SystemUserManage.resx">
+      <DependentUpon>SystemUserManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -137,8 +394,45 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ScheduleJob\ScheduleJob.resx">
+      <DependentUpon>ScheduleJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ImageDetailItem.resx">
+      <DependentUpon>ImageDetailItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ImageItem.resx">
+      <DependentUpon>ImageItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucFamily.resx">
+      <DependentUpon>ucFamily.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucNoCheck.resx">
+      <DependentUpon>ucNoCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucNoData.resx">
+      <DependentUpon>ucNoData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ucPanel.resx">
+      <DependentUpon>ucPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="PrintTemp\导入业主信息的模板.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="PrintTemp\导入工作人员数据的模板.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="PrintTemp\导入房屋信息的模板.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="PrintTemp\导入楼栋信息的模板.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="PrintTemp\导入用户信息的模板.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -148,10 +442,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="quartz.config" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HM.Common_\HM.Common_.csproj">
@@ -161,6 +458,22 @@
     <ProjectReference Include="..\HM.Enum_\HM.Enum_.csproj">
       <Project>{f26f1383-fcca-410d-8e7e-376faed6b8f1}</Project>
       <Name>HM.Enum_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.Face.Common_\HM.Face.Common_.csproj">
+      <Project>{52cc6bdc-99b7-4a88-b3ca-bbe35cd22d0a}</Project>
+      <Name>HM.Face.Common_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.FacePlatForm.BLL\HM.FacePlatform.BLL.csproj">
+      <Project>{1afa51ae-a00b-4dfb-9329-36d11d3e70b0}</Project>
+      <Name>HM.FacePlatform.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.FacePlatForm.Model\HM.FacePlatform.Model.csproj">
+      <Project>{7c1f67b9-6158-401c-9f47-6f9af3b31d3a}</Project>
+      <Name>HM.FacePlatform.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.Form_.Old\HM.Form_.Old.csproj">
+      <Project>{77d85fae-9622-4556-8ad4-0315ea19daf7}</Project>
+      <Name>HM.Form_.Old</Name>
     </ProjectReference>
     <ProjectReference Include="..\HM.Form_\HM.Form_.csproj">
       <Project>{66915408-D8F4-43B8-B126-AD3FD0706CCA}</Project>
@@ -184,7 +497,52 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="client.ico" />
     <Content Include="favicon.ico" />
+    <Content Include="License-LGPL.txt" />
+    <Content Include="quartz_jobs.xml" />
+    <None Include="Resources\注册 hover.png" />
+    <None Include="Resources\注册.png" />
+    <None Include="Resources\原始图.png" />
+    <None Include="Resources\统计 hover.png" />
+    <None Include="Resources\统计.png" />
+    <None Include="Resources\审核 hover.png" />
+    <None Include="Resources\审核.png" />
+    <None Include="Resources\日志 hover.png" />
+    <None Include="Resources\日志.png" />
+    <None Include="Resources\拍照_32.png" />
+    <None Include="Resources\基础数据 hover.png" />
+    <None Include="Resources\基础数据.png" />
+    <None Include="Resources\write.png" />
+    <None Include="Resources\userPhoto.png" />
+    <None Include="Resources\user.png" />
+    <None Include="Resources\unregistered.png" />
+    <None Include="Resources\top.jpg" />
+    <None Include="Resources\set.png" />
+    <None Include="Resources\right.jpg" />
+    <None Include="Resources\registed.png" />
+    <None Include="Resources\PreviousImage.png" />
+    <None Include="Resources\NextImage.png" />
+    <None Include="Resources\Minimum.png" />
+    <None Include="Resources\Middlemum.png" />
+    <None Include="Resources\Maximum.png" />
+    <None Include="Resources\content.png" />
+    <None Include="Resources\loading-c.gif" />
+    <None Include="Resources\loading.gif" />
+    <None Include="Resources\left.jpg" />
+    <None Include="Resources\LastImage.png" />
+    <None Include="Resources\house.png" />
+    <None Include="Resources\home.png" />
+    <None Include="Resources\FirstImage.png" />
+    <None Include="Resources\delete.jpg" />
+    <None Include="Resources\camera.png" />
+    <None Include="Resources\cam.png" />
+    <None Include="Resources\calendar_month1.png" />
+    <None Include="Resources\buttom.jpg" />
+    <None Include="Resources\bk.png" />
+    <None Include="Resources\bcirclerunning.gif" />
+    <None Include="Resources\aa.png" />
+    <None Include="Resources\lock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

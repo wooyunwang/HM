@@ -1,13 +1,9 @@
 ﻿using ArxOne.MrAdvice.Advice;
 using HM.Common_;
-using HM.Common_.DTO;
 using HM.Face.Common_.EyeCool;
 using HM.Utils_;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace HM.Face.Common_
@@ -16,6 +12,7 @@ namespace HM.Face.Common_
     /// 使用此特性，要求所有的返回参数都是或者继承
     /// HM.Face.Common_.EyeCool.ResponseCode
     /// </summary>
+    [AttributeUsage(AttributeTargets.Method)]
     public class EyeCoolRequestAttribute : Attribute, IMethodAdvice
     {
         public void Advise(MethodAdviceContext context)

@@ -7,7 +7,7 @@ using System.Web.Http;
 using Flurl.Http;
 using Flurl;
 
-namespace HM.FacePlatForm.WebApi
+namespace HM.FacePlatform.WebApi
 {
     public class ApiGetFacePassOutVO
     {

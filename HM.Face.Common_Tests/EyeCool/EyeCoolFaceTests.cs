@@ -1,14 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HM.Face.Common_;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
+﻿using HM.Enum_.FacePlatform;
 using HM.Utils_;
-using AutoMapper;
-using AutoMapper;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.IO;
 
 namespace HM.Face.Common_.Tests
 {
@@ -35,7 +29,7 @@ namespace HM.Face.Common_.Tests
             if (File.Exists(path))
             {
                 var result = api.Checking(
-                    RandomGenerator.SequentialGuid(),
+                    Key_.SequentialGuid(),
                     RegisterType.手动注册,
                     path,
                     "单元测试"

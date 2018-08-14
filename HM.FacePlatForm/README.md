@@ -1,4 +1,4 @@
-﻿# HM.FacePlatForm说明
+﻿# HM.FacePlatform说明
 
 黑猫一号人脸客户端
 

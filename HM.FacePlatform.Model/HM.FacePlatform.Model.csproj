@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7C1F67B9-6158-401C-9F47-6F9AF3B31D3A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HM.FacePlatform.Model</RootNamespace>
+    <AssemblyName>HM.FacePlatform.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.8.8\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.8.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseModelNotId.cs" />
+    <Compile Include="BaseModel.cs" />
+    <Compile Include="FacePlatformDB.cs" />
+    <Compile Include="Model\ActionLog.cs" />
+    <Compile Include="Model\Building.cs" />
+    <Compile Include="Model\Dictionary.cs" />
+    <Compile Include="Model\House.cs" />
+    <Compile Include="Model\Mao.cs" />
+    <Compile Include="Model\MaoBuilding.cs" />
+    <Compile Include="Model\MaoFailedJob.cs" />
+    <Compile Include="Model\Project.cs" />
+    <Compile Include="Model\Register.cs" />
+    <Compile Include="Model\SystemUser.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserHouse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HM.Enum_\HM.Enum_.csproj">
+      <Project>{f26f1383-fcca-410d-8e7e-376faed6b8f1}</Project>
+      <Name>HM.Enum_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.Socket_.Common_\HM.Socket_.Common_.csproj">
+      <Project>{84D387C8-A1CD-4E0C-9D71-3C59C4A60FF4}</Project>
+      <Name>HM.Socket_.Common_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.Utils_\HM.Utils_.csproj">
+      <Project>{38F4F95A-F905-43E1-8AD0-4D7D4820EDEF}</Project>
+      <Name>HM.Utils_</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

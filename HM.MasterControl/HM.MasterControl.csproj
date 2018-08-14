@@ -274,6 +274,10 @@
       <Project>{38f4f95a-f905-43e1-8ad0-4d7d4820edef}</Project>
       <Name>HM.Utils_</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HM\HM.csproj">
+      <Project>{61d0f886-db69-45b7-ae4b-5405e6d58a8f}</Project>
+      <Name>HM</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

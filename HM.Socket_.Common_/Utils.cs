@@ -175,28 +175,5 @@ namespace HM.Socket_.Common_
                              .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
                              .ToArray();
         }
-        /// <summary>
-        /// 检查远程端口是否可连接
-        /// </summary>
-        /// <param name="ip"></param>
-        /// <param name="port"></param>
-        /// <returns></returns>
-        public static bool VisualTelnet(string ip, int port)
-        {
-            try
-            {
-                IPEndPoint point = new IPEndPoint(IPAddress.Parse(ip), port);
-                using (Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-                {
-                    sock.Connect(point);
-                    sock.Close();
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
     }
 }

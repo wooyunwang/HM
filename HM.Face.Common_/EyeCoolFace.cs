@@ -1,14 +1,14 @@
-﻿using System;
+﻿using AutoMapper;
+using Flurl.Http;
+using HM.Common_;
+using HM.DTO;
+using HM.Enum_.FacePlatform;
+using HM.Face.Common_.EyeCool;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using HM.Common_.DTO;
-using HM.Face.Common_.EyeCool;
-using Newtonsoft.Json;
-using Flurl;
-using Flurl.Http;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 
 namespace HM.Face.Common_
 {
@@ -74,10 +74,10 @@ namespace HM.Face.Common_
         /// <param name="filePath">文件路径或者下载地址</param>
         /// <param name="tip">备注</param>
         /// <returns></returns>
-        [FaceActionResult]
-        public override ActionResult Checking(string faceId, RegisterType registerType, string filePath, string tip = "")
+        [ActionResultTryCatch]
+        public override ActionResult<CheckingOutput> Checking(string faceId, RegisterType registerType, string filePath, string tip = "")
         {
-            ActionResult result = new ActionResult();
+            ActionResult<CheckingOutput> result = new ActionResult<CheckingOutput>();
             if (string.IsNullOrWhiteSpace(filePath))
             {
                 result.IsSuccess = false;
@@ -122,7 +122,8 @@ namespace HM.Face.Common_
                     rctype = Mapper.Map<RCType>(registerType),
                     tip = tip
                 });
-                return output.ToActionResult();
+                result.Obj = output;
+                return result;
             }
         }
         /// <summary>
@@ -159,7 +160,7 @@ namespace HM.Face.Common_
         /// <param name="face_id1"></param>
         /// <param name="face_id2"></param>
         /// <returns></returns>
-        [FaceActionResult]
+        [ActionResultTryCatch]
         public override ActionResult MatchCompare(string face_id1, string face_id2)
         {
             ActionResult result = new ActionResult();
@@ -201,7 +202,7 @@ namespace HM.Face.Common_
         /// <param name="filePath1"></param>
         /// <param name="filePath2"></param>
         /// <returns></returns>
-        [FaceActionResult]
+        [ActionResultTryCatch]
         public override ActionResult MatchCompare1(string filePath1, string filePath2)
         {
             ActionResult result = new ActionResult();
@@ -211,7 +212,7 @@ namespace HM.Face.Common_
             {
                 Task<CheckingOutput> task1 = _API.CheckingAsync(new CheckingInput()
                 {
-                    face_id = RandomGenerator.SequentialGuid(),
+                    face_id = Utils_.Key_.SequentialGuid(),
                     file = Utils_.Image_.ImageToBase64(filePath1),
                     rctype = RCType.自动注册,
                     tip = "图片比较"
@@ -219,7 +220,7 @@ namespace HM.Face.Common_
 
                 Task<CheckingOutput> task2 = _API.CheckingAsync(new CheckingInput()
                 {
-                    face_id = Common_.RandomGenerator.SequentialGuid(),
+                    face_id = Utils_.Key_.SequentialGuid(),
                     file = Utils_.Image_.ImageToBase64(filePath1),
                     rctype = RCType.自动注册,
                     tip = "图片比较"
@@ -253,7 +254,7 @@ namespace HM.Face.Common_
         /// <param name="filePath"></param>
         /// <param name="faceId"></param>
         /// <returns></returns>
-        [FaceActionResult]
+        [ActionResultTryCatch]
         public override ActionResult MatchCompare2(string filePath, string faceId)
         {
             ActionResult result = new ActionResult();
@@ -262,7 +263,7 @@ namespace HM.Face.Common_
             {
                 CheckingOutput output = _API.Checking(new CheckingInput()
                 {
-                    face_id = RandomGenerator.SequentialGuid(),
+                    face_id = Utils_.Key_.SequentialGuid(),
                     file = Utils_.Image_.ImageToBase64(filePath),
                     rctype = RCType.自动注册,
                     tip = "图片比较"
@@ -286,7 +287,7 @@ namespace HM.Face.Common_
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [FaceActionResult]
+        [ActionResultTryCatch]
         public override ActionResult<RegisterOutput> Register(RegisterInput input)
         {
             ActionResult<RegisterOutput> result = new ActionResult<RegisterOutput>();
@@ -339,7 +340,7 @@ namespace HM.Face.Common_
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [FaceActionResult]
+        [ActionResultTryCatch]
         public override ActionResult<List<GetRegisterPageOutput>> GetRegisterPage(GetRegisterPageInput input)
         {
             ActionResult<List<GetRegisterPageOutput>> result = new ActionResult<List<GetRegisterPageOutput>>();
@@ -354,7 +355,7 @@ namespace HM.Face.Common_
                 updateTime = input.UpdateTime
             });
             result.IsSuccess = true;
-            result.Obj = Mapper.Map<List<GetRegisterPageOutput>>(output) ;
+            result.Obj = Mapper.Map<List<GetRegisterPageOutput>>(output);
             return result;
         }
         /// <summary>
@@ -365,8 +366,8 @@ namespace HM.Face.Common_
         /// <param name="state"></param>
         /// <param name="comments"></param>
         /// <returns></returns>
-        [FaceActionResult]
-        public override ActionResult Review(string projectCode, string peopleId, string state, string comments)
+        [ActionResultTryCatch]
+        public override ActionResult Review(string projectCode, string peopleId, CheckType state, string comments)
         {
             ActionResult result = new ActionResult();
             ReviewPeopleOutput output = _API.ReviewPeople(new ReviewPeopleInput
@@ -392,7 +393,7 @@ namespace HM.Face.Common_
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [FaceActionResult]
+        [ActionResultTryCatch]
         public override ActionResult<List<GetFacePassDataOutput>> GetFacePassData(GetFacePassDataInput input)
         {
             List<CurrentDetailOutput> output = _API.CurrentDetail(new CurrentDetailInput()
@@ -417,7 +418,7 @@ namespace HM.Face.Common_
         /// <param name="peopleId"></param>
         /// <param name="faceIds"></param>
         /// <returns></returns>
-        [FaceActionResult]
+        [ActionResultTryCatch]
         public override ActionResult FaceDel(string peopleId, List<string> faceIds)
         {
             ActionResult result = new ActionResult();
@@ -451,7 +452,7 @@ namespace HM.Face.Common_
         /// <param name="peopleId"></param>
         /// <param name="endTime"></param>
         /// <returns></returns>
-        [FaceActionResult]
+        [ActionResultTryCatch]
         public override ActionResult UpdateActiveTime(string peopleId, DateTime endTime)
         {
             ActionResult result = new ActionResult();
@@ -477,7 +478,7 @@ namespace HM.Face.Common_
         /// </summary>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        [FaceActionResult]
+        [ActionResultTryCatch]
         public override ActionResult PersonCardSnapshot(string filePath)
         {
             ActionResult result = new ActionResult();

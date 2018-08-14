@@ -1,4 +1,5 @@
-﻿using HM.Face.Common_.EyeCool;
+﻿using HM.Enum_.FacePlatform;
+using HM.Face.Common_.EyeCool;
 using System;
 
 namespace HM.Face.Common_
@@ -36,7 +37,7 @@ namespace HM.Face.Common_
         /// <summary>
         /// 
         /// </summary>
-        public int Sex { get; set; }
+        public SexType Sex { get; set; }
         /// <summary>
         /// 人员所属房号
         /// </summary>
@@ -61,17 +62,50 @@ namespace HM.Face.Common_
         /// 猫编号
         /// </summary>
         public string cNO { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Obsolete("此转换存在一定问题")]
         public RCType GetEyeCoolRCType()
         {
-            //RegisterType
-            return RCType.自动注册;
+            switch (RegisterType)
+            {
+                case RegisterType.未知:
+                    return RCType.手动注册;
+                case RegisterType.微信注册:
+                    return RCType.微信注册;
+                case RegisterType.手动注册:
+                    return RCType.手动注册;
+                case RegisterType.刷卡注册:
+                    return RCType.手动注册;
+                case RegisterType.人脸一体机自动注册:
+                    return RCType.自动注册;
+                case RegisterType.人脸一体机手动注册:
+                    return RCType.手动注册;
+                default:
+                    return RCType.手动注册;
+            }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [Obsolete("此转换存在一定问题")]
         public int GetEyeCoolSex()
         {
             //性别，1：男，0：女 默认1
-            return Sex;
+            switch (Sex)
+            {
+                case SexType.未知:
+                    return 1;
+                case SexType.男:
+                    return 1;
+                case SexType.女:
+                    return 0;
+                default:
+                    return 1;
+            }
         }
         /// <summary>
         /// 若是微信的，需要审核

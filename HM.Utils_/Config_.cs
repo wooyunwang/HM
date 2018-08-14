@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Configuration;
+using System.Xml;
+
 namespace HM.Utils_
 {
     /// <summary>配置文件辅助类
     /// </summary>
     public sealed class Config_
     {
+        #region 获取
         /// <summary>获得配置
         /// </summary>
         /// <param name="key"></param>
@@ -19,7 +22,7 @@ namespace HM.Utils_
                 Cache_.ClearCache(strCacheKey);
             }
             return Cache_.GetCacheItem<string>(strCacheKey,
-                delegate()
+                delegate ()
                 {
                     var obj = ConfigurationManager.AppSettings[key];
                     return (obj == null) ? "" : obj.ToString();
@@ -89,5 +92,54 @@ namespace HM.Utils_
         {
             return GetString(key).ToDecimal_() ?? def;
         }
+        #endregion
+
+        #region 设置
+        /// <summary>
+        /// 保存配置文件的内容(这种方法需重启后才更新)
+        /// </summary>
+        /// <param name="configFileName"></param>
+        /// <param name="configNodeName"></param>
+        /// <param name="configValue"></param>
+        public static void SaveConfig(string configFileName, string configNodeName, string configValue)
+        {
+            XmlDocument doc = new XmlDocument();
+            //获得配置文件的全路径
+            doc.Load(configFileName);
+            //找出名称为“add”的所有元素
+            XmlNodeList nodes = doc.GetElementsByTagName("add");
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                //获得将当前元素的key属性
+                XmlAttribute att = nodes[i].Attributes["key"];
+                if (att == null)
+                    continue;
+                //根据元素的第一个属性来判断当前的元素是不是目标元素
+                if (att.Value == configNodeName)
+                {
+                    //对目标元素中的第二个属性赋值
+                    att = nodes[i].Attributes["value"];
+                    att.Value = configValue;
+                    break;
+                }
+            }
+            //保存上面的修改
+            doc.Save(configFileName);
+        }
+
+        /// <summary>
+        /// 保存配置文件的内容(这种方法保存后立刻更新)
+        /// </summary>
+        /// <param name="configNodeName"></param>
+        /// <param name="configValue"></param>
+        public static void SaveConfig(string key, string value)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings.Remove(key);
+            config.AppSettings.Settings.Add(key, value);
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
+        #endregion
     }
 }

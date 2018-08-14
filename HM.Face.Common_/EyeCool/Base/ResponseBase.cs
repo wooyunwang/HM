@@ -1,10 +1,6 @@
-﻿using HM.Common_.DTO;
+﻿using HM.DTO;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HM.Face.Common_.EyeCool
 {

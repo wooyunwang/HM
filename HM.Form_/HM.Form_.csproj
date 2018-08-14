@@ -60,6 +60,9 @@
     <Compile Include="HMComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="HMDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="HMLink.cs">
       <SubType>Component</SubType>
     </Compile>

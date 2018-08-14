@@ -1,9 +1,12 @@
-﻿using HM.Common_.DTO;
+﻿using HM.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HM.Enum_.FacePlatform;
+using HM.Face.Common_.EyeCool;
+using HM.Common_;
 
 namespace HM.Face.Common_
 {
@@ -30,27 +33,12 @@ namespace HM.Face.Common_
         /// <summary>
         /// Telnet，可用于批量处理前做网络检测
         /// </summary>
-        /// <param name="host"></param>
+        /// <param name="ip"></param>
         /// <param name="port"></param>
         /// <returns></returns>
-        public bool VisualTelnet(string host, int port)
+        public bool VisualTelnet(string ip, int port)
         {
-            int millisecondsTimeout = 50;//等待时间
-            System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient();
-            try
-            {
-                var ar = client.BeginConnect(host, port, null, null);
-                ar.AsyncWaitHandle.WaitOne(millisecondsTimeout);
-                return client.Connected;
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-            finally
-            {
-                client.Close();
-            }
+            return Utils_.NetWork_.VisualTelnet(ip, port);
         }
         /// <summary>
         /// 检查图片是否包含人脸
@@ -60,7 +48,7 @@ namespace HM.Face.Common_
         /// <param name="filePath">文件路径或者下载地址</param>
         /// <param name="tip">备注</param>
         /// <returns></returns>
-        public abstract ActionResult Checking(string faceId, RegisterType registerType, string filePath, string tip = "");
+        public abstract ActionResult<CheckingOutput> Checking(string faceId, RegisterType registerType, string filePath, string tip = "");
         /// <summary>
         /// 两张图片内容比较是否为同一个人
         /// </summary>
@@ -94,7 +82,7 @@ namespace HM.Face.Common_
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [FaceActionResult]
+        [ActionResultTryCatch]
         public abstract ActionResult<List<GetRegisterPageOutput>> GetRegisterPage(GetRegisterPageInput input);
 
         /// <summary>
@@ -102,10 +90,10 @@ namespace HM.Face.Common_
         /// </summary>
         /// <param name="projectCode"></param>
         /// <param name="peopleId"></param>
-        /// <param name="state"></param>
+        /// <param name="checkType"></param>
         /// <param name="comments"></param>
         /// <returns></returns>
-        public abstract ActionResult Review(string projectCode, string peopleId, string state, string comments);
+        public abstract ActionResult Review(string projectCode, string peopleId, CheckType checkType, string comments);
 
         /// <summary>
         /// 获取人脸通行明细

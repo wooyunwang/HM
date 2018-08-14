@@ -8,7 +8,7 @@ using Flurl.Http;
 using Flurl;
 
 
-namespace HM.FacePlatForm
+namespace HM.FacePlatform
 {
     public class BaseTestApiController : ApiController
     {

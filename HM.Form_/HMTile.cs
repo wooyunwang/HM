@@ -7,6 +7,7 @@ namespace HM.Form_
         public HMTile()
         {
             TileTextFontWeight = MetroFramework.MetroTileTextWeight.Light;
+            TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         }
     }
 }

@@ -82,6 +82,10 @@
       <Project>{a3d97c81-7036-4645-a3cf-2c9a3a366cdb}</Project>
       <Name>HM.Common_</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HM.Enum_\HM.Enum_.csproj">
+      <Project>{F26F1383-FCCA-410D-8E7E-376FAED6B8F1}</Project>
+      <Name>HM.Enum_</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HM.Face.Common_\HM.Face.Common_.csproj">
       <Project>{52CC6BDC-99B7-4A88-B3CA-BBE35CD22D0A}</Project>
       <Name>HM.Face.Common_</Name>
@@ -89,6 +93,10 @@
     <ProjectReference Include="..\HM.Utils_\HM.Utils_.csproj">
       <Project>{38f4f95a-f905-43e1-8ad0-4d7d4820edef}</Project>
       <Name>HM.Utils_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM\HM.csproj">
+      <Project>{61d0f886-db69-45b7-ae4b-5405e6d58a8f}</Project>
+      <Name>HM</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

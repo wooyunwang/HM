@@ -131,7 +131,7 @@ namespace HM.Face.Common_.EyeCool.Tests
             {
                 var input = new CheckingInput()
                 {
-                    face_id = RandomGenerator.SequentialGuid(),
+                    face_id = Key_.SequentialGuid(),
                     file = Image_.ImageToBase64(path),
                     rctype = RCType.手动注册,
                     tip = "单元测试"
@@ -171,7 +171,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                 {
                     var input1 = new CheckingInput()
                     {
-                        face_id = RandomGenerator.SequentialGuid(),
+                        face_id = Key_.SequentialGuid(),
                         file = Image_.ImageToBase64(path),
                         rctype = RCType.手动注册,
                         tip = "单元测试"
@@ -349,7 +349,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                 {
                     var input1 = new CheckingInput()
                     {
-                        face_id = RandomGenerator.SequentialGuid(),
+                        face_id = Key_.SequentialGuid(),
                         file = Image_.ImageToBase64(path),
                         rctype = RCType.手动注册,
                         tip = "单元测试"

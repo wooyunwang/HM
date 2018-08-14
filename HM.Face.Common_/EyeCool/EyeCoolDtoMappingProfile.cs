@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HM.Enum_.FacePlatform;
 
 namespace HM.Face.Common_.EyeCool
 {

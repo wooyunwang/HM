@@ -21,7 +21,7 @@ namespace HM.Form_
             this.ClientSize = new System.Drawing.Size(300, 300);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HMForm";
-            this.Style = MetroFramework.MetroColorStyle.Green;
+            this.Style = MetroFramework.MetroColorStyle.Blue;
             this.Text = "标题";
             this.ResumeLayout(false);
 
@@ -36,6 +36,6 @@ namespace HM.Form_
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
-        }
+        }        
     }
 }

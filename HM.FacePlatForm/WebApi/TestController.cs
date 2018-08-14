@@ -11,7 +11,7 @@ using HM.Enum_;
 using HM.Enum_.ControlCenter;
 using System.IO;
 
-namespace HM.FacePlatForm.WebApi
+namespace HM.FacePlatform.WebApi
 {
     public class TestController : BaseTestApiController
     {

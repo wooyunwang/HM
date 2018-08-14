@@ -40,12 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FacePlatform\ActionName.cs" />
+    <Compile Include="FacePlatform\CheckType.cs" />
+    <Compile Include="FacePlatform\ActionType.cs" />
+    <Compile Include="FacePlatform\DataFromType.cs" />
+    <Compile Include="FacePlatform\IdType.cs" />
+    <Compile Include="FacePlatform\IsAdminType.cs" />
+    <Compile Include="FacePlatform\RegisterType.cs" />
+    <Compile Include="FacePlatform\SexType.cs" />
+    <Compile Include="FacePlatform\IsDelType.cs" />
+    <Compile Include="FacePlatform\UserType.cs" />
+    <Compile Include="FacePlatform\JobType.cs" />
     <Compile Include="LogType.cs" />
     <Compile Include="ControlCenter\FileType.cs" />
     <Compile Include="MasterControlConfigFileName.cs" />
     <Compile Include="GPIO\GPIOInPinEnum.cs" />
     <Compile Include="GPIO\GPIOLevelEnum.cs" />
     <Compile Include="GPIO\GPIOOutPinEnum.cs" />
+    <Compile Include="MessageType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

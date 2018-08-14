@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using AForge.Video;
 using AForge.Video.DirectShow;
+using HM.Form_;
 
 namespace HM.FacePlatform.Forms
 {
@@ -36,7 +37,7 @@ namespace HM.FacePlatform.Forms
             }
             else
             {
-                MessageBox.Show("没有检测到摄像头", "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                HMMessageBox.Show(this, "没有检测到摄像头", "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

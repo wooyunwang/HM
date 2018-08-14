@@ -100,7 +100,7 @@ namespace HM.FacePlatform.Forms
                     int pictureMaxSize = Config_.GetInt("PictureMaxSize") ?? 356;
                     if (ofd.FileNames.Any(it => new FileInfo(it).Length > pictureMaxSize * 1024 * 1024))
                     {
-                        MessageBox.Show("单张图片大小不能超过【" + MainForm.pictureMaxSize + "M】");
+                        HMMessageBox.Show(this, "单张图片大小不能超过【" + MainForm.pictureMaxSize + "M】");
                     }
                     string compressPath = Config_.GetString("CompressPath");
                     List<string> lstCompressImage = new List<string>();
@@ -150,7 +150,7 @@ namespace HM.FacePlatform.Forms
                         ActionResult result = face.Checking(faceId, RegisterType.手动注册, imagePath, "");
                         if (!result.IsSuccess)
                         {
-                            MessageBox.Show(result.ToAlertString());
+                            HMMessageBox.Show(this, result.ToAlertString());
                             continue;
                         }
                         else
@@ -209,7 +209,7 @@ namespace HM.FacePlatform.Forms
 
         private void DeleteToRegisterImage(ImageItem imageItem)
         {
-            if (MessageBox.Show("确定要删除该照片吗?", "删除确认", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            if (HMMessageBox.Show(this, "确定要删除该照片吗?", "删除确认", MessageBoxButtons.OKCancel) != DialogResult.OK)
                 return;
 
             _dicPhoto.Remove(imageItem._register.photo_path);
@@ -278,12 +278,12 @@ namespace HM.FacePlatform.Forms
 
             if (_dicPhoto.Count < 1)
             {
-                MessageBox.Show("请上传或拍摄图片");
+                HMMessageBox.Show(this, "请上传或拍摄图片");
                 return;
             }
             if (tbEnd.Visible && tbEnd.Value < DateTime.Now)
             {
-                MessageBox.Show("有效期时间不能小于当前时间");
+                HMMessageBox.Show(this, "有效期时间不能小于当前时间");
                 return;
             }
 
@@ -440,7 +440,7 @@ namespace HM.FacePlatform.Forms
         /// <param name="imageItem"></param>
         private void DeleteRegistedImage(ImageItem imageItem)
         {
-            if (MessageBox.Show("此人脸已审核通过，确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            if (HMMessageBox.Show(this, "此人脸已审核通过，确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel) != DialogResult.OK)
                 return;
 
             LoadLoading();
@@ -508,7 +508,7 @@ namespace HM.FacePlatform.Forms
             IList<Mao> lstMao = FacePlatformCache.GetALL<Mao>();
             if (!lstMao.Any())
             {
-                MessageBox.Show("请先配置猫信息!");
+                HMMessageBox.Show(this, "请先配置猫信息!");
                 return;
             }
 

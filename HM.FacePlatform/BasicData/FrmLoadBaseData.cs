@@ -20,7 +20,7 @@ namespace HM.FacePlatform.BasicData
     public partial class FrmLoadBaseData : Form
     {
         private BaseDataTypeE baseDataType;
-        private DataBase _ucDataBase;
+        private UcDataBase _ucDataBase;
 
         Regex regex = new Regex("^" + Program._Mainform._ProjectCode + ".*");
 
@@ -28,7 +28,7 @@ namespace HM.FacePlatform.BasicData
         HouseBLL _houseBLL = new HouseBLL();
         UserBLL _userBLL = new UserBLL();
 
-        public FrmLoadBaseData(BaseDataTypeE baseDataTypeVar, DataBase ucDataBase)
+        public FrmLoadBaseData(BaseDataTypeE baseDataTypeVar, UcDataBase ucDataBase)
         {
             baseDataType = baseDataTypeVar;
             _ucDataBase = ucDataBase;
@@ -99,7 +99,7 @@ namespace HM.FacePlatform.BasicData
                 }
                 catch (Exception exp)
                 {
-                    MessageBox.Show(exp.Message, "Error");
+                    HMMessageBox.Show(this, exp.Message, "Error");
                     return;
                 }
 
@@ -110,17 +110,17 @@ namespace HM.FacePlatform.BasicData
                 }
                 catch (System.Net.WebException exp)
                 {
-                    MessageBox.Show("请关闭当前打开的此文档!" + exp.Message);
+                    HMMessageBox.Show(this, "请关闭当前打开的此文档!" + exp.Message);
                     return;
                 }
                 catch (Exception exp)
                 {
-                    MessageBox.Show(exp.Message, "Error");
+                    HMMessageBox.Show(this, exp.Message, "Error");
                     return;
                 }
 
                 DialogResult result;
-                result = MessageBox.Show("下载完成\n请确认是否现在打开此文件?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                result = HMMessageBox.Show(this, "下载完成\n请确认是否现在打开此文件?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result == DialogResult.OK)
                 {
                     try
@@ -129,7 +129,7 @@ namespace HM.FacePlatform.BasicData
                     }
                     catch
                     {
-                        MessageBox.Show("不能直接打开此文件,但已保存至本地目录!");
+                        HMMessageBox.Show(this, "不能直接打开此文件,但已保存至本地目录!");
                     }
                 }
             }
@@ -280,7 +280,7 @@ namespace HM.FacePlatform.BasicData
                             }
                             else
                             {
-                                MessageBox.Show(strError.Substring(0, 280));
+                                HMMessageBox.Show(this, strError.Substring(0, 280));
                             }
 
                             this.UIThread(() =>
@@ -504,7 +504,7 @@ namespace HM.FacePlatform.BasicData
                             }
                             else
                             {
-                                MessageBox.Show(strError.Substring(0, 598));
+                                HMMessageBox.Show(this, strError.Substring(0, 598));
                             }
 
                             this.UIThread(() =>
@@ -763,7 +763,7 @@ namespace HM.FacePlatform.BasicData
                             }
                             else
                             {
-                                MessageBox.Show(strError.Substring(0, 290));
+                                HMMessageBox.Show(this, strError.Substring(0, 290));
                             }
 
                             this.UIThread(() =>

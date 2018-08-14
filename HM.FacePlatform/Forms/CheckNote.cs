@@ -41,7 +41,7 @@ namespace HM.FacePlatform.Forms
         /// <summary>
         /// 
         /// </summary>
-        Check _usCheck = null;
+        UcCheck _usCheck = null;
         /// <summary>
         /// 注册人【注：批量审核时，需要保持为Null】
         /// </summary>
@@ -60,7 +60,7 @@ namespace HM.FacePlatform.Forms
         /// <param name="ucCheck"></param>
         /// <param name="userUid"></param>
         /// <param name="isRead"></param>
-        public CheckNote(Check ucCheck, string userUid, bool isRead = false)
+        public CheckNote(UcCheck ucCheck, string userUid, bool isRead = false)
         {
             _Tip = new VankeBalloonToolTip(this);
             InitializeComponent();
@@ -78,7 +78,7 @@ namespace HM.FacePlatform.Forms
             }
             else
             {
-                MessageBox.Show(ar.ToAlertString());
+                HMMessageBox.Show(this, ar.ToAlertString());
                 //退出窗口
                 DialogResult = DialogResult.Cancel;
             }
@@ -89,7 +89,7 @@ namespace HM.FacePlatform.Forms
         /// <param name="ucCheck"></param>
         /// <param name="lstRegisterWithUser"></param>
         /// <param name="isRead"></param>
-        public CheckNote(Check ucCheck, List<Register> lstRegisterWithUser, bool isRead = false)
+        public CheckNote(UcCheck ucCheck, List<Register> lstRegisterWithUser, bool isRead = false)
         {
             _Tip = new VankeBalloonToolTip(this);
             InitializeComponent();
@@ -171,13 +171,13 @@ namespace HM.FacePlatform.Forms
             }
             else
             {
-                MessageBox.Show(result.ToAlertString());
+                HMMessageBox.Show(this, result.ToAlertString());
             }
         }
 
         private void DeleteRegistedImage(ImageItem imageItem)
         {
-            if (MessageBox.Show("此人脸已审核通过，确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            if (HMMessageBox.Show(this, "此人脸已审核通过，确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel) != DialogResult.OK)
                 return;
 
             ClearMessage();

@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace HM.FacePlatform
 {
-    public partial class Check : HMUserControl
+    public partial class UcCheck : HMUserControl
     {
         /// <summary>
         /// 提示控件
@@ -30,7 +30,7 @@ namespace HM.FacePlatform
         /// <summary>
         /// 构造函数
         /// </summary>
-        public Check()
+        public UcCheck()
         {
             InitializeComponent();
             m_Tip = new VankeBalloonToolTip(this);
@@ -100,7 +100,7 @@ namespace HM.FacePlatform
                 CheckType.待审核);
             if (!result.IsSuccess)
             {
-                MessageBox.Show(result.ToAlertString());
+                HMMessageBox.Show(this, result.ToAlertString());
                 result.Obj = new PagerData<Register>()
                 {
                     pages = 0,
@@ -163,7 +163,7 @@ namespace HM.FacePlatform
                 CheckType.待审核);
             if (!result.IsSuccess)
             {
-                MessageBox.Show(result.ToAlertString());
+                HMMessageBox.Show(this, result.ToAlertString());
                 result.Obj = new PagerData<Register>()
                 {
                     pages = 0,

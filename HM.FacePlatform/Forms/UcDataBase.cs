@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Threading.Tasks;
-using System.Threading;
-using HM.Form_;
+﻿using HM.Common_;
+using HM.FacePlatform.BasicData;
 using HM.FacePlatform.BLL;
 using HM.FacePlatform.Model;
+using HM.Form_;
 using HM.Form_.Old;
+using HM.Utils_;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
-using System.Collections.Generic;
-using HM.Utils_;
-using HM.Common_;
-using HM.FacePlatform.BasicData;
 
 namespace HM.FacePlatform
 {
-    public partial class DataBase : HMUserControl
+    public partial class UcDataBase : HMUserControl
     {
         public delegate void ThreadDelegate();
 
@@ -37,7 +32,7 @@ namespace HM.FacePlatform
         HouseBLL _houseBLL;
         MaoBLL _maoBLL;
 
-        public DataBase()
+        public UcDataBase()
         {
             InitializeComponent();
 
@@ -187,11 +182,6 @@ namespace HM.FacePlatform
             LoadHouse();
         }
 
-        private void dgvHouse_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(e.Graphics, ((DataGridView)sender).ClientRectangle, Color.FromArgb(224, 224, 224), ButtonBorderStyle.Solid);
-        }
-
         private void tbxQuery_TextChanged(object sender, EventArgs e)
         {
             tbxQuery.Text = Validate_.GetSafeString(ControlType.姓名类, tbxQuery.Text);
@@ -226,11 +216,11 @@ namespace HM.FacePlatform
 
                     if (_maoBuildingBLL.Any(it => it.mao_id == id))
                     {
-                        MessageBox.Show("请先取消猫对应的楼栋信息!");
+                        HMMessageBox.Show(this, "请先取消猫对应的楼栋信息!");
                     }
                     else
                     {
-                        DialogResult dr = MessageBox.Show("确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel);
+                        DialogResult dr = HMMessageBox.Show(this, "确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel);
                         if (dr == DialogResult.OK)//如果点击“确定”按钮
                         {
                             _maoBLL.Delete(it => it.id == id);
@@ -252,7 +242,7 @@ namespace HM.FacePlatform
                 }
                 else if (e.ColumnIndex == indexInitColumn)
                 {
-                    DialogResult dr = MessageBox.Show("确定要初始吗?\r\n如果确定，初始化完成前请不要关闭本系统", "初始化确认", MessageBoxButtons.OKCancel);
+                    DialogResult dr = HMMessageBox.Show(this, "确定要初始吗?\r\n如果确定，初始化完成前请不要关闭本系统", "初始化确认", MessageBoxButtons.OKCancel);
                     if (dr == DialogResult.OK)
                     {
                         int mao_id = Convert.ToInt32(dgMao.Rows[dgMao.CurrentCell.RowIndex].Cells["col_mao_id"].Value);
@@ -275,7 +265,7 @@ namespace HM.FacePlatform
                 }
                 else if (e.ColumnIndex == indexAbandonColumn)
                 {
-                    DialogResult dr = MessageBox.Show("确定放弃初始吗?", "放弃初始化确认", MessageBoxButtons.OKCancel);
+                    DialogResult dr = HMMessageBox.Show(this, "确定放弃初始吗?", "放弃初始化确认", MessageBoxButtons.OKCancel);
                     if (dr == DialogResult.OK)
                     {
                         int mao_id = Convert.ToInt32(dgMao.Rows[dgMao.CurrentCell.RowIndex].Cells["col_mao_id"].Value);
@@ -422,27 +412,6 @@ namespace HM.FacePlatform
         }
         #endregion
 
-        #region paint
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(e.Graphics, ((System.Windows.Forms.Panel)sender).ClientRectangle, Color.FromArgb(224, 224, 224), ButtonBorderStyle.Solid);
-
-            System.Windows.Forms.Panel _Panel = (System.Windows.Forms.Panel)sender;
-            Graphics _Graphcis = Graphics.FromHwnd(_Panel.Handle);
-            _Graphcis.DrawLine(new Pen(Color.FromArgb(224, 224, 224), 2), new Point(1, 290), new Point(300, 290));
-            _Graphcis.Dispose();
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(e.Graphics, ((System.Windows.Forms.Panel)sender).ClientRectangle, Color.FromArgb(224, 224, 224), ButtonBorderStyle.Solid);
-
-            System.Windows.Forms.Panel _Panel = (System.Windows.Forms.Panel)sender;
-            Graphics _Graphcis = Graphics.FromHwnd(_Panel.Handle);
-            _Graphcis.DrawLine(new Pen(Color.FromArgb(224, 224, 224), 2), new Point(1, 290), new Point(300, 290));
-            _Graphcis.Dispose();
-        }
-        #endregion
 
         private void dgBuilding_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

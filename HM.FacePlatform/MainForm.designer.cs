@@ -125,7 +125,7 @@
             this.btnUserManage.Name = "btnUserManage";
             this.btnUserManage.Size = new System.Drawing.Size(67, 69);
             this.btnUserManage.TabIndex = 9;
-            this.btnUserManage.Tag = "HM.FacePlatform.SystemUserManage";
+            this.btnUserManage.Tag = "HM.FacePlatform.UcSystemUserManage";
             this.btnUserManage.Text = "登录管理";
             this.btnUserManage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnUserManage.UseVisualStyleBackColor = true;
@@ -160,7 +160,7 @@
             this.btnRegisterManage.Name = "btnRegisterManage";
             this.btnRegisterManage.Size = new System.Drawing.Size(94, 69);
             this.btnRegisterManage.TabIndex = 7;
-            this.btnRegisterManage.Tag = "HM.FacePlatform.RegisterManage";
+            this.btnRegisterManage.Tag = "HM.FacePlatform.UcRegisterManage";
             this.btnRegisterManage.Text = "注册管理";
             this.btnRegisterManage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRegisterManage.UseVisualStyleBackColor = true;
@@ -190,7 +190,7 @@
             this.btnLog.Name = "btnLog";
             this.btnLog.Size = new System.Drawing.Size(79, 69);
             this.btnLog.TabIndex = 5;
-            this.btnLog.Tag = "HM.FacePlatform.Log";
+            this.btnLog.Tag = "HM.FacePlatform.UcLog";
             this.btnLog.Text = "日志";
             this.btnLog.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLog.UseVisualStyleBackColor = true;
@@ -209,7 +209,7 @@
             this.btnCount.Name = "btnCount";
             this.btnCount.Size = new System.Drawing.Size(79, 69);
             this.btnCount.TabIndex = 4;
-            this.btnCount.Tag = "HM.FacePlatform.Count";
+            this.btnCount.Tag = "HM.FacePlatform.UcCount";
             this.btnCount.Text = "统计";
             this.btnCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCount.UseVisualStyleBackColor = true;
@@ -232,7 +232,7 @@
             this.btnDataBase.Name = "btnDataBase";
             this.btnDataBase.Size = new System.Drawing.Size(94, 69);
             this.btnDataBase.TabIndex = 1;
-            this.btnDataBase.Tag = "HM.FacePlatform.DataBase";
+            this.btnDataBase.Tag = "HM.FacePlatform.UcDataBase";
             this.btnDataBase.Text = "基础数据";
             this.btnDataBase.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDataBase.UseVisualStyleBackColor = false;
@@ -264,7 +264,7 @@
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(79, 69);
             this.btnCheck.TabIndex = 3;
-            this.btnCheck.Tag = "HM.FacePlatform.Check";
+            this.btnCheck.Tag = "HM.FacePlatform.UcCheck";
             this.btnCheck.Text = "审核";
             this.btnCheck.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCheck.UseVisualStyleBackColor = true;
@@ -285,7 +285,7 @@
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(79, 69);
             this.btnRegister.TabIndex = 2;
-            this.btnRegister.Tag = "HM.FacePlatform.Register";
+            this.btnRegister.Tag = "HM.FacePlatform.UcRegister";
             this.btnRegister.Text = "注册";
             this.btnRegister.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnRegister.UseVisualStyleBackColor = true;

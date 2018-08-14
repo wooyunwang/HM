@@ -23,7 +23,7 @@ namespace HM.Form_.Old.TextBox
         /// <summary>
         /// 获取焦点时边框色
         /// </summary>
-        private Color _FocusBorderColor = Color.FromArgb(67, 152, 237);//Color.DarkOrange;
+        private Color _FocusBorderColor = Color.FromArgb(0, 174, 219);//Color.DarkOrange;
         /// <summary>
         /// 失去焦点背景色
         /// </summary>
@@ -127,6 +127,9 @@ DefaultValue(true)]
             }
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public RTextBox()
             : base()
         {
@@ -135,6 +138,19 @@ DefaultValue(true)]
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.SetParentContainer();
         }
+        /// <summary>
+        /// 创建事件
+        /// </summary>
+        protected override void OnCreateControl()
+        {
+            //统一设置，实际release此部分无效
+#if DEBUG
+            HotBorderColor = Color.FromArgb(0, 174, 219);
+#endif
+
+            base.OnCreateControl();
+        }
+
         /// <summary>
         /// 设置TextBox添加父容器
         /// </summary>
@@ -246,7 +262,7 @@ DefaultValue(true)]
             base.OnMouseLeave(e);
         }
     }
-    
+
 
     public class Win32
     {

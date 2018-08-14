@@ -2,7 +2,7 @@
 using HM.Form_.Old.TextBox;
 namespace HM.FacePlatform
 {
-    partial class RegisterManage
+    partial class UcRegisterManage
     {
         /// <summary> 
         /// 必需的设计器变量。

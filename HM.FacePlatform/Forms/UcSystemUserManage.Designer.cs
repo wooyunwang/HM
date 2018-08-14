@@ -1,6 +1,6 @@
 ﻿namespace HM.FacePlatform
 {
-    partial class SystemUserManage
+    partial class UcSystemUserManage
     {
         /// <summary> 
         /// Required designer variable.

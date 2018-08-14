@@ -1,6 +1,6 @@
 ﻿namespace HM.FacePlatform
 {
-    partial class Log
+    partial class UcLog
     {
         /// <summary> 
         /// 必需的设计器变量。

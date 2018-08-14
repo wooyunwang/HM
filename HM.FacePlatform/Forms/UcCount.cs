@@ -11,7 +11,7 @@ using ZedGraph;
 
 namespace HM.FacePlatform
 {
-    public partial class Count : UserControl
+    public partial class UcCount : HMUserControl
     {
         private float AngleIn = 20;
         private float AngleOut = 34;
@@ -22,7 +22,7 @@ namespace HM.FacePlatform
         public DateTime searchEndTimeB;
         private VankeBalloonToolTip m_Tip;//提示
 
-        public Count()
+        public UcCount()
         {
             InitializeComponent();
 

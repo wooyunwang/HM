@@ -93,7 +93,7 @@ namespace HM.FacePlatform
             var strTag = (tp.Tag ?? "").ToString();
             if (string.IsNullOrWhiteSpace(strTag))
             {
-                MessageBox.Show("该菜单未配置页面，请联系管理员！");
+                HMMessageBox.Show(this, "该菜单未配置页面，请联系管理员！");
                 return null;
             }
             #region 根据按钮的Tag，实例化控件
@@ -132,7 +132,7 @@ namespace HM.FacePlatform
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("确定退出程序？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (HMMessageBox.Show(this, "确定退出程序？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 Process p = Process.GetCurrentProcess();
                 if (p != null)

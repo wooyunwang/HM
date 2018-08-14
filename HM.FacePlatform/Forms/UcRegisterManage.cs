@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
-using HM.FacePlatform.BLL;
-using HM.FacePlatform.UserControls;
-using System.Threading;
-using System.Threading.Tasks;
-using HM.FacePlatform.Model;
-using HM.Common_;
-using HM.FacePlatform.Forms;
-using HM.Form_.Old;
+﻿using HM.Common_;
 using HM.DTO;
 using HM.Enum_;
 using HM.Enum_.FacePlatform;
-using HM.Utils_;
+using HM.FacePlatform.BLL;
+using HM.FacePlatform.Forms;
+using HM.FacePlatform.Model;
+using HM.FacePlatform.UserControls;
 using HM.Form_;
+using HM.Form_.Old;
+using HM.Utils_;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace HM.FacePlatform
 {
-    public partial class RegisterManage : UserControl
+    public partial class UcRegisterManage : HMUserControl
     {
 
         MaoFailedJobBLL _maoFailedJobBLL = new MaoFailedJobBLL();
@@ -41,7 +40,7 @@ namespace HM.FacePlatform
         private string regTypeMag;
 
         //构造函数 
-        public RegisterManage()
+        public UcRegisterManage()
         {
             m_Tip = new VankeBalloonToolTip(this);
 
@@ -99,7 +98,7 @@ namespace HM.FacePlatform
 
         private void DeleteRegistedImage(ImageDetailItem imageItem)
         {
-            if (MessageBox.Show("此人脸已审核通过，确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel) != DialogResult.OK)
+            if (HMMessageBox.Show(this, "此人脸已审核通过，确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel) != DialogResult.OK)
                 return;
 
             ClearMessage();
@@ -179,7 +178,7 @@ namespace HM.FacePlatform
 
             if (!result.IsSuccess)
             {
-                MessageBox.Show(result.ToAlertString());
+                HMMessageBox.Show(this, result.ToAlertString());
                 result.Obj = new PagerData<Register>()
                 {
                     pages = 0,
@@ -278,11 +277,11 @@ namespace HM.FacePlatform
                 DialogResult dr;
                 if (registerWithUser.check_state == CheckType.审核通过)
                 {
-                    dr = MessageBox.Show("确定要禁用吗?", "禁用确认", MessageBoxButtons.OKCancel);
+                    dr = HMMessageBox.Show(this, "确定要禁用吗?", "禁用确认", MessageBoxButtons.OKCancel);
                 }
                 else
                 {
-                    dr = MessageBox.Show("确定要启用吗?", "启用确认", MessageBoxButtons.OKCancel);
+                    dr = HMMessageBox.Show(this, "确定要启用吗?", "启用确认", MessageBoxButtons.OKCancel);
                 }
                 if (dr != DialogResult.OK) return;
 
@@ -385,7 +384,7 @@ namespace HM.FacePlatform
                 return;
             }
 
-            DialogResult result = MessageBox.Show("有效期是否延期一个月?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult result = HMMessageBox.Show(this, "有效期是否延期一个月?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
                 Task.Run(() =>
@@ -416,7 +415,7 @@ namespace HM.FacePlatform
                 return;
             }
 
-            DialogResult result = MessageBox.Show("有效期是否延期一年?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult result = HMMessageBox.Show(this, "有效期是否延期一年?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
                 Task.Run(() =>

@@ -2,6 +2,7 @@
 using HM.FacePlatform.BLL;
 using HM.FacePlatform.Forms;
 using HM.FacePlatform.Model;
+using HM.Form_;
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -121,7 +122,7 @@ namespace HM.FacePlatform
 
                 if (btnMenu.Tag.ToString() == string.Empty)
                 {
-                    MessageBox.Show("该菜单未配置页面，请联系管理员！");
+                    HMMessageBox.Show(this, "该菜单未配置页面，请联系管理员！");
                     return;
                 }
                 if (htControl.Contains(btnMenu.Tag.ToString()))
@@ -136,14 +137,14 @@ namespace HM.FacePlatform
                         {
                             if (btnMenu.Tag.ToString() == "HM.FacePlatform.Check")
                             {
-                                if (((Check)ctrl).HtcMain.SelectedIndex == 0)
+                                if (((UcCheck)ctrl).HtcMain.SelectedIndex == 0)
                                 {
-                                    ((Check)ctrl).LoadData();
+                                    ((UcCheck)ctrl).LoadData();
                                 }
                             }
                             else if (btnMenu.Tag.ToString() == "HM.FacePlatform.Register")
                             {
-                                ((ucRegister)ctrl).BindWorkers();
+                                ((UcRegister)ctrl).BindWorkers();
                             }
                             //else
                             //if (btnMenu.Tag.ToString() == "HM.FacePlatform.Count")//统计的
@@ -216,7 +217,7 @@ namespace HM.FacePlatform
 
         private void MainForm_Closing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("确定退出程序？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (HMMessageBox.Show(this, "确定退出程序？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 Process p = Process.GetCurrentProcess();
                 if (p != null)
@@ -232,7 +233,7 @@ namespace HM.FacePlatform
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("确定退出程序？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (HMMessageBox.Show(this, "确定退出程序？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 Process p = Process.GetCurrentProcess();
                 if (p != null)

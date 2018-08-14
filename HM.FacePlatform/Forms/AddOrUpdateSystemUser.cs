@@ -15,9 +15,9 @@ namespace HM.FacePlatform.Forms
         VankeBalloonToolTip toolTip;
         DataCrypto dataCrypto;
 
-        SystemUserManage form;
+        UcSystemUserManage form;
 
-        public AddOrUpdateSystemUser(SystemUserManage form)
+        public AddOrUpdateSystemUser(UcSystemUserManage form)
         {
             _systemUserBLL = new SystemUserBLL();
             toolTip = new VankeBalloonToolTip();

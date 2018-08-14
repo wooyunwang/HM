@@ -11,12 +11,12 @@ using HM.Utils_;
 
 namespace HM.FacePlatform
 {
-    public partial class Log : HMUserControl
+    public partial class UcLog : HMUserControl
     {
         ActionLogBLL _actionLogBLL;
         UserBLL _userBLL;
         SystemUserBLL _systemUserBLL;
-        public Log()
+        public UcLog()
         {
             InitializeComponent();
 
@@ -72,7 +72,7 @@ namespace HM.FacePlatform
 
             if (!result.IsSuccess)
             {
-                MessageBox.Show(result.ToAlertString());
+                HMMessageBox.Show(this, result.ToAlertString());
                 result.Obj = new PagerData<RegisterActionLogDto>()
                 {
                     pages = 0,
@@ -106,7 +106,7 @@ namespace HM.FacePlatform
 
             if (!result.IsSuccess)
             {
-                MessageBox.Show(result.ToAlertString());
+                HMMessageBox.Show(this, result.ToAlertString());
                 result.Obj = new PagerData<ActionLogDto>()
                 {
                     pages = 0,
@@ -140,7 +140,7 @@ namespace HM.FacePlatform
 
             if (!result.IsSuccess)
             {
-                MessageBox.Show(result.ToAlertString());
+                HMMessageBox.Show(this, result.ToAlertString());
                 result.Obj = new PagerData<ActionLogDto>()
                 {
                     pages = 0,

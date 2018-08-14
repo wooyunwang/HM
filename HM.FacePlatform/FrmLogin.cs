@@ -126,7 +126,7 @@ namespace HM.FacePlatform
             var project = new ProjectBLL().FirstOrDefault(it => 1 == 1);
             if (project == null)
             {
-                MessageBox.Show("数据库未初始化项目信息！", "严重错误");
+                HMMessageBox.Show(this, "数据库未初始化项目信息！", "严重错误");
             }
             else
             {

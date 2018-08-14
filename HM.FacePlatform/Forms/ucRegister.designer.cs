@@ -3,7 +3,7 @@ using HM.Form_.Old.TextBox;
 
 namespace HM.FacePlatform
 {
-    partial class ucRegister
+    partial class UcRegister
     {
         /// <summary> 
         /// 必需的设计器变量。

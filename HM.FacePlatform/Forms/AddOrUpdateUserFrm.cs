@@ -16,7 +16,7 @@ namespace HM.FacePlatform.Forms
         UserHouseBLL _userHouseBLL = new UserHouseBLL();
 
         VankeBalloonToolTip m_Tip;
-        ucRegister _ucRegister;
+        UcRegister _ucRegister;
         UserHouse _user_house;
         House _house;
         /// <summary>
@@ -28,7 +28,7 @@ namespace HM.FacePlatform.Forms
         /// </summary>
         /// <param name="uc_register"></param>
         /// <param name="user_house">关系对象必须包含user、house</param>
-        public AddOrUpdateUserFrm(ucRegister uc_register, UserHouse user_house)
+        public AddOrUpdateUserFrm(UcRegister uc_register, UserHouse user_house)
         {
             InitializeComponent();
             m_Tip = new VankeBalloonToolTip(this);
@@ -41,7 +41,7 @@ namespace HM.FacePlatform.Forms
         /// </summary>
         /// <param name="uc_register"></param>
         /// <param name="house"></param>
-        public AddOrUpdateUserFrm(ucRegister uc_register, House house)
+        public AddOrUpdateUserFrm(UcRegister uc_register, House house)
         {
             InitializeComponent();
             m_Tip = new VankeBalloonToolTip(this);

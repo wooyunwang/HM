@@ -2,7 +2,7 @@
 using HM.Form_.Old.TextBox;
 namespace HM.FacePlatform
 {
-    partial class Check
+    partial class UcCheck
     {
         /// <summary> 
         /// 必需的设计器变量。

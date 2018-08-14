@@ -1,6 +1,6 @@
 ﻿namespace HM.FacePlatform
 {
-    partial class Count
+    partial class UcCount
     {
         /// <summary> 
         /// 必需的设计器变量。

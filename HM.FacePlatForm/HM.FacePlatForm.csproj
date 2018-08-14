@@ -74,12 +74,15 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+    <Reference Include="MetroFramework">
       <HintPath>..\packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll</HintPath>
     </Reference>
     <Reference Include="MetroFramework.Design, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroFramework.Design.1.2.0.3\lib\net40\MetroFramework.Design.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroFramework.Fonts.1.2.0.3\lib\net40\MetroFramework.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -184,11 +187,11 @@
     <Compile Include="Forms\AddOrUpdateUserFrm.Designer.cs">
       <DependentUpon>AddOrUpdateUserFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Check.cs">
+    <Compile Include="Forms\UcCheck.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Check.Designer.cs">
-      <DependentUpon>Check.cs</DependentUpon>
+    <Compile Include="Forms\UcCheck.Designer.cs">
+      <DependentUpon>UcCheck.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CheckNote.cs">
       <SubType>Form</SubType>
@@ -196,17 +199,17 @@
     <Compile Include="Forms\CheckNote.Designer.cs">
       <DependentUpon>CheckNote.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Count.cs">
+    <Compile Include="Forms\UcCount.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Count.Designer.cs">
-      <DependentUpon>Count.cs</DependentUpon>
+    <Compile Include="Forms\UcCount.Designer.cs">
+      <DependentUpon>UcCount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DataBase.cs">
+    <Compile Include="Forms\UcDataBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\DataBase.Designer.cs">
-      <DependentUpon>DataBase.cs</DependentUpon>
+    <Compile Include="Forms\UcDataBase.Designer.cs">
+      <DependentUpon>UcDataBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form_Loading.cs">
       <SubType>Form</SubType>
@@ -214,11 +217,11 @@
     <Compile Include="Forms\Form_Loading.Designer.cs">
       <DependentUpon>Form_Loading.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Log.cs">
+    <Compile Include="Forms\UcLog.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Log.Designer.cs">
-      <DependentUpon>Log.cs</DependentUpon>
+    <Compile Include="Forms\UcLog.Designer.cs">
+      <DependentUpon>UcLog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\PhotoRegisterFrm.cs">
       <SubType>Form</SubType>
@@ -226,17 +229,17 @@
     <Compile Include="Forms\PhotoRegisterFrm.Designer.cs">
       <DependentUpon>PhotoRegisterFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ucRegister.cs">
+    <Compile Include="Forms\UcRegister.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\ucRegister.designer.cs">
-      <DependentUpon>ucRegister.cs</DependentUpon>
+    <Compile Include="Forms\UcRegister.designer.cs">
+      <DependentUpon>UcRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RegisterManage.cs">
+    <Compile Include="Forms\UcRegisterManage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\RegisterManage.designer.cs">
-      <DependentUpon>RegisterManage.cs</DependentUpon>
+    <Compile Include="Forms\UcRegisterManage.designer.cs">
+      <DependentUpon>UcRegisterManage.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ResetPassword.cs">
       <SubType>Form</SubType>
@@ -250,11 +253,11 @@
     <Compile Include="Forms\ShowCamera.designer.cs">
       <DependentUpon>ShowCamera.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SystemUserManage.cs">
+    <Compile Include="Forms\UcSystemUserManage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\SystemUserManage.Designer.cs">
-      <DependentUpon>SystemUserManage.cs</DependentUpon>
+    <Compile Include="Forms\UcSystemUserManage.Designer.cs">
+      <DependentUpon>UcSystemUserManage.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
@@ -341,32 +344,32 @@
     <EmbeddedResource Include="Forms\AddOrUpdateUserFrm.resx">
       <DependentUpon>AddOrUpdateUserFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Check.resx">
-      <DependentUpon>Check.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UcCheck.resx">
+      <DependentUpon>UcCheck.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CheckNote.resx">
       <DependentUpon>CheckNote.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Count.resx">
-      <DependentUpon>Count.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UcCount.resx">
+      <DependentUpon>UcCount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DataBase.resx">
-      <DependentUpon>DataBase.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UcDataBase.resx">
+      <DependentUpon>UcDataBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form_Loading.resx">
       <DependentUpon>Form_Loading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Log.resx">
-      <DependentUpon>Log.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UcLog.resx">
+      <DependentUpon>UcLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PhotoRegisterFrm.resx">
       <DependentUpon>PhotoRegisterFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ucRegister.resx">
-      <DependentUpon>ucRegister.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UcRegister.resx">
+      <DependentUpon>UcRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RegisterManage.resx">
-      <DependentUpon>RegisterManage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UcRegisterManage.resx">
+      <DependentUpon>UcRegisterManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ResetPassword.resx">
       <DependentUpon>ResetPassword.cs</DependentUpon>
@@ -374,8 +377,8 @@
     <EmbeddedResource Include="Forms\ShowCamera.resx">
       <DependentUpon>ShowCamera.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SystemUserManage.resx">
-      <DependentUpon>SystemUserManage.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\UcSystemUserManage.resx">
+      <DependentUpon>UcSystemUserManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
@@ -500,6 +503,7 @@
     <Content Include="client.ico" />
     <Content Include="favicon.ico" />
     <Content Include="License-LGPL.txt" />
+    <Content Include="MetroFramework.txt" />
     <Content Include="quartz_jobs.xml" />
     <None Include="Resources\注册 hover.png" />
     <None Include="Resources\注册.png" />

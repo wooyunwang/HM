@@ -26,11 +26,11 @@ namespace HM.Form_
             //统一设置，实际release此部分无效
 #if DEBUG
             this.ColumnHeadersHeight = 36;
-            this.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(239, 243, 250);
+            this.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 174, 219);
             this.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;//Raised
             this.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
-            this.ColumnHeadersDefaultCellStyle.Font = new Font("微软雅黑", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(134)));
+            this.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.ColumnHeadersDefaultCellStyle.Font = new Font("微软雅黑", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(134)));
             this.ColumnHeadersDefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
             this.ColumnHeadersDefaultCellStyle.SelectionForeColor = SystemColors.HighlightText;
             this.RowHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;

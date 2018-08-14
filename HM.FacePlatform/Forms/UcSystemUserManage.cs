@@ -12,7 +12,7 @@ using HM.Form_;
 
 namespace HM.FacePlatform
 {
-    public partial class SystemUserManage : UserControl
+    public partial class UcSystemUserManage : UserControl
     {
         SystemUserBLL _systemUserBLL;
         DataCrypto dataCrypto;
@@ -39,7 +39,7 @@ namespace HM.FacePlatform
         private readonly string resetPasswordColumnName = "col_reset_password";
         private readonly string isDelColumnName = "col_is_del";
         private readonly string isAdminColumnName = "col_is_admin";
-        public SystemUserManage()
+        public UcSystemUserManage()
         {
             _systemUserBLL = new SystemUserBLL();
             dataCrypto = new DataCrypto();
@@ -122,12 +122,12 @@ namespace HM.FacePlatform
                 DialogResult dr;
                 if (systemUser.is_del == IsDelType.是)
                 {
-                    dr = MessageBox.Show("确定要启用吗?", "启用确认", MessageBoxButtons.OKCancel);
+                    dr = HMMessageBox.Show(this, "确定要启用吗?", "启用确认", MessageBoxButtons.OKCancel);
                     isDelTypeResult = IsDelType.否;
                 }
                 else
                 {
-                    dr = MessageBox.Show("确定要禁用吗?", "禁用确认", MessageBoxButtons.OKCancel);
+                    dr = HMMessageBox.Show(this, "确定要禁用吗?", "禁用确认", MessageBoxButtons.OKCancel);
                     isDelTypeResult = IsDelType.是;
                 }
 
@@ -139,17 +139,17 @@ namespace HM.FacePlatform
                 if (result)
                 {
                     systemUser = dbSystemUser;
-                    MessageBox.Show("操作成功！");
+                    HMMessageBox.Show(this, "操作成功！");
                     PagerSystemManage.Bind();
                 }
                 else
                 {
-                    MessageBox.Show("操作失败！");
+                    HMMessageBox.Show(this, "操作失败！");
                 }
             }
             else if (e.ColumnIndex == resetIndex)
             {
-                if (DialogResult.OK != MessageBox.Show("确定要重置密码吗?", "重置确认", MessageBoxButtons.OKCancel)) return;
+                if (DialogResult.OK != HMMessageBox.Show(this, "确定要重置密码吗?", "重置确认", MessageBoxButtons.OKCancel)) return;
 
                 var dbSystemUser = _systemUserBLL.FirstOrDefault(it => it.id == systemUser.id);
                 dbSystemUser.password = dataCrypto.Encrypto(defaultPassword);
@@ -157,12 +157,12 @@ namespace HM.FacePlatform
                 if (result)
                 {
                     systemUser = dbSystemUser;
-                    MessageBox.Show("操作成功，密码重置为：" + defaultPassword);
+                    HMMessageBox.Show(this, "操作成功，密码重置为：" + defaultPassword);
                     PagerSystemManage.Bind();
                 }
                 else
                 {
-                    MessageBox.Show("操作失败！");
+                    HMMessageBox.Show(this, "操作失败！");
                 }
             }
         }

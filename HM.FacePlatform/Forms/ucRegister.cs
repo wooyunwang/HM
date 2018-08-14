@@ -20,7 +20,7 @@ using System.Linq;
 
 namespace HM.FacePlatform
 {
-    public partial class ucRegister : HMUserControl
+    public partial class UcRegister : HMUserControl
     {
 
         MaoBLL _maoBLL = new MaoBLL();
@@ -41,7 +41,7 @@ namespace HM.FacePlatform
         /// <summary>
         /// 
         /// </summary>
-        public ucRegister()
+        public UcRegister()
         {
             //允许线程直接访问控件
             Control.CheckForIllegalCrossThreadCalls = false;
@@ -236,7 +236,7 @@ namespace HM.FacePlatform
             var result = _houseBLL.GetHousePageByBuildingCode(pagerHouse.PageIndex, pagerHouse.PageSize, userName);
             if (!result.IsSuccess)
             {
-                MessageBox.Show(result.ToAlertString());
+                HMMessageBox.Show(this, result.ToAlertString());
                 result.Obj = new PagerData<House>()
                 {
                     pages = 0,
@@ -383,7 +383,7 @@ namespace HM.FacePlatform
             var result = _userBLL.GetUserByHouseCode(pagerWorker.PageIndex, pagerWorker.PageSize, _propertyHouse.building_code, workerKey, registeState);
             if (!result.IsSuccess)
             {
-                MessageBox.Show(result.ToAlertString());
+                HMMessageBox.Show(this, result.ToAlertString());
                 result.Obj = new PagerData<User>()
                 {
                     pages = 0,
@@ -733,7 +733,7 @@ namespace HM.FacePlatform
                 }
                 catch (System.Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    HMMessageBox.Show(this, ex.Message);
                 };
             }
 

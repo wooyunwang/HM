@@ -35,8 +35,8 @@
             this.txtOldPassword = new HM.Form_.Old.TextBox.RTextBox();
             this.txtPassword = new HM.Form_.Old.TextBox.RTextBox();
             this.txtPasswordConfirm = new HM.Form_.Old.TextBox.RTextBox();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new HM.Form_.HMTile();
+            this.btnSave = new HM.Form_.HMTile();
             this.lblStar = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -77,11 +77,11 @@
             this.txtOldPassword.BackColor = System.Drawing.SystemColors.Window;
             this.txtOldPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtOldPassword.HotBackColor = System.Drawing.Color.White;
-            this.txtOldPassword.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.txtOldPassword.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.txtOldPassword.Location = new System.Drawing.Point(122, 81);
             this.txtOldPassword.LostBackColor = System.Drawing.SystemColors.Window;
             this.txtOldPassword.LostBorderColor = System.Drawing.Color.Transparent;
-            this.txtOldPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtOldPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtOldPassword.MaxLength = 20;
             this.txtOldPassword.Name = "txtOldPassword";
             this.txtOldPassword.PasswordChar = '*';
@@ -93,11 +93,11 @@
             this.txtPassword.BackColor = System.Drawing.SystemColors.Window;
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPassword.HotBackColor = System.Drawing.Color.White;
-            this.txtPassword.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.txtPassword.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.txtPassword.Location = new System.Drawing.Point(122, 136);
             this.txtPassword.LostBackColor = System.Drawing.SystemColors.Window;
             this.txtPassword.LostBorderColor = System.Drawing.Color.Transparent;
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.MaxLength = 20;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -109,11 +109,11 @@
             this.txtPasswordConfirm.BackColor = System.Drawing.SystemColors.Window;
             this.txtPasswordConfirm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPasswordConfirm.HotBackColor = System.Drawing.Color.White;
-            this.txtPasswordConfirm.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.txtPasswordConfirm.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.txtPasswordConfirm.Location = new System.Drawing.Point(122, 191);
             this.txtPasswordConfirm.LostBackColor = System.Drawing.SystemColors.Window;
             this.txtPasswordConfirm.LostBorderColor = System.Drawing.Color.Transparent;
-            this.txtPasswordConfirm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPasswordConfirm.Margin = new System.Windows.Forms.Padding(2);
             this.txtPasswordConfirm.MaxLength = 20;
             this.txtPasswordConfirm.Name = "txtPasswordConfirm";
             this.txtPasswordConfirm.PasswordChar = '*';
@@ -122,32 +122,22 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
-            this.btnCancel.FlatAppearance.BorderSize = 0;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCancel.Location = new System.Drawing.Point(55, 231);
+            this.btnCancel.Location = new System.Drawing.Point(57, 240);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(76, 25);
             this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "取消";
-            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
-            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
-            this.btnSave.FlatAppearance.BorderSize = 0;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnSave.Location = new System.Drawing.Point(169, 231);
+            this.btnSave.Location = new System.Drawing.Point(171, 240);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(76, 25);
             this.btnSave.TabIndex = 9;
             this.btnSave.Text = "保存";
-            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lblStar
@@ -201,11 +191,12 @@
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblOldPassword);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ResetPassword";
-            this.Padding = new System.Windows.Forms.Padding(13, 40, 13, 13);
+            this.Padding = new System.Windows.Forms.Padding(13, 60, 13, 13);
+            this.Resizable = false;
             this.Text = "修改密码";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -220,8 +211,8 @@
         private HM.Form_.Old.TextBox.RTextBox txtOldPassword;
         private HM.Form_.Old.TextBox.RTextBox txtPassword;
         private HM.Form_.Old.TextBox.RTextBox txtPasswordConfirm;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnSave;
+        private HM.Form_.HMTile btnCancel;
+        private HM.Form_.HMTile btnSave;
         private System.Windows.Forms.Label lblStar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

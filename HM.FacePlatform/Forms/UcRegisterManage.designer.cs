@@ -30,39 +30,27 @@ namespace HM.FacePlatform
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.HtcMain = new HM.Form_.HMTabControl();
             this.tpRegistMag = new System.Windows.Forms.TabPage();
             this.panel9 = new System.Windows.Forms.Panel();
             this.CbxAll = new System.Windows.Forms.CheckBox();
             this.button1 = new HM.Form_.HMTile();
-            this.DgRegister = new HM.Form_.HMDataGridView();
-            this.colCB = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.col_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_end_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_register_type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_state = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDo = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.col_user_uid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_people_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_check_state = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DgvRegister = new HM.Form_.HMDataGridView();
             this.PagerRegister = new HM.Form_.HMPager();
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.FlpRegister = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tbMessage = new System.Windows.Forms.RichTextBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.btnNextY = new HM.Form_.HMTile();
             this.btnNextM = new HM.Form_.HMTile();
@@ -103,13 +91,22 @@ namespace HM.FacePlatform
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCB = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHouseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUserType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRegisterType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCheckState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDo = new System.Windows.Forms.DataGridViewLinkColumn();
             this.HtcMain.SuspendLayout();
             this.tpRegistMag.SuspendLayout();
             this.panel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgRegister)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvRegister)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -121,7 +118,7 @@ namespace HM.FacePlatform
             this.HtcMain.Location = new System.Drawing.Point(0, 0);
             this.HtcMain.Name = "HtcMain";
             this.HtcMain.SelectedIndex = 0;
-            this.HtcMain.Size = new System.Drawing.Size(1225, 500);
+            this.HtcMain.Size = new System.Drawing.Size(1200, 600);
             this.HtcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.HtcMain.TabIndex = 66;
             this.HtcMain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -134,7 +131,7 @@ namespace HM.FacePlatform
             this.tpRegistMag.Controls.Add(this.panel7);
             this.tpRegistMag.Location = new System.Drawing.Point(4, 34);
             this.tpRegistMag.Name = "tpRegistMag";
-            this.tpRegistMag.Size = new System.Drawing.Size(1217, 462);
+            this.tpRegistMag.Size = new System.Drawing.Size(1192, 562);
             this.tpRegistMag.TabIndex = 66;
             this.tpRegistMag.Text = "注册管理";
             this.tpRegistMag.UseVisualStyleBackColor = true;
@@ -143,18 +140,18 @@ namespace HM.FacePlatform
             // 
             this.panel9.Controls.Add(this.CbxAll);
             this.panel9.Controls.Add(this.button1);
-            this.panel9.Controls.Add(this.DgRegister);
+            this.panel9.Controls.Add(this.DgvRegister);
             this.panel9.Controls.Add(this.PagerRegister);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(0, 50);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(997, 412);
+            this.panel9.Size = new System.Drawing.Size(972, 512);
             this.panel9.TabIndex = 66;
             // 
             // CbxAll
             // 
             this.CbxAll.AutoSize = true;
-            this.CbxAll.Location = new System.Drawing.Point(11, 1);
+            this.CbxAll.Location = new System.Drawing.Point(10, 5);
             this.CbxAll.Name = "CbxAll";
             this.CbxAll.Size = new System.Drawing.Size(15, 14);
             this.CbxAll.TabIndex = 111;
@@ -170,202 +167,97 @@ namespace HM.FacePlatform
             this.button1.Text = "查询";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // DgRegister
+            // DgvRegister
             // 
-            this.DgRegister.AllowUserToAddRows = false;
-            this.DgRegister.AllowUserToDeleteRows = false;
-            this.DgRegister.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            this.DgRegister.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
-            this.DgRegister.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DgRegister.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.DgRegister.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.DgRegister.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.DgRegister.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.DgRegister.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgRegister.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
-            this.DgRegister.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgRegister.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DgvRegister.AllowUserToAddRows = false;
+            this.DgvRegister.AllowUserToDeleteRows = false;
+            this.DgvRegister.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
+            this.DgvRegister.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.DgvRegister.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DgvRegister.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DgvRegister.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.DgvRegister.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DgvRegister.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.DgvRegister.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvRegister.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.DgvRegister.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvRegister.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCB,
-            this.col_name,
-            this.col_end_time,
-            this.Column6,
-            this.Column3,
-            this.Column2,
-            this.col_register_type_name,
-            this.Column7,
-            this.col_state,
-            this.colDo,
-            this.col_user_uid,
-            this.col_people_id,
-            this.col_check_state});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.Wheat;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgRegister.DefaultCellStyle = dataGridViewCellStyle11;
-            this.DgRegister.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DgRegister.EnableHeadersVisualStyles = false;
-            this.DgRegister.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.DgRegister.Location = new System.Drawing.Point(0, 0);
-            this.DgRegister.Name = "DgRegister";
-            this.DgRegister.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgRegister.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
-            this.DgRegister.RowHeadersVisible = false;
-            this.DgRegister.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgRegister.RowsDefaultCellStyle = dataGridViewCellStyle13;
-            this.DgRegister.RowTemplate.Height = 50;
-            this.DgRegister.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgRegister.Size = new System.Drawing.Size(997, 384);
-            this.DgRegister.TabIndex = 66;
-            this.DgRegister.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgRegister_CellContentClick);
-            this.DgRegister.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgRegister_CellFormatting);
-            this.DgRegister.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgRegister_DataBindingComplete);
-            this.DgRegister.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.DgRegister_RowPrePaint);
-            this.DgRegister.SelectionChanged += new System.EventHandler(this.DgRegister_SelectionChanged);
-            // 
-            // colCB
-            // 
-            this.colCB.FillWeight = 32.21937F;
-            this.colCB.HeaderText = "";
-            this.colCB.Name = "colCB";
-            this.colCB.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // col_name
-            // 
-            this.col_name.DataPropertyName = "name";
-            this.col_name.FillWeight = 94.06081F;
-            this.col_name.HeaderText = "姓名";
-            this.col_name.Name = "col_name";
-            this.col_name.ReadOnly = true;
-            // 
-            // col_end_time
-            // 
-            this.col_end_time.DataPropertyName = "end_time";
-            this.col_end_time.FillWeight = 104.1269F;
-            this.col_end_time.HeaderText = "有效期至";
-            this.col_end_time.Name = "col_end_time";
-            this.col_end_time.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "mobile";
-            this.Column6.FillWeight = 141.4873F;
-            this.Column6.HeaderText = "手机号";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "house_name";
-            this.Column3.FillWeight = 194.6764F;
-            this.Column3.HeaderText = "住址";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "user_type_name";
-            this.Column2.FillWeight = 97.67197F;
-            this.Column2.HeaderText = "类型";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // col_register_type_name
-            // 
-            this.col_register_type_name.DataPropertyName = "register_type_name";
-            this.col_register_type_name.HeaderText = "注册方式";
-            this.col_register_type_name.Name = "col_register_type_name";
-            // 
-            // Column7
-            // 
-            this.Column7.DataPropertyName = "reg_time";
-            this.Column7.FillWeight = 107.9198F;
-            this.Column7.HeaderText = "注册时间";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            // 
-            // col_state
-            // 
-            this.col_state.DataPropertyName = "check_state_name";
-            this.col_state.FillWeight = 72.36298F;
-            this.col_state.HeaderText = "状态";
-            this.col_state.Name = "col_state";
-            this.col_state.ReadOnly = true;
-            // 
-            // colDo
-            // 
-            this.colDo.FillWeight = 71.85663F;
-            this.colDo.HeaderText = "操作";
-            this.colDo.Name = "colDo";
-            this.colDo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colDo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // col_user_uid
-            // 
-            this.col_user_uid.DataPropertyName = "user_uid";
-            this.col_user_uid.FillWeight = 22.34035F;
-            this.col_user_uid.HeaderText = "user_uid";
-            this.col_user_uid.Name = "col_user_uid";
-            this.col_user_uid.Visible = false;
-            // 
-            // col_people_id
-            // 
-            this.col_people_id.DataPropertyName = "people_id";
-            this.col_people_id.HeaderText = "people_id";
-            this.col_people_id.Name = "col_people_id";
-            this.col_people_id.Visible = false;
-            // 
-            // col_check_state
-            // 
-            this.col_check_state.DataPropertyName = "check_state";
-            this.col_check_state.HeaderText = "check_state";
-            this.col_check_state.Name = "col_check_state";
-            this.col_check_state.Visible = false;
+            this.colUserName,
+            this.colEndTime,
+            this.colMobile,
+            this.colHouseName,
+            this.colUserType,
+            this.colRegisterType,
+            this.colCreateTime,
+            this.colCheckState,
+            this.colDo});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Wheat;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvRegister.DefaultCellStyle = dataGridViewCellStyle6;
+            this.DgvRegister.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvRegister.EnableHeadersVisualStyles = false;
+            this.DgvRegister.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.DgvRegister.Location = new System.Drawing.Point(0, 0);
+            this.DgvRegister.Name = "DgvRegister";
+            this.DgvRegister.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvRegister.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.DgvRegister.RowHeadersVisible = false;
+            this.DgvRegister.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvRegister.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            this.DgvRegister.RowTemplate.Height = 50;
+            this.DgvRegister.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvRegister.Size = new System.Drawing.Size(972, 484);
+            this.DgvRegister.TabIndex = 66;
+            this.DgvRegister.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvRegister_CellContentClick);
+            this.DgvRegister.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvRegister_CellFormatting);
+            this.DgvRegister.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.DgvRegister_RowPrePaint);
+            this.DgvRegister.SelectionChanged += new System.EventHandler(this.DgvRegister_SelectionChanged);
             // 
             // PagerRegister
             // 
             this.PagerRegister.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PagerRegister.Location = new System.Drawing.Point(0, 384);
+            this.PagerRegister.Location = new System.Drawing.Point(0, 484);
             this.PagerRegister.Margin = new System.Windows.Forms.Padding(4);
             this.PagerRegister.Name = "PagerRegister";
             this.PagerRegister.NMax = 0;
             this.PagerRegister.PageCount = 0;
             this.PagerRegister.PageCurrent = 1;
             this.PagerRegister.PageSize = 20;
-            this.PagerRegister.Size = new System.Drawing.Size(997, 28);
+            this.PagerRegister.Size = new System.Drawing.Size(972, 28);
             this.PagerRegister.TabIndex = 66;
             this.PagerRegister.EventPaging += new HM.Form_.EventPagingHandler(this.PagerRegister_EventPaging);
             // 
             // panel8
             // 
             this.panel8.Controls.Add(this.panel2);
-            this.panel8.Controls.Add(this.panel1);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel8.Location = new System.Drawing.Point(997, 50);
+            this.panel8.Location = new System.Drawing.Point(972, 50);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(220, 412);
+            this.panel8.Size = new System.Drawing.Size(220, 512);
             this.panel8.TabIndex = 66;
             // 
             // panel2
@@ -375,7 +267,7 @@ namespace HM.FacePlatform
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(220, 265);
+            this.panel2.Size = new System.Drawing.Size(220, 512);
             this.panel2.TabIndex = 112;
             // 
             // FlpRegister
@@ -386,29 +278,8 @@ namespace HM.FacePlatform
             this.FlpRegister.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FlpRegister.Location = new System.Drawing.Point(0, 0);
             this.FlpRegister.Name = "FlpRegister";
-            this.FlpRegister.Size = new System.Drawing.Size(220, 265);
+            this.FlpRegister.Size = new System.Drawing.Size(220, 512);
             this.FlpRegister.TabIndex = 66;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.tbMessage);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 265);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(220, 147);
-            this.panel1.TabIndex = 113;
-            // 
-            // tbMessage
-            // 
-            this.tbMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbMessage.HideSelection = false;
-            this.tbMessage.Location = new System.Drawing.Point(0, 0);
-            this.tbMessage.Margin = new System.Windows.Forms.Padding(2);
-            this.tbMessage.Name = "tbMessage";
-            this.tbMessage.Size = new System.Drawing.Size(220, 147);
-            this.tbMessage.TabIndex = 112;
-            this.tbMessage.Text = "";
             // 
             // panel7
             // 
@@ -433,13 +304,13 @@ namespace HM.FacePlatform
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1217, 50);
+            this.panel7.Size = new System.Drawing.Size(1192, 50);
             this.panel7.TabIndex = 66;
             // 
             // btnNextY
             // 
             this.btnNextY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNextY.Location = new System.Drawing.Point(1133, 12);
+            this.btnNextY.Location = new System.Drawing.Point(1108, 12);
             this.btnNextY.Name = "btnNextY";
             this.btnNextY.Size = new System.Drawing.Size(72, 25);
             this.btnNextY.TabIndex = 110;
@@ -450,7 +321,7 @@ namespace HM.FacePlatform
             // btnNextM
             // 
             this.btnNextM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNextM.Location = new System.Drawing.Point(1044, 12);
+            this.btnNextM.Location = new System.Drawing.Point(1019, 12);
             this.btnNextM.Name = "btnNextM";
             this.btnNextM.Size = new System.Drawing.Size(83, 25);
             this.btnNextM.TabIndex = 109;
@@ -616,7 +487,7 @@ namespace HM.FacePlatform
             this.TxtUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TxtUserName.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.TxtUserName.HotBackColor = System.Drawing.Color.White;
-            this.TxtUserName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.TxtUserName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.TxtUserName.Location = new System.Drawing.Point(385, 13);
             this.TxtUserName.LostBackColor = System.Drawing.SystemColors.Window;
             this.TxtUserName.LostBorderColor = System.Drawing.Color.Transparent;
@@ -673,8 +544,8 @@ namespace HM.FacePlatform
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.DataPropertyName = "cardCount";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewTextBoxColumn4.FillWeight = 74.86698F;
             this.dataGridViewTextBoxColumn4.HeaderText = "门禁卡";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
@@ -684,8 +555,8 @@ namespace HM.FacePlatform
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "familyCount";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn5.FillWeight = 61.44244F;
             this.dataGridViewTextBoxColumn5.HeaderText = "成员";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
@@ -695,8 +566,8 @@ namespace HM.FacePlatform
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "guestCount";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn6.FillWeight = 40.15079F;
             this.dataGridViewTextBoxColumn6.HeaderText = "访客";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
@@ -821,24 +692,120 @@ namespace HM.FacePlatform
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
             this.dataGridViewTextBoxColumn18.Visible = false;
             // 
-            // RegisterManage
+            // colCB
+            // 
+            this.colCB.FillWeight = 2F;
+            this.colCB.HeaderText = "";
+            this.colCB.MinimumWidth = 30;
+            this.colCB.Name = "colCB";
+            this.colCB.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCB.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // colUserName
+            // 
+            this.colUserName.DataPropertyName = "user_name";
+            this.colUserName.FillWeight = 10F;
+            this.colUserName.HeaderText = "姓名";
+            this.colUserName.MinimumWidth = 60;
+            this.colUserName.Name = "colUserName";
+            this.colUserName.ReadOnly = true;
+            // 
+            // colEndTime
+            // 
+            this.colEndTime.DataPropertyName = "end_time";
+            dataGridViewCellStyle3.Format = "yyyy-MM-dd";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colEndTime.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colEndTime.FillWeight = 10F;
+            this.colEndTime.HeaderText = "有效期至";
+            this.colEndTime.MinimumWidth = 80;
+            this.colEndTime.Name = "colEndTime";
+            this.colEndTime.ReadOnly = true;
+            // 
+            // colMobile
+            // 
+            this.colMobile.DataPropertyName = "mobile";
+            this.colMobile.FillWeight = 10F;
+            this.colMobile.HeaderText = "手机号";
+            this.colMobile.MinimumWidth = 100;
+            this.colMobile.Name = "colMobile";
+            this.colMobile.ReadOnly = true;
+            // 
+            // colHouseName
+            // 
+            this.colHouseName.DataPropertyName = "house_name";
+            this.colHouseName.FillWeight = 150F;
+            this.colHouseName.HeaderText = "住址";
+            this.colHouseName.MinimumWidth = 150;
+            this.colHouseName.Name = "colHouseName";
+            this.colHouseName.ReadOnly = true;
+            // 
+            // colUserType
+            // 
+            this.colUserType.DataPropertyName = "user_type";
+            this.colUserType.FillWeight = 30F;
+            this.colUserType.HeaderText = "类型";
+            this.colUserType.MinimumWidth = 60;
+            this.colUserType.Name = "colUserType";
+            this.colUserType.ReadOnly = true;
+            // 
+            // colRegisterType
+            // 
+            this.colRegisterType.DataPropertyName = "register_type";
+            this.colRegisterType.FillWeight = 30F;
+            this.colRegisterType.HeaderText = "注册方式";
+            this.colRegisterType.MinimumWidth = 60;
+            this.colRegisterType.Name = "colRegisterType";
+            // 
+            // colCreateTime
+            // 
+            this.colCreateTime.DataPropertyName = "create_time";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Format = "yyyy-MM-dd HH:mm:ss";
+            this.colCreateTime.DefaultCellStyle = dataGridViewCellStyle4;
+            this.colCreateTime.FillWeight = 30F;
+            this.colCreateTime.HeaderText = "注册时间";
+            this.colCreateTime.MinimumWidth = 120;
+            this.colCreateTime.Name = "colCreateTime";
+            this.colCreateTime.ReadOnly = true;
+            // 
+            // colCheckState
+            // 
+            this.colCheckState.DataPropertyName = "check_state";
+            this.colCheckState.FillWeight = 20F;
+            this.colCheckState.HeaderText = "状态";
+            this.colCheckState.MinimumWidth = 50;
+            this.colCheckState.Name = "colCheckState";
+            this.colCheckState.ReadOnly = true;
+            // 
+            // colDo
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colDo.DefaultCellStyle = dataGridViewCellStyle5;
+            this.colDo.FillWeight = 20F;
+            this.colDo.HeaderText = "操作";
+            this.colDo.MinimumWidth = 30;
+            this.colDo.Name = "colDo";
+            this.colDo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colDo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // UcRegisterManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.HtcMain);
-            this.Name = "RegisterManage";
-            this.Size = new System.Drawing.Size(1225, 500);
+            this.Name = "UcRegisterManage";
+            this.Size = new System.Drawing.Size(1200, 600);
             this.Load += new System.EventHandler(this.RegisterManage_Load);
             this.HtcMain.ResumeLayout(false);
             this.tpRegistMag.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgRegister)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvRegister)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.ResumeLayout(false);
@@ -896,22 +863,16 @@ namespace HM.FacePlatform
         private HM.Form_.HMTile btnNextM;
         private System.Windows.Forms.CheckBox CbxAll;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RichTextBox tbMessage;
-        private HM.Form_.HMDataGridView DgRegister;
+        private HM.Form_.HMDataGridView DgvRegister;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCB;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_end_time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_register_type_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_state;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEndTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMobile;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHouseName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUserType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRegisterType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCheckState;
         private System.Windows.Forms.DataGridViewLinkColumn colDo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_user_uid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_people_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_check_state;
-
     }
 }

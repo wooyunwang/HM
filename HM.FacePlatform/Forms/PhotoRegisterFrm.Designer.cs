@@ -214,7 +214,7 @@ namespace HM.FacePlatform.Forms
             this.tbHouse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbHouse.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.tbHouse.HotBackColor = System.Drawing.Color.White;
-            this.tbHouse.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.tbHouse.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.tbHouse.Location = new System.Drawing.Point(209, 21);
             this.tbHouse.LostBackColor = System.Drawing.SystemColors.Window;
             this.tbHouse.LostBorderColor = System.Drawing.Color.Transparent;
@@ -229,7 +229,7 @@ namespace HM.FacePlatform.Forms
             this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbName.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.tbName.HotBackColor = System.Drawing.Color.White;
-            this.tbName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.tbName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.tbName.Location = new System.Drawing.Point(53, 21);
             this.tbName.LostBackColor = System.Drawing.SystemColors.Window;
             this.tbName.LostBorderColor = System.Drawing.Color.Transparent;

@@ -613,9 +613,9 @@ namespace HM.FacePlatform
                         continue; ;
                     }
 
-                    if ((new FileInfo(item.FullName)).Length > MainForm.pictureMaxSize * 1024 * 1024)
+                    if ((new FileInfo(item.FullName)).Length > FacePlatformCache.GetPictureMaxSize())
                     {
-                        ShowMessage(item.FullName + "图片大小超过 " + MainForm.pictureMaxSize + " M", MessageType.Warning);
+                        ShowMessage(item.FullName + "图片大小超过 " + FacePlatformCache.GetPictureMaxSize() + " M", MessageType.Warning);
                     }
 
                     string fileName = Path.GetFileNameWithoutExtension(item.FullName);
@@ -651,7 +651,7 @@ namespace HM.FacePlatform
                                 }
                             }
 
-                            string savedPictureName = _registerBLL.FileSaveAs(item.FullName, MainForm.picturePath);//保存图片到本地
+                            string savedPictureName = _registerBLL.FileSaveAs(item.FullName, FacePlatformCache.GetPictureDirectory());//保存图片到本地
                             if (string.IsNullOrEmpty(savedPictureName))
                             {
                                 ShowMessage("**图片保存失败，请稍后重试", MessageType.Error);

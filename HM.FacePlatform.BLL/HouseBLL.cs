@@ -30,11 +30,6 @@ namespace HM.FacePlatform.BLL
             };
         }
 
-        public List<User> GetUserByHouseCode(string house_code)
-        {
-            return dal.GetUserByHouseCode(house_code);
-        }
-
         //public view_user_house[] GetUserList(DateTime from, DateTime to)
         //{
         //    try

@@ -97,19 +97,19 @@ namespace HM.FacePlatform.Forms
             {
                 try
                 {
-                    int pictureMaxSize = Config_.GetInt("PictureMaxSize") ?? 356;
-                    if (ofd.FileNames.Any(it => new FileInfo(it).Length > pictureMaxSize * 1024 * 1024))
+                    int pictureMaxSize = FacePlatformCache.GetPictureMaxSize();
+                    if (ofd.FileNames.Any(it => new FileInfo(it).Length > pictureMaxSize))
                     {
-                        HMMessageBox.Show(this, "单张图片大小不能超过【" + MainForm.pictureMaxSize + "M】");
+                        HMMessageBox.Show(this, "单张图片大小不能超过【" + pictureMaxSize / 1024 / 1024 + "M】");
                     }
-                    string compressPath = Config_.GetString("CompressPath");
+                    string compressDirectory = FacePlatformCache.GetCompressDirectory();
                     List<string> lstCompressImage = new List<string>();
 
                     if (ofd.FileNames.Count() > 0)
                     {
                         Parallel.ForEach(ofd.FileNames, fileName =>
                         {
-                            string compressImageName = Path.Combine(Environment.CurrentDirectory, compressPath, Guid.NewGuid().ToString(), ".jpg");
+                            string compressImageName = Path.Combine(compressDirectory, Guid.NewGuid().ToString(), ".jpg");
                             bool isSuccess = Image_.CompressImage(fileName, compressImageName);
                             if (isSuccess)
                             {
@@ -124,7 +124,7 @@ namespace HM.FacePlatform.Forms
                     else if (ofd.FileNames.Count() == 1)
                     {
                         string fileName = ofd.FileNames[0];
-                        string compressImageName = Path.Combine(Environment.CurrentDirectory, compressPath, Guid.NewGuid().ToString(), ".jpg");
+                        string compressImageName = Path.Combine(compressDirectory, Guid.NewGuid().ToString(), ".jpg");
                         bool isSuccess = Image_.CompressImage(fileName, compressImageName);
                         if (isSuccess)
                         {
@@ -332,7 +332,7 @@ namespace HM.FacePlatform.Forms
                     }
                 }
 
-                string savedPictureName = _registerBLL.FileSaveAs(item.PicUrl, MainForm.picturePath);//保存图片到本地
+                string savedPictureName = _registerBLL.FileSaveAs(item.PicUrl, FacePlatformCache.GetPictureDirectory());//保存图片到本地
                 if (string.IsNullOrEmpty(savedPictureName))
                 {
                     ShowMessage("**图片保存失败，请稍后重试", MessageType.Error);
@@ -513,7 +513,7 @@ namespace HM.FacePlatform.Forms
             }
 
             _camera = new ShowCamera();
-            _camera.captureSavePath = MainForm.capturePath;
+            _camera.captureSavePath = FacePlatformCache.GetCaptureDirectory();
             _camera.CapturedEvent += cameraCapturedEvent;
             _camera.Show();
         }

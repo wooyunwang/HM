@@ -63,25 +63,25 @@ namespace HM.FacePlatform.Model
         /// <summary>
         /// 证件号码
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(50)]
         public string id_num { get; set; }
         /// <summary>
         /// 证件图片
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(100)]
         public string id_pic { get; set; }
         /// <summary>
         /// 手机
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(50)]
         public string mobile { get; set; }
         /// <summary>
         /// 电话
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(50)]
         public string tel { get; set; }
         /// <summary>
@@ -103,7 +103,7 @@ namespace HM.FacePlatform.Model
         /// <summary>
         /// 人脸厂家返回的人id
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(50)]
         public string people_id { get; set; }
         /// <summary>
@@ -125,7 +125,7 @@ namespace HM.FacePlatform.Model
         /// <summary>
         /// 审核备注
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(500)]
         public string check_note { get; set; }
         /// <summary>
@@ -135,13 +135,13 @@ namespace HM.FacePlatform.Model
         /// <summary>
         /// 职位
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(50)]
         public string job { get; set; }
         /// <summary>
         /// 工号
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(50)]
         public string job_number { get; set; }
         /// <summary>

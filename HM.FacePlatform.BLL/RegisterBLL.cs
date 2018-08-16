@@ -112,7 +112,7 @@ namespace HM.FacePlatform.BLL
         /// <param name="check_state"></param>
         /// <returns></returns>
         [ActionResultTryCatch]
-        public ActionResult<PagerData<Register>> GetWithUser(int pageIndex,
+        public ActionResult<PagerData<RegisterManageDto>> GetForRegisterManage(int pageIndex,
             int pageSize,
             DateTime from,
             DateTime? to,
@@ -121,32 +121,16 @@ namespace HM.FacePlatform.BLL
             RegisterType? register_type,
             CheckType? check_state)
         {
-            var where = Predicate_.True<Register>();
-            where = where.And(it => it.is_del == IsDelType.否);
-            where = where.And(it => it.user.is_del == IsDelType.否);
-            if (!string.IsNullOrWhiteSpace(user_name))
+            var result = dal.GetForRegisterManage(pageIndex, pageSize,
+                from, to, user_name,
+                user_type, register_type,
+                check_state);
+
+            return new ActionResult<PagerData<RegisterManageDto>>()
             {
-                where = where.And(it => it.user.name.Contains(user_name));
-            }
-            if (user_type.HasValue)
-            {
-                where = where.And(it => it.user.UserHouses.Any(uh => uh.user_type == user_type));
-            }
-            where = where.And(it => it.create_time > from);
-            if (to.HasValue)
-            {
-                DateTime dtTo = to.Value.Date.AddDays(1);
-                where = where.And(it => it.create_time < dtTo);
-            }
-            if (register_type.HasValue)
-            {
-                where = where.And(it => it.register_type == register_type.Value);
-            }
-            if (check_state.HasValue)
-            {
-                where = where.And(it => it.check_state == check_state.Value);
-            }
-            return GetWithUser(pageIndex, pageSize, where);
+                IsSuccess = true,
+                Obj = result
+            };
         }
         /// <summary>
         /// 

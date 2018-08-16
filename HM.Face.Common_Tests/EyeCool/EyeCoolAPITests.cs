@@ -34,6 +34,12 @@ namespace HM.Face.Common_.EyeCool.Tests
             cultureInfo.DateTimeFormat.LongTimePattern = "HH:mm:ss";
             Thread.CurrentThread.CurrentCulture = cultureInfo;
         }
+        [TestMethod()]
+        public void GetVerion() {
+            Version v = new Version("2.0.6");
+            Version v1 = new Version("2.0.61");
+            Version v2 = new Version("2.0.6.0");
+        }
 
 
 #if DEBUG

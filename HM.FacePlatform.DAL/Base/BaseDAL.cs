@@ -1,4 +1,5 @@
-﻿using HM.FacePlatform.Model;
+﻿using HM.DTO;
+using HM.FacePlatform.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -180,6 +181,55 @@ namespace HM.FacePlatform.DAL
                 string sql1 = temp.ToString();
 #endif
                 return temp.ToList<T>();
+            }
+        }
+        /// <summary>
+        /// 带分页查询
+        /// </summary>
+        /// <typeparam name="S"></typeparam>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="rows"></param>
+        /// <param name="totalPage"></param>
+        /// <param name="whereLambds"></param>
+        /// <param name="isAsc"></param>
+        /// <param name="orderByLambds"></param>
+        /// <returns></returns>
+        public virtual PagerData<T> Get<S>(int pageIndex, int pageSize, Expression<Func<T, bool>> whereLambds, bool isAsc, Expression<Func<T, S>> orderByLambds)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                var temp = db.Set<T>().Where<T>(whereLambds).AsNoTracking();
+#if DEBUG
+                string sql = temp.ToString();
+#endif
+                PagerData<T> pagerData = new PagerData<T>();
+
+                pagerData.total = temp.Count();
+                if (pagerData.total % pageSize == 0)
+                {
+                    pagerData.pages = pagerData.total / pageSize;
+                }
+                else
+                {
+                    pagerData.pages = pagerData.total / pageSize + 1;
+                }
+                if (isAsc)
+                {
+                    temp = temp.OrderBy(orderByLambds);
+                }
+                else
+                {
+                    temp = temp.OrderByDescending(orderByLambds);
+                }
+
+                temp = temp.Skip(pageSize * pageIndex).Take(pageSize);
+#if DEBUG
+                string sql1 = temp.ToString();
+#endif
+                pagerData.rows = temp.ToList();
+
+                return pagerData;
             }
         }
         /// <summary>

@@ -8,11 +8,11 @@ namespace HM.FacePlatform
     public abstract class BaseJob
     {
         public static ScheduleJob jobFrom;
-        public static string projectCode;
-        public static string propertyHouseCode;
-        public static string virtualHouseCode;
-        public static string photoPath;
-        public static int maxRetryTime;
+        public string projectCode;
+        public string propertyHouseCode;
+        public string virtualHouseCode;
+        public string pictureDirectory;
+        public int maxRetryTime;
 
         protected static readonly bool isFirstMao = false;
 
@@ -34,8 +34,8 @@ namespace HM.FacePlatform
             projectCode = Program._Mainform._ProjectCode;
             propertyHouseCode = Program._Mainform._PropertyHouseCode;
             virtualHouseCode = Program._Mainform._VirtualHouseCode;
-            photoPath = MainForm.picturePath;
-            maxRetryTime = MainForm.maxRetryTime;
+            pictureDirectory = FacePlatformCache.GetPictureDirectory();
+            maxRetryTime = FacePlatformCache.GetMaxRetryTime();
         }
 
         protected DateTime GetMinDateTime()

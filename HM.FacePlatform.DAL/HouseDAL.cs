@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using HM.DTO;
 using Z.EntityFramework.Plus;
 using System.Data.Entity;
+using HM.DTO.FacePlatform;
 
 namespace HM.FacePlatform.DAL
 {
@@ -42,15 +43,13 @@ namespace HM.FacePlatform.DAL
 
                 PagerData<House> pagerData = new PagerData<House>();
                 pagerData.total = query.Count();
-
-                int rows = query.Count();
-                if (rows % pageSize == 0)
+                if (pagerData.total % pageSize == 0)
                 {
-                    pagerData.pages = rows / pageSize;
+                    pagerData.pages = pagerData.total / pageSize;
                 }
                 else
                 {
-                    pagerData.pages = rows / pageSize + 1;
+                    pagerData.pages = pagerData.total / pageSize + 1;
                 }
                 pagerData.rows = query.OrderBy(it => it.roomnumber)
                     .Skip(pageSize * pageIndex)
@@ -83,22 +82,6 @@ namespace HM.FacePlatform.DAL
         //                return list.ToArray();
         //            }
         //        }
-
-        public List<User> GetUserByHouseCode(string house_code)
-        {
-            using (FacePlatformDB db = new FacePlatformDB())
-            {
-                var query = db.UserHouses.Include("f_user")
-                    .Where(it => it.house_code == house_code
-                    && it.is_del == IsDelType.否)
-                    .OrderByDescending(it => it.user_type)
-                    .Select(it => it.User);
-#if DEBUG
-                string sql = query.ToString();
-#endif
-                return query.ToList();
-            }
-        }
 
         //        public view_user_house[] GetStatistics(int pageNumber, int rowsPerPage, string building_code, bool includeTotalCount)
         //        {

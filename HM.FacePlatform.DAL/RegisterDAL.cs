@@ -30,6 +30,120 @@ namespace HM.FacePlatform.DAL
             }
         }
 
+        public PagerData<RegisterManageDto> GetForRegisterManage(int pageIndex,
+            int pageSize,
+            DateTime from,
+            DateTime? to,
+            string user_name,
+            UserType? user_type,
+            RegisterType? register_type,
+            CheckType? check_state)
+        {
+            var where = Predicate_.True<Register>();
+            where = where.And(it => it.is_del == IsDelType.否);
+            where = where.And(it => it.user.is_del == IsDelType.否);
+            if (!string.IsNullOrWhiteSpace(user_name))
+            {
+                where = where.And(it => it.user.name.Contains(user_name));
+            }
+            if (user_type.HasValue)
+            {
+                where = where.And(it => it.user.UserHouses.Any(uh => uh.user_type == user_type));
+            }
+            where = where.And(it => it.create_time > from);
+            if (to.HasValue)
+            {
+                DateTime dtTo = to.Value.Date.AddDays(1);
+                where = where.And(it => it.create_time < dtTo);
+            }
+            if (register_type.HasValue)
+            {
+                where = where.And(it => it.register_type == register_type.Value);
+            }
+            if (check_state.HasValue)
+            {
+                where = where.And(it => it.check_state == check_state.Value);
+            }
+
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                var query = db.Set<Register>()
+                    .Include(it => it.user)
+                    .Where(where).AsNoTracking()
+                    .Select(it => new RegisterManageDto()
+                    {
+                        user_uid = it.user_uid,
+                        face_id = it.face_id,
+                        photo_path = it.photo_path,
+                        tc_path = it.tc_path,
+                        register_type = it.register_type,
+                        create_time = it.create_time,
+                        change_time = it.change_time,
+                        check_state = it.check_state,
+                        is_del = it.is_del,
+                        user_name = it.user.name,
+                        end_time = it.user.end_time,
+                        mobile = it.user.mobile,
+                    });
+
+#if DEBUG
+                string sql = query.ToString();
+#endif
+
+                PagerData<RegisterManageDto> pagerData = new PagerData<RegisterManageDto>();
+                pagerData.total = query.Count();
+                if (pagerData.total % pageSize == 0)
+                {
+                    pagerData.pages = pagerData.total / pageSize;
+                }
+                else
+                {
+                    pagerData.pages = pagerData.total / pageSize + 1;
+                }
+                query = query.OrderBy(it => it.user_name);
+                query = query.Skip(pageSize * pageIndex).Take(pageSize);
+#if DEBUG
+                string sqlPage = query.ToString();
+#endif
+                pagerData.rows = query.ToList();
+
+                #region 多对多关系处理
+                IEnumerable<string> lstUserUid = pagerData.rows.Select(it => it.user_uid);
+                var lstUserHouseDto = db.UserHouses
+                    .Where(it => it.is_del != IsDelType.是 && lstUserUid.Contains(it.user_uid))
+                    .Select(it => new
+                    {
+                        it.user_uid,
+                        it.user_type,
+                        it.house_code,
+                        it.House.house_name,
+                        it.relation
+                    }).ToList();
+
+                foreach (var row in pagerData.rows)
+                {
+                    var userHouseDto = lstUserHouseDto.Where(it => it.user_uid == row.user_uid).ToList();
+                    if (userHouseDto != null && userHouseDto.Any())
+                    {
+                        if (userHouseDto.Count() == 1)
+                        {
+                            row.house_name = userHouseDto[0].house_name;
+                            row.user_type = userHouseDto[0].user_type;
+                            row.relation = userHouseDto[0].relation;
+                        }
+                        else
+                        {
+                            row.house_name = userHouseDto[0].house_name + "；等";
+                            row.user_type = userHouseDto[0].user_type;
+                            row.relation = userHouseDto[0].relation + "；等";
+                        }
+                    }
+                }
+                #endregion
+                return pagerData;
+            }
+        }
+
         public PagerData<Register> GetWithUser(int pageIndex, int pageSize, Expression<Func<Register, bool>> whereLambds)
         {
             using (FacePlatformDB db = new FacePlatformDB())
@@ -43,14 +157,13 @@ namespace HM.FacePlatform.DAL
 
                 PagerData<Register> pagerData = new PagerData<Register>();
                 pagerData.total = query.Count();
-                int rows = query.Count();
-                if (rows % pageSize == 0)
+                if (pagerData.total % pageSize == 0)
                 {
-                    pagerData.pages = rows / pageSize;
+                    pagerData.pages = pagerData.total / pageSize;
                 }
                 else
                 {
-                    pagerData.pages = rows / pageSize + 1;
+                    pagerData.pages = pagerData.total / pageSize + 1;
                 }
                 query = query.OrderBy(it => it.id);
                 query = query.Skip(pageSize * pageIndex).Take(pageSize);

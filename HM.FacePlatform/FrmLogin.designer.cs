@@ -35,8 +35,8 @@
             this.cbxPassword = new System.Windows.Forms.CheckBox();
             this.txtUserName = new HM.Form_.Old.TextBox.RTextBox();
             this.txtPassword = new HM.Form_.Old.TextBox.RTextBox();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
+            this.btnLogin = new HM.Form_.HMTile();
+            this.btnExit = new HM.Form_.HMTile();
             this.SuspendLayout();
             // 
             // lblUserName
@@ -86,7 +86,7 @@
             this.txtUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtUserName.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.txtUserName.HotBackColor = System.Drawing.Color.White;
-            this.txtUserName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.txtUserName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.txtUserName.Location = new System.Drawing.Point(121, 233);
             this.txtUserName.LostBackColor = System.Drawing.SystemColors.Window;
             this.txtUserName.LostBorderColor = System.Drawing.Color.Transparent;
@@ -101,7 +101,7 @@
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPassword.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.txtPassword.HotBackColor = System.Drawing.Color.White;
-            this.txtPassword.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.txtPassword.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.txtPassword.Location = new System.Drawing.Point(121, 267);
             this.txtPassword.LostBackColor = System.Drawing.SystemColors.Window;
             this.txtPassword.LostBorderColor = System.Drawing.Color.Transparent;
@@ -113,36 +113,27 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
-            this.btnLogin.FlatAppearance.BorderSize = 0;
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogin.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnLogin.Location = new System.Drawing.Point(346, 233);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(65, 25);
             this.btnLogin.TabIndex = 70;
             this.btnLogin.Text = "登录";
-            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // btnExit
             // 
-            this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
-            this.btnExit.FlatAppearance.BorderSize = 0;
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnExit.Location = new System.Drawing.Point(346, 267);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(65, 25);
             this.btnExit.TabIndex = 71;
             this.btnExit.Text = "退出";
-            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // FrmLogin
             // 
+            this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
@@ -178,7 +169,7 @@
         private System.Windows.Forms.CheckBox cbxPassword;
         private HM.Form_.Old.TextBox.RTextBox txtUserName;
         private HM.Form_.Old.TextBox.RTextBox txtPassword;
-        private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Button btnExit;
+        private HM.Form_.HMTile btnLogin;
+        private HM.Form_.HMTile btnExit;
     }
 }

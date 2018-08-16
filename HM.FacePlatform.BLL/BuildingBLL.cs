@@ -1,5 +1,7 @@
-﻿using HM.FacePlatform.DAL;
-
+﻿using HM.Common_;
+using HM.DTO;
+using HM.DTO.FaceForm;
+using HM.FacePlatform.DAL;
 using HM.FacePlatform.Model;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,29 @@ namespace HM.FacePlatform.BLL
     {
         new BuildingDAL dal = new BuildingDAL();
 
-
+        public List<Building> GetBuildingForMao(int mao_id)
+        {
+            return dal.GetBuildingForMao(mao_id);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="project_code">项目编号</param>
+        /// <param name="mao_id">猫id</param>
+        /// <param name="build_name">楼栋名称</param>
+        /// <param name="hasMap">是否已映射</param>
+        /// <returns></returns>
+        [ActionResultTryCatch]
+        public ActionResult<PagerData<BuildingForMapDto>> GetBuildingForMap(int pageIndex, int pageSize, string project_code, int mao_id, string build_name, bool? hasMap)
+        {
+            return new ActionResult<PagerData<BuildingForMapDto>>()
+            {
+                IsSuccess = true,
+                Obj = dal.GetBuildingForMap(pageIndex, pageSize, project_code, mao_id, build_name, hasMap)
+            };
+        }
         //public Building[] GetList(string project_code)
         //{
         //    try
@@ -90,9 +114,6 @@ namespace HM.FacePlatform.BLL
         //    return new Building[] { };
         //}
 
-        public List<Building> GetBuildingForMao(int mao_id)
-        {
-            return dal.GetBuildingForMao(mao_id);
-        }
+
     }
 }

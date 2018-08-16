@@ -14,10 +14,11 @@ using HM.Utils_;
 using HM.Enum_;
 using HM.Enum_.FacePlatform;
 using HM.Form_;
+using System.Collections.Generic;
 
 namespace HM.FacePlatform.BasicData
 {
-    public partial class FrmLoadBaseData : Form
+    public partial class FrmLoadBaseData : HMForm
     {
         private BaseDataTypeE baseDataType;
         private UcDataBase _ucDataBase;
@@ -27,12 +28,12 @@ namespace HM.FacePlatform.BasicData
         BuildingBLL _buildingBLL = new BuildingBLL();
         HouseBLL _houseBLL = new HouseBLL();
         UserBLL _userBLL = new UserBLL();
+        ActionLogBLL _actionLogBLL = new ActionLogBLL();
 
         public FrmLoadBaseData(BaseDataTypeE baseDataTypeVar, UcDataBase ucDataBase)
         {
             baseDataType = baseDataTypeVar;
             _ucDataBase = ucDataBase;
-
             InitializeComponent();
         }
 
@@ -40,17 +41,17 @@ namespace HM.FacePlatform.BasicData
         {
             if (baseDataType == BaseDataTypeE.楼栋信息)
             {
-                lbtnLoadTempt.Text = "点击下载楼栋信息导入模板";
+                LbtnLoadTemplate.Text = "点击下载楼栋信息导入模板";
                 this.Text = "导入楼栋信息";
             }
             else if (baseDataType == BaseDataTypeE.房屋信息)
             {
-                lbtnLoadTempt.Text = "点击下载房屋信息导入模板";
+                LbtnLoadTemplate.Text = "点击下载房屋信息导入模板";
                 this.Text = "导入房屋信息";
             }
             else
             {
-                lbtnLoadTempt.Text = "点击下载用户信息导入模板";
+                LbtnLoadTemplate.Text = "点击下载用户信息导入模板";
                 this.Text = "导入用户信息";
             }
             //tbShow.Text = "aa\r\n\nbb";
@@ -65,22 +66,22 @@ namespace HM.FacePlatform.BasicData
         private void lbtnLoadTempt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             string firstName = "导入楼栋信息的模板";
-            string urlStr = Application.StartupPath + @"\PrintTemp\导入楼栋信息的模板.xls";
+            string urlStr = Path.Combine(Environment.CurrentDirectory, @"Templates\导入楼栋信息的模板.xls");
 
             if (baseDataType == BaseDataTypeE.楼栋信息)
             {
                 firstName = "导入楼栋信息的模板";
-                urlStr = Application.StartupPath + @"\PrintTemp\导入楼栋信息的模板.xls";
+                urlStr = Path.Combine(Environment.CurrentDirectory, @"Templates\导入楼栋信息的模板.xls");
             }
             else if (baseDataType == BaseDataTypeE.房屋信息)
             {
                 firstName = "导入房屋信息的模板";
-                urlStr = Application.StartupPath + @"\PrintTemp\导入房屋信息的模板.xls";
+                urlStr = Path.Combine(Environment.CurrentDirectory, @"Templates\导入房屋信息的模板.xls");
             }
             else
             {
                 firstName = "导入用户信息的模板";
-                urlStr = Application.StartupPath + @"\PrintTemp\导入用户信息的模板.xls";
+                urlStr = Path.Combine(Environment.CurrentDirectory, @"Templates\导入用户信息的模板.xls");
             }
 
             string lastName = "xls";
@@ -125,7 +126,7 @@ namespace HM.FacePlatform.BasicData
                 {
                     try
                     {
-                        if (System.IO.File.Exists(dirStr)) System.Diagnostics.Process.Start(dirStr); //打开EXCEL
+                        if (File.Exists(dirStr)) System.Diagnostics.Process.Start(dirStr); //打开EXCEL
                     }
                     catch
                     {
@@ -144,7 +145,7 @@ namespace HM.FacePlatform.BasicData
             //图像文件(*.gif;*.jpg;*.jpeg;*.bmp;*.wmf)|*.gif;*.jpg;*.jpeg;*.bmp;*.wmf|所有文件(*.*)|*.*
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                tbPicUrl.Text = openFileDialog1.FileName;
+                TxtPicUrl.Text = openFileDialog1.FileName;
             }
         }
         #endregion
@@ -153,24 +154,24 @@ namespace HM.FacePlatform.BasicData
 
         private void btnStarLoad_Click(object sender, EventArgs e)
         {
-            if (this.tbPicUrl.Text.Trim() != String.Empty)
+            if (this.TxtPicUrl.Text.Trim() != String.Empty)
             {
-                tbShow.Text = string.Empty;//清空
+                TbShow.Text = string.Empty;//清空
 
                 if (baseDataType == BaseDataTypeE.楼栋信息)
                 {
                     Thread td = new Thread(new ParameterizedThreadStart(ImportBuilding));
-                    td.Start(this.tbPicUrl.Text.Trim());
+                    td.Start(this.TxtPicUrl.Text.Trim());
                 }
                 else if (baseDataType == BaseDataTypeE.房屋信息)
                 {
                     Thread td = new Thread(new ParameterizedThreadStart(ImportHouse));
-                    td.Start(this.tbPicUrl.Text.Trim());
+                    td.Start(this.TxtPicUrl.Text.Trim());
                 }
                 else
                 {
                     Thread td = new Thread(new ParameterizedThreadStart(ImportUser));
-                    td.Start(this.tbPicUrl.Text.Trim());
+                    td.Start(this.TxtPicUrl.Text.Trim());
                 }
             }
             else
@@ -204,8 +205,7 @@ namespace HM.FacePlatform.BasicData
                             progressBar1.Maximum = loadCount;
                             progressBar1.Value = 0;
                             progressBar1.Visible = true;
-
-                            btnStarLoad.Enabled = false;
+                            BtnStartLoad.Enabled = false;
                         });
 
                         #region check
@@ -285,7 +285,7 @@ namespace HM.FacePlatform.BasicData
 
                             this.UIThread(() =>
                             {
-                                btnStarLoad.Enabled = true;
+                                BtnStartLoad.Enabled = true;
                                 progressBar1.Visible = false;
                             });
                             return;
@@ -343,7 +343,7 @@ namespace HM.FacePlatform.BasicData
 
                         this.UIThread(() =>
                         {
-                            btnStarLoad.Enabled = true;
+                            BtnStartLoad.Enabled = true;
                             progressBar1.Visible = false;
                             _ucDataBase.LoadBuilding();
                         });
@@ -387,7 +387,7 @@ namespace HM.FacePlatform.BasicData
                             progressBar1.Value = 0;
                             progressBar1.Visible = true;
 
-                            btnStarLoad.Enabled = false;
+                            BtnStartLoad.Enabled = false;
                         });
 
                         #region check
@@ -436,7 +436,12 @@ namespace HM.FacePlatform.BasicData
 
                             checkIndex++;
 
-                            if (ExcelHelper.ReadStringCell(0, row).Trim() == "" && ExcelHelper.ReadStringCell(1, row).Trim() == "" && ExcelHelper.ReadStringCell(2, row).Trim() == "" && ExcelHelper.ReadStringCell(3, row).Trim() == "" && ExcelHelper.ReadStringCell(4, row).Trim() == "" && ExcelHelper.ReadStringCell(5, row).Trim() == "")
+                            if (ExcelHelper.ReadStringCell(0, row).Trim() == ""
+                                && ExcelHelper.ReadStringCell(1, row).Trim() == ""
+                                && ExcelHelper.ReadStringCell(2, row).Trim() == ""
+                                && ExcelHelper.ReadStringCell(3, row).Trim() == ""
+                                && ExcelHelper.ReadStringCell(4, row).Trim() == ""
+                                && ExcelHelper.ReadStringCell(5, row).Trim() == "")
                             {
                                 continue;
                             }
@@ -509,7 +514,7 @@ namespace HM.FacePlatform.BasicData
 
                             this.UIThread(() =>
                             {
-                                btnStarLoad.Enabled = true;
+                                BtnStartLoad.Enabled = true;
                                 progressBar1.Visible = false;
                             });
                             return;
@@ -529,7 +534,12 @@ namespace HM.FacePlatform.BasicData
 
                                 IRow row = sheet.GetRow(i);
 
-                                if (ExcelHelper.ReadStringCell(0, row).Trim() == "" && ExcelHelper.ReadStringCell(1, row).Trim() == "" && ExcelHelper.ReadStringCell(2, row).Trim() == "" && ExcelHelper.ReadStringCell(3, row).Trim() == "" && ExcelHelper.ReadStringCell(4, row).Trim() == "" && ExcelHelper.ReadStringCell(5, row).Trim() == "")
+                                if (ExcelHelper.ReadStringCell(0, row).Trim() == ""
+                                    && ExcelHelper.ReadStringCell(1, row).Trim() == ""
+                                    && ExcelHelper.ReadStringCell(2, row).Trim() == ""
+                                    && ExcelHelper.ReadStringCell(3, row).Trim() == ""
+                                    && ExcelHelper.ReadStringCell(4, row).Trim() == ""
+                                    && ExcelHelper.ReadStringCell(5, row).Trim() == "")
                                 {
                                     continue;
                                 }
@@ -571,7 +581,7 @@ namespace HM.FacePlatform.BasicData
 
                         this.UIThread(() =>
                         {
-                            btnStarLoad.Enabled = true;
+                            BtnStartLoad.Enabled = true;
                             progressBar1.Visible = false;
                             _ucDataBase.LoadHouse();
                         });
@@ -623,7 +633,7 @@ namespace HM.FacePlatform.BasicData
                             progressBar1.Value = 0;
                             progressBar1.Visible = true;
 
-                            btnStarLoad.Enabled = false;
+                            BtnStartLoad.Enabled = false;
                         });
 
                         #region check
@@ -678,9 +688,12 @@ namespace HM.FacePlatform.BasicData
 
                             checkIndex++;
 
-                            if (ExcelHelper.ReadStringCell(0, row).Trim() == "" && ExcelHelper.ReadStringCell(1, row).Trim() == ""
-                                && ExcelHelper.ReadStringCell(2, row).Trim() == "" && ExcelHelper.ReadStringCell(3, row).Trim() == ""
-                                && ExcelHelper.ReadStringCell(4, row).Trim() == "" && ExcelHelper.ReadStringCell(5, row).Trim() == ""
+                            if (ExcelHelper.ReadStringCell(0, row).Trim() == ""
+                                && ExcelHelper.ReadStringCell(1, row).Trim() == ""
+                                && ExcelHelper.ReadStringCell(2, row).Trim() == ""
+                                && ExcelHelper.ReadStringCell(3, row).Trim() == ""
+                                && ExcelHelper.ReadStringCell(4, row).Trim() == ""
+                                && ExcelHelper.ReadStringCell(5, row).Trim() == ""
                                 && ExcelHelper.ReadStringCell(6, row).Trim() == "")
                             {
                                 continue;
@@ -717,8 +730,7 @@ namespace HM.FacePlatform.BasicData
                             }
                             if (mobile != string.Empty)
                             {
-                                //^1[3|4|5|7|8]\d{9}$
-                                if (!Regex.IsMatch(mobile, @"^1[0|1|2|3|4|5|6|7|8|9]\d{9}$", RegexOptions.IgnoreCase))
+                                if (!Validate_.IsMobile(mobile))
                                 {
                                     strError = strError + "第" + checkIndex + "行姓名为:" + name + "手机号格式不正确" + "\r\n";
                                 }
@@ -739,7 +751,8 @@ namespace HM.FacePlatform.BasicData
                                     strError = strError + "第" + checkIndex + "行姓名为:" + name + "身份证号格式不正确" + "\r\n";
                                 }
                                 else
-                                {// 身份证唯一性检测
+                                {
+                                    // 身份证唯一性检测
                                     User _user = _userBLL.FirstOrDefault(it => it.id_num == id_num && it.is_del != IsDelType.是);
                                     if (_user != null)
                                     {
@@ -768,7 +781,7 @@ namespace HM.FacePlatform.BasicData
 
                             this.UIThread(() =>
                             {
-                                btnStarLoad.Enabled = true;
+                                BtnStartLoad.Enabled = true;
                                 progressBar1.Visible = false;
                             });
                             return;
@@ -788,48 +801,90 @@ namespace HM.FacePlatform.BasicData
 
                                 IRow row = sheet.GetRow(i);
 
-                                if (ExcelHelper.ReadStringCell(0, row).Trim() == "" && ExcelHelper.ReadStringCell(1, row).Trim() == "" && ExcelHelper.ReadStringCell(2, row).Trim() == "" && ExcelHelper.ReadStringCell(3, row).Trim() == "" && ExcelHelper.ReadStringCell(4, row).Trim() == "" && ExcelHelper.ReadStringCell(5, row).Trim() == "")
+                                if (ExcelHelper.ReadStringCell(0, row).Trim() == ""
+                                    && ExcelHelper.ReadStringCell(1, row).Trim() == ""
+                                    && ExcelHelper.ReadStringCell(2, row).Trim() == ""
+                                    && ExcelHelper.ReadStringCell(3, row).Trim() == ""
+                                    && ExcelHelper.ReadStringCell(4, row).Trim() == ""
+                                    && ExcelHelper.ReadStringCell(5, row).Trim() == "")
                                 {
                                     continue;
                                 }
 
-                                User _user = new User();
-                                _user.name = ExcelHelper.ReadStringCell(0, row).Trim();
-                                _user.sex = ExcelHelper.ReadStringCell(1, row).Trim() == "男" ? SexType.男 : SexType.女;
-                                _user.id_num = ExcelHelper.ReadStringCell(3, row).Trim();
-                                _user.mobile = ExcelHelper.ReadStringCell(4, row).Trim();
-                                //_user.job = ExcelHelper.ReadStringCell(5, row).Trim(); //wait 怎么处理工作人员？
-                                _user.data_from = DataFromType.导入;
+                                SexType sexType = SexType.未知;
+                                if (ExcelHelper.ReadStringCell(1, row).Trim() == "男")
+                                {
+                                    sexType = SexType.男;
+                                }
+                                else if (ExcelHelper.ReadStringCell(1, row).Trim() == "女")
+                                {
+                                    sexType = SexType.女;
+                                }
+                                else
+                                {
+                                    sexType = SexType.未知;
+                                }
 
-                                UserHouse _user_house = new UserHouse();
-                                _user_house.user_uid = _user.user_uid;
-                                _user_house.house_code = ExcelHelper.ReadStringCell(6, row).Trim();
+                                User user = new User()
+                                {
+                                    birthday = DateTime.MinValue,
+                                    change_time = DateTime.Now,
+                                    check_by = 0,
+                                    check_note = "",
+                                    check_state = CheckType.待审核,
+                                    check_time = DateTime.MinValue,
+                                    create_time = DateTime.Now,
+                                    data_from = DataFromType.导入,
+                                    end_time = DateTime.MinValue,
+                                    id_num = ExcelHelper.ReadStringCell(3, row).Trim(),
+                                    id_pic = "",
+                                    id_type = IdType.身份证,
+                                    is_del = IsDelType.否,
+                                    job = ExcelHelper.ReadStringCell(5, row).Trim(),
+                                    job_number = "",
+                                    mobile = ExcelHelper.ReadStringCell(4, row).Trim(),
+                                    name = ExcelHelper.ReadStringCell(0, row).Trim(),
+                                    people_id = Key_.SequentialGuid(),
+                                    reg_time = DateTime.Now,
+                                    sex = sexType,
+                                    tel = "",
+                                    user_uid = Key_.SequentialGuid()
+                                };
+
+                                UserHouse user_house = new UserHouse
+                                {
+                                    user_uid = user.user_uid,
+                                    house_code = ExcelHelper.ReadStringCell(6, row).Trim(),
+                                    is_del = IsDelType.否,
+                                    relation = ""
+                                };
 
                                 switch (ExcelHelper.ReadStringCell(2, row).Trim())
                                 {
-                                    case "拥有": _user_house.user_type = UserType.业主_拥有; break;
-                                    case "居住": _user_house.user_type = UserType.业主_居住; break;
-                                    case "家庭成员": _user_house.user_type = UserType.家庭成员; break;
-                                    case "访客": _user_house.user_type = UserType.访客; break;
-                                    case "工作人员": _user_house.user_type = UserType.工作人员; break;
-                                }
-                                if (_user_house.user_type == UserType.工作人员)
-                                {
-                                    _user_house.house_code = propertyHouse.house_code;
+                                    case "拥有": user_house.user_type = UserType.业主_拥有; break;
+                                    case "居住": user_house.user_type = UserType.业主_居住; break;
+                                    case "家庭成员": user_house.user_type = UserType.家庭成员; break;
+                                    case "访客": user_house.user_type = UserType.访客; break;
+                                    case "工作人员": user_house.user_type = UserType.工作人员; break;
                                 }
 
-                                if (!string.IsNullOrEmpty(_user.mobile))
+                                if (user_house.user_type == UserType.工作人员)
                                 {
-                                    User temp_user = _userBLL.FirstOrDefault(it => it.mobile == _user.mobile && it.is_del != IsDelType.是);
+                                    user_house.house_code = propertyHouse.house_code;
+                                }
+
+                                if (!string.IsNullOrEmpty(user.mobile))
+                                {
+                                    User temp_user = _userBLL.FirstOrDefault(it => it.mobile == user.mobile && it.is_del != IsDelType.是);
                                     if (temp_user != null)
                                     {
                                         ShowMessage("第" + i + "行的手机号" + temp_user.mobile + "已被" + temp_user.name + "占用", MessageType.Warning);
                                         continue;
                                     }
                                 }
-                                if (!string.IsNullOrEmpty(_user.id_num))
+                                if (!string.IsNullOrEmpty(user.id_num))
                                 {
-                                    User temp_user = _userBLL.FirstOrDefault(it => it.id_num == _user.id_num && it.is_del != IsDelType.是);
+                                    User temp_user = _userBLL.FirstOrDefault(it => it.id_num == user.id_num && it.is_del != IsDelType.是);
                                     if (temp_user != null)
                                     {
                                         ShowMessage("第" + i + "行的身份证号" + temp_user.id_num + "," + temp_user.name + "已存在", MessageType.Warning);
@@ -837,15 +892,28 @@ namespace HM.FacePlatform.BasicData
                                     }
                                 }
 
-                                //wait
-                                //if (_userBLL.Add(_user, _user_house, Program._Account.id, "批量导入"))
-                                //{
-                                //    ShowMessage("导入" + _user.name + "成功... ", MessageType.Success);
-                                //}
-                                //else
-                                //{
-                                //    ShowMessage("导入" + _user.name + "失败(数据库异常)", MessageType.Error);
-                                //}
+                                if (user.UserHouses == null) user.UserHouses = new List<UserHouse>();
+                                user.UserHouses.Add(user_house);
+
+                                var newUser = _userBLL.Add(user);
+                                if (newUser != null)
+                                {
+                                    ActionLog log = new ActionLog
+                                    {
+                                        table_id = newUser.id,
+                                        action_type = ActionType.基础数据,
+                                        action = ActionName.新增,
+                                        action_by = Program._Account.id,
+                                        remark = "批量导入",
+                                    };
+                                    _actionLogBLL.Add(log);
+
+                                    ShowMessage("导入" + user.name + "成功... ", MessageType.Success);
+                                }
+                                else
+                                {
+                                    ShowMessage("导入" + user.name + "失败(数据库异常)", MessageType.Error);
+                                }
 
                                 ok++;
                             }
@@ -860,7 +928,7 @@ namespace HM.FacePlatform.BasicData
 
                         this.UIThread(() =>
                         {
-                            btnStarLoad.Enabled = true;
+                            BtnStartLoad.Enabled = true;
                             progressBar1.Visible = false;
                             _ucDataBase.BindUserData();
                         });
@@ -881,14 +949,14 @@ namespace HM.FacePlatform.BasicData
         {
             //tbShow.ForeColor = MessageColor.GetColorByMessgaeType(type);
 
-            if (tbShow.InvokeRequired)
+            if (TbShow.InvokeRequired)
             {
                 DGShowMsg msgDelegate = ShowMessage;
                 Invoke(msgDelegate, new object[] { message, type });
             }
             else
             {
-                tbShow.AppendText(message + "\r\n", MessageColor.GetColorByMessgaeType(type));
+                TbShow.AppendText(message + "\r\n", MessageColor.GetColorByMessgaeType(type));
             }
         }
         #endregion

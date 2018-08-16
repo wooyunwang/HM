@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using HM.Enum_.FacePlatform;
+using HM.FacePlatform.BLL;
 using HM.FacePlatform.Model;
 
 namespace HM.FacePlatform.UserControls
@@ -38,7 +39,7 @@ namespace HM.FacePlatform.UserControls
             }
 
             picPhoto.BackgroundImage = _Photo;
-            if (!string.IsNullOrEmpty(_register.photo_path)) picPhoto.ImageLocation = Path.Combine(MainForm.picturePath, _register.photo_path);
+            if (!string.IsNullOrEmpty(_register.photo_path)) picPhoto.ImageLocation = Path.Combine(FacePlatformCache.GetPictureDirectory(), _register.photo_path);
 
             this.labName.Text = _register.user.name;
             //this.labNum.Text = theCheck.num;

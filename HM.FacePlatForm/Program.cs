@@ -38,6 +38,9 @@ namespace HM.FacePlatform
         {
             FormHelper.SetAccess("Users", Application.StartupPath);
 
+            //日志配置
+            log4net.Config.XmlConfigurator.Configure();
+
             string strFullPath = Application.ExecutablePath;
             string strFileName = System.IO.Path.GetFileName(strFullPath);
             Mutex m = new Mutex(false, strFileName, out bool createdNew);
@@ -62,13 +65,13 @@ namespace HM.FacePlatform
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            if (e.ExceptionObject is System.Exception)
+            if (e.ExceptionObject is Exception)
             {
-                HandleException((System.Exception)e.ExceptionObject);
+                HandleException((Exception)e.ExceptionObject);
             }
         }
 
-        static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
+        static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             HandleException(e.Exception);
         }

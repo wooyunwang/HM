@@ -37,7 +37,7 @@ namespace HM.FacePlatform.Model
         /// <summary>
         /// µ¥Ôª
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(20)]
         public string unit { get; set; }
         /// <summary>
@@ -49,13 +49,13 @@ namespace HM.FacePlatform.Model
         /// <summary>
         /// Â¥²ã
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(50)]
         public string floor { get; set; }
         /// <summary>
         /// ·¿ºÅ
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(50)]
         public string roomnumber { get; set; }
         /// <summary>

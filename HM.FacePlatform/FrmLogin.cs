@@ -95,10 +95,12 @@ namespace HM.FacePlatform
                     if (cbxPassword.Checked) Config_.SaveConfig("RegPass", password);
                     else Config_.SaveConfig("RegPass", "");
 
-                    Task.Run(() =>
-                    {
-                        Login(result.Obj);
-                    });
+                    ParameterizedThreadStart ps = new ParameterizedThreadStart(Login);
+                    Thread t = new Thread(ps);
+                    t.IsBackground = true;
+                    t.SetApartmentState(ApartmentState.STA);
+                    t.Start(result.Obj);
+
                 }
                 else
                 {

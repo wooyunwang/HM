@@ -12,6 +12,7 @@ namespace HM.FacePlatform.BLL
     public class ActionLogBLL : BaseBLL<ActionLog>
     {
         new ActionLogDAL dal = new ActionLogDAL();
+
         /// <summary>
         /// 
         /// </summary>
@@ -22,33 +23,49 @@ namespace HM.FacePlatform.BLL
         /// <param name="key"></param>
         /// <param name="admin_type"></param>
         /// <param name="action_name"></param>
-        /// <param name="action_type"></param>
         /// <param name="system_user_id"></param>
         /// <returns></returns>
         [ActionResultTryCatch]
-        public ActionResult<PagerData<ActionLogDto>> GetLogButRegister(int pageIndex, int pageSize,
+        public ActionResult<PagerData<CheckActionLogDto>> GetCheckLog(int pageIndex, int pageSize,
             DateTime from, DateTime? to,
             string key, IsAdminType? admin_type,
-            ActionType action_type,
             ActionName? action_name,
             int? system_user_id)
         {
-            switch (action_type)
+
+            var pagerData = dal.GetCheckLog(pageIndex, pageSize, from, to, key, admin_type, action_name, system_user_id);
+            return new ActionResult<PagerData<CheckActionLogDto>>()
             {
-                case ActionType.未知:
-                    throw new Exception($"未提供对【{EnumHelper.GetName(action_type)}】日志的查询！");
-                case ActionType.审核:
-                case ActionType.基础数据:
-                    var pagerData = dal.GetLogButRegister(pageIndex, pageSize, from, to, key, admin_type, action_type, action_name, system_user_id);
-                    return new ActionResult<PagerData<ActionLogDto>>()
-                    {
-                        IsSuccess = true,
-                        Obj = pagerData
-                    };
-                case ActionType.平台注册:
-                default:
-                    throw new Exception($"【{EnumHelper.GetName(action_type)}】日志不应该调用此方法！");
-            }
+                IsSuccess = true,
+                Obj = pagerData
+            };
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="key"></param>
+        /// <param name="admin_type"></param>
+        /// <param name="action_name"></param>
+        /// <param name="system_user_id"></param>
+        /// <returns></returns>
+        [ActionResultTryCatch]
+        public ActionResult<PagerData<BaseDataActionLogDto>> GetBaseDataLog(int pageIndex, int pageSize,
+            DateTime from, DateTime? to,
+            string key, IsAdminType? admin_type,
+            ActionName? action_name,
+            int? system_user_id)
+        {
+
+            var pagerData = dal.GetBaseDataLog(pageIndex, pageSize, from, to, key, admin_type, action_name, system_user_id);
+            return new ActionResult<PagerData<BaseDataActionLogDto>>()
+            {
+                IsSuccess = true,
+                Obj = pagerData
+            };
         }
 
         /// <summary>
@@ -61,17 +78,17 @@ namespace HM.FacePlatform.BLL
         /// <param name="name"></param>
         /// <param name="key"></param>
         /// <param name="user_type"></param>
-        /// <param name="admin_type"></param>
+        /// <param name="action_name"></param>
         /// <param name="system_user_id"></param>
         /// <returns></returns>
         [ActionResultTryCatch]
         public ActionResult<PagerData<RegisterActionLogDto>> GetRegisterLog(int pageIndex, int pageSize,
             DateTime from, DateTime? to,
-            string name, string key, UserType? user_type,
-            IsAdminType? admin_type,
+            string name, UserType? user_type,
+            ActionName? action_name,
             int? system_user_id)
         {
-            var pagerData = dal.GetRegisterLog(pageIndex, pageSize, from, to, name, key, user_type, admin_type, system_user_id);
+            var pagerData = dal.GetRegisterLog(pageIndex, pageSize, from, to, name, user_type, action_name, system_user_id);
             return new ActionResult<PagerData<RegisterActionLogDto>>()
             {
                 IsSuccess = true,

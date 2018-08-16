@@ -59,7 +59,18 @@ namespace HM.FacePlatform.Model
         /// <returns></returns>
         public string GetIP()
         {
-            return new Uri(ip).Host;
+            if (Validate_.IsIPAddress(ip))
+            {
+                return ip;
+            }
+            else if (ip.IndexOf("http://") == 0 || ip.IndexOf("https://") == 0)
+            {
+                return new Uri(ip).Host;
+            }
+            else
+            {
+                return ip;
+            }
         }
         /// <summary>
         /// »ñÈ¡¶Ë¿Ú

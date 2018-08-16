@@ -42,8 +42,13 @@
   <ItemGroup>
     <Compile Include="Config\FaceConfigInfo.cs" />
     <Compile Include="DTO\ActionResult.cs" />
+    <Compile Include="DTO\FaceForm\BaseDataActionLogDto.cs" />
     <Compile Include="DTO\FaceForm\ActionLogDto.cs" />
+    <Compile Include="DTO\FaceForm\BuildingForMapDto.cs" />
+    <Compile Include="DTO\FaceForm\CheckActionLogDto.cs" />
+    <Compile Include="DTO\FaceForm\RegisterManageDto.cs" />
     <Compile Include="DTO\FaceForm\RegisterActionLogDto.cs" />
+    <Compile Include="DTO\FaceForm\UserForDataBaseDto.cs" />
     <Compile Include="DTO\PagerData.cs" />
     <Compile Include="GPIO\In_Port_Info.cs" />
     <Compile Include="GPIO\Out_Port_Info.cs" />

@@ -1,12 +1,95 @@
-﻿using HM.FacePlatform.Model;
+﻿using HM.DTO;
+using HM.FacePlatform.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using HM.DTO.FaceForm;
 
 namespace HM.FacePlatform.DAL
 {
     public class BuildingDAL : BaseDAL<Building>
     {
+        public List<Building> GetBuildingForMao(int mao_id)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                var query = from maobuilding in db.MaoBuildings
+                            join building in db.Buildings
+                            on maobuilding.building_code equals building.building_code
+                            where maobuilding.mao_id == mao_id
+                            orderby building.building_name
+                            select building;
+#if DEBUG
+                string sql = query.ToString();
+#endif
+                return query.ToList();
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="project_code">项目编号</param>
+        /// <param name="mao_id">猫id</param>
+        /// <param name="build_name">楼栋名称</param>
+        /// <param name="hasMap">是否已映射</param>
+        /// <returns></returns>
+        public PagerData<BuildingForMapDto> GetBuildingForMap(int pageIndex, int pageSize, string project_code, int mao_id, string build_name, bool? hasMap)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                var query = db.Set<Building>().AsNoTracking().Where(it => it.project_code == project_code);
+
+                if (!string.IsNullOrWhiteSpace(build_name))
+                {
+                    query = query.Where(it => it.building_name.Contains(build_name));
+                }
+                if (hasMap.HasValue)
+                {
+                    if (hasMap.Value)
+                    {
+                        query = query.Where(it => it.MaoBuildings.Any(mb => mb.mao_id == mao_id));
+                    }
+                    else {
+                        query = query.Where(it => !it.MaoBuildings.Any(mb => mb.mao_id == mao_id));
+                    }
+                }
+#if DEBUG
+                string sql = query.ToString();
+#endif
+
+                PagerData<BuildingForMapDto> pagerData = new PagerData<BuildingForMapDto>();
+                pagerData.total = query.Count();
+                if (pagerData.total % pageSize == 0)
+                {
+                    pagerData.pages = pagerData.total / pageSize;
+                }
+                else
+                {
+                    pagerData.pages = pagerData.total / pageSize + 1;
+                }
+                var query2 = query.Select(it => new BuildingForMapDto()
+                {
+                    id = it.id,
+                    building_code = it.building_code,
+                    building_name = it.building_name,
+                    project_code = it.project_code,
+                    has_map = it.MaoBuildings.Any(mb => mb.mao_id == mao_id)
+                });
+                query2 = query2.OrderBy(it => it.building_name);
+                query2 = query2.Skip(pageSize * pageIndex).Take(pageSize);
+#if DEBUG
+                string sqlPage = query2.ToString();
+#endif
+                pagerData.rows = query2.ToList();
+
+                return pagerData;
+            }
+        }
 
         //        public int RecordCount(object parameters = null)
         //        {
@@ -32,29 +115,7 @@ namespace HM.FacePlatform.DAL
         //            }
         //        }
 
-        public List<Building> GetBuildingForMao(int mao_id)
-        {
-            //            string sql = @"
-            //select b.building_code,b.building_name
-            //	,case when mb.building_code is null then 0 else 1 end as mao_building_ref
-            //	,case when mb.id is null then 0 else mb.id end as id
-            //from f_building b
-            //left join f_mao_building mb on b.building_code = mb.building_code and mb.mao_id=@mao_id
-            //order by mao_building_ref desc, b.building_name;";
-            using (FacePlatformDB db = new FacePlatformDB())
-            {
-                var query = from maobuilding in db.MaoBuildings
-                            join building in db.Buildings
-                            on maobuilding.building_code equals building.building_code
-                            where maobuilding.mao_id == mao_id
-                            orderby building.building_name
-                            select building;
-#if DEBUG
-                string sql = query.ToString();
-#endif
-                return query.ToList();
-            }
-        }
+
 
         //public int RemoveMaoUsing(MaoBuilding maoBuilding)
         //{

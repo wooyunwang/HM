@@ -3,6 +3,8 @@ using HM.FacePlatform.Model;
 using HM.Form_;
 using HM.Form_.Old;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HM.FacePlatform.Forms
@@ -64,6 +66,15 @@ namespace HM.FacePlatform.Forms
             {
                 user.password = user.password;
                 toolTip.ShowIt(btnSave, "修改成功", TooltipIcon.Info);
+                Task.Run(() =>
+                {
+                    Thread.Sleep(1000);
+                    this.UIThread(() =>
+                    {
+                        Close();
+                    });
+                });
+
             }
             else
             {

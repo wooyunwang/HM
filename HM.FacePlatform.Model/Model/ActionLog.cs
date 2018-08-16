@@ -33,7 +33,7 @@ namespace HM.FacePlatform.Model
         /// <summary>
         /// ±¸×¢
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(500)]
         public string remark { get; set; }
         /// <summary>

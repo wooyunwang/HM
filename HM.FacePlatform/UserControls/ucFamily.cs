@@ -52,7 +52,7 @@ namespace HM.FacePlatform.UserControls
             Register register = _registerBLL.FirstOrDefault(it => it.is_del != IsDelType.是 && it.user_uid == _user.user_uid, true, it => it.id);
 
             picPhoto.BackgroundImage = _photo;
-            picPhoto.ImageLocation = string.IsNullOrEmpty(register.photo_path) ? null : Path.Combine(MainForm.picturePath, register.photo_path);
+            picPhoto.ImageLocation = string.IsNullOrEmpty(register.photo_path) ? null : Path.Combine(FacePlatformCache.GetPictureDirectory(), register.photo_path);
             lblName.Text = $"{ _user.name }({ _user.mobile })";
             lblUserType.Text = EnumHelper.GetName(_userHouse.user_type);
 

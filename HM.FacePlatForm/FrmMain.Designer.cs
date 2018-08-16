@@ -32,10 +32,10 @@
             this.HtcMain = new HM.Form_.HMTabControl();
             this.MtpDataBase = new MetroFramework.Controls.MetroTabPage();
             this.MtpCheck = new MetroFramework.Controls.MetroTabPage();
+            this.MtpSystemUserManage = new MetroFramework.Controls.MetroTabPage();
+            this.MtpLog = new MetroFramework.Controls.MetroTabPage();
             this.MtpRegister = new MetroFramework.Controls.MetroTabPage();
             this.MtpRegisterManage = new MetroFramework.Controls.MetroTabPage();
-            this.MtpLog = new MetroFramework.Controls.MetroTabPage();
-            this.MtpSystemUserManage = new MetroFramework.Controls.MetroTabPage();
             this.TileResetPassword = new HM.Form_.HMTile();
             this.HtcMain.SuspendLayout();
             this.SuspendLayout();
@@ -44,9 +44,9 @@
             // 
             this.HtcMain.Controls.Add(this.MtpDataBase);
             this.HtcMain.Controls.Add(this.MtpCheck);
+            this.HtcMain.Controls.Add(this.MtpLog);
             this.HtcMain.Controls.Add(this.MtpRegister);
             this.HtcMain.Controls.Add(this.MtpRegisterManage);
-            this.HtcMain.Controls.Add(this.MtpLog);
             this.HtcMain.Controls.Add(this.MtpSystemUserManage);
             this.HtcMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.HtcMain.FontSize = MetroFramework.MetroTabControlSize.Tall;
@@ -59,7 +59,6 @@
             this.HtcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.HtcMain.TabIndex = 0;
             this.HtcMain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.HtcMain.SelectedIndexChanged += new System.EventHandler(this.HtcMain_SelectedIndexChanged);
             this.HtcMain.Selected += new System.Windows.Forms.TabControlEventHandler(this.HtcMain_Selected);
             // 
             // MtpDataBase
@@ -84,6 +83,28 @@
             this.MtpCheck.Text = "审核";
             this.MtpCheck.VerticalScrollbarBarColor = true;
             // 
+            // MtpSystemUserManage
+            // 
+            this.MtpSystemUserManage.HorizontalScrollbarBarColor = true;
+            this.MtpSystemUserManage.Location = new System.Drawing.Point(4, 40);
+            this.MtpSystemUserManage.Name = "MtpSystemUserManage";
+            this.MtpSystemUserManage.Size = new System.Drawing.Size(1152, 632);
+            this.MtpSystemUserManage.TabIndex = 5;
+            this.MtpSystemUserManage.Tag = "HM.FacePlatform.UcSystemUserManage";
+            this.MtpSystemUserManage.Text = "登陆管理";
+            this.MtpSystemUserManage.VerticalScrollbarBarColor = true;
+            // 
+            // MtpLog
+            // 
+            this.MtpLog.HorizontalScrollbarBarColor = true;
+            this.MtpLog.Location = new System.Drawing.Point(4, 40);
+            this.MtpLog.Name = "MtpLog";
+            this.MtpLog.Size = new System.Drawing.Size(1152, 632);
+            this.MtpLog.TabIndex = 4;
+            this.MtpLog.Tag = "HM.FacePlatform.UcLog";
+            this.MtpLog.Text = "日志";
+            this.MtpLog.VerticalScrollbarBarColor = true;
+            // 
             // MtpRegister
             // 
             this.MtpRegister.HorizontalScrollbarBarColor = true;
@@ -106,32 +127,10 @@
             this.MtpRegisterManage.Text = "注册管理";
             this.MtpRegisterManage.VerticalScrollbarBarColor = true;
             // 
-            // MtpLog
-            // 
-            this.MtpLog.HorizontalScrollbarBarColor = true;
-            this.MtpLog.Location = new System.Drawing.Point(4, 40);
-            this.MtpLog.Name = "MtpLog";
-            this.MtpLog.Size = new System.Drawing.Size(1152, 632);
-            this.MtpLog.TabIndex = 4;
-            this.MtpLog.Tag = "HM.FacePlatform.UcLog";
-            this.MtpLog.Text = "日志";
-            this.MtpLog.VerticalScrollbarBarColor = true;
-            // 
-            // MtpSystemUserManage
-            // 
-            this.MtpSystemUserManage.HorizontalScrollbarBarColor = true;
-            this.MtpSystemUserManage.Location = new System.Drawing.Point(4, 40);
-            this.MtpSystemUserManage.Name = "MtpSystemUserManage";
-            this.MtpSystemUserManage.Size = new System.Drawing.Size(1152, 632);
-            this.MtpSystemUserManage.TabIndex = 5;
-            this.MtpSystemUserManage.Tag = "HM.FacePlatform.UcSystemUserManage";
-            this.MtpSystemUserManage.Text = "登陆管理";
-            this.MtpSystemUserManage.VerticalScrollbarBarColor = true;
-            // 
             // TileResetPassword
             // 
             this.TileResetPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.TileResetPassword.Location = new System.Drawing.Point(1096, 28);
+            this.TileResetPassword.Location = new System.Drawing.Point(1096, 41);
             this.TileResetPassword.Name = "TileResetPassword";
             this.TileResetPassword.Size = new System.Drawing.Size(80, 36);
             this.TileResetPassword.TabIndex = 2;

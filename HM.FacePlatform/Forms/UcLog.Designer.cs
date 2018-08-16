@@ -28,58 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.HtcMain = new HM.Form_.HMTabControl();
             this.MtpRegisterLog = new System.Windows.Forms.TabPage();
             this.PnlLogDG = new HM.Form_.HMPanel();
-            this.dgRegisterLog = new HM.Form_.HMDataGridView();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.action_type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.action_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DgvRegisterLog = new HM.Form_.HMDataGridView();
             this.PagerRegisterLog = new HM.Form_.HMPager();
             this.PnlLogTop = new HM.Form_.HMPanel();
             this.CbxUserTypeRegister = new HM.Form_.HMComboBox();
-            this.CbxActionTypeRegister = new HM.Form_.HMComboBox();
+            this.CbxActionNameRegister = new HM.Form_.HMComboBox();
             this.CbxSystemUserRegister = new HM.Form_.HMComboBox();
             this.label16 = new HM.Form_.HMLabel();
-            this.label10 = new HM.Form_.HMLabel();
+            this.LblActionNameRegister = new HM.Form_.HMLabel();
             this.DtpTo = new System.Windows.Forms.DateTimePicker();
             this.DtpFrom = new System.Windows.Forms.DateTimePicker();
-            this.label7 = new HM.Form_.HMLabel();
-            this.label8 = new HM.Form_.HMLabel();
-            this.label6 = new HM.Form_.HMLabel();
-            this.label5 = new HM.Form_.HMLabel();
+            this.LblTo = new HM.Form_.HMLabel();
+            this.LblUserTypeRegister = new HM.Form_.HMLabel();
+            this.LblCreateDate = new HM.Form_.HMLabel();
+            this.LblUserName = new HM.Form_.HMLabel();
             this.BtnSelectRegister = new HM.Form_.HMTile();
             this.TxtUserName = new HM.Form_.HMTextBox();
             this.MtpBaseDataLog = new System.Windows.Forms.TabPage();
             this.PnlBaseDataDG = new HM.Form_.HMPanel();
-            this.dgBaseData = new HM.Form_.HMDataGridView();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DgvBaseData = new HM.Form_.HMDataGridView();
             this.PagerBaseDataLog = new HM.Form_.HMPager();
             this.PnlBaseDataLogTop = new HM.Form_.HMPanel();
             this.DtpToBaseData = new System.Windows.Forms.DateTimePicker();
@@ -95,15 +83,11 @@
             this.TxtKeyBaseData = new HM.Form_.HMTextBox();
             this.MtpCheckLog = new System.Windows.Forms.TabPage();
             this.PnlCheckLogDG = new HM.Form_.HMPanel();
-            this.dgCheckLog = new HM.Form_.HMDataGridView();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DgvCheckLog = new HM.Form_.HMDataGridView();
             this.PagerCheckLog = new HM.Form_.HMPager();
             this.PnlCheckLogTop = new HM.Form_.HMPanel();
+            this.CbxActionNameCheck = new HM.Form_.HMComboBox();
+            this.LblActionNameCheck = new HM.Form_.HMLabel();
             this.DtpToCheck = new System.Windows.Forms.DateTimePicker();
             this.DtpFromCheck = new System.Windows.Forms.DateTimePicker();
             this.CbxAdminTypeCheck = new HM.Form_.HMComboBox();
@@ -112,21 +96,39 @@
             this.label3 = new HM.Form_.HMLabel();
             this.label9 = new HM.Form_.HMLabel();
             this.BtnSelectCheck = new HM.Form_.HMTile();
-            this.tbInforCheck = new HM.Form_.HMTextBox();
-            this.CbxActionNameCheck = new HM.Form_.HMComboBox();
-            this.LblActionNameCheck = new HM.Form_.HMLabel();
+            this.TxtKeyCheck = new HM.Form_.HMTextBox();
+            this.colCreateDate_Check = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHouseName_Check = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUserName_Check = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemark_Check = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSystemUserName_Check = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAction_Check = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsAdmin_Check = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateDate_BaseData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHouseName_BaseData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUserName_BaseData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemark_BaseData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSystemUserName_BaseData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAction_BaseData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIsAdmin_BaseData = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUserType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRemark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAction = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSystemUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HtcMain.SuspendLayout();
             this.MtpRegisterLog.SuspendLayout();
             this.PnlLogDG.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgRegisterLog)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvRegisterLog)).BeginInit();
             this.PnlLogTop.SuspendLayout();
             this.MtpBaseDataLog.SuspendLayout();
             this.PnlBaseDataDG.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgBaseData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvBaseData)).BeginInit();
             this.PnlBaseDataLogTop.SuspendLayout();
             this.MtpCheckLog.SuspendLayout();
             this.PnlCheckLogDG.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgCheckLog)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvCheckLog)).BeginInit();
             this.PnlCheckLogTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -139,11 +141,12 @@
             this.HtcMain.ItemSize = new System.Drawing.Size(150, 30);
             this.HtcMain.Location = new System.Drawing.Point(0, 0);
             this.HtcMain.Name = "HtcMain";
-            this.HtcMain.SelectedIndex = 2;
+            this.HtcMain.SelectedIndex = 0;
             this.HtcMain.Size = new System.Drawing.Size(1200, 600);
             this.HtcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.HtcMain.TabIndex = 67;
             this.HtcMain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.HtcMain.SelectedIndexChanged += new System.EventHandler(this.HtcMain_SelectedIndexChanged);
             // 
             // MtpRegisterLog
             // 
@@ -159,7 +162,7 @@
             // 
             // PnlLogDG
             // 
-            this.PnlLogDG.Controls.Add(this.dgRegisterLog);
+            this.PnlLogDG.Controls.Add(this.DgvRegisterLog);
             this.PnlLogDG.Controls.Add(this.PagerRegisterLog);
             this.PnlLogDG.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PnlLogDG.HorizontalScrollbarBarColor = true;
@@ -173,133 +176,68 @@
             this.PnlLogDG.VerticalScrollbarHighlightOnWheel = false;
             this.PnlLogDG.VerticalScrollbarSize = 10;
             // 
-            // dgRegisterLog
+            // DgvRegisterLog
             // 
-            this.dgRegisterLog.AllowUserToAddRows = false;
-            this.dgRegisterLog.AllowUserToDeleteRows = false;
-            this.dgRegisterLog.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            this.dgRegisterLog.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
-            this.dgRegisterLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgRegisterLog.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgRegisterLog.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgRegisterLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgRegisterLog.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgRegisterLog.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgRegisterLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
-            this.dgRegisterLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRegisterLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn3,
-            this.action_type_name,
-            this.action_name,
-            this.remark,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn1});
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Transparent;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.Wheat;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgRegisterLog.DefaultCellStyle = dataGridViewCellStyle18;
-            this.dgRegisterLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgRegisterLog.EnableHeadersVisualStyles = false;
-            this.dgRegisterLog.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.dgRegisterLog.Location = new System.Drawing.Point(0, 0);
-            this.dgRegisterLog.Name = "dgRegisterLog";
-            this.dgRegisterLog.ReadOnly = true;
-            this.dgRegisterLog.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgRegisterLog.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
-            this.dgRegisterLog.RowHeadersVisible = false;
-            this.dgRegisterLog.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgRegisterLog.RowsDefaultCellStyle = dataGridViewCellStyle20;
-            this.dgRegisterLog.RowTemplate.Height = 50;
-            this.dgRegisterLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgRegisterLog.Size = new System.Drawing.Size(1192, 485);
-            this.dgRegisterLog.TabIndex = 69;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "name";
-            this.dataGridViewTextBoxColumn5.FillWeight = 79.73921F;
-            this.dataGridViewTextBoxColumn5.HeaderText = "姓名";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "user_type_name";
-            this.dataGridViewTextBoxColumn4.FillWeight = 97.16142F;
-            this.dataGridViewTextBoxColumn4.HeaderText = "人员类型";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "house_name";
-            this.dataGridViewTextBoxColumn3.FillWeight = 220.9982F;
-            this.dataGridViewTextBoxColumn3.HeaderText = "房号";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Visible = false;
-            // 
-            // action_type_name
-            // 
-            this.action_type_name.DataPropertyName = "action_type_name";
-            this.action_type_name.HeaderText = "操作类型";
-            this.action_type_name.Name = "action_type_name";
-            this.action_type_name.ReadOnly = true;
-            // 
-            // action_name
-            // 
-            this.action_name.DataPropertyName = "action_name";
-            this.action_name.HeaderText = "操作";
-            this.action_name.Name = "action_name";
-            this.action_name.ReadOnly = true;
-            // 
-            // remark
-            // 
-            this.remark.DataPropertyName = "remark";
-            this.remark.HeaderText = "备注";
-            this.remark.Name = "remark";
-            this.remark.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "system_user_name";
-            this.dataGridViewTextBoxColumn2.FillWeight = 110.674F;
-            this.dataGridViewTextBoxColumn2.HeaderText = "操作人";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "create_date";
-            this.dataGridViewTextBoxColumn1.FillWeight = 100.2753F;
-            this.dataGridViewTextBoxColumn1.HeaderText = "时间";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.DgvRegisterLog.AllowUserToAddRows = false;
+            this.DgvRegisterLog.AllowUserToDeleteRows = false;
+            this.DgvRegisterLog.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
+            this.DgvRegisterLog.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.DgvRegisterLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DgvRegisterLog.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DgvRegisterLog.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.DgvRegisterLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DgvRegisterLog.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.DgvRegisterLog.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvRegisterLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.DgvRegisterLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvRegisterLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCreateDate,
+            this.colUserName,
+            this.colUserType,
+            this.colRemark,
+            this.colAction,
+            this.colSystemUserName});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Wheat;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvRegisterLog.DefaultCellStyle = dataGridViewCellStyle4;
+            this.DgvRegisterLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvRegisterLog.EnableHeadersVisualStyles = false;
+            this.DgvRegisterLog.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.DgvRegisterLog.Location = new System.Drawing.Point(0, 0);
+            this.DgvRegisterLog.Name = "DgvRegisterLog";
+            this.DgvRegisterLog.ReadOnly = true;
+            this.DgvRegisterLog.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvRegisterLog.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.DgvRegisterLog.RowHeadersVisible = false;
+            this.DgvRegisterLog.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvRegisterLog.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.DgvRegisterLog.RowTemplate.Height = 50;
+            this.DgvRegisterLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvRegisterLog.Size = new System.Drawing.Size(1192, 485);
+            this.DgvRegisterLog.TabIndex = 69;
             // 
             // PagerRegisterLog
             // 
@@ -318,16 +256,16 @@
             // PnlLogTop
             // 
             this.PnlLogTop.Controls.Add(this.CbxUserTypeRegister);
-            this.PnlLogTop.Controls.Add(this.CbxActionTypeRegister);
+            this.PnlLogTop.Controls.Add(this.CbxActionNameRegister);
             this.PnlLogTop.Controls.Add(this.CbxSystemUserRegister);
             this.PnlLogTop.Controls.Add(this.label16);
-            this.PnlLogTop.Controls.Add(this.label10);
+            this.PnlLogTop.Controls.Add(this.LblActionNameRegister);
             this.PnlLogTop.Controls.Add(this.DtpTo);
             this.PnlLogTop.Controls.Add(this.DtpFrom);
-            this.PnlLogTop.Controls.Add(this.label7);
-            this.PnlLogTop.Controls.Add(this.label8);
-            this.PnlLogTop.Controls.Add(this.label6);
-            this.PnlLogTop.Controls.Add(this.label5);
+            this.PnlLogTop.Controls.Add(this.LblTo);
+            this.PnlLogTop.Controls.Add(this.LblUserTypeRegister);
+            this.PnlLogTop.Controls.Add(this.LblCreateDate);
+            this.PnlLogTop.Controls.Add(this.LblUserName);
             this.PnlLogTop.Controls.Add(this.BtnSelectRegister);
             this.PnlLogTop.Controls.Add(this.TxtUserName);
             this.PnlLogTop.Dock = System.Windows.Forms.DockStyle.Top;
@@ -347,52 +285,51 @@
             this.CbxUserTypeRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.CbxUserTypeRegister.FormattingEnabled = true;
             this.CbxUserTypeRegister.ItemHeight = 23;
-            this.CbxUserTypeRegister.Location = new System.Drawing.Point(942, 11);
+            this.CbxUserTypeRegister.Location = new System.Drawing.Point(589, 11);
             this.CbxUserTypeRegister.Name = "CbxUserTypeRegister";
-            this.CbxUserTypeRegister.Size = new System.Drawing.Size(68, 29);
+            this.CbxUserTypeRegister.Size = new System.Drawing.Size(95, 29);
             this.CbxUserTypeRegister.TabIndex = 113;
             // 
-            // CbxActionTypeRegister
+            // CbxActionNameRegister
             // 
-            this.CbxActionTypeRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.CbxActionTypeRegister.FormattingEnabled = true;
-            this.CbxActionTypeRegister.ItemHeight = 23;
-            this.CbxActionTypeRegister.Location = new System.Drawing.Point(755, 11);
-            this.CbxActionTypeRegister.Name = "CbxActionTypeRegister";
-            this.CbxActionTypeRegister.Size = new System.Drawing.Size(82, 29);
-            this.CbxActionTypeRegister.TabIndex = 113;
+            this.CbxActionNameRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.CbxActionNameRegister.FormattingEnabled = true;
+            this.CbxActionNameRegister.ItemHeight = 23;
+            this.CbxActionNameRegister.Location = new System.Drawing.Point(759, 11);
+            this.CbxActionNameRegister.Name = "CbxActionNameRegister";
+            this.CbxActionNameRegister.Size = new System.Drawing.Size(82, 29);
+            this.CbxActionNameRegister.TabIndex = 113;
             // 
             // CbxSystemUserRegister
             // 
             this.CbxSystemUserRegister.FormattingEnabled = true;
             this.CbxSystemUserRegister.ItemHeight = 23;
-            this.CbxSystemUserRegister.Location = new System.Drawing.Point(578, 11);
+            this.CbxSystemUserRegister.Location = new System.Drawing.Point(903, 11);
             this.CbxSystemUserRegister.Name = "CbxSystemUserRegister";
             this.CbxSystemUserRegister.Size = new System.Drawing.Size(68, 29);
             this.CbxSystemUserRegister.TabIndex = 113;
-            this.CbxSystemUserRegister.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.Color.Transparent;
             this.label16.ForeColor = System.Drawing.Color.Black;
-            this.label16.Location = new System.Drawing.Point(525, 16);
+            this.label16.Location = new System.Drawing.Point(850, 16);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(54, 19);
             this.label16.TabIndex = 104;
             this.label16.Text = "操作人:";
             // 
-            // label10
+            // LblActionNameRegister
             // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(674, 16);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(68, 19);
-            this.label10.TabIndex = 104;
-            this.label10.Text = "操作类型:";
+            this.LblActionNameRegister.AutoSize = true;
+            this.LblActionNameRegister.BackColor = System.Drawing.Color.Transparent;
+            this.LblActionNameRegister.ForeColor = System.Drawing.Color.Black;
+            this.LblActionNameRegister.Location = new System.Drawing.Point(691, 16);
+            this.LblActionNameRegister.Name = "LblActionNameRegister";
+            this.LblActionNameRegister.Size = new System.Drawing.Size(68, 19);
+            this.LblActionNameRegister.TabIndex = 104;
+            this.LblActionNameRegister.Text = "操作名称:";
             // 
             // DtpTo
             // 
@@ -412,48 +349,47 @@
             this.DtpFrom.Size = new System.Drawing.Size(121, 21);
             this.DtpFrom.TabIndex = 31;
             // 
-            // label7
+            // LblTo
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(205, 16);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(23, 19);
-            this.label7.TabIndex = 66;
-            this.label7.Text = "至";
+            this.LblTo.AutoSize = true;
+            this.LblTo.Location = new System.Drawing.Point(205, 16);
+            this.LblTo.Name = "LblTo";
+            this.LblTo.Size = new System.Drawing.Size(23, 19);
+            this.LblTo.TabIndex = 66;
+            this.LblTo.Text = "至";
             // 
-            // label8
+            // LblUserTypeRegister
             // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(868, 16);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(68, 19);
-            this.label8.TabIndex = 66;
-            this.label8.Text = "人员类型:";
-            this.label8.Visible = false;
+            this.LblUserTypeRegister.AutoSize = true;
+            this.LblUserTypeRegister.BackColor = System.Drawing.Color.Transparent;
+            this.LblUserTypeRegister.ForeColor = System.Drawing.Color.Black;
+            this.LblUserTypeRegister.Location = new System.Drawing.Point(521, 16);
+            this.LblUserTypeRegister.Name = "LblUserTypeRegister";
+            this.LblUserTypeRegister.Size = new System.Drawing.Size(68, 19);
+            this.LblUserTypeRegister.TabIndex = 66;
+            this.LblUserTypeRegister.Text = "人员类型:";
             // 
-            // label6
+            // LblCreateDate
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(12, 16);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(68, 19);
-            this.label6.TabIndex = 66;
-            this.label6.Text = "操作时间:";
+            this.LblCreateDate.AutoSize = true;
+            this.LblCreateDate.BackColor = System.Drawing.Color.Transparent;
+            this.LblCreateDate.ForeColor = System.Drawing.Color.Black;
+            this.LblCreateDate.Location = new System.Drawing.Point(12, 16);
+            this.LblCreateDate.Name = "LblCreateDate";
+            this.LblCreateDate.Size = new System.Drawing.Size(68, 19);
+            this.LblCreateDate.TabIndex = 66;
+            this.LblCreateDate.Text = "操作时间:";
             // 
-            // label5
+            // LblUserName
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(364, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 19);
-            this.label5.TabIndex = 66;
-            this.label5.Text = "姓名:";
+            this.LblUserName.AutoSize = true;
+            this.LblUserName.BackColor = System.Drawing.Color.Transparent;
+            this.LblUserName.ForeColor = System.Drawing.Color.Black;
+            this.LblUserName.Location = new System.Drawing.Point(364, 16);
+            this.LblUserName.Name = "LblUserName";
+            this.LblUserName.Size = new System.Drawing.Size(40, 19);
+            this.LblUserName.TabIndex = 66;
+            this.LblUserName.Text = "姓名:";
             // 
             // BtnSelectRegister
             // 
@@ -468,7 +404,7 @@
             // TxtUserName
             // 
             this.TxtUserName.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtUserName.Location = new System.Drawing.Point(411, 14);
+            this.TxtUserName.Location = new System.Drawing.Point(409, 14);
             this.TxtUserName.Name = "TxtUserName";
             this.TxtUserName.Size = new System.Drawing.Size(98, 23);
             this.TxtUserName.TabIndex = 33;
@@ -486,7 +422,7 @@
             // 
             // PnlBaseDataDG
             // 
-            this.PnlBaseDataDG.Controls.Add(this.dgBaseData);
+            this.PnlBaseDataDG.Controls.Add(this.DgvBaseData);
             this.PnlBaseDataDG.Controls.Add(this.PagerBaseDataLog);
             this.PnlBaseDataDG.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PnlBaseDataDG.HorizontalScrollbarBarColor = true;
@@ -500,125 +436,69 @@
             this.PnlBaseDataDG.VerticalScrollbarHighlightOnWheel = false;
             this.PnlBaseDataDG.VerticalScrollbarSize = 10;
             // 
-            // dgBaseData
+            // DgvBaseData
             // 
-            this.dgBaseData.AllowUserToAddRows = false;
-            this.dgBaseData.AllowUserToDeleteRows = false;
-            this.dgBaseData.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            this.dgBaseData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
-            this.dgBaseData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgBaseData.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgBaseData.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgBaseData.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgBaseData.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgBaseData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgBaseData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
-            this.dgBaseData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgBaseData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
-            this.dataGridViewTextBoxColumn16,
-            this.Column2,
-            this.dataGridViewTextBoxColumn12});
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.Wheat;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgBaseData.DefaultCellStyle = dataGridViewCellStyle23;
-            this.dgBaseData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgBaseData.EnableHeadersVisualStyles = false;
-            this.dgBaseData.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.dgBaseData.Location = new System.Drawing.Point(0, 0);
-            this.dgBaseData.Name = "dgBaseData";
-            this.dgBaseData.ReadOnly = true;
-            this.dgBaseData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgBaseData.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
-            this.dgBaseData.RowHeadersVisible = false;
-            this.dgBaseData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgBaseData.RowsDefaultCellStyle = dataGridViewCellStyle25;
-            this.dgBaseData.RowTemplate.Height = 50;
-            this.dgBaseData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgBaseData.Size = new System.Drawing.Size(1192, 485);
-            this.dgBaseData.TabIndex = 71;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "theTime";
-            this.dataGridViewTextBoxColumn11.FillWeight = 78.30265F;
-            this.dataGridViewTextBoxColumn11.HeaderText = "时间";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "oper_type";
-            this.dataGridViewTextBoxColumn13.FillWeight = 58.46482F;
-            this.dataGridViewTextBoxColumn13.HeaderText = "操作类型";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "house_name";
-            this.dataGridViewTextBoxColumn14.FillWeight = 215.2233F;
-            this.dataGridViewTextBoxColumn14.HeaderText = "房号";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "user_type";
-            this.dataGridViewTextBoxColumn15.FillWeight = 75.87111F;
-            this.dataGridViewTextBoxColumn15.HeaderText = "人员类型";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "name";
-            this.dataGridViewTextBoxColumn16.FillWeight = 62.26651F;
-            this.dataGridViewTextBoxColumn16.HeaderText = "姓名";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "oper_note";
-            this.Column2.FillWeight = 143.2969F;
-            this.Column2.HeaderText = "备注";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "Operator";
-            this.dataGridViewTextBoxColumn12.FillWeight = 86.42281F;
-            this.dataGridViewTextBoxColumn12.HeaderText = "操作人";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            this.DgvBaseData.AllowUserToAddRows = false;
+            this.DgvBaseData.AllowUserToDeleteRows = false;
+            this.DgvBaseData.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
+            this.DgvBaseData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            this.DgvBaseData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DgvBaseData.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DgvBaseData.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.DgvBaseData.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DgvBaseData.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.DgvBaseData.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvBaseData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            this.DgvBaseData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvBaseData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCreateDate_BaseData,
+            this.colHouseName_BaseData,
+            this.colUserName_BaseData,
+            this.colRemark_BaseData,
+            this.colSystemUserName_BaseData,
+            this.colAction_BaseData,
+            this.colIsAdmin_BaseData});
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.Wheat;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvBaseData.DefaultCellStyle = dataGridViewCellStyle16;
+            this.DgvBaseData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvBaseData.EnableHeadersVisualStyles = false;
+            this.DgvBaseData.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.DgvBaseData.Location = new System.Drawing.Point(0, 0);
+            this.DgvBaseData.Name = "DgvBaseData";
+            this.DgvBaseData.ReadOnly = true;
+            this.DgvBaseData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvBaseData.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            this.DgvBaseData.RowHeadersVisible = false;
+            this.DgvBaseData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvBaseData.RowsDefaultCellStyle = dataGridViewCellStyle18;
+            this.DgvBaseData.RowTemplate.Height = 50;
+            this.DgvBaseData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvBaseData.Size = new System.Drawing.Size(1192, 485);
+            this.DgvBaseData.TabIndex = 71;
             // 
             // PagerBaseDataLog
             // 
@@ -718,7 +598,7 @@
             this.LblAdminTypeBaseData.Name = "LblAdminTypeBaseData";
             this.LblAdminTypeBaseData.Size = new System.Drawing.Size(68, 19);
             this.LblAdminTypeBaseData.TabIndex = 66;
-            this.LblAdminTypeBaseData.Text = "人员类型:";
+            this.LblAdminTypeBaseData.Text = "管理员？:";
             // 
             // LblTimeBaseData
             // 
@@ -784,7 +664,7 @@
             // 
             // PnlCheckLogDG
             // 
-            this.PnlCheckLogDG.Controls.Add(this.dgCheckLog);
+            this.PnlCheckLogDG.Controls.Add(this.DgvCheckLog);
             this.PnlCheckLogDG.Controls.Add(this.PagerCheckLog);
             this.PnlCheckLogDG.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PnlCheckLogDG.HorizontalScrollbarBarColor = true;
@@ -798,116 +678,69 @@
             this.PnlCheckLogDG.VerticalScrollbarHighlightOnWheel = false;
             this.PnlCheckLogDG.VerticalScrollbarSize = 10;
             // 
-            // dgCheckLog
+            // DgvCheckLog
             // 
-            this.dgCheckLog.AllowUserToAddRows = false;
-            this.dgCheckLog.AllowUserToDeleteRows = false;
-            this.dgCheckLog.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            this.dgCheckLog.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle26;
-            this.dgCheckLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgCheckLog.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgCheckLog.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgCheckLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgCheckLog.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgCheckLog.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgCheckLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle27;
-            this.dgCheckLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgCheckLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn6,
-            this.Column1,
-            this.dataGridViewTextBoxColumn8,
-            this.dataGridViewTextBoxColumn9,
-            this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn7});
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.Wheat;
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgCheckLog.DefaultCellStyle = dataGridViewCellStyle28;
-            this.dgCheckLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgCheckLog.EnableHeadersVisualStyles = false;
-            this.dgCheckLog.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.dgCheckLog.Location = new System.Drawing.Point(0, 0);
-            this.dgCheckLog.Name = "dgCheckLog";
-            this.dgCheckLog.ReadOnly = true;
-            this.dgCheckLog.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgCheckLog.RowHeadersDefaultCellStyle = dataGridViewCellStyle29;
-            this.dgCheckLog.RowHeadersVisible = false;
-            this.dgCheckLog.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgCheckLog.RowsDefaultCellStyle = dataGridViewCellStyle30;
-            this.dgCheckLog.RowTemplate.Height = 50;
-            this.dgCheckLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgCheckLog.Size = new System.Drawing.Size(1192, 484);
-            this.dgCheckLog.TabIndex = 70;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "theTime";
-            this.dataGridViewTextBoxColumn6.FillWeight = 94.66334F;
-            this.dataGridViewTextBoxColumn6.HeaderText = "时间";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "check_state";
-            this.Column1.FillWeight = 53.48943F;
-            this.Column1.HeaderText = "操作类型";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "house_name";
-            this.dataGridViewTextBoxColumn8.FillWeight = 200.215F;
-            this.dataGridViewTextBoxColumn8.HeaderText = "房号";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "user_type";
-            this.dataGridViewTextBoxColumn9.FillWeight = 91.72372F;
-            this.dataGridViewTextBoxColumn9.HeaderText = "人员类型";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "name";
-            this.dataGridViewTextBoxColumn10.FillWeight = 75.27656F;
-            this.dataGridViewTextBoxColumn10.HeaderText = "姓名";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "oper_name";
-            this.dataGridViewTextBoxColumn7.FillWeight = 104.4801F;
-            this.dataGridViewTextBoxColumn7.HeaderText = "操作人";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.DgvCheckLog.AllowUserToAddRows = false;
+            this.DgvCheckLog.AllowUserToDeleteRows = false;
+            this.DgvCheckLog.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
+            this.DgvCheckLog.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            this.DgvCheckLog.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DgvCheckLog.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.DgvCheckLog.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.DgvCheckLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DgvCheckLog.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.DgvCheckLog.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvCheckLog.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.DgvCheckLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvCheckLog.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCreateDate_Check,
+            this.colHouseName_Check,
+            this.colUserName_Check,
+            this.colRemark_Check,
+            this.colSystemUserName_Check,
+            this.colAction_Check,
+            this.colIsAdmin_Check});
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.Wheat;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvCheckLog.DefaultCellStyle = dataGridViewCellStyle10;
+            this.DgvCheckLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DgvCheckLog.EnableHeadersVisualStyles = false;
+            this.DgvCheckLog.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.DgvCheckLog.Location = new System.Drawing.Point(0, 0);
+            this.DgvCheckLog.Name = "DgvCheckLog";
+            this.DgvCheckLog.ReadOnly = true;
+            this.DgvCheckLog.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvCheckLog.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            this.DgvCheckLog.RowHeadersVisible = false;
+            this.DgvCheckLog.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvCheckLog.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            this.DgvCheckLog.RowTemplate.Height = 50;
+            this.DgvCheckLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvCheckLog.Size = new System.Drawing.Size(1192, 484);
+            this.DgvCheckLog.TabIndex = 70;
             // 
             // PagerCheckLog
             // 
@@ -935,7 +768,7 @@
             this.PnlCheckLogTop.Controls.Add(this.label3);
             this.PnlCheckLogTop.Controls.Add(this.label9);
             this.PnlCheckLogTop.Controls.Add(this.BtnSelectCheck);
-            this.PnlCheckLogTop.Controls.Add(this.tbInforCheck);
+            this.PnlCheckLogTop.Controls.Add(this.TxtKeyCheck);
             this.PnlCheckLogTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.PnlCheckLogTop.HorizontalScrollbarBarColor = true;
             this.PnlCheckLogTop.HorizontalScrollbarHighlightOnWheel = false;
@@ -948,10 +781,30 @@
             this.PnlCheckLogTop.VerticalScrollbarHighlightOnWheel = false;
             this.PnlCheckLogTop.VerticalScrollbarSize = 10;
             // 
+            // CbxActionNameCheck
+            // 
+            this.CbxActionNameCheck.FormattingEnabled = true;
+            this.CbxActionNameCheck.ItemHeight = 23;
+            this.CbxActionNameCheck.Location = new System.Drawing.Point(620, 10);
+            this.CbxActionNameCheck.Name = "CbxActionNameCheck";
+            this.CbxActionNameCheck.Size = new System.Drawing.Size(73, 29);
+            this.CbxActionNameCheck.TabIndex = 67;
+            // 
+            // LblActionNameCheck
+            // 
+            this.LblActionNameCheck.AutoSize = true;
+            this.LblActionNameCheck.BackColor = System.Drawing.Color.Transparent;
+            this.LblActionNameCheck.ForeColor = System.Drawing.Color.Black;
+            this.LblActionNameCheck.Location = new System.Drawing.Point(547, 15);
+            this.LblActionNameCheck.Name = "LblActionNameCheck";
+            this.LblActionNameCheck.Size = new System.Drawing.Size(68, 19);
+            this.LblActionNameCheck.TabIndex = 68;
+            this.LblActionNameCheck.Text = "操作名称:";
+            // 
             // DtpToCheck
             // 
             this.DtpToCheck.CalendarMonthBackground = System.Drawing.SystemColors.ControlLightLight;
-            this.DtpToCheck.Location = new System.Drawing.Point(224, 17);
+            this.DtpToCheck.Location = new System.Drawing.Point(224, 14);
             this.DtpToCheck.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.DtpToCheck.Name = "DtpToCheck";
             this.DtpToCheck.Size = new System.Drawing.Size(121, 21);
@@ -960,7 +813,7 @@
             // DtpFromCheck
             // 
             this.DtpFromCheck.CalendarMonthBackground = System.Drawing.SystemColors.ControlLightLight;
-            this.DtpFromCheck.Location = new System.Drawing.Point(80, 16);
+            this.DtpFromCheck.Location = new System.Drawing.Point(80, 14);
             this.DtpFromCheck.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.DtpFromCheck.Name = "DtpFromCheck";
             this.DtpFromCheck.Size = new System.Drawing.Size(121, 21);
@@ -972,7 +825,7 @@
             this.CbxAdminTypeCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CbxAdminTypeCheck.FormattingEnabled = true;
             this.CbxAdminTypeCheck.ItemHeight = 23;
-            this.CbxAdminTypeCheck.Location = new System.Drawing.Point(602, 13);
+            this.CbxAdminTypeCheck.Location = new System.Drawing.Point(767, 10);
             this.CbxAdminTypeCheck.Name = "CbxAdminTypeCheck";
             this.CbxAdminTypeCheck.Size = new System.Drawing.Size(68, 29);
             this.CbxAdminTypeCheck.TabIndex = 34;
@@ -980,7 +833,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(199, 18);
+            this.label1.Location = new System.Drawing.Point(199, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(23, 19);
             this.label1.TabIndex = 66;
@@ -991,18 +844,18 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(534, 18);
+            this.label2.Location = new System.Drawing.Point(699, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 19);
             this.label2.TabIndex = 66;
-            this.label2.Text = "人员类型:";
+            this.label2.Text = "管理员？:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(10, 17);
+            this.label3.Location = new System.Drawing.Point(10, 15);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 19);
             this.label3.TabIndex = 66;
@@ -1013,7 +866,7 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(358, 18);
+            this.label9.Location = new System.Drawing.Point(358, 15);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(68, 19);
             this.label9.TabIndex = 66;
@@ -1021,7 +874,7 @@
             // 
             // BtnSelectCheck
             // 
-            this.BtnSelectCheck.Location = new System.Drawing.Point(857, 15);
+            this.BtnSelectCheck.Location = new System.Drawing.Point(857, 12);
             this.BtnSelectCheck.Name = "BtnSelectCheck";
             this.BtnSelectCheck.Size = new System.Drawing.Size(65, 25);
             this.BtnSelectCheck.TabIndex = 36;
@@ -1029,57 +882,224 @@
             this.BtnSelectCheck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.BtnSelectCheck.Click += new System.EventHandler(this.BtnSelectCheck_Click);
             // 
-            // tbInforCheck
+            // TxtKeyCheck
             // 
-            this.tbInforCheck.BackColor = System.Drawing.SystemColors.Window;
-            this.tbInforCheck.Location = new System.Drawing.Point(428, 16);
-            this.tbInforCheck.Name = "tbInforCheck";
-            this.tbInforCheck.Size = new System.Drawing.Size(98, 23);
-            this.tbInforCheck.TabIndex = 33;
+            this.TxtKeyCheck.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtKeyCheck.Location = new System.Drawing.Point(428, 13);
+            this.TxtKeyCheck.Name = "TxtKeyCheck";
+            this.TxtKeyCheck.Size = new System.Drawing.Size(98, 23);
+            this.TxtKeyCheck.TabIndex = 33;
             // 
-            // CbxActionNameCheck
+            // colCreateDate_Check
             // 
-            this.CbxActionNameCheck.FormattingEnabled = true;
-            this.CbxActionNameCheck.ItemHeight = 23;
-            this.CbxActionNameCheck.Location = new System.Drawing.Point(767, 13);
-            this.CbxActionNameCheck.Name = "CbxActionNameCheck";
-            this.CbxActionNameCheck.Size = new System.Drawing.Size(73, 29);
-            this.CbxActionNameCheck.TabIndex = 67;
+            this.colCreateDate_Check.DataPropertyName = "create_date";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.Format = "yyyy-MM-dd HH:mm:ss";
+            dataGridViewCellStyle9.NullValue = null;
+            this.colCreateDate_Check.DefaultCellStyle = dataGridViewCellStyle9;
+            this.colCreateDate_Check.FillWeight = 10F;
+            this.colCreateDate_Check.HeaderText = "时间";
+            this.colCreateDate_Check.MinimumWidth = 120;
+            this.colCreateDate_Check.Name = "colCreateDate_Check";
+            this.colCreateDate_Check.ReadOnly = true;
             // 
-            // LblActionNameCheck
+            // colHouseName_Check
             // 
-            this.LblActionNameCheck.AutoSize = true;
-            this.LblActionNameCheck.BackColor = System.Drawing.Color.Transparent;
-            this.LblActionNameCheck.ForeColor = System.Drawing.Color.Black;
-            this.LblActionNameCheck.Location = new System.Drawing.Point(694, 18);
-            this.LblActionNameCheck.Name = "LblActionNameCheck";
-            this.LblActionNameCheck.Size = new System.Drawing.Size(68, 19);
-            this.LblActionNameCheck.TabIndex = 68;
-            this.LblActionNameCheck.Text = "操作名称:";
+            this.colHouseName_Check.DataPropertyName = "house_name";
+            this.colHouseName_Check.FillWeight = 80F;
+            this.colHouseName_Check.HeaderText = "房屋";
+            this.colHouseName_Check.MinimumWidth = 120;
+            this.colHouseName_Check.Name = "colHouseName_Check";
+            this.colHouseName_Check.ReadOnly = true;
+            this.colHouseName_Check.Visible = false;
             // 
-            // Log
+            // colUserName_Check
+            // 
+            this.colUserName_Check.DataPropertyName = "user_name";
+            this.colUserName_Check.FillWeight = 10F;
+            this.colUserName_Check.HeaderText = "姓名";
+            this.colUserName_Check.MinimumWidth = 60;
+            this.colUserName_Check.Name = "colUserName_Check";
+            this.colUserName_Check.ReadOnly = true;
+            // 
+            // colRemark_Check
+            // 
+            this.colRemark_Check.DataPropertyName = "remark";
+            this.colRemark_Check.FillWeight = 80F;
+            this.colRemark_Check.HeaderText = "备注";
+            this.colRemark_Check.MinimumWidth = 150;
+            this.colRemark_Check.Name = "colRemark_Check";
+            this.colRemark_Check.ReadOnly = true;
+            // 
+            // colSystemUserName_Check
+            // 
+            this.colSystemUserName_Check.DataPropertyName = "system_user_name";
+            this.colSystemUserName_Check.FillWeight = 10F;
+            this.colSystemUserName_Check.HeaderText = "操作人";
+            this.colSystemUserName_Check.MinimumWidth = 60;
+            this.colSystemUserName_Check.Name = "colSystemUserName_Check";
+            this.colSystemUserName_Check.ReadOnly = true;
+            // 
+            // colAction_Check
+            // 
+            this.colAction_Check.DataPropertyName = "action";
+            this.colAction_Check.FillWeight = 10F;
+            this.colAction_Check.HeaderText = "操作名称";
+            this.colAction_Check.MinimumWidth = 80;
+            this.colAction_Check.Name = "colAction_Check";
+            this.colAction_Check.ReadOnly = true;
+            // 
+            // colIsAdmin_Check
+            // 
+            this.colIsAdmin_Check.DataPropertyName = "is_admin";
+            this.colIsAdmin_Check.FillWeight = 10F;
+            this.colIsAdmin_Check.HeaderText = "管理员？";
+            this.colIsAdmin_Check.MinimumWidth = 60;
+            this.colIsAdmin_Check.Name = "colIsAdmin_Check";
+            this.colIsAdmin_Check.ReadOnly = true;
+            // 
+            // colCreateDate_BaseData
+            // 
+            this.colCreateDate_BaseData.DataPropertyName = "create_date";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.Format = "yyyy-MM-dd HH:mm:ss";
+            this.colCreateDate_BaseData.DefaultCellStyle = dataGridViewCellStyle15;
+            this.colCreateDate_BaseData.FillWeight = 78.30265F;
+            this.colCreateDate_BaseData.HeaderText = "时间";
+            this.colCreateDate_BaseData.Name = "colCreateDate_BaseData";
+            this.colCreateDate_BaseData.ReadOnly = true;
+            // 
+            // colHouseName_BaseData
+            // 
+            this.colHouseName_BaseData.DataPropertyName = "house_name";
+            this.colHouseName_BaseData.FillWeight = 215.2233F;
+            this.colHouseName_BaseData.HeaderText = "房屋";
+            this.colHouseName_BaseData.Name = "colHouseName_BaseData";
+            this.colHouseName_BaseData.ReadOnly = true;
+            this.colHouseName_BaseData.Visible = false;
+            // 
+            // colUserName_BaseData
+            // 
+            this.colUserName_BaseData.DataPropertyName = "user_name";
+            this.colUserName_BaseData.FillWeight = 62.26651F;
+            this.colUserName_BaseData.HeaderText = "姓名";
+            this.colUserName_BaseData.Name = "colUserName_BaseData";
+            this.colUserName_BaseData.ReadOnly = true;
+            // 
+            // colRemark_BaseData
+            // 
+            this.colRemark_BaseData.DataPropertyName = "remark";
+            this.colRemark_BaseData.FillWeight = 143.2969F;
+            this.colRemark_BaseData.HeaderText = "备注";
+            this.colRemark_BaseData.Name = "colRemark_BaseData";
+            this.colRemark_BaseData.ReadOnly = true;
+            // 
+            // colSystemUserName_BaseData
+            // 
+            this.colSystemUserName_BaseData.DataPropertyName = "system_user_name";
+            this.colSystemUserName_BaseData.FillWeight = 86.42281F;
+            this.colSystemUserName_BaseData.HeaderText = "操作人";
+            this.colSystemUserName_BaseData.Name = "colSystemUserName_BaseData";
+            this.colSystemUserName_BaseData.ReadOnly = true;
+            // 
+            // colAction_BaseData
+            // 
+            this.colAction_BaseData.DataPropertyName = "action";
+            this.colAction_BaseData.FillWeight = 58.46482F;
+            this.colAction_BaseData.HeaderText = "操作类型";
+            this.colAction_BaseData.Name = "colAction_BaseData";
+            this.colAction_BaseData.ReadOnly = true;
+            // 
+            // colIsAdmin_BaseData
+            // 
+            this.colIsAdmin_BaseData.DataPropertyName = "is_admin";
+            this.colIsAdmin_BaseData.FillWeight = 75.87111F;
+            this.colIsAdmin_BaseData.HeaderText = "管理员";
+            this.colIsAdmin_BaseData.Name = "colIsAdmin_BaseData";
+            this.colIsAdmin_BaseData.ReadOnly = true;
+            // 
+            // colCreateDate
+            // 
+            this.colCreateDate.DataPropertyName = "create_date";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Format = "yyyy-MM-dd HH:mm:ss";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colCreateDate.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colCreateDate.FillWeight = 10F;
+            this.colCreateDate.HeaderText = "时间";
+            this.colCreateDate.MinimumWidth = 120;
+            this.colCreateDate.Name = "colCreateDate";
+            this.colCreateDate.ReadOnly = true;
+            // 
+            // colUserName
+            // 
+            this.colUserName.DataPropertyName = "user_name";
+            this.colUserName.FillWeight = 20F;
+            this.colUserName.HeaderText = "姓名";
+            this.colUserName.MinimumWidth = 80;
+            this.colUserName.Name = "colUserName";
+            this.colUserName.ReadOnly = true;
+            // 
+            // colUserType
+            // 
+            this.colUserType.DataPropertyName = "user_type";
+            this.colUserType.FillWeight = 30F;
+            this.colUserType.HeaderText = "人员类型";
+            this.colUserType.MinimumWidth = 100;
+            this.colUserType.Name = "colUserType";
+            this.colUserType.ReadOnly = true;
+            this.colUserType.Visible = false;
+            // 
+            // colRemark
+            // 
+            this.colRemark.DataPropertyName = "remark";
+            this.colRemark.FillWeight = 80F;
+            this.colRemark.HeaderText = "备注";
+            this.colRemark.MinimumWidth = 150;
+            this.colRemark.Name = "colRemark";
+            this.colRemark.ReadOnly = true;
+            // 
+            // colAction
+            // 
+            this.colAction.DataPropertyName = "action";
+            this.colAction.FillWeight = 20F;
+            this.colAction.HeaderText = "操作名称";
+            this.colAction.MinimumWidth = 60;
+            this.colAction.Name = "colAction";
+            this.colAction.ReadOnly = true;
+            // 
+            // colSystemUserName
+            // 
+            this.colSystemUserName.DataPropertyName = "system_user_name";
+            this.colSystemUserName.FillWeight = 20F;
+            this.colSystemUserName.HeaderText = "操作人";
+            this.colSystemUserName.MinimumWidth = 60;
+            this.colSystemUserName.Name = "colSystemUserName";
+            this.colSystemUserName.ReadOnly = true;
+            // 
+            // UcLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.HtcMain);
-            this.Name = "Log";
+            this.Name = "UcLog";
             this.Size = new System.Drawing.Size(1200, 600);
             this.Load += new System.EventHandler(this.Log_Load);
             this.HtcMain.ResumeLayout(false);
             this.MtpRegisterLog.ResumeLayout(false);
             this.PnlLogDG.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgRegisterLog)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvRegisterLog)).EndInit();
             this.PnlLogTop.ResumeLayout(false);
             this.PnlLogTop.PerformLayout();
             this.MtpBaseDataLog.ResumeLayout(false);
             this.PnlBaseDataDG.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgBaseData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvBaseData)).EndInit();
             this.PnlBaseDataLogTop.ResumeLayout(false);
             this.PnlBaseDataLogTop.PerformLayout();
             this.MtpCheckLog.ResumeLayout(false);
             this.PnlCheckLogDG.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgCheckLog)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvCheckLog)).EndInit();
             this.PnlCheckLogTop.ResumeLayout(false);
             this.PnlCheckLogTop.PerformLayout();
             this.ResumeLayout(false);
@@ -1093,8 +1113,8 @@
         private HM.Form_.HMPanel PnlLogTop;
         private System.Windows.Forms.DateTimePicker DtpTo;
         private System.Windows.Forms.DateTimePicker DtpFrom;
-        private HM.Form_.HMLabel label7;
-        private HM.Form_.HMLabel label6;
+        private HM.Form_.HMLabel LblTo;
+        private HM.Form_.HMLabel LblCreateDate;
         private HM.Form_.HMTile BtnSelectRegister;
         private System.Windows.Forms.TabPage MtpCheckLog;
         private System.Windows.Forms.TabPage MtpBaseDataLog;
@@ -1109,7 +1129,7 @@
         private HM.Form_.HMLabel label3;
         private HM.Form_.HMLabel label9;
         private HM.Form_.HMTile BtnSelectCheck;
-        private HM.Form_.HMTextBox tbInforCheck;
+        private HM.Form_.HMTextBox TxtKeyCheck;
         private HM.Form_.HMPanel PnlCheckLogDG;
         private HM.Form_.HMPager PagerCheckLog;
         private HM.Form_.HMPanel PnlBaseDataDG;
@@ -1126,39 +1146,38 @@
         private HM.Form_.HMLabel LblKeyBaseData;
         private HM.Form_.HMTile BtnSelectBaseData;
         private HM.Form_.HMTextBox TxtKeyBaseData;
-        private HM.Form_.HMDataGridView dgRegisterLog;
-        private HM.Form_.HMDataGridView dgCheckLog;
-        private HM.Form_.HMDataGridView dgBaseData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private HM.Form_.HMDataGridView DgvRegisterLog;
+        private HM.Form_.HMDataGridView DgvCheckLog;
+        private HM.Form_.HMDataGridView DgvBaseData;
         private HM.Form_.HMLabel label16;
-        private HM.Form_.HMLabel label10;
-        private HM.Form_.HMLabel label8;
-        private HM.Form_.HMLabel label5;
+        private HM.Form_.HMLabel LblActionNameRegister;
+        private HM.Form_.HMLabel LblUserTypeRegister;
+        private HM.Form_.HMLabel LblUserName;
         private HM.Form_.HMTextBox TxtUserName;
-        private HM.Form_.HMComboBox CbxSystemUserRegister;
         private HM.Form_.HMComboBox CbxUserTypeRegister;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn action_type_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn action_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn remark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private HM.Form_.HMComboBox CbxActionTypeRegister;
+        private HM.Form_.HMComboBox CbxActionNameRegister;
         private Form_.HMComboBox CbxActionNameCheck;
         private Form_.HMLabel LblActionNameCheck;
+        private Form_.HMComboBox CbxSystemUserRegister;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate_Check;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHouseName_Check;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUserName_Check;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRemark_Check;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSystemUserName_Check;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAction_Check;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsAdmin_Check;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate_BaseData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHouseName_BaseData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUserName_BaseData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRemark_BaseData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSystemUserName_BaseData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAction_BaseData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIsAdmin_BaseData;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCreateDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUserName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUserType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRemark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAction;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSystemUserName;
     }
 }

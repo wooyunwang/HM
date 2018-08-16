@@ -1,5 +1,6 @@
 ﻿using HM.Common_;
 using HM.DTO;
+using HM.DTO.FacePlatform;
 using HM.Enum_.FacePlatform;
 using HM.FacePlatform.DAL;
 using HM.FacePlatform.Model;
@@ -27,7 +28,7 @@ namespace HM.FacePlatform.BLL
         }
 
         /// <summary>
-        /// 
+        /// 通过房屋编号获取小区用户信息
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
@@ -35,6 +36,7 @@ namespace HM.FacePlatform.BLL
         /// <param name="key"></param>
         /// <param name="registeState"></param>
         /// <returns></returns>
+        [ActionResultTryCatch]
         public ActionResult<PagerData<User>> GetUserByHouseCode(int pageIndex, int pageSize, string houseCode, string key, bool? registeState)
         {
             return new ActionResult<PagerData<User>>()
@@ -44,10 +46,25 @@ namespace HM.FacePlatform.BLL
             };
         }
         /// <summary>
+        /// 通过房屋编号获取小区用户信息
+        /// </summary>
+        /// <param name="houseCode"></param>
+        /// <returns></returns>
+        [ActionResultTryCatch]
+        public ActionResult<List<UserForDataBaseDto>> GetUserByHouseCode(string houseCode)
+        {
+            return new ActionResult<List<UserForDataBaseDto>>()
+            {
+                IsSuccess = true,
+                Obj = dal.GetUserByHouseCode(houseCode)
+            };
+        }
+        /// <summary>
         /// 通过名称获取工作人员
         /// </summary>
         /// <param name="workerName"></param>
         /// <returns></returns>
+        [ActionResultTryCatch]
         public ActionResult<User> GetWorkerByName(string workerName)
         {
             ActionResult<User> result = new ActionResult<User>();

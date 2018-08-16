@@ -35,7 +35,7 @@ namespace HM.FacePlatform.Model
         /// <summary>
         /// 与业主关系
         /// </summary>
-        [Required]
+        [Required(AllowEmptyStrings = true)]
         [StringLength(50)]
         public string relation { get; set; }
         /// <summary>

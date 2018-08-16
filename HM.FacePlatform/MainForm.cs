@@ -26,12 +26,7 @@ namespace HM.FacePlatform
         public string _PropertyHouseCode;
         public string _VirtualHouseCode;
 
-        public static string picturePath;
-        public static string capturePath;
-        public static int pictureMaxSize;
         ScheduleJob scheduleJob;
-
-        public static int maxRetryTime;
 
         ProjectBLL _projectBLL;
 
@@ -56,25 +51,6 @@ namespace HM.FacePlatform
         {
 
             if (Program.IsAdmin()) btnUserManage.Visible = true;
-
-            picturePath = Utils_.Config_.GetString("PicturePath");
-            capturePath = Utils_.Config_.GetString("CapturePath");
-            pictureMaxSize = Utils_.Config_.GetInt("PictureMaxSize") ?? 0;
-            maxRetryTime = Utils_.Config_.GetInt("MaxRetryTime") ?? 0;
-
-            Task.Run(() =>
-            {
-                try
-                {
-                    if (!Directory.Exists(picturePath)) Directory.CreateDirectory(picturePath);
-
-                    if (!Directory.Exists(capturePath)) Directory.CreateDirectory(capturePath);
-                }
-                catch (Exception ex)
-                {
-                    LogHelper.Error("创建文件夹失败：" + ex.Message);
-                }
-            });
 
             activeButton = btnRegister;
             activeButton.BackColor = activeColor;

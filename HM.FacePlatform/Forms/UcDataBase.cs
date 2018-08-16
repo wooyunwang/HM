@@ -1,6 +1,9 @@
 ﻿using HM.Common_;
+using HM.DTO;
+using HM.DTO.FacePlatform;
 using HM.FacePlatform.BasicData;
 using HM.FacePlatform.BLL;
+using HM.FacePlatform.Forms;
 using HM.FacePlatform.Model;
 using HM.Form_;
 using HM.Form_.Old;
@@ -16,21 +19,12 @@ namespace HM.FacePlatform
 {
     public partial class UcDataBase : HMUserControl
     {
-        public delegate void ThreadDelegate();
-
-        private VankeBalloonToolTip m_Tip;//提示
-
-        private string theSelectBuilding_code = string.Empty;
-
-        private readonly int indexDeleteColumn = 0;
-        private readonly int indexEditColumn = 1;
-        private readonly int indexInitColumn = 2;
-        private readonly int indexAbandonColumn = 3;
-        private readonly int indexBuildingCheckColumn = 0;
+        VankeBalloonToolTip m_Tip;//提示
         MaoBuildingBLL _maoBuildingBLL;
         BuildingBLL _buildingBLL;
         HouseBLL _houseBLL;
         MaoBLL _maoBLL;
+        UserBLL _userBLL;
 
         public UcDataBase()
         {
@@ -40,28 +34,389 @@ namespace HM.FacePlatform
             _buildingBLL = new BuildingBLL();
             _houseBLL = new HouseBLL();
             _maoBLL = new MaoBLL();
+            _userBLL = new UserBLL();
 
-            dgvPerson.AllowUserToAddRows = false;
-            dgvPerson.AutoGenerateColumns = false;
-            dgvPerson.RowHeadersVisible = false;
+            DgvPerson.AllowUserToAddRows = false;
+            DgvPerson.AutoGenerateColumns = false;
+            DgvPerson.RowHeadersVisible = false;
             m_Tip = new VankeBalloonToolTip(this);
 
-            dgvHouse.AutoGenerateColumns = false;
-            dgBuilding.AutoGenerateColumns = false;
+            DgvHouse.AutoGenerateColumns = false;
+            DgvBuilding.AutoGenerateColumns = false;
         }
 
         private void DataBase_Load(object sender, EventArgs e)
         {
-            LoadBuilding();
-
-            ListMao();
-
-            tbLastPullDate.Text = DateTime.MinValue.ToString();
+            if (HtcMain.SelectedTab != MtpMao)
+            {
+                HtcMain.SelectedTab = MtpMao;
+            }
+            else
+            {
+                HtcMain_SelectedIndexChanged(HtcMain, new TabControlEventArgs(MtpMao, HtcMain.TabPages.IndexOf(MtpMao), new TabControlAction()));
+            }
         }
+
+        #region 猫
+
+        private void BtnRefreshMao_Click(object sender, EventArgs e)
+        {
+            BindMao();
+        }
+
+        /// <summary>
+        /// 已选中的猫ID
+        /// </summary>
+        int? _SelectedMaoID = null;
+        /// <summary>
+        /// 绑定猫
+        /// </summary>
+        private void BindMao()
+        {
+            DgvMao.DataSource = null;
+            DgvMao.DataSource = _maoBLL.Get();
+        }
+        /// <summary>
+        /// 标签切换绑定数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HtcMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (HtcMain.SelectedTab.Equals(MtpMao))
+            {
+                BindMao();
+            }
+            else if (HtcMain.SelectedTab.Equals(MtpDataBase))
+            {
+                LoadBuilding();
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DgvMao_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            HMDataGridView hmDGV = (HMDataGridView)sender;
+            var cells = hmDGV.Rows[e.RowIndex].Cells;
+            Mao mao = hmDGV.Rows[e.RowIndex].DataBoundItem as Mao;
+
+            cells["col_del"].Value = "删除";
+            cells["col_edit"].Value = "编辑";
+            cells["col_map_building"].Value = "去设置";
+            if (mao.is_init)
+            {
+                cells["col_init"].Value = "";
+                cells["col_abandon_init"].Value = "";
+            }
+            else
+            {
+                cells["col_init"].Value = "初始化";
+                cells["col_abandon_init"].Value = "放弃初始化";
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DgvMao_SelectionChanged(object sender, EventArgs e)
+        {
+            var hmDGV = sender as DataGridView;
+            if (hmDGV == null || DgvMao.SelectedRows.Count <= 0)
+            {
+                return;
+            }
+            else
+            {
+                int rowIndex = hmDGV.SelectedRows[0].Index;
+                var cells = hmDGV.Rows[rowIndex].Cells;
+                Mao mao = hmDGV.Rows[rowIndex].DataBoundItem as Mao;
+                _SelectedMaoID = mao.id;
+                BindBuilding(mao.id);
+            }
+        }
+        /// <summary>
+        /// 双击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DgvMao_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            else
+            {
+                HMDataGridView hmDGV = (HMDataGridView)sender;
+                var cells = hmDGV.Rows[e.RowIndex].Cells;
+                Mao mao = hmDGV.Rows[e.RowIndex].DataBoundItem as Mao;
+                if (cells[e.ColumnIndex].OwningColumn.Name == "col_del")
+                {
+                    if (_maoBuildingBLL.Any(it => it.mao_id == mao.id))
+                    {
+                        HMMessageBox.Show(this, "请先取消猫关联的楼栋信息!");
+                    }
+                    else
+                    {
+                        DialogResult dr = HMMessageBox.Show(this, "确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel);
+                        if (dr == DialogResult.OK)
+                        {
+                            int result = _maoBLL.Delete(it => it.id == mao.id);
+                            BindMao();
+                        }
+                    }
+                }
+                else if (cells[e.ColumnIndex].OwningColumn.Name == "col_edit")
+                {
+                    RenderMao(mao);
+                }
+                else if (cells[e.ColumnIndex].OwningColumn.Name == "col_init")
+                {
+                    DialogResult dr = HMMessageBox.Show(this, "确定要初始吗?\r\n如果确定，初始化完成前请不要关闭本系统", "初始化确认", MessageBoxButtons.OKCancel);
+                    if (dr == DialogResult.OK)
+                    {
+                        Mao _mao = _maoBLL.FirstOrDefault(it => it.id == mao.id);
+                        if (_mao != null)
+                        {
+                            _mao.is_init = true;
+                            _maoBLL.Edit(_mao);
+
+                            Task.Run(() =>
+                            {
+                                InitJob job = new InitJob(_mao);
+                                job.Execute();
+                            });
+                        }
+                        BindMao();
+                    }
+                }
+                else if (cells[e.ColumnIndex].OwningColumn.Name == "col_abandon_init")
+                {
+                    DialogResult dr = HMMessageBox.Show(this, "确定放弃初始吗?", "放弃初始化确认", MessageBoxButtons.OKCancel);
+                    if (dr == DialogResult.OK)
+                    {
+                        Mao _mao = _maoBLL.FirstOrDefault(it => it.id == mao.id);
+                        if (_mao != null)
+                        {
+                            _mao.is_init = true;
+                            _maoBLL.Edit(_mao);
+                        }
+                        BindMao();
+                    }
+                }
+                else if (cells[e.ColumnIndex].OwningColumn.Name == "col_map_building")
+                {
+                    MapBuildingFrm mapBuildingFrm = new MapBuildingFrm(mao);
+                    DialogResult dr = mapBuildingFrm.ShowDialog();
+                    if (dr == DialogResult.OK)
+                    {
+                        BindMao();
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// 绑定完成事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DgvMao_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            DgvMao.ClearSelection();
+            if (DgvMao.Rows.Count > 0)
+            {
+                int i = 0;
+                DataGridViewRow row = DgvMao.Rows[i];
+                row.Selected = true;
+                DgvMao.CurrentCell = row.Cells[0];
+                DgvMao.FirstDisplayedScrollingRowIndex = i;
+                Mao mao = row.DataBoundItem as Mao;
+                BindBuilding(mao.id);
+            }
+        }
+        /// <summary>
+        /// 绑定楼栋
+        /// </summary>
+        /// <param name="mao_id"></param>
+        private void BindBuilding(int mao_id)
+        {
+            DgvBuilding.Visible = true;
+            DgvBuilding.DataSource = null;
+            DgvBuilding.DataSource = _buildingBLL.GetBuildingForMao(mao_id);
+        }
+        private void BtnCancelMao_Click(object sender, EventArgs e)
+        {
+            RenderMao(null);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnAddMao_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Mao mao = null;
+                if (BtnAddMao.Tag != null)
+                {
+                    mao = BtnAddMao.Tag as Mao;
+                }
+                int id = (mao?.id) ?? 0;
+                string mao_name_old = (mao?.mao_name) ?? string.Empty;
+                string mao_no = this.tbMaoNo.Text.Trim();
+                string mao_name = this.tbMaoName.Text.Trim();
+                string ip = tbIP.Text.Trim();
+                string port = tbPort.Text.Trim();
+
+                #region check
+                if (string.IsNullOrWhiteSpace(mao_no))
+                {
+                    m_Tip.ShowItTop(tbMaoNo, "请输入猫编号");
+                    return;
+                }
+
+                if (_maoBLL.Any(it => it.mao_no == mao_no && it.id != id))
+                {
+                    m_Tip.ShowItTop(tbMaoNo, "此猫编号已被占用");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(mao_name))
+                {
+                    m_Tip.ShowItTop(tbMaoName, "请输入猫名称");
+                    return;
+                }
+
+                if (_maoBLL.Any(it => it.mao_name == mao_name_old && it.id != id))
+                {
+                    m_Tip.ShowItTop(tbMaoName, "此猫名称已存在");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(ip) || ip == "http://" || ip == "https://")
+                {
+                    m_Tip.ShowItTop(tbIP, "请输入猫IP地址");
+                    return;
+                }
+                else
+                {
+                    string trueIp = ip.Replace("https://", "").Replace("http://", "");
+                    if (!Validate_.IsIPAddress(trueIp))
+                    {
+                        m_Tip.ShowItTop(tbIP, "请输入正确的IP地址");
+                        return;
+                    }
+                }
+                if (_maoBLL.Any(it => it.ip == ip && it.id != id))
+                {
+                    m_Tip.ShowItTop(tbIP, "此IP地址已经存在");
+                    return;
+                }
+                if (string.IsNullOrEmpty(port))
+                {
+                    m_Tip.ShowItTop(tbPort, "请输入猫端口号");
+                    return;
+                }
+                else if (!Validate_.IsIPPort(port))
+                {
+                    m_Tip.ShowItTop(tbPort, "端口号范围应为【0-65535】");
+                    return;
+                }
+
+                #endregion
+                if (id == 0)
+                {
+                    mao = new Mao()
+                    {
+                        ip = ip,
+                        is_init = false,
+                        last_pull_date = DateTime.MinValue,
+                        mao_name = mao_name,
+                        mao_no = mao_no,
+                        port = port
+                    };
+                    var addResult = _maoBLL.Add(mao);
+                    if (addResult != null)
+                    {
+                        Cache_.ClearCache(typeof(Mao).Name);
+                        m_Tip.ShowItTop(BtnAddMao, "新建成功");
+                        BindMao();
+                        RenderMao(null);
+                    }
+                    else
+                    {
+                        m_Tip.ShowItTop(BtnAddMao, "新建失败");
+                    }
+                }
+                else
+                {
+                    var dbMao = _maoBLL.FirstOrDefault(it => it.id == id);
+                    if (dbMao != null)
+                    {
+                        mao = dbMao;
+                        dbMao.ip = ip;
+                        dbMao.mao_name = mao_name;
+                        dbMao.mao_no = mao_no;
+                        dbMao.port = port;
+                        bool editResult = _maoBLL.Edit(dbMao);
+                        if (editResult)
+                        {
+                            Cache_.ClearCache(typeof(Mao).Name);
+                            m_Tip.ShowItTop(BtnAddMao, "修改成功");
+                            BindMao();
+                            RenderMao(null);
+                        }
+                        else
+                        {
+                            m_Tip.ShowItTop(BtnAddMao, "修改失败");
+                        }
+                    }
+                    else
+                    {
+                        m_Tip.ShowItTop(BtnAddMao, "此猫信息已不存在！");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                m_Tip.ShowItTop(BtnAddMao, $"操作失败:{ Exception_.GetInnerException(ex).Message }");
+                LogHelper.Error(ex);
+            }
+        }
+        /// <summary>
+        /// 显示
+        /// </summary>
+        /// <param name="mao"></param>
+        public void RenderMao(Mao mao)
+        {
+            if (mao == null)
+            {
+                tbMaoName.Text = string.Empty;
+                tbMaoNo.Text = string.Empty;
+                tbIP.Text = "http://";
+                tbPort.Text = "8080";
+                BtnAddMao.Text = "新增";
+                BtnAddMao.Tag = null;//在Tag存放Mao对象
+            }
+            else
+            {
+                tbMaoNo.Text = mao.mao_no.ToString();
+                tbMaoName.Text = mao.mao_name;
+                tbIP.Text = mao.ip;
+                tbPort.Text = mao.port.ToString();
+                BtnAddMao.Text = "保存";
+                BtnAddMao.Tag = mao;//在Tag存放Mao对象
+            }
+        }
+        #endregion
 
         public void LoadBuilding()
         {
-            tvBuilding.Nodes.Clear();
+            TvBuilding.Nodes.Clear();
             var root = new TreeNode();
             root.Text = Program._Mainform._ProjectName;
             root.Tag = Program._Mainform._ProjectCode;
@@ -79,89 +434,92 @@ namespace HM.FacePlatform
                 }
             }
 
-            tvBuilding.Nodes.Add(root);
-            tvBuilding.ExpandAll();
+            TvBuilding.Nodes.Add(root);
+            TvBuilding.ExpandAll();
             //让第一行被选中
-            if (tvBuilding.Nodes.Count > 0)
+            if (TvBuilding.Nodes.Count > 0)
             {
-                if (tvBuilding.Nodes[0].Nodes.Count > 0)
+                if (TvBuilding.Nodes[0].Nodes.Count > 0)
                 {
-                    SelectNodeStly(tvBuilding.Nodes[0].Nodes[0]);
+                    SelectNodeStyle(TvBuilding.Nodes[0].Nodes[0]);
                 }
             }
         }
 
         /// <summary>
-        /// 让某一行被选中
+        /// 设置某一行的风格
         /// </summary>
-        private void SelectNodeStly(TreeNode nodeVar)
+        private void SelectNodeStyle(TreeNode nodeVar)
         {
             //取消选中
-            tvBuilding.Nodes[0].ForeColor = Color.Black;
-            tvBuilding.Nodes[0].BackColor = Color.White;
-            foreach (TreeNode node in tvBuilding.Nodes[0].Nodes)
+            TvBuilding.Nodes[0].ForeColor = Color.Black;
+            TvBuilding.Nodes[0].BackColor = Color.White;
+            foreach (TreeNode node in TvBuilding.Nodes[0].Nodes)
             {
                 node.ForeColor = Color.Black;
                 node.BackColor = Color.White;
             }
 
-            tvBuilding.SelectedNode = nodeVar;
+            TvBuilding.SelectedNode = nodeVar;
             nodeVar.Checked = true;
             nodeVar.ForeColor = Color.White;
-            nodeVar.BackColor = Color.FromArgb(67, 152, 237);
+            nodeVar.BackColor = Color.FromArgb(0, 174, 219);
         }
 
         public void LoadHouse()
         {
-            if (tvBuilding.SelectedNode != null)
+            if (TvBuilding.SelectedNode != null)
             {
-                dgvHouse.DataSource = null;
-                var _houses = _houseBLL.Get(it => it.building_code == theSelectBuilding_code, true, it => it.house_name);
-                if (_houses.Count > 0)
+                string building_code = TvBuilding.SelectedNode.Tag as string;
+
+                DgvHouse.DataSource = null;
+                if (TvBuilding.SelectedNode.Parent != null)
                 {
-                    for (int i = 0; i < _houses.Count; i++)
+                    var _houses = _houseBLL.Get(it => it.building_code == building_code, true, it => it.house_name);
+                    if (_houses.Count > 0)
                     {
-                        _houses[i].id = i + 1;
+                        DgvHouse.DataSource = _houses;
                     }
-                    dgvHouse.DataSource = _houses;
                 }
             }
         }
 
-        private void tvBuilding_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TvBuilding_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (tvBuilding.SelectedNode != null)
+            if (TvBuilding.SelectedNode != null)
             {
-                SelectNodeStly(tvBuilding.SelectedNode);
+                string building_code = TvBuilding.SelectedNode.Tag as string;
 
-                if (tvBuilding.SelectedNode.Parent == null)
+                SelectNodeStyle(TvBuilding.SelectedNode);
+
+                if (TvBuilding.SelectedNode.Parent != null)
                 {
-                    theSelectBuilding_code = string.Empty;//选中的是项目
-                }
-                else
-                {
-                    theSelectBuilding_code = tvBuilding.SelectedNode.Tag.ToString();//选中的是楼栋
                     LoadHouse();
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="house_code"></param>
         public void LoadPerson(string house_code)
         {
-            dgvPerson.DataSource = null;
-            List<User> _users = _houseBLL.GetUserByHouseCode(house_code);
-            if (_users != null && _users.Any())
+            DgvPerson.DataSource = null;
+            ActionResult<List<UserForDataBaseDto>> result = _userBLL.GetUserByHouseCode(house_code);
+            if (result.IsSuccess)
             {
-                for (int i = 0; i < _users.Count; i++)
+                if (result.Obj != null && result.Obj.Any())
                 {
-                    _users[i].id = i + 1;
+                    DgvPerson.DataSource = result.Obj;
                 }
-                dgvPerson.DataSource = _users;
+            }
+            else
+            {
+                HMMessageBox.Show(this, result.ToAlertString());
             }
         }
 
-
-        private void dgvHouse_SelectionChanged(object sender, EventArgs e)
+        private void DgvHouse_SelectionChanged(object sender, EventArgs e)
         {
             BindUserData();
         }
@@ -169,277 +527,52 @@ namespace HM.FacePlatform
         public void BindUserData()
         {
 
-            if (dgvHouse.SelectedRows.Count <= 0)
+            if (DgvHouse.SelectedRows.Count <= 0)
             {
                 return;
             }
-            var code = dgvHouse.SelectedRows[0].Cells["ColCode"].Value as string;
+            var code = DgvHouse.SelectedRows[0].Cells["ColCode"].Value as string;
             LoadPerson(code);
         }
 
-        private void btnQuery_Click(object sender, EventArgs e)
+        private void BtnQuery_Click(object sender, EventArgs e)
         {
             LoadHouse();
         }
 
-        private void tbxQuery_TextChanged(object sender, EventArgs e)
+        private void TbxQuery_TextChanged(object sender, EventArgs e)
         {
-            tbxQuery.Text = Validate_.GetSafeString(ControlType.姓名类, tbxQuery.Text);
+            TbxQuery.Text = Validate_.GetSafeString(ControlType.姓名类, TbxQuery.Text);
         }
 
-        #region 猫
-        string theSelectMaoID = string.Empty;
-        private void ListMao()
+        private void DgvBuilding_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            dgMao.DataSource = _maoBLL.Get();
-        }
-
-        private void dgMao_SelectionChanged(object sender, EventArgs e)
-        {
-            var dgv = sender as DataGridView;
-            if (dgv == null || dgMao.SelectedRows.Count <= 0)
-            {
-                return;
-            }
-
-            theSelectMaoID = dgv.SelectedRows[0].Cells["col_mao_id"].Value.ToString();
-            BindBuilding();
-        }
-
-        private void dgMao_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex != -1)
-            {
-                if (e.ColumnIndex == indexDeleteColumn)
-                {
-                    int id = Convert.ToInt32(dgMao.Rows[e.RowIndex].Cells["col_mao_id"].Value);
-
-                    if (_maoBuildingBLL.Any(it => it.mao_id == id))
-                    {
-                        HMMessageBox.Show(this, "请先取消猫对应的楼栋信息!");
-                    }
-                    else
-                    {
-                        DialogResult dr = HMMessageBox.Show(this, "确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel);
-                        if (dr == DialogResult.OK)//如果点击“确定”按钮
-                        {
-                            _maoBLL.Delete(it => it.id == id);
-                            ListMao();
-                        }
-                    }
-                }
-                else if (e.ColumnIndex == indexEditColumn)
-                {
-                    var i = dgMao.CurrentCell.RowIndex;
-                    tbId.Text = dgMao.Rows[i].Cells["col_mao_id"].Value.ToString();
-                    tbMaoNo.Text = dgMao.Rows[i].Cells["col_mao_no"].Value.ToString();
-                    tbMaoName.Text = dgMao.Rows[i].Cells["col_mao_name"].Value.ToString();
-                    tbIP.Text = dgMao.Rows[i].Cells["col_ip"].Value.ToString();
-                    tbPort.Text = dgMao.Rows[i].Cells["col_port"].Value.ToString();
-                    tbIsInit.Text = dgMao.Rows[i].Cells["col_is_init"].Value.ToString();
-                    tbLastPullDate.Text = dgMao.Rows[i].Cells["col_last_pull_date"].Value.ToString();
-                    btnAddMao.Text = "保存修改";
-                }
-                else if (e.ColumnIndex == indexInitColumn)
-                {
-                    DialogResult dr = HMMessageBox.Show(this, "确定要初始吗?\r\n如果确定，初始化完成前请不要关闭本系统", "初始化确认", MessageBoxButtons.OKCancel);
-                    if (dr == DialogResult.OK)
-                    {
-                        int mao_id = Convert.ToInt32(dgMao.Rows[dgMao.CurrentCell.RowIndex].Cells["col_mao_id"].Value);
-
-                        Mao _mao = _maoBLL.FirstOrDefault(it => it.id == mao_id);
-                        if (_mao != null)
-                        {
-                            _mao.is_init = true;
-                            _maoBLL.Edit(_mao);
-
-                            Task.Run(() =>
-                            {
-                                InitJob job = new InitJob(_mao);
-                                job.Execute();
-                            });
-                        }
-
-                        ListMao();
-                    }
-                }
-                else if (e.ColumnIndex == indexAbandonColumn)
-                {
-                    DialogResult dr = HMMessageBox.Show(this, "确定放弃初始吗?", "放弃初始化确认", MessageBoxButtons.OKCancel);
-                    if (dr == DialogResult.OK)
-                    {
-                        int mao_id = Convert.ToInt32(dgMao.Rows[dgMao.CurrentCell.RowIndex].Cells["col_mao_id"].Value);
-                        Mao _mao = _maoBLL.FirstOrDefault(it => it.id == mao_id);
-                        if (_mao != null)
-                        {
-                            _mao.is_init = true;
-                            _maoBLL.Edit(_mao);
-                        }
-
-                        ListMao();
-                    }
-                }
-            }
-        }
-
-        private void dgMao_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            ScrollGridViewOneRow_For(0);
-        }
-        private void ScrollGridViewOneRow_For(int i)
-        {
-            if (dgMao.Rows.Count > 0)
-            {
-                dgMao.ClearSelection();
-                dgMao.CurrentCell = dgMao.Rows[i].Cells[0];//并且滚动条也会自动的滚动，显示选中的行省去了           
-
-                dgMao.Rows[i].Selected = true;
-                dgMao.FirstDisplayedScrollingRowIndex = i;
-
-                theSelectMaoID = dgMao.SelectedRows[0].Cells["col_mao_id"].Value.ToString();
-
-                BindBuilding();
-            }
-        }
-
-        private void dgMao_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-        {
-            dgMao.Rows[e.RowIndex].Cells["colDo"].Value = "删除";
-            dgMao.Rows[e.RowIndex].Cells["colEdit"].Value = "编辑";
-
-            if (dgMao.Rows[e.RowIndex].Cells["col_is_init"].Value.ToBool_() ?? false)
-            {
-                dgMao.Rows[e.RowIndex].Cells["col_init"].Value = "";
-                dgMao.Rows[e.RowIndex].Cells["col_abandon_init"].Value = "";
-            }
-            else
-            {
-                dgMao.Rows[e.RowIndex].Cells["col_init"].Value = "初始化";
-                dgMao.Rows[e.RowIndex].Cells["col_abandon_init"].Value = "放弃初始化";
-            }
-        }
-
-        private void btnAddMao_Click(object sender, EventArgs e)
-        {
-            Mao _mao = new Mao()
-            {
-                id = tbId.Text.ToInt_() ?? 0,
-                mao_no = this.tbMaoNo.Text.Trim(),
-                mao_name = this.tbMaoName.Text.Trim(),
-                ip = tbIP.Text.Trim(),
-                port = tbPort.Text.Trim(),
-                is_init = false,
-                last_pull_date = DateTime.MinValue,
-            };
-
-            try
-            {
-                #region check
-                if (string.IsNullOrWhiteSpace(_mao.mao_no))
-                {
-                    m_Tip.ShowItTop(tbMaoNo, "请输入猫编号");
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(_mao.mao_name))
-                {
-                    m_Tip.ShowItTop(tbMaoName, "请输入猫名称");
-                    return;
-                }
-
-                if (_maoBLL.Any(it => it.mao_no == _mao.mao_no && it.id != _mao.id))
-                {
-                    m_Tip.ShowItTop(tbMaoNo, "此猫编号已被占用");
-                    return;
-                }
-
-                if (_maoBLL.Any(it => it.mao_name == _mao.mao_name && it.id != _mao.id))
-                {
-                    m_Tip.ShowItTop(tbMaoName, "此猫名称已存在");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(_mao.ip) || _mao.ip == "http://" || _mao.ip == "https://")
-                {
-                    m_Tip.ShowItTop(tbIP, "请输入猫IP地址");
-                    return;
-                }
-                if (_maoBLL.Any(it => it.ip == _mao.ip && it.id != _mao.id))
-                {
-                    m_Tip.ShowItTop(tbIP, "此IP地址已经存在");
-                    return;
-                }
-                if (string.IsNullOrEmpty(_mao.port))
-                {
-                    m_Tip.ShowItTop(tbPort, "请输入猫端口号");
-                    return;
-                }
-                else if (!Validate_.IsIPPort(_mao.port))
-                {
-                    m_Tip.ShowItTop(tbPort, "猫端口号长度不能超过5位");
-                    return;
-                }
-
-                #endregion
-
-                _maoBLL.AddOrUpdate(it => it.id == _mao.id, _mao);
-
-                ListMao();
-
-                dgMao.ClearSelection();
-                dgMao.Rows[dgMao.Rows.Count - 1].Selected = true;
-
-                m_Tip.ShowItTop(btnAddMao, "操作成功");
-
-                tbId.Text = "0";
-                tbMaoName.Text = string.Empty;
-                tbMaoNo.Text = string.Empty;
-                tbIP.Text = "http://";
-                tbPort.Text = "8080";
-                tbIsInit.Text = "0";
-                tbLastPullDate.Text = DateTime.MinValue.ToString();
-                btnAddMao.Text = "新增猫";
-            }
-            catch (Exception ex)
-            {
-                m_Tip.ShowItTop(btnAddMao, $"操作失败:{ Exception_.GetInnerException(ex).Message }");
-                LogHelper.Error(ex);
-            }
-        }
-
-        private void BindBuilding()
-        {
-            dgBuilding.DataSource = _buildingBLL.GetBuildingForMao(Convert.ToInt32(theSelectMaoID));
-        }
-        #endregion
-
-
-        private void dgBuilding_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex != -1 && e.ColumnIndex == indexBuildingCheckColumn)
+            if (e.RowIndex < 0) return;
+            if (DgvBuilding.Columns[e.ColumnIndex].Name == "colCB")
             {
                 MaoBuilding _mao_building = new MaoBuilding()
                 {
-                    id = Convert.ToBoolean(dgBuilding.Rows[e.RowIndex].Cells["colCB"].EditedFormattedValue) ? 0 : 1,
-                    mao_id = Convert.ToInt32(theSelectMaoID),
-                    building_code = dgBuilding.Rows[e.RowIndex].Cells["col_building_code"].Value.ToString()
+                    id = Convert.ToBoolean(DgvBuilding.Rows[e.RowIndex].Cells["colCB"].EditedFormattedValue) ? 0 : 1,
+                    mao_id = Convert.ToInt32(_SelectedMaoID),
+                    building_code = DgvBuilding.Rows[e.RowIndex].Cells["col_building_code"].Value.ToString()
                 };
                 _maoBuildingBLL.AddOrRemove(_mao_building);//wait
             }
         }
 
-        private void btnLoadBuilding_Click(object sender, EventArgs e)
+        private void BtnLoadBuilding_Click(object sender, EventArgs e)
         {
             FrmLoadBaseData frmLoad = new FrmLoadBaseData(BaseDataTypeE.楼栋信息, this);
             frmLoad.ShowDialog();
         }
 
-        private void btnLoadHouse_Click(object sender, EventArgs e)
+        private void BtnLoadHouse_Click(object sender, EventArgs e)
         {
             FrmLoadBaseData frmLoad = new FrmLoadBaseData(BaseDataTypeE.房屋信息, this);
             frmLoad.ShowDialog();
         }
 
-        private void btnLoadUser_Click(object sender, EventArgs e)
+        private void BtnLoadUser_Click(object sender, EventArgs e)
         {
             FrmLoadBaseData frmLoad = new FrmLoadBaseData(BaseDataTypeE.业主信息, this);
             frmLoad.ShowDialog();

@@ -20,30 +20,25 @@ namespace HM.FacePlatform
         {
             InitializeComponent();
 
-            HtcMain.SelectedTab = MtpRegisterLog;
-            //HtcMain.TabPages.RemoveAt(HtcMain.TabPages.IndexOf(MtpCheckLog));
-            //HtcMain.TabPages.RemoveAt(HtcMain.TabPages.IndexOf(MtpBaseDataLog));
-
-
             _actionLogBLL = new ActionLogBLL();
             _userBLL = new UserBLL();
             _systemUserBLL = new SystemUserBLL();
 
-            dgRegisterLog.AllowUserToAddRows = false;
-            dgRegisterLog.AutoGenerateColumns = false;
-            dgRegisterLog.RowHeadersVisible = false;
+            DgvRegisterLog.AllowUserToAddRows = false;
+            DgvRegisterLog.AutoGenerateColumns = false;
+            DgvRegisterLog.RowHeadersVisible = false;
         }
         private void Log_Load(object sender, EventArgs e)
         {
-            DtpFrom.Value = DateTime.Now.AddMonths(-1);
-            DtpTo.Value = DateTime.Now;
-            DtpFromCheck.Value = DateTime.Now.AddMonths(-1);
-            DtpToCheck.Value = DateTime.Now;
-            DtpFromBaseData.Value = DateTime.Now.AddMonths(-1);
-            DtpToBaseData.Value = DateTime.Now;
+            DtpFrom.Value = DateTime.Today.AddMonths(-1);
+            DtpTo.Value = DateTime.Today;
+            DtpFromCheck.Value = DateTime.Today.AddMonths(-1);
+            DtpToCheck.Value = DateTime.Today;
+            DtpFromBaseData.Value = DateTime.Today.AddMonths(-1);
+            DtpToBaseData.Value = DateTime.Today;
 
             BindHelper.EnumBind<UserType>(CbxUserTypeRegister);
-            BindHelper.EnumBind<ActionType>(CbxActionTypeRegister);
+            BindHelper.EnumBind<ActionName>(CbxActionNameRegister);
             BindHelper.SystemUserBind(CbxSystemUserRegister);
 
             BindHelper.EnumBind<IsAdminType>(CbxAdminTypeCheck);
@@ -51,7 +46,39 @@ namespace HM.FacePlatform
 
             BindHelper.EnumBind<IsAdminType>(CbxAdminTypeBaseData);
             BindHelper.EnumBind<ActionName>(CbxActionNameBaseData);
-            PagerRegisterLog.Bind();
+
+            if (HtcMain.SelectedTab != MtpRegisterLog)
+            {
+                HtcMain.SelectedTab = MtpRegisterLog;
+            }
+            else
+            {
+                HtcMain_SelectedIndexChanged(HtcMain, new TabControlEventArgs(MtpRegisterLog, HtcMain.TabPages.IndexOf(MtpRegisterLog), new TabControlAction()));
+            }
+        }
+        /// <summary>
+        /// 标签切换绑定
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HtcMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (HtcMain.SelectedTab.Equals(MtpRegisterLog))
+            {
+                PagerRegisterLog.Bind();
+            }
+            else if (HtcMain.SelectedTab.Equals(MtpBaseDataLog))
+            {
+                PagerBaseDataLog.Bind();
+            }
+            else if (HtcMain.SelectedTab.Equals(MtpCheckLog))
+            {
+                PagerCheckLog.Bind();
+            }
+            else
+            {
+                throw new Exception("添加一个Tab,请在此方法添加对应的处理！");
+            }
         }
         /// <summary>
         /// 分页加载数据
@@ -60,15 +87,15 @@ namespace HM.FacePlatform
         /// <returns></returns>
         private int PagerRegisterLog_EventPaging(EventPagingArg e)
         {
-            DateTime from = DtpFrom.Value;
-            DateTime to = DtpTo.Value;
+            DateTime from = DtpFrom.Value.Date;
+            DateTime to = DtpTo.Value.Date;
             string name = TxtUserName.Text.Trim();
-            UserType? user_type = BindHelper.EnumValue<UserType>(CbxUserTypeRegister);
-            ActionType? action_type = BindHelper.EnumValue<ActionType>(CbxActionTypeRegister);
             int? system_user_id = BindHelper.EnumValue<int>(CbxSystemUserRegister);
+            ActionName? action_name = BindHelper.EnumValue<ActionName>(CbxActionNameRegister);
+            UserType? user_type = BindHelper.EnumValue<UserType>(CbxUserTypeRegister);
 
             ActionResult<PagerData<RegisterActionLogDto>> result = _actionLogBLL.GetRegisterLog(PagerRegisterLog.PageIndex, PagerRegisterLog.PageSize,
-                 from, to, name, "", user_type, null, system_user_id);
+                 from, to, name, user_type, action_name, system_user_id);
 
             if (!result.IsSuccess)
             {
@@ -83,6 +110,8 @@ namespace HM.FacePlatform
             //绑定分页控件
             PagerRegisterLog.bsPager.DataSource = result.Obj.rows;
             PagerRegisterLog.bnPager.BindingSource = PagerRegisterLog.bsPager;
+            //分页控件绑定DataGridView
+            DgvRegisterLog.DataSource = PagerRegisterLog.bsPager;
             //返回总记录数
             return result.Obj.total;
         }
@@ -93,30 +122,32 @@ namespace HM.FacePlatform
         /// <returns></returns>
         private int PagerCheckLog_EventPaging(EventPagingArg e)
         {
-            DateTime from = DtpFromCheck.Value;
-            DateTime to = DtpToCheck.Value;
-            string key = TxtKeyBaseData.Text.Trim();
+            DateTime from = DtpFromCheck.Value.Date;
+            DateTime to = DtpToCheck.Value.Date;
+            string key = TxtKeyCheck.Text.Trim();
             IsAdminType? admin_type = BindHelper.EnumValue<IsAdminType>(CbxAdminTypeCheck);
             ActionName? action_name = BindHelper.EnumValue<ActionName>(CbxActionNameCheck);
 
             //int? system_user_id = BindHelper.EnumValue<int>(CbxSystemUserCheck);
 
-            ActionResult<PagerData<ActionLogDto>> result = _actionLogBLL.GetLogButRegister(PagerCheckLog.PageIndex, PagerCheckLog.PageSize,
-                 from, to, key, admin_type, ActionType.审核, action_name, null);
+            ActionResult<PagerData<CheckActionLogDto>> result = _actionLogBLL.GetCheckLog(PagerCheckLog.PageIndex, PagerCheckLog.PageSize,
+                 from, to, key, admin_type, action_name, null);
 
             if (!result.IsSuccess)
             {
                 HMMessageBox.Show(this, result.ToAlertString());
-                result.Obj = new PagerData<ActionLogDto>()
+                result.Obj = new PagerData<CheckActionLogDto>()
                 {
                     pages = 0,
-                    rows = new List<ActionLogDto>(),
+                    rows = new List<CheckActionLogDto>(),
                     total = 0
                 };
             }
             //绑定分页控件
-            PagerRegisterLog.bsPager.DataSource = result.Obj.rows;
-            PagerRegisterLog.bnPager.BindingSource = PagerRegisterLog.bsPager;
+            PagerCheckLog.bsPager.DataSource = result.Obj.rows;
+            PagerCheckLog.bnPager.BindingSource = PagerRegisterLog.bsPager;
+            //分页控件绑定DataGridView
+            DgvCheckLog.DataSource = PagerCheckLog.bsPager;
             //返回总记录数
             return result.Obj.total;
         }
@@ -127,30 +158,32 @@ namespace HM.FacePlatform
         /// <returns></returns>
         private int PagerBaseDataLog_EventPaging(EventPagingArg e)
         {
-            DateTime from = DtpFromBaseData.Value;
-            DateTime to = DtpToBaseData.Value;
+            DateTime from = DtpFromBaseData.Value.Date;
+            DateTime to = DtpToBaseData.Value.Date;
             string key = TxtKeyBaseData.Text.Trim();
             IsAdminType? admin_type = BindHelper.EnumValue<IsAdminType>(CbxAdminTypeBaseData);
             ActionName? action_name = BindHelper.EnumValue<ActionName>(CbxActionNameBaseData);
 
             //int? system_user_id = BindHelper.EnumValue<int>(CbxSystemUserBaseData);
 
-            ActionResult<PagerData<ActionLogDto>> result = _actionLogBLL.GetLogButRegister(PagerBaseDataLog.PageIndex, PagerBaseDataLog.PageSize,
-                 from, to, key, admin_type, ActionType.审核, action_name, null);
+            ActionResult<PagerData<BaseDataActionLogDto>> result = _actionLogBLL.GetBaseDataLog(PagerBaseDataLog.PageIndex, PagerBaseDataLog.PageSize,
+                 from, to, key, admin_type, action_name, null);
 
             if (!result.IsSuccess)
             {
                 HMMessageBox.Show(this, result.ToAlertString());
-                result.Obj = new PagerData<ActionLogDto>()
+                result.Obj = new PagerData<BaseDataActionLogDto>()
                 {
                     pages = 0,
-                    rows = new List<ActionLogDto>(),
+                    rows = new List<BaseDataActionLogDto>(),
                     total = 0
                 };
             }
             //绑定分页控件
-            PagerRegisterLog.bsPager.DataSource = result.Obj.rows;
-            PagerRegisterLog.bnPager.BindingSource = PagerRegisterLog.bsPager;
+            PagerBaseDataLog.bsPager.DataSource = result.Obj.rows;
+            PagerBaseDataLog.bnPager.BindingSource = PagerRegisterLog.bsPager;
+            //分页控件绑定DataGridView
+            DgvBaseData.DataSource = PagerBaseDataLog.bsPager;
             //返回总记录数
             return result.Obj.total;
         }
@@ -182,7 +215,5 @@ namespace HM.FacePlatform
         {
             PagerBaseDataLog.Bind();
         }
-
-
     }
 }

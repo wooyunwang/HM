@@ -83,8 +83,8 @@ namespace HM.FacePlatform
             this.HtcMain.ItemSize = new System.Drawing.Size(120, 30);
             this.HtcMain.Location = new System.Drawing.Point(0, 0);
             this.HtcMain.Name = "HtcMain";
-            this.HtcMain.SelectedIndex = 0;
-            this.HtcMain.Size = new System.Drawing.Size(1268, 491);
+            this.HtcMain.SelectedIndex = 1;
+            this.HtcMain.Size = new System.Drawing.Size(1200, 600);
             this.HtcMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.HtcMain.TabIndex = 99;
             this.HtcMain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -98,7 +98,7 @@ namespace HM.FacePlatform
             this.MtpWaitReview.Location = new System.Drawing.Point(4, 34);
             this.MtpWaitReview.Name = "MtpWaitReview";
             this.MtpWaitReview.Padding = new System.Windows.Forms.Padding(3);
-            this.MtpWaitReview.Size = new System.Drawing.Size(1260, 453);
+            this.MtpWaitReview.Size = new System.Drawing.Size(1192, 562);
             this.MtpWaitReview.TabIndex = 99;
             this.MtpWaitReview.Text = "待审核列表";
             this.MtpWaitReview.UseVisualStyleBackColor = true;
@@ -111,20 +111,20 @@ namespace HM.FacePlatform
             this.FlpWaitReview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FlpWaitReview.Location = new System.Drawing.Point(3, 53);
             this.FlpWaitReview.Name = "FlpWaitReview";
-            this.FlpWaitReview.Size = new System.Drawing.Size(1254, 370);
+            this.FlpWaitReview.Size = new System.Drawing.Size(1186, 479);
             this.FlpWaitReview.TabIndex = 99;
             // 
             // pagerWaitReview
             // 
             this.pagerWaitReview.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pagerWaitReview.Location = new System.Drawing.Point(3, 423);
+            this.pagerWaitReview.Location = new System.Drawing.Point(3, 532);
             this.pagerWaitReview.Margin = new System.Windows.Forms.Padding(4);
             this.pagerWaitReview.Name = "pagerWaitReview";
             this.pagerWaitReview.NMax = 0;
             this.pagerWaitReview.PageCount = 0;
             this.pagerWaitReview.PageCurrent = 1;
             this.pagerWaitReview.PageSize = 16;
-            this.pagerWaitReview.Size = new System.Drawing.Size(1254, 27);
+            this.pagerWaitReview.Size = new System.Drawing.Size(1186, 27);
             this.pagerWaitReview.TabIndex = 102;
             this.pagerWaitReview.EventPaging += new HM.Form_.EventPagingHandler(this.pagerWaitReview_EventPaging);
             // 
@@ -143,7 +143,7 @@ namespace HM.FacePlatform
             this.PnlWaitReview.Dock = System.Windows.Forms.DockStyle.Top;
             this.PnlWaitReview.Location = new System.Drawing.Point(3, 3);
             this.PnlWaitReview.Name = "PnlWaitReview";
-            this.PnlWaitReview.Size = new System.Drawing.Size(1254, 50);
+            this.PnlWaitReview.Size = new System.Drawing.Size(1186, 50);
             this.PnlWaitReview.TabIndex = 99;
             // 
             // LblWait_RegisterType
@@ -232,7 +232,7 @@ namespace HM.FacePlatform
             this.TxtWait_Name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TxtWait_Name.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.TxtWait_Name.HotBackColor = System.Drawing.Color.White;
-            this.TxtWait_Name.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.TxtWait_Name.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.TxtWait_Name.Location = new System.Drawing.Point(74, 13);
             this.TxtWait_Name.LostBackColor = System.Drawing.SystemColors.Window;
             this.TxtWait_Name.LostBorderColor = System.Drawing.Color.Transparent;
@@ -244,7 +244,7 @@ namespace HM.FacePlatform
             // 
             this.CbxAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CbxAll.AutoSize = true;
-            this.CbxAll.Location = new System.Drawing.Point(1022, 17);
+            this.CbxAll.Location = new System.Drawing.Point(954, 17);
             this.CbxAll.Name = "CbxAll";
             this.CbxAll.Size = new System.Drawing.Size(88, 15);
             this.CbxAll.TabIndex = 104;
@@ -255,7 +255,7 @@ namespace HM.FacePlatform
             // BtnBatchReview
             // 
             this.BtnBatchReview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnBatchReview.Location = new System.Drawing.Point(1116, 12);
+            this.BtnBatchReview.Location = new System.Drawing.Point(1048, 12);
             this.BtnBatchReview.Name = "BtnBatchReview";
             this.BtnBatchReview.Size = new System.Drawing.Size(90, 25);
             this.BtnBatchReview.TabIndex = 5;
@@ -281,7 +281,7 @@ namespace HM.FacePlatform
             this.MtpHasReview.Controls.Add(this.PnlHasReview);
             this.MtpHasReview.Location = new System.Drawing.Point(4, 34);
             this.MtpHasReview.Name = "MtpHasReview";
-            this.MtpHasReview.Size = new System.Drawing.Size(1260, 453);
+            this.MtpHasReview.Size = new System.Drawing.Size(1192, 562);
             this.MtpHasReview.TabIndex = 99;
             this.MtpHasReview.Text = "已审核列表";
             this.MtpHasReview.UseVisualStyleBackColor = true;
@@ -294,20 +294,20 @@ namespace HM.FacePlatform
             this.FlpHasReview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FlpHasReview.Location = new System.Drawing.Point(0, 47);
             this.FlpHasReview.Name = "FlpHasReview";
-            this.FlpHasReview.Size = new System.Drawing.Size(1260, 379);
+            this.FlpHasReview.Size = new System.Drawing.Size(1192, 488);
             this.FlpHasReview.TabIndex = 99;
             // 
             // pagerHasReview
             // 
             this.pagerHasReview.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pagerHasReview.Location = new System.Drawing.Point(0, 426);
+            this.pagerHasReview.Location = new System.Drawing.Point(0, 535);
             this.pagerHasReview.Margin = new System.Windows.Forms.Padding(4);
             this.pagerHasReview.Name = "pagerHasReview";
             this.pagerHasReview.NMax = 0;
             this.pagerHasReview.PageCount = 0;
             this.pagerHasReview.PageCurrent = 1;
             this.pagerHasReview.PageSize = 16;
-            this.pagerHasReview.Size = new System.Drawing.Size(1260, 27);
+            this.pagerHasReview.Size = new System.Drawing.Size(1192, 27);
             this.pagerHasReview.TabIndex = 100;
             this.pagerHasReview.EventPaging += new HM.Form_.EventPagingHandler(this.pagerHasReview_EventPaging);
             // 
@@ -326,7 +326,7 @@ namespace HM.FacePlatform
             this.PnlHasReview.Dock = System.Windows.Forms.DockStyle.Top;
             this.PnlHasReview.Location = new System.Drawing.Point(0, 0);
             this.PnlHasReview.Name = "PnlHasReview";
-            this.PnlHasReview.Size = new System.Drawing.Size(1260, 47);
+            this.PnlHasReview.Size = new System.Drawing.Size(1192, 47);
             this.PnlHasReview.TabIndex = 99;
             // 
             // LblHas_CheckType
@@ -461,7 +461,7 @@ namespace HM.FacePlatform
             // 
             this.BtnSelecteHasReview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnSelecteHasReview.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BtnSelecteHasReview.Location = new System.Drawing.Point(759, 10);
+            this.BtnSelecteHasReview.Location = new System.Drawing.Point(752, 11);
             this.BtnSelecteHasReview.Name = "BtnSelecteHasReview";
             this.BtnSelecteHasReview.Size = new System.Drawing.Size(65, 25);
             this.BtnSelecteHasReview.TabIndex = 16;
@@ -483,14 +483,14 @@ namespace HM.FacePlatform
             this.rTextBox1.Size = new System.Drawing.Size(112, 23);
             this.rTextBox1.TabIndex = 14;
             // 
-            // Check
+            // UcCheck
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.HtcMain);
-            this.Name = "Check";
-            this.Size = new System.Drawing.Size(1268, 491);
+            this.Name = "UcCheck";
+            this.Size = new System.Drawing.Size(1200, 600);
             this.Load += new System.EventHandler(this.Check_Load);
             this.HtcMain.ResumeLayout(false);
             this.MtpWaitReview.ResumeLayout(false);

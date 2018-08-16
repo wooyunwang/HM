@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using HM.FacePlatform.BLL;
 using HM.FacePlatform.Model;
 using HM.Utils_;
 
@@ -10,7 +11,7 @@ namespace HM.FacePlatform.UserControls
     public partial class ImageDetailItem : UserControl
     {
         #region 模板参数定义
-        public event Action<ImageDetailItem> DeleteImageAction;
+        public Action<ImageDetailItem> ActionComplete;
 
         public Register _register { get; set; }
 
@@ -34,7 +35,7 @@ namespace HM.FacePlatform.UserControls
         {
             picPhoto.BackgroundImage = _Photo;
 
-            if (!string.IsNullOrEmpty(_register.photo_path)) picPhoto.ImageLocation = Path.Combine(MainForm.picturePath, _register.photo_path);
+            if (!string.IsNullOrEmpty(_register.photo_path)) picPhoto.ImageLocation = Path.Combine(FacePlatformCache.GetPictureDirectory(), _register.photo_path);
 
             this.labCreateTime.Text = _register.create_time.ToString();
             this.lblRegisterType.Text = EnumHelper.GetName(_register.register_type) + " (" + EnumHelper.GetName(_register.check_state) + ")";
@@ -47,9 +48,10 @@ namespace HM.FacePlatform.UserControls
 
         private void btnDeleteImage_Click(object sender, EventArgs e)
         {
-            if (DeleteImageAction != null)
+
+            if (ActionComplete != null)
             {
-                DeleteImageAction(this);
+                ActionComplete(this);
             }
         }
 

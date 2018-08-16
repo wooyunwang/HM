@@ -2,45 +2,27 @@ namespace HM.FacePlatform.Model
 {
     using HM.Enum_.FacePlatform;
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     /// <summary>
     /// 人脸注册
     /// </summary>
-    public partial class Register : BaseModel
+    public partial class RegisterManageDto
     {
-        public Register()
-        {
-            SetDefaultToProperties(this);
-            create_time = change_time = DateTime.Now;
-        }
         /// <summary>
         /// 小区用户唯一标识
         /// </summary>
-        [Required]
-        [StringLength(50)]
         public string user_uid { get; set; }
         /// <summary>
         /// 人脸特征ID
         /// </summary>
-        [Required(AllowEmptyStrings = true)]
-        [StringLength(50)]
         public string face_id { get; set; }
         /// <summary>
         /// 图片地址
         /// </summary>
-        [Required(AllowEmptyStrings = true)]
-        [StringLength(200)]
         public string photo_path { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        [Required(AllowEmptyStrings = true)]
-        [StringLength(200)]
-        [Obsolete("此属相在项目中未用到")]
         public string tc_path { get; set; }
         /// <summary>
         /// 注册类型
@@ -63,9 +45,28 @@ namespace HM.FacePlatform.Model
         /// </summary>
         public IsDelType is_del { get; set; }
         /// <summary>
-        /// 小区用户
+        /// 用户名称
         /// </summary>
-        [ForeignKey("user_uid")]
-        public User user { get; set; }
+        public string user_name { get; set; }
+        /// <summary>
+        /// 有效期
+        /// </summary>
+        public DateTime end_time { get; set; }
+        /// <summary>
+        /// 手机号码
+        /// </summary>
+        public string mobile { get; set; }
+        /// <summary>
+        /// 住址(房屋名称)
+        /// </summary>
+        public string house_name { get; set; }
+        /// <summary>
+        /// 用户类型
+        /// </summary>
+        public UserType user_type { get; set; }
+        /// <summary>
+        /// 小区用户与房屋的关系
+        /// </summary>
+        public string relation { get; set; }
     }
 }

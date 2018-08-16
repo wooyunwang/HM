@@ -74,6 +74,9 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework">
       <HintPath>..\packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll</HintPath>
     </Reference>
@@ -186,6 +189,18 @@
     </Compile>
     <Compile Include="Forms\AddOrUpdateUserFrm.Designer.cs">
       <DependentUpon>AddOrUpdateUserFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FaceJobFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FaceJobFrm.Designer.cs">
+      <DependentUpon>FaceJobFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MapBuildingFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MapBuildingFrm.Designer.cs">
+      <DependentUpon>MapBuildingFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\UcCheck.cs">
       <SubType>UserControl</SubType>
@@ -344,6 +359,12 @@
     <EmbeddedResource Include="Forms\AddOrUpdateUserFrm.resx">
       <DependentUpon>AddOrUpdateUserFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FaceJobFrm.resx">
+      <DependentUpon>FaceJobFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MapBuildingFrm.resx">
+      <DependentUpon>MapBuildingFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UcCheck.resx">
       <DependentUpon>UcCheck.cs</DependentUpon>
     </EmbeddedResource>
@@ -420,20 +441,23 @@
     <EmbeddedResource Include="UserControls\ucPanel.resx">
       <DependentUpon>ucPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
-    <None Include="PrintTemp\导入业主信息的模板.xls">
+    <None Include="Templates\导入业主信息的模板.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="PrintTemp\导入工作人员数据的模板.xls">
+    <None Include="Templates\导入工作人员数据的模板.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="PrintTemp\导入房屋信息的模板.xls">
+    <None Include="Templates\导入房屋信息的模板.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="PrintTemp\导入楼栋信息的模板.xls">
+    <None Include="Templates\导入楼栋信息的模板.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="PrintTemp\导入用户信息的模板.xls">
+    <None Include="Templates\导入用户信息的模板.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">

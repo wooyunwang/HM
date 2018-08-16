@@ -12,7 +12,7 @@ using HM.Form_;
 
 namespace HM.FacePlatform
 {
-    public partial class UcSystemUserManage : UserControl
+    public partial class UcSystemUserManage : HMUserControl
     {
         SystemUserBLL _systemUserBLL;
         DataCrypto dataCrypto;
@@ -34,11 +34,6 @@ namespace HM.FacePlatform
         private readonly int disableIndex = 3;
         private readonly int resetIndex = 4;
 
-        private readonly string idColumnName = "col_id";
-        private readonly string disableColumnName = "col_disable";
-        private readonly string resetPasswordColumnName = "col_reset_password";
-        private readonly string isDelColumnName = "col_is_del";
-        private readonly string isAdminColumnName = "col_is_admin";
         public UcSystemUserManage()
         {
             _systemUserBLL = new SystemUserBLL();
@@ -49,10 +44,11 @@ namespace HM.FacePlatform
 
         private void SystemUserManage_Load(object sender, EventArgs e)
         {
-            gvSystemUser.AutoGenerateColumns = false;
+            DgvSystemUser.AutoGenerateColumns = false;
             PagerSystemManage.Bind();
         }
-        public void BindData() {
+        public void BindData()
+        {
             PagerSystemManage.Bind();
         }
         /// <summary>
@@ -70,6 +66,8 @@ namespace HM.FacePlatform
             //绑定分页控件
             PagerSystemManage.bsPager.DataSource = lstSystemUser;
             PagerSystemManage.bnPager.BindingSource = PagerSystemManage.bsPager;
+            //分页控件绑定DataGridView
+            DgvSystemUser.DataSource = PagerSystemManage.bsPager;
             //返回总记录数
             return totalPage;
         }
@@ -78,7 +76,7 @@ namespace HM.FacePlatform
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void gvSystemUser_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        private void DgvSystemUser_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -90,25 +88,25 @@ namespace HM.FacePlatform
                 switch (systemUser.is_del)
                 {
                     case IsDelType.否:
-                        cells["colDo"].Value = disableText;
+                        cells["col_disable"].Value = disableText;
                         break;
                     case IsDelType.是:
-                        cells["colDo"].Value = enableText;
+                        cells["col_disable"].Value = enableText;
                         break;
                     default:
                         break;
                 }
-                cells[resetPasswordColumnName].Value = resetText;
+                cells["col_reset_password"].Value = resetText;
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
             AddOrUpdateSystemUser form = new AddOrUpdateSystemUser(this);
             form.Show();
         }
 
-        private void gvSystemUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvSystemUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -116,7 +114,7 @@ namespace HM.FacePlatform
             var cells = hmDGV.Rows[e.RowIndex].Cells;
             SystemUser systemUser = hmDGV.Rows[e.RowIndex].DataBoundItem as SystemUser;
 
-            if (e.ColumnIndex == disableIndex)
+            if (hmDGV.Columns[e.ColumnIndex].Name == "col_disable")
             {
                 IsDelType isDelTypeResult;
                 DialogResult dr;
@@ -147,7 +145,7 @@ namespace HM.FacePlatform
                     HMMessageBox.Show(this, "操作失败！");
                 }
             }
-            else if (e.ColumnIndex == resetIndex)
+            else if (hmDGV.Columns[e.ColumnIndex].Name == "col_reset_password")
             {
                 if (DialogResult.OK != HMMessageBox.Show(this, "确定要重置密码吗?", "重置确认", MessageBoxButtons.OKCancel)) return;
 

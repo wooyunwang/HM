@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using HM.FacePlatform.BLL;
 using HM.FacePlatform.Model;
 
 namespace HM.FacePlatform.UserControls
@@ -20,7 +21,7 @@ namespace HM.FacePlatform.UserControls
         {
             if(_register.id > 0)
             {
-                picImage.ImageLocation = Path.Combine(MainForm.picturePath, _register.photo_path);
+                picImage.ImageLocation = Path.Combine(FacePlatformCache.GetPictureDirectory(), _register.photo_path);
             }
             else
             {

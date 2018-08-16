@@ -3,15 +3,15 @@ using System;
 
 namespace HM.DTO
 {
-    public class RegisterActionLogDto : ActionLogDto
+    public class CheckActionLogDto: ActionLogDto
     {
-        /// <summary>
-        /// 用户类型
-        /// </summary>
-        public UserType user_type { get; set; }
         /// <summary>
         /// 小区用户名称
         /// </summary>
         public string user_name { get; set; }
+        /// <summary>
+        /// 房间
+        /// </summary>
+        public string house_name { get; set; }
     }
 }

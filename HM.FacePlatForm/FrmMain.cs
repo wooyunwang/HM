@@ -59,26 +59,30 @@ namespace HM.FacePlatform
         /// <summary>
         /// 初始化
         /// </summary>
-        [System.Obsolete("未确定IsAdmin准确")]
         private void Init()
         {
             if (!Program.IsAdmin())
             {
                 HtcMain.TabPages.Remove(MtpSystemUserManage);
             }
-            foreach (TabPage item in HtcMain.TabPages)
+            //foreach (TabPage item in HtcMain.TabPages)
+            //{
+            //    NavigationButtonClick(HtcMain, new TabControlEventArgs(
+            //        item, HtcMain.TabPages.IndexOf(item), new TabControlAction()
+            //    ));
+            //}
+            if (HtcMain.SelectedTab != MtpDataBase)
             {
-                NavigationButtonClick(HtcMain, new TabControlEventArgs(
-                    item, HtcMain.TabPages.IndexOf(item), new TabControlAction()
-                ));
+                HtcMain.SelectedTab = MtpDataBase;
+            }
+            else
+            {
+                HtcMain_Selected(HtcMain, new TabControlEventArgs(MtpDataBase, HtcMain.TabPages.IndexOf(MtpDataBase), new TabControlAction()));
             }
         }
         private void HtcMain_Selected(object sender, TabControlEventArgs e)
         {
             NavigationButtonClick(sender, e);
-        }
-        private void HtcMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
         /// <summary>
         /// 

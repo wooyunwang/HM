@@ -71,7 +71,7 @@
             this.txtPasswordConfirm.BackColor = System.Drawing.SystemColors.Window;
             this.txtPasswordConfirm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPasswordConfirm.HotBackColor = System.Drawing.Color.White;
-            this.txtPasswordConfirm.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.txtPasswordConfirm.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.txtPasswordConfirm.Location = new System.Drawing.Point(120, 173);
             this.txtPasswordConfirm.LostBackColor = System.Drawing.SystemColors.Window;
             this.txtPasswordConfirm.LostBorderColor = System.Drawing.Color.Transparent;
@@ -87,7 +87,7 @@
             this.txtPassword.BackColor = System.Drawing.SystemColors.Window;
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPassword.HotBackColor = System.Drawing.Color.White;
-            this.txtPassword.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.txtPassword.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.txtPassword.Location = new System.Drawing.Point(120, 135);
             this.txtPassword.LostBackColor = System.Drawing.SystemColors.Window;
             this.txtPassword.LostBorderColor = System.Drawing.Color.Transparent;
@@ -103,7 +103,7 @@
             this.txtUserName.BackColor = System.Drawing.SystemColors.Window;
             this.txtUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtUserName.HotBackColor = System.Drawing.Color.White;
-            this.txtUserName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.txtUserName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.txtUserName.Location = new System.Drawing.Point(120, 93);
             this.txtUserName.LostBackColor = System.Drawing.SystemColors.Window;
             this.txtUserName.LostBorderColor = System.Drawing.Color.Transparent;
@@ -197,6 +197,7 @@
             this.Name = "AddOrUpdateSystemUser";
             this.Padding = new System.Windows.Forms.Padding(13, 60, 13, 13);
             this.Text = "新增登录用户";
+            this.Load += new System.EventHandler(this.AddOrUpdateSystemUser_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

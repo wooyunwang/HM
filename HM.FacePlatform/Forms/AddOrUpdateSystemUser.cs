@@ -83,24 +83,25 @@ namespace HM.FacePlatform.Forms
                     is_admin = IsAdminType.否,
                     is_del = IsDelType.否,
                 };
-                systemUser = _systemUserBLL.Add(systemUser);
-                if (systemUser != null)
+                var result_add = _systemUserBLL.Add(systemUser);
+                if (result_add.IsSuccess)
                 {
+                    systemUser = result_add.Obj;
                     toolTip.ShowIt(btnSave, "添加成功", TooltipIcon.Info);
                     _ucSystemUserManage.BindData();
                     Close();
                 }
                 else
                 {
-                    toolTip.ShowIt(btnSave, "添加失败", TooltipIcon.Error);
+                    toolTip.ShowIt(btnSave, result_add.ToAlertString(), TooltipIcon.Error);
                 }
             }
             else
             {
                 systemUser.user_name = userName;
                 systemUser.password = dataCrypto.Encrypto(password);
-                var result = _systemUserBLL.Edit(systemUser);
-                if (result)
+                var result_edit = _systemUserBLL.Edit(systemUser);
+                if (result_edit.IsSuccess)
                 {
                     toolTip.ShowIt(btnSave, "更新成功", TooltipIcon.Info);
                     _ucSystemUserManage.BindData();
@@ -108,7 +109,7 @@ namespace HM.FacePlatform.Forms
                 }
                 else
                 {
-                    toolTip.ShowIt(btnSave, "更新失败！", TooltipIcon.Error);
+                    toolTip.ShowIt(btnSave, result_edit.ToAlertString(), TooltipIcon.Error);
                 }
             }
         }

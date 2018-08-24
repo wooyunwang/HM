@@ -13,6 +13,18 @@ namespace HM.Face.Common_.EyeCool
     public partial class EyeCoolAPI
     {
         /// <summary>
+        /// 获取版本信息
+        /// </summary>
+        /// <returns></returns>
+        public async Task<FaceVersion> GetFaceVersionAsync()
+        {
+            RequestBase input = new RequestBase();
+            FillIDAndKey(input);
+            return await ROOT_URL.AbsoluteUri.AppendPathSegment("/faceInterface/biovregister/get_jar_info")
+                .WithTimeout(1)
+                .PostJsonAsync(input).ReceiveJson<FaceVersion>();
+        }
+        /// <summary>
         /// 用于采集人员(如业主)身份基础信息（注册）
         /// </summary>
         /// <param name="input"></param>

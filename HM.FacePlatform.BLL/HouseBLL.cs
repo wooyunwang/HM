@@ -7,6 +7,7 @@ using HM.FacePlatform.DAL;
 using HM.Common_;
 using System.Collections.Generic;
 using HM.DTO;
+using HM.DTO.FacePlatform;
 
 namespace HM.FacePlatform.BLL
 {
@@ -15,20 +16,38 @@ namespace HM.FacePlatform.BLL
         new HouseDAL dal = new HouseDAL();
 
         /// <summary>
+        /// 通过房号获取房屋用户关系信息（包括User对象、House对象）
+        /// </summary>
+        /// <param name="house_code"></param>
+        /// <returns></returns>
+        public ActionResult<System.Collections.Generic.List<UserHouse>> GetUserHouseWithUserAndHouse(string house_code)
+        {
+            return new ActionResult<System.Collections.Generic.List<UserHouse>>()
+            {
+                IsSuccess = true,
+                Obj = dal.GetUserHouseWithUserAndHouse((string)house_code)
+            };
+        }
+
+
+        /// <summary>
         /// 获取房屋信息
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
+        /// <param name="buildingCode"></param>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public ActionResult<PagerData<House>> GetHousePageByBuildingCode(int pageIndex, int pageSize, string userName)
+        public ActionResult<PagerData<HouseForRegisterDto>> GetPageHouseForRegisterDto(int pageIndex, int pageSize, string buildingCode, string userName)
         {
-            return new ActionResult<PagerData<House>>()
+            return new ActionResult<PagerData<HouseForRegisterDto>>()
             {
                 IsSuccess = true,
-                Obj = dal.GetHousePageByBuildingCode(pageIndex, pageSize, userName)
+                Obj = dal.GetPageHouseForRegisterDto((int)pageIndex, (int)pageSize, (string)buildingCode, (string)userName)
             };
         }
+
+
 
         //public view_user_house[] GetUserList(DateTime from, DateTime to)
         //{

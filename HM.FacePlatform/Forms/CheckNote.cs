@@ -118,9 +118,9 @@ namespace HM.FacePlatform.Forms
             }
 
             Register registerWithUser = _lstRegisterWithUser[0];
-            tbHouseName.Text = registerWithUser.user.UserHouses.ToList()[0].House.house_name;//wait 不是这么玩的
+            tbHouseName.Text = registerWithUser.user.user_houses.ToList()[0].House.house_name;//wait 不是这么玩的
             tbName.Text = registerWithUser.user.name;
-            tbUserType.Text = Utils_.EnumHelper.GetName(registerWithUser.user.UserHouses.ToList()[0].user_type);//wait 不是这么玩的
+            tbUserType.Text = Utils_.EnumHelper.GetName(registerWithUser.user.user_houses.ToList()[0].user_type);//wait 不是这么玩的
             tbRelation.Text = "";//registerWithUser.relation;//wait 不是这么玩的
             tbRegTime.Text = registerWithUser.user.end_time.ToString();
             txtNote.Text = registerWithUser.user.check_note;
@@ -182,12 +182,12 @@ namespace HM.FacePlatform.Forms
 
             ClearMessage();
 
-            var result = _maoBLL.CheckAllMao();
+            var result = _maoBLL.CheckMao();
             if (result.IsSuccess)
             {
                 DateTime change_time = DateTime.Now;
                 imageItem._register.change_time = change_time;
-                var goodMaos = result.Obj.Where(it => it.Value.Item1 == false).Select(it => it.Value);
+                var goodMaos = result.Obj.Where(it => it.Value.Item1 == true).Select(it => it.Value);
                 Parallel.ForEach(goodMaos,
                    new ParallelOptions { MaxDegreeOfParallelism = Utils_.Config_.GetInt("MaxDegreeOfParallelism") ?? 2 },
                    tplMao =>
@@ -289,7 +289,7 @@ namespace HM.FacePlatform.Forms
                 }
             }
 
-            var result = _maoBLL.CheckAllMao();
+            var result = _maoBLL.CheckMao();
             if (result.IsSuccess)
             {
                 var goodMaos = result.Obj.Where(it => it.Value.Item1 == false).Select(it => it.Value);
@@ -337,7 +337,7 @@ namespace HM.FacePlatform.Forms
                         Mao mao = tplMao.Item2;
                         Face.Common_.Face face = tplMao.Item3;
 
-                        var result = face.Review(project_code, registerWithUser.user.people_id, checkType, "客户端审核");
+                        var result = face.Review(project_code, registerWithUser.user.people_id, registerWithUser.face_id, checkType, "客户端审核");
                         lstActionResult.Add(result);
                         if (result.IsSuccess)
                         {

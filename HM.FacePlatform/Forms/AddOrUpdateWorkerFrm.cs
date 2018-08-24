@@ -200,11 +200,15 @@ namespace HM.FacePlatform.Forms
                     uh.user_type = UserType.工作人员;
                     uh.relation = "";
                     uh.user_uid = "";
-                    var result = _userHouseBLL.Add(_user_house);
-                    if (result != null)
+                    var result_add = _userHouseBLL.Add(_user_house);
+                    if (result_add.IsSuccess)
                     {
-                        _user_house = result;
+                        _user_house = result_add.Obj;
                         m_Tip.ShowItTop(BtnAdd, "新增成功");
+                    }
+                    else
+                    {
+                        m_Tip.ShowItTop(BtnAdd, result_add.ToAlertString());
                     }
                 }
                 else
@@ -218,10 +222,14 @@ namespace HM.FacePlatform.Forms
                     uh.house_code = _house.house_code;
                     uh.user_type = UserType.工作人员;
                     uh.relation = "";
-                    bool result = _userHouseBLL.Edit(_user_house);
-                    if (result)
+                    var result_edit = _userHouseBLL.Edit(_user_house);
+                    if (result_edit.IsSuccess)
                     {
                         m_Tip.ShowItTop(BtnAdd, "修改成功");
+                    }
+                    else
+                    {
+                        m_Tip.ShowItTop(BtnAdd, result_edit.ToAlertString());
                     }
                 }
 

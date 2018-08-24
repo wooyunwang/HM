@@ -13,6 +13,15 @@ namespace HM.Face.Common_.EyeCool
     public partial class EyeCoolAPI
     {
         /// <summary>
+        /// 获取版本信息
+        /// </summary>
+        /// <returns></returns>
+        [EyeCoolRequest]
+        public FaceVersion GetFaceVersion()
+        {
+            return GetFaceVersionAsync().Result;
+        }
+        /// <summary>
         /// 用于采集人员(如业主)身份基础信息（注册）
         /// </summary>
         /// <param name="input"></param>

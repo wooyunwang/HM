@@ -52,6 +52,8 @@
     <Compile Include="AOPAttrubutes\ActionResultTryCatchAttribute.cs" />
     <Compile Include="AOPAttrubutes\TimeAopAttribute.cs" />
     <Compile Include="AOPAttrubutes\TryCatchAttrubute.cs" />
+    <Compile Include="DllImportHelper.cs" />
+    <Compile Include="GeneratePassword.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="LogLevel.cs" />
     <Compile Include="MessageColor.cs" />

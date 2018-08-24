@@ -48,7 +48,7 @@ namespace HM.FacePlatform.DAL
             }
             if (user_type.HasValue)
             {
-                where = where.And(it => it.user.UserHouses.Any(uh => uh.user_type == user_type));
+                where = where.And(it => it.user.user_houses.Any(uh => uh.user_type == user_type));
             }
             where = where.And(it => it.create_time > from);
             if (to.HasValue)
@@ -122,20 +122,20 @@ namespace HM.FacePlatform.DAL
 
                 foreach (var row in pagerData.rows)
                 {
-                    var userHouseDto = lstUserHouseDto.Where(it => it.user_uid == row.user_uid).ToList();
-                    if (userHouseDto != null && userHouseDto.Any())
+                    var lstDto = lstUserHouseDto.Where(it => it.user_uid == row.user_uid).ToList();
+                    if (lstDto != null && lstDto.Any())
                     {
-                        if (userHouseDto.Count() == 1)
+                        if (lstDto.Count() == 1)
                         {
-                            row.house_name = userHouseDto[0].house_name;
-                            row.user_type = userHouseDto[0].user_type;
-                            row.relation = userHouseDto[0].relation;
+                            row.house_name = lstDto[0].house_name;
+                            row.user_type = lstDto[0].user_type;
+                            row.relation = lstDto[0].relation;
                         }
                         else
                         {
-                            row.house_name = userHouseDto[0].house_name + "；等";
-                            row.user_type = userHouseDto[0].user_type;
-                            row.relation = userHouseDto[0].relation + "；等";
+                            row.house_name = lstDto[0].house_name + "；等";
+                            row.user_type = lstDto[0].user_type;
+                            row.relation = lstDto[0].relation + "；等";
                         }
                     }
                 }
@@ -173,6 +173,20 @@ namespace HM.FacePlatform.DAL
                 pagerData.rows = query.ToList();
 
                 return pagerData;
+            }
+        }
+
+        public Register GetWithUser(string user_uid, string face_uid)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                var query = db.Set<Register>()
+                    .Include(it => it.user)
+                    .Where(it => it.user_uid == user_uid && it.face_id == face_uid).AsNoTracking();
+#if DEBUG
+                string sql = query.ToString();
+#endif
+                return query.FirstOrDefault();
             }
         }
         /// <summary>

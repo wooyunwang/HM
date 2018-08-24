@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="https://www.vankeservice.com" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="https://www.vankeservice.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="https://www.vankeservice.com/Imports">
+      <xsd:import schemaLocation="http://localhost:8089/service?xsd=xsd0" namespace="https://www.vankeservice.com" />
+      <xsd:import schemaLocation="http://localhost:8089/service?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="WeChatService_GetBuildingListByProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingListByProject" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetBuildingListByProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuildingListByProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetHouseListByBuilding_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHouseListByBuilding" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetHouseListByBuilding_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHouseListByBuildingResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetPagedUserListByProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPagedUserListByProject" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetPagedUserListByProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPagedUserListByProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetUpdatedUserListByProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUpdatedUserListByProject" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetUpdatedUserListByProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUpdatedUserListByProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetPagedUpdatedRegisterListByProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPagedUpdatedRegisterListByProject" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetPagedUpdatedRegisterListByProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPagedUpdatedRegisterListByProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetRegisterPhoto_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRegisterPhoto" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetRegisterPhoto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRegisterPhotoResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_PutBuilding_InputMessage">
+    <wsdl:part name="parameters" element="tns:PutBuilding" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_PutBuilding_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PutBuildingResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_PutHouse_InputMessage">
+    <wsdl:part name="parameters" element="tns:PutHouse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_PutHouse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PutHouseResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_PutUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:PutUser" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_PutUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PutUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_PutRegister_InputMessage">
+    <wsdl:part name="parameters" element="tns:PutRegister" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_PutRegister_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PutRegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_PutEntryHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:PutEntryHistory" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_PutEntryHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PutEntryHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_TestMethod_InputMessage">
+    <wsdl:part name="parameters" element="tns:TestMethod" />
+  </wsdl:message>
+  <wsdl:message name="WeChatService_TestMethod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TestMethodResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WeChatService">
+    <wsdl:operation name="GetBuildingListByProject">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/GetBuildingListByProject" message="tns:WeChatService_GetBuildingListByProject_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/GetBuildingListByProjectResponse" message="tns:WeChatService_GetBuildingListByProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHouseListByBuilding">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/GetHouseListByBuilding" message="tns:WeChatService_GetHouseListByBuilding_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/GetHouseListByBuildingResponse" message="tns:WeChatService_GetHouseListByBuilding_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPagedUserListByProject">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/GetPagedUserListByProject" message="tns:WeChatService_GetPagedUserListByProject_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/GetPagedUserListByProjectResponse" message="tns:WeChatService_GetPagedUserListByProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUpdatedUserListByProject">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/GetUpdatedUserListByProject" message="tns:WeChatService_GetUpdatedUserListByProject_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/GetUpdatedUserListByProjectResponse" message="tns:WeChatService_GetUpdatedUserListByProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPagedUpdatedRegisterListByProject">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/GetPagedUpdatedRegisterListByProject" message="tns:WeChatService_GetPagedUpdatedRegisterListByProject_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/GetPagedUpdatedRegisterListByProjectResponse" message="tns:WeChatService_GetPagedUpdatedRegisterListByProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRegisterPhoto">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/GetRegisterPhoto" message="tns:WeChatService_GetRegisterPhoto_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/GetRegisterPhotoResponse" message="tns:WeChatService_GetRegisterPhoto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/GetUser" message="tns:WeChatService_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/GetUserResponse" message="tns:WeChatService_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PutBuilding">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/PutBuilding" message="tns:WeChatService_PutBuilding_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/PutBuildingResponse" message="tns:WeChatService_PutBuilding_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PutHouse">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/PutHouse" message="tns:WeChatService_PutHouse_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/PutHouseResponse" message="tns:WeChatService_PutHouse_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PutUser">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/PutUser" message="tns:WeChatService_PutUser_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/PutUserResponse" message="tns:WeChatService_PutUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PutRegister">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/PutRegister" message="tns:WeChatService_PutRegister_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/PutRegisterResponse" message="tns:WeChatService_PutRegister_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PutEntryHistory">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/PutEntryHistory" message="tns:WeChatService_PutEntryHistory_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/PutEntryHistoryResponse" message="tns:WeChatService_PutEntryHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TestMethod">
+      <wsdl:input wsaw:Action="https://www.vankeservice.com/WeChatService/TestMethod" message="tns:WeChatService_TestMethod_InputMessage" />
+      <wsdl:output wsaw:Action="https://www.vankeservice.com/WeChatService/TestMethodResponse" message="tns:WeChatService_TestMethod_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

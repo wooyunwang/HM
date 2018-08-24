@@ -103,7 +103,7 @@ namespace HM.FacePlatform
                 result.Obj = new PagerData<RegisterActionLogDto>()
                 {
                     pages = 0,
-                    rows = new List<RegisterActionLogDto>(),
+                    rows = new System.Collections.Generic.List<RegisterActionLogDto>(),
                     total = 0
                 };
             }
@@ -139,7 +139,7 @@ namespace HM.FacePlatform
                 result.Obj = new PagerData<CheckActionLogDto>()
                 {
                     pages = 0,
-                    rows = new List<CheckActionLogDto>(),
+                    rows = new System.Collections.Generic.List<CheckActionLogDto>(),
                     total = 0
                 };
             }
@@ -175,7 +175,7 @@ namespace HM.FacePlatform
                 result.Obj = new PagerData<BaseDataActionLogDto>()
                 {
                     pages = 0,
-                    rows = new List<BaseDataActionLogDto>(),
+                    rows = new System.Collections.Generic.List<BaseDataActionLogDto>(),
                     total = 0
                 };
             }

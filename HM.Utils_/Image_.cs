@@ -194,7 +194,7 @@ namespace HM.Utils_
             EncoderParameters ep = new EncoderParameters();
             long[] qy = new long[1];
             qy[0] = flag;//设置压缩的比例1-100
-            EncoderParameter eParam = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, qy);
+            EncoderParameter eParam = new EncoderParameter(Encoder.Quality, qy);
             ep.Param[0] = eParam;
 
             try

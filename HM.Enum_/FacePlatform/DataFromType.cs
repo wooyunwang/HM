@@ -40,5 +40,9 @@ namespace HM.Enum_.FacePlatform
         /// 人脸一体机手动添加
         /// </summary>
         人脸一体机手动添加 = 6,
+        /// <summary>
+        /// 云平台添加
+        /// </summary>
+        云平台添加 = 7
     }
 }

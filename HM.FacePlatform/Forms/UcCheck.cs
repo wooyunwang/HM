@@ -104,7 +104,7 @@ namespace HM.FacePlatform
                 result.Obj = new PagerData<Register>()
                 {
                     pages = 0,
-                    rows = new List<Register>(),
+                    rows = new System.Collections.Generic.List<Register>(),
                     total = 0
                 };
             }
@@ -118,7 +118,7 @@ namespace HM.FacePlatform
         /// <summary>
         /// 
         /// </summary>
-        public void FlpWaitReviewRender(List<Register> lstRegisterWithUser)
+        public void FlpWaitReviewRender(System.Collections.Generic.List<Register> lstRegisterWithUser)
         {
             this.UIThread(() =>
             {
@@ -167,7 +167,7 @@ namespace HM.FacePlatform
                 result.Obj = new PagerData<Register>()
                 {
                     pages = 0,
-                    rows = new List<Register>(),
+                    rows = new System.Collections.Generic.List<Register>(),
                     total = 0
                 };
             }
@@ -181,7 +181,7 @@ namespace HM.FacePlatform
         /// <summary>
         /// 
         /// </summary>
-        public void FlpHasReviewRender(List<Register> lstRegisterWithUser)
+        public void FlpHasReviewRender(System.Collections.Generic.List<Register> lstRegisterWithUser)
         {
             this.UIThread(() =>
             {
@@ -247,7 +247,7 @@ namespace HM.FacePlatform
         /// <param name="e"></param>
         private void BtnBatchReview_Click(object sender, EventArgs e)
         {
-            List<Register> lstRegister = new List<Register>();
+            System.Collections.Generic.List<Register> lstRegister = new System.Collections.Generic.List<Register>();
             foreach (Control ucVar in FlpWaitReview.Controls)
             {
                 if (ucVar is ucNoCheck)

@@ -28,21 +28,43 @@ namespace HM.FacePlatform.BLL
         }
 
         /// <summary>
-        /// 通过房屋编号获取小区用户信息
+        /// 分页获取需要同步至云平台的用户数据
+        /// </summary>
+        /// <param name="fromDate"></param>
+        /// <param name="toDate"></param>
+        /// <param name="top">前多少条，null时默认全部</param>
+        /// <returns>小区用户数据包括用户房屋关系数据</returns>
+        public List<User> GetUserForPushToCloud(DateTime fromDate, DateTime? toDate, int? top = null)
+        {
+            return dal.GetUserForPushToCloud(fromDate, toDate, top);
+        }
+
+        /// <summary>
+        /// 通过uid获取用户信息（包含用户房屋关系对象）
+        /// </summary>
+        /// <param name="user_uid"></param>
+        /// <returns></returns>
+        public User GetUserWithUserHouse(string user_uid)
+        {
+            return dal.GetUserWithUserHouse(user_uid);
+        }
+
+        /// <summary>
+        /// 通过房屋编号获取小区工作人员信息
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <param name="houseCode"></param>
-        /// <param name="key"></param>
+        /// <param name="key">姓名或者手机号码</param>
         /// <param name="registeState"></param>
         /// <returns></returns>
         [ActionResultTryCatch]
-        public ActionResult<PagerData<User>> GetUserByHouseCode(int pageIndex, int pageSize, string houseCode, string key, bool? registeState)
+        public ActionResult<PagerData<User>> GetWorkerUserForRegister(int pageIndex, int pageSize, string houseCode, string key, bool? registeState)
         {
             return new ActionResult<PagerData<User>>()
             {
                 IsSuccess = true,
-                Obj = dal.GetUserByHouseCode(pageIndex, pageSize, houseCode, key)
+                Obj = dal.GetWorkerUserForRegister(pageIndex, pageSize, houseCode, key, registeState)
             };
         }
         /// <summary>
@@ -56,7 +78,7 @@ namespace HM.FacePlatform.BLL
             return new ActionResult<List<UserForDataBaseDto>>()
             {
                 IsSuccess = true,
-                Obj = dal.GetUserByHouseCode(houseCode)
+                Obj = dal.GetUserByHouseCode((string)houseCode)
             };
         }
         /// <summary>
@@ -69,7 +91,7 @@ namespace HM.FacePlatform.BLL
         {
             ActionResult<User> result = new ActionResult<User>();
 
-            var worker = FirstOrDefault(it => it.name == workerName && it.UserHouses.Any(uh => uh.user_type == UserType.工作人员 && uh.is_del != IsDelType.是) && it.is_del != IsDelType.是);
+            var worker = FirstOrDefault(it => it.name == workerName && it.user_houses.Any(uh => uh.user_type == UserType.工作人员 && uh.is_del != IsDelType.是) && it.is_del != IsDelType.是);
             if (worker == null)
             {
                 result.IsSuccess = false;

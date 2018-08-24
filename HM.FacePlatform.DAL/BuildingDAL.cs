@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using HM.DTO.FaceForm;
+using HM.DTO.FacePlatform;
 
 namespace HM.FacePlatform.DAL
 {

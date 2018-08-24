@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("HM.AutoUpdate")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("黑猫一号·自动升级·生成程序")]
+[assembly: AssemblyDescription("黑猫一号·自动升级·生成程序")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("HM.AutoUpdate")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("VankeService")]
+[assembly: AssemblyProduct("黑猫一号·自动升级·生成程序")]
+[assembly: AssemblyCopyright("Copyright ©  2018 -2020")]
+[assembly: AssemblyTrademark("VankeService")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型

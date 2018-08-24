@@ -30,7 +30,7 @@ namespace HM.FacePlatform.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PhotoRegisterFrm));
-            this.toolbar = new System.Windows.Forms.ToolStrip();
+            this.Tsp = new System.Windows.Forms.ToolStrip();
             this.btn_SelPic = new System.Windows.Forms.ToolStripButton();
             this.btn_PCCamera = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -54,7 +54,7 @@ namespace HM.FacePlatform.Forms
             this.pnRegisted = new System.Windows.Forms.FlowLayoutPanel();
             this.ed_ResultBox = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.toolbar.SuspendLayout();
+            this.Tsp.SuspendLayout();
             this.groupBox_Info.SuspendLayout();
             this.pnEndTime.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -66,12 +66,12 @@ namespace HM.FacePlatform.Forms
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // toolbar
+            // Tsp
             // 
-            this.toolbar.CanOverflow = false;
-            this.toolbar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolbar.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.toolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Tsp.CanOverflow = false;
+            this.Tsp.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.Tsp.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.Tsp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_SelPic,
             this.btn_PCCamera,
             this.toolStripSeparator1,
@@ -80,11 +80,11 @@ namespace HM.FacePlatform.Forms
             this.btn_RegisterTemp,
             this.btn_DelTemp,
             this.btn_UploadDB});
-            this.toolbar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolbar.Location = new System.Drawing.Point(20, 60);
-            this.toolbar.Name = "toolbar";
-            this.toolbar.Size = new System.Drawing.Size(774, 56);
-            this.toolbar.TabIndex = 22;
+            this.Tsp.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.Tsp.Location = new System.Drawing.Point(20, 60);
+            this.Tsp.Name = "Tsp";
+            this.Tsp.Size = new System.Drawing.Size(774, 56);
+            this.Tsp.TabIndex = 22;
             // 
             // btn_SelPic
             // 
@@ -348,13 +348,13 @@ namespace HM.FacePlatform.Forms
             this.ClientSize = new System.Drawing.Size(814, 546);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox_Info);
-            this.Controls.Add(this.toolbar);
+            this.Controls.Add(this.Tsp);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PhotoRegisterFrm";
             this.Text = "人脸注册";
             this.Load += new System.EventHandler(this.PhotoRegisterFrm_Load);
-            this.toolbar.ResumeLayout(false);
-            this.toolbar.PerformLayout();
+            this.Tsp.ResumeLayout(false);
+            this.Tsp.PerformLayout();
             this.groupBox_Info.ResumeLayout(false);
             this.groupBox_Info.PerformLayout();
             this.pnEndTime.ResumeLayout(false);
@@ -372,7 +372,7 @@ namespace HM.FacePlatform.Forms
 
         #endregion
 
-        private System.Windows.Forms.ToolStrip toolbar;
+        private System.Windows.Forms.ToolStrip Tsp;
         private System.Windows.Forms.ToolStripButton btn_SelPic;
         private System.Windows.Forms.ToolStripButton btn_PCCamera;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

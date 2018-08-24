@@ -31,7 +31,13 @@ namespace HM.Face.Common_.EyeCool
         {
             throw new Exception("测试异常时候EyeCoolRequest特性的捕捉情况！");
         }
-
+        public dynamic GetFaceVersion_Debug()
+        {
+            RequestBase input = new RequestBase();
+            FillIDAndKey(input);
+            return ROOT_URL.AbsoluteUri.AppendPathSegment("/faceInterface/biovregister/get_jar_info")
+                  .PostJsonAsync(input).ReceiveJson<dynamic>().Result;
+        }
         /// <summary>
         /// 用于采集人员(如业主)身份基础信息（注册）
         /// </summary>

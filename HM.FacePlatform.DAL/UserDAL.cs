@@ -28,7 +28,7 @@ namespace HM.FacePlatform.DAL
             using (FacePlatformDB db = new FacePlatformDB())
             {
                 var query = db.Users.IncludeOptimized(
-                    x => x.Registers.Where(p =>
+                    x => x.registers.Where(p =>
                     p.is_del != IsDelType.是
                     && p.create_time > fromDate
                     && p.create_time < toDate
@@ -53,24 +53,95 @@ namespace HM.FacePlatform.DAL
                 return pagerData;
             }
         }
+
         /// <summary>
-        /// 通过房屋编号获取小区用户信息
+        /// 分页获取需要同步至云平台的用户数据
+        /// </summary>
+        /// <param name="fromDate"></param>
+        /// <param name="toDate"></param>
+        /// <param name="top">前多少条，null时默认全部</param>
+        /// <returns>小区用户数据包括用户房屋关系数据</returns>
+        public List<User> GetUserForPushToCloud(DateTime fromDate, DateTime? toDate, int? top = null)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                var query = db.Users.Include(it => it.user_houses)
+                    .Where(it => it.is_del != IsDelType.是)
+                    .Where(it => it.user_houses.Any(uh => uh.is_del != IsDelType.是))
+                    .Where(it => it.change_time >= fromDate);
+#if DEBUG
+                string sql = query.ToString();
+#endif
+                if (toDate.HasValue)
+                {
+                    query = query.Where(it => it.change_time <= toDate);
+                }
+
+                var query2 = query.OrderBy(it => it.change_time)
+                     .AsNoTracking();
+#if DEBUG
+                string sql2 = query2.ToString();
+#endif
+                if (top.HasValue)
+                {
+
+                    return query2.Take(top.Value).ToList();
+                }
+                else
+                {
+                    return query2.ToList();
+                }
+            }
+        }
+        /// <summary>
+        /// 通过uid获取用户信息（包含用户房屋关系对象）
+        /// </summary>
+        /// <param name="user_uid"></param>
+        /// <returns></returns>
+        public User GetUserWithUserHouse(string user_uid)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                return db.Users.Include(it => it.user_houses)
+                      .Where(it => it.user_uid == user_uid).FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// 通过房屋编号获取小区用户信息（包含属于houseCode的UserHouses对象）
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <param name="houseCode"></param>
-        /// <param name="key"></param>
+        /// <param name="key">姓名或者手机号码</param>
+        /// <param name="registeState"></param>
         /// <returns></returns>
-        public PagerData<User> GetUserByHouseCode(int pageIndex, int pageSize, string houseCode, string key)
+        public PagerData<User> GetWorkerUserForRegister(int pageIndex, int pageSize, string houseCode, string key, bool? registeState)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
                 var query = db.Users.IncludeOptimized(
-                    x => x.Registers.Where(p =>
-                    p.is_del != IsDelType.是
+                    x => x.user_houses.Where(p =>
+                    p.is_del != IsDelType.是 && p.house_code == houseCode
                     ))
                     .Where(it => it.is_del != IsDelType.是);
 
+                if (!string.IsNullOrWhiteSpace(key))
+                {
+                    if (Utils_.Validate_.IsCHZN(key))
+                    {
+                        query = query.Where(it => it.name.Contains(key));
+                    }
+                    else if (Utils_.Validate_.IsNumber(key))
+                    {
+                        query = query.Where(it => it.mobile.Contains(key));
+                    }
+                }
+                if (registeState.HasValue)
+                {
+                    CheckType check_state = registeState.Value ? CheckType.审核通过 : CheckType.审核不通过;
+                    query = query.Where(it => it.check_state == check_state);
+                }
                 PagerData<User> pagerData = new PagerData<User>();
                 pagerData.total = query.Count();
                 if (pagerData.total % pageSize == 0)

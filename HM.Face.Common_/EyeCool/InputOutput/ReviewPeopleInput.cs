@@ -15,6 +15,10 @@ namespace HM.Face.Common_.EyeCool
         /// </summary>
         public string people_id { set; get; }
         /// <summary>
+        /// 人脸特征值Id，为空，则按照people_id审核，不为空，则按照face_id审核
+        /// </summary>
+        public string face_id { set; get; }
+        /// <summary>
         /// 审核状态
         /// <!--
         /// 0.待审核1通过2不通过（不通过代表禁用，可激活使用。）

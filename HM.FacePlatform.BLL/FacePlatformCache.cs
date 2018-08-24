@@ -19,9 +19,9 @@ namespace HM.FacePlatform.BLL
         /// 
         /// </summary>
         /// <returns></returns>
-        public static IList<T> GetALL<T>() where T : class, new()
+        public static List<T> GetALL<T>() where T : class, new()
         {
-            return Cache_.GetCacheItem<IList<T>>(typeof(T).Name,
+            return Cache_.GetCacheItem<List<T>>(typeof(T).Name,
              delegate ()
              {
                  BaseBLL<T> bll = new BaseBLL<T>();

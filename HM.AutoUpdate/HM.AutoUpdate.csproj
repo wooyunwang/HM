@@ -55,18 +55,9 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MetroFramework, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroFramework.RunTime.1.2.0.3\lib\net40-Client\MetroFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="MetroFramework.Design, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroFramework.Design.1.2.0.3\lib\net40\MetroFramework.Design.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MetroFramework.Fonts, Version=1.2.0.3, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MetroFramework.Fonts.1.2.0.3\lib\net40\MetroFramework.Fonts.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -78,66 +69,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoUpdater.cs" />
-    <Compile Include="DownloadUpdateDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DownloadUpdateDialog.Designer.cs">
-      <DependentUpon>DownloadUpdateDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Json_.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemindLaterForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RemindLaterForm.designer.cs">
-      <DependentUpon>RemindLaterForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UpdateForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UpdateForm.designer.cs">
-      <DependentUpon>UpdateForm.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="DownloadUpdateDialog.resx">
-      <DependentUpon>DownloadUpdateDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DownloadUpdateDialog.zh.resx">
-      <DependentUpon>DownloadUpdateDialog.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="UpdateHelper.cs" />
+    <Compile Include="UpdateInfo.cs" />
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.zh.resx" />
-    <EmbeddedResource Include="RemindLaterForm.resx">
-      <DependentUpon>RemindLaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RemindLaterForm.zh.resx">
-      <DependentUpon>RemindLaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UpdateForm.resx">
-      <DependentUpon>UpdateForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UpdateForm.zh.resx">
-      <DependentUpon>UpdateForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -149,27 +94,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Resources\ZipExtractor.exe.config" />
+    <None Include="UpdateInfo.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HM.Common_\HM.Common_.csproj">
-      <Project>{a3d97c81-7036-4645-a3cf-2c9a3a366cdb}</Project>
-      <Name>HM.Common_</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HM.Enum_\HM.Enum_.csproj">
-      <Project>{f26f1383-fcca-410d-8e7e-376faed6b8f1}</Project>
-      <Name>HM.Enum_</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HM.Form_\HM.Form_.csproj">
-      <Project>{66915408-d8f4-43b8-b126-ad3fd0706cca}</Project>
-      <Name>HM.Form_</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HM.Utils_\HM.Utils_.csproj">
-      <Project>{38f4f95a-f905-43e1-8ad0-4d7d4820edef}</Project>
-      <Name>HM.Utils_</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -208,10 +136,9 @@
   <ItemGroup>
     <None Include="Resources\ZipExtractor.exe" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="AutoUpdaterTest.xml">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -1,0 +1,12 @@
+{
+  "AppInfo": {
+    "AppId": "HMFacePlatform",
+    "EntryPoint": "HM.FacePlatform.exe",
+    "Description": "",
+    "Version": "1.0.0.0"
+  },
+  "Files": [
+  ],
+  "Mandatory": true,
+  "UpdateUrl": "http://localhost/AutoUpdate/updates/HMFacePlatform/"
+}

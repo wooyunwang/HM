@@ -6,7 +6,9 @@ namespace HM.FacePlatform.WeChatModel
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("wechatface.w_user_fail")]
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class w_user_fail
     {
         public int id { get; set; }

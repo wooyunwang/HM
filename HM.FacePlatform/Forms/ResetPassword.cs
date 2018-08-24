@@ -61,8 +61,8 @@ namespace HM.FacePlatform.Forms
             }
 
             user.password = dataCrypto.Encrypto(password);
-
-            if (_systemUserBLL.Edit(user))
+            var result_edit = _systemUserBLL.Edit(user);
+            if (result_edit.IsSuccess)
             {
                 user.password = user.password;
                 toolTip.ShowIt(btnSave, "修改成功", TooltipIcon.Info);
@@ -74,12 +74,11 @@ namespace HM.FacePlatform.Forms
                         Close();
                     });
                 });
-
             }
             else
             {
                 user.password = oldPassword;
-                toolTip.ShowIt(btnSave, "修改失败!", TooltipIcon.Error);
+                toolTip.ShowIt(btnSave, result_edit.ToAlertString(), TooltipIcon.Error);
             }
         }
     }

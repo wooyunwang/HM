@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- This file contains job definitions in schema version 2.0 format -->
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+    <job>
+      <name>PullBasicData</name>
+      <group>ScheduleJob</group>
+      <description>从微信端服务器初始化项目数据</description>
+      <job-type>FacePlatformService.PullBasicData,FacePlatformService</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <job>
+      <name>PullJob</name>
+      <group>ScheduleJob</group>
+      <description>定时获取微信端服务器上更新的数据</description>
+      <job-type>FacePlatformService.PullJob,FacePlatformService</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <job>
+      <name>PushJob</name>
+      <group>ScheduleJob</group>
+      <description>定时将平台操作更新失败数据推送到微信端服务器</description>
+      <job-type>FacePlatformService.PushJob,FacePlatformService</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <job>
+      <name>ClearScreenJob</name>
+      <group>ScheduleJob</group>
+      <description>定时清除输出信息</description>
+      <job-type>FacePlatformService.ClearScreenJob,FacePlatformService</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    <trigger>
+      <cron>
+        <name>PullJobTrigger</name>
+        <group>ScheduleJobTrigger</group>
+        <job-name>PullJob</job-name>
+        <job-group>ScheduleJob</job-group>
+        <cron-expression>0 */1 * * * ? </cron-expression>
+      </cron>
+    </trigger>
+    <trigger>
+      <cron>
+        <name>PushJobTrigger</name>
+        <group>ScheduleJobTrigger</group>
+        <job-name>PushJob</job-name>
+        <job-group>ScheduleJob</job-group>
+        <cron-expression>0 */1 * * * ? </cron-expression>
+      </cron>
+    </trigger>
+    <trigger>
+      <cron>
+        <name>ClearScreenJobTrigger</name>
+        <group>ScheduleJobTrigger</group>
+        <job-name>ClearScreenJob</job-name>
+        <job-group>ScheduleJob</job-group>
+        <cron-expression>0 0 0 * 1 ?</cron-expression>
+      </cron>
+    </trigger>
+
+  </schedule>
+</job-scheduling-data>

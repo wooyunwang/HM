@@ -14,7 +14,7 @@ namespace HM.Face.Common_.EyeCool
     {
         string APP_ID { get; set; }
         string APP_KEY { get; set; }
-        Uri ROOT_URL { get; set; }
+        public Uri ROOT_URL { get; set; }
         /// <summary>
         /// 构造函数
         /// </summary>

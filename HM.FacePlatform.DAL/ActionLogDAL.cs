@@ -223,7 +223,7 @@ namespace HM.FacePlatform.DAL
                             on al.action_by equals su.id
                             where al.action_type == ActionType.平台注册
                             &&
-                            (user_type == null || u.UserHouses.Any(it => it.user_type == user_type))
+                            (user_type == null || u.user_houses.Any(it => it.user_type == user_type))
                             select new RegisterActionLogDto
                             {
                                 id = al.id,

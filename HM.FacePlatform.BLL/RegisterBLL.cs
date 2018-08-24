@@ -32,14 +32,15 @@ namespace HM.FacePlatform.BLL
                 Obj = dal.GetRegistedAndUserCount()
             }; ;
         }
-        [ActionResultTryCatch]
-        public new ActionResult<Register> Add(Register register)
+        /// <summary>
+        /// 获取注册的人脸信息（包含用户信息对象）
+        /// </summary>
+        /// <param name="user_uid"></param>
+        /// <param name="face_uid"></param>
+        /// <returns></returns>
+        public Register GetWithUser(string user_uid,string face_uid)
         {
-            return new ActionResult<Register>()
-            {
-                IsSuccess = true,
-                Obj = base.Add(register)
-            };
+            return dal.GetWithUser(user_uid, face_uid);
         }
         /// <summary>
         /// 分页获取注册的人脸信息
@@ -86,7 +87,7 @@ namespace HM.FacePlatform.BLL
             }
             if (user_type.HasValue)
             {
-                where = where.And(it => it.user.UserHouses.Any(uh => uh.user_type == user_type));
+                where = where.And(it => it.user.user_houses.Any(uh => uh.user_type == user_type));
             }
             if (register_type.HasValue)
             {

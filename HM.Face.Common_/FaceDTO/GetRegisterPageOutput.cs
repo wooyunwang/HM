@@ -37,11 +37,11 @@ namespace HM.Face.Common_
         /// <summary>
         /// 注册时间(格式: yyyy-MM-dd HH:mm:ss)
         /// </summary>
-        public string RegisterTime { set; get; }
+        public DateTime RegisterTime { set; get; }
         /// <summary>
         /// 有效期(格式: yyyy-MM-dd)
         /// </summary>
-        public string ActiveTime { set; get; }
+        public DateTime? ActiveTime { set; get; }
         /// <summary>
         /// 审核状态
         /// <!--

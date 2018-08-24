@@ -34,15 +34,10 @@ namespace HM.Face.Common_.EyeCool.Tests
             cultureInfo.DateTimeFormat.LongTimePattern = "HH:mm:ss";
             Thread.CurrentThread.CurrentCulture = cultureInfo;
         }
-        [TestMethod()]
-        public void GetVerion() {
-            Version v = new Version("2.0.6");
-            Version v1 = new Version("2.0.61");
-            Version v2 = new Version("2.0.6.0");
-        }
 
 
 #if DEBUG
+
         [TestMethod()]
         public void VoidReturn_DebugTest()
         {
@@ -108,6 +103,12 @@ namespace HM.Face.Common_.EyeCool.Tests
 #endif
 
         [TestMethod()]
+        public void GetFaceVersion()
+        {
+            var result = api.GetFaceVersion_Debug();
+        }
+
+        [TestMethod()]
         public void PeopleCreateTest()
         {
             var input = new PeopleCreateInput()
@@ -117,11 +118,11 @@ namespace HM.Face.Common_.EyeCool.Tests
                 cardNo = Guid.Empty.ToString(),
                 cid = CertificateType.业主卡,
                 cNO = "1",
-                crowd_name = "00000000",
-                fNo = "506",
+                crowd_name = "00000002",
+                fNo = "508",
                 people_id = "",
                 people_name = "蔡泽智",
-                phone = "15112296572",
+                phone = "15112296573",
                 rctype = RCType.手动注册,
                 sex = 1,
                 tip = "拥有"
@@ -378,7 +379,8 @@ namespace HM.Face.Common_.EyeCool.Tests
                                     comments = "单元测试",
                                     crowd_name = "",
                                     people_id = result0.people_id,
-                                    state = ReviewState.不通过
+                                    //face_id = "232323",// result1.face[0].face_id,
+                                    state = ReviewState.通过
                                 });
 
                                 if (result3.res_code_enum == ResponseCode._0000)

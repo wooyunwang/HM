@@ -1,4 +1,5 @@
-﻿using HM.Enum_.FacePlatform;
+﻿using HM.DTO;
+using HM.Enum_.FacePlatform;
 using HM.FacePlatform.BLL;
 using HM.FacePlatform.Forms;
 using HM.FacePlatform.Model;
@@ -7,13 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace HM.FacePlatform.UserControls
 {
-    public partial class ucFamily : UserControl
+    public partial class UcFamily : UserControl
     {
-        public event Action<ucFamily> UpdateAction;
+        public Action<UcFamily> UpdateAction;
         Image _photo = Properties.Resources.userPhoto;
         Image _unregistered = Properties.Resources.unregistered;
         Image _registered = Properties.Resources.registed;
@@ -27,13 +29,20 @@ namespace HM.FacePlatform.UserControls
         /// 
         /// </summary>
         /// <param name="userHouse">关系对象必须包括用户信息和房屋信息</param>
-        public ucFamily(UserHouse userHouse)
+        public UcFamily(UserHouse userHouse)
         {
             InitializeComponent();
             _registerBLL = new RegisterBLL();
             _userHouse = userHouse;
-            _user = userHouse.User;
-            _house = userHouse.House;
+            try
+            {
+                _user = userHouse.User;
+                _house = userHouse.House;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         /// <summary>
         /// 
@@ -49,11 +58,22 @@ namespace HM.FacePlatform.UserControls
         /// </summary>
         public void Init()
         {
-            Register register = _registerBLL.FirstOrDefault(it => it.is_del != IsDelType.是 && it.user_uid == _user.user_uid, true, it => it.id);
-
             picPhoto.BackgroundImage = _photo;
-            picPhoto.ImageLocation = string.IsNullOrEmpty(register.photo_path) ? null : Path.Combine(FacePlatformCache.GetPictureDirectory(), register.photo_path);
-            lblName.Text = $"{ _user.name }({ _user.mobile })";
+
+            IList<Register> lstRegister = _registerBLL.Get(it => it.is_del != IsDelType.是 && it.user_uid == _user.user_uid && it.check_state != CheckType.审核不通过, true, it => it.id);
+            if (lstRegister.Any())
+            {
+                var register = lstRegister.FirstOrDefault();
+                picPhoto.ImageLocation = string.IsNullOrEmpty(register.photo_path) ? null : Path.Combine(FacePlatformCache.GetPictureDirectory(), register.photo_path);
+                lblCountCompare.Text = lstRegister.Where(it => it.check_state == CheckType.审核通过).Count() + "-" + lstRegister.Count;
+            }
+            else
+            {
+                picPhoto.ImageLocation = null;
+                lblCountCompare.Text = "0-0";
+            }
+
+            lblName.Text = _user.name + (string.IsNullOrWhiteSpace(_user.mobile) ? "" : $"（{_user.mobile}）");
             lblUserType.Text = EnumHelper.GetName(_userHouse.user_type);
 
             if (_userHouse.user_type == UserType.工作人员)
@@ -68,7 +88,6 @@ namespace HM.FacePlatform.UserControls
             }
             lblSex.Text = EnumHelper.GetName(_user.sex);
             lblDataFrom.Text = EnumHelper.GetName(_user.data_from);
-            lblId.Text = _userHouse.id.ToString();
             switch (_user.check_state)
             {
                 case CheckType.审核不通过:
@@ -84,17 +103,56 @@ namespace HM.FacePlatform.UserControls
                     break;
             }
         }
-
-        private void btnReg_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnReg_Click(object sender, EventArgs e)
         {
             PhotoRegisterFrm photoRegFrm = new PhotoRegisterFrm(this);
-            photoRegFrm.ShowDialog();
+            DialogResult dr = photoRegFrm.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                Init();
+            }
         }
-        private void btnUpdate_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnUpdate_Click(object sender, EventArgs e)
         {
             if (UpdateAction != null)
             {
                 UpdateAction(this);
+            }
+        }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            FaceJobFrm faceJobFrm = new FaceJobFrm();
+            ActionResult ar = faceJobFrm.BasicCheck();
+            if (ar.IsSuccess)
+            {
+                faceJobFrm.DeleteUserHouse(_userHouse);
+                DialogResult dr = faceJobFrm.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    if (UpdateAction != null)
+                    {
+                        UpdateAction(this);
+                    }
+                }
+            }
+            else
+            {
+                faceJobFrm.BasicCheckRender(ar);
             }
         }
     }

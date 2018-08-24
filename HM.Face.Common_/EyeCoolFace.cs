@@ -66,6 +66,40 @@ namespace HM.Face.Common_
         {
             return Vendor.ToString();
         }
+        public override Uri GetRootUri()
+        {
+            return _API.ROOT_URL;
+        }
+        /// <summary>
+        /// 获取人脸版本信息
+        /// </summary>
+        /// <returns></returns>
+        public override FaceVersion GetFaceVersion()
+        {
+            return _API.GetFaceVersion();
+        }
+        /// <summary>
+        /// 检查图片是否包含人脸
+        /// </summary>
+        /// <param name="faceId"></param>
+        /// <param name="registerType">注册类型</param>
+        /// <param name="imageBase64">imageBase64</param>
+        /// <param name="tip">备注</param>
+        /// <returns></returns>
+        [ActionResultTryCatch]
+        public override ActionResult<CheckingOutput> Checking(string faceId, RegisterType registerType, string imageBase64, string tip = "")
+        {
+            ActionResult<CheckingOutput> result = new ActionResult<CheckingOutput>();
+            CheckingOutput output = _API.Checking(new CheckingInput()
+            {
+                face_id = faceId,
+                file = imageBase64,
+                rctype = Mapper.Map<RCType>(registerType),
+                tip = tip
+            });
+            result.Obj = output;
+            return result;
+        }
         /// <summary>
         /// 检查图片是否包含人脸
         /// </summary>
@@ -75,7 +109,7 @@ namespace HM.Face.Common_
         /// <param name="tip">备注</param>
         /// <returns></returns>
         [ActionResultTryCatch]
-        public override ActionResult<CheckingOutput> Checking(string faceId, RegisterType registerType, string filePath, string tip = "")
+        public override ActionResult<CheckingOutput> Checking2(string faceId, RegisterType registerType, string filePath, string tip = "")
         {
             ActionResult<CheckingOutput> result = new ActionResult<CheckingOutput>();
             if (string.IsNullOrWhiteSpace(filePath))
@@ -161,9 +195,9 @@ namespace HM.Face.Common_
         /// <param name="face_id2"></param>
         /// <returns></returns>
         [ActionResultTryCatch]
-        public override ActionResult MatchCompare(string face_id1, string face_id2)
+        public override ActionResult<bool> MatchCompare(string face_id1, string face_id2)
         {
-            ActionResult result = new ActionResult();
+            ActionResult<bool> result = new ActionResult<bool>();
             if (!string.IsNullOrWhiteSpace(face_id1))
             {
                 result.IsSuccess = false;
@@ -185,11 +219,13 @@ namespace HM.Face.Common_
                 if (matchCompareOutput.res_code_enum == ResponseCode._0000 && matchCompareOutput.similarity >= similarity)
                 {
                     result.IsSuccess = true;
+                    result.Obj = true;//表示同一个人
                     result.Add(matchCompareOutput.res_msg);
                 }
                 else
                 {
-                    result.IsSuccess = false;
+                    result.IsSuccess = true;
+                    result.Obj = false;//表示非同一个人
                     result.Add($"两张照片的匹配度为【{matchCompareOutput.similarity} < {similarity}】，判定为非同一个人！");
                     result.Add(matchCompareOutput.res_msg);
                 }
@@ -203,9 +239,9 @@ namespace HM.Face.Common_
         /// <param name="filePath2"></param>
         /// <returns></returns>
         [ActionResultTryCatch]
-        public override ActionResult MatchCompare1(string filePath1, string filePath2)
+        public override ActionResult<bool> MatchCompare1(string filePath1, string filePath2)
         {
-            ActionResult result = new ActionResult();
+            ActionResult<bool> result = new ActionResult<bool>();
             result.Add(CheckPath(filePath1, "filePath1"));
             result.Add(CheckPath(filePath2, "filePath2"));
             if (result.IsSuccess)
@@ -251,34 +287,49 @@ namespace HM.Face.Common_
         /// <summary>
         /// 两张图片内容比较是否为同一个人
         /// </summary>
-        /// <param name="filePath"></param>
+        /// <param name="imageBase64"></param>
         /// <param name="faceId"></param>
         /// <returns></returns>
         [ActionResultTryCatch]
-        public override ActionResult MatchCompare2(string filePath, string faceId)
+        public override ActionResult<bool> MatchCompare2(string imageBase64, RegisterType registerType, string faceId)
         {
-            ActionResult result = new ActionResult();
+            ActionResult<bool> result = new ActionResult<bool>();
+            CheckingOutput output = _API.Checking(new CheckingInput()
+            {
+                face_id = Utils_.Key_.SequentialGuid(),
+                file = imageBase64,
+                rctype = FaceEnumConverter.RegisterType_RCType(registerType),
+                tip = "图片比较"
+            });
+
+            if (string.IsNullOrEmpty(output?.face?[0].face_id))
+            {
+                result.IsSuccess = false;
+                result.Add($"图片不包含人脸信息！");
+            }
+
+            if (result.IsSuccess)
+            {
+                result.Add(MatchCompare(output?.face?[0].face_id, faceId));
+            }
+            return result;
+        }
+        /// <summary>
+        /// 两张图片内容比较是否为同一个人
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="registerType"></param>
+        /// <param name="faceId"></param>
+        /// <returns></returns>
+        [ActionResultTryCatch]
+        public override ActionResult<bool> MatchCompare3(string filePath, RegisterType registerType, string faceId)
+        {
+            ActionResult<bool> result = new ActionResult<bool>();
             result.Add(CheckPath(filePath, "filePath"));
             if (result.IsSuccess)
             {
-                CheckingOutput output = _API.Checking(new CheckingInput()
-                {
-                    face_id = Utils_.Key_.SequentialGuid(),
-                    file = Utils_.Image_.ImageToBase64(filePath),
-                    rctype = RCType.自动注册,
-                    tip = "图片比较"
-                });
-
-                if (string.IsNullOrEmpty(output?.face?[0].face_id))
-                {
-                    result.IsSuccess = false;
-                    result.Add($"图片【{filePath}】不包含人脸信息！！");
-                }
-
-                if (result.IsSuccess)
-                {
-                    result.Add(MatchCompare(output?.face?[0].face_id, faceId));
-                }
+                var file = Utils_.Image_.ImageToBase64(filePath);
+                result.Add(MatchCompare2(file, registerType, faceId));
             }
             return result;
         }
@@ -367,7 +418,7 @@ namespace HM.Face.Common_
         /// <param name="comments"></param>
         /// <returns></returns>
         [ActionResultTryCatch]
-        public override ActionResult Review(string projectCode, string peopleId, CheckType state, string comments)
+        public override ActionResult Review(string projectCode, string peopleId, string faceId, CheckType state, string comments)
         {
             ActionResult result = new ActionResult();
             ReviewPeopleOutput output = _API.ReviewPeople(new ReviewPeopleInput
@@ -375,6 +426,7 @@ namespace HM.Face.Common_
                 comments = comments,
                 crowd_name = projectCode,
                 people_id = peopleId,
+                face_id = faceId,
                 //state = state
             });
 

@@ -107,6 +107,7 @@
     <Compile Include="FaceDTO\GetFacePassDataOutput.cs" />
     <Compile Include="FaceDTO\GetRegisterPageInput.cs" />
     <Compile Include="FaceDTO\GetRegisterPageOutput.cs" />
+    <Compile Include="FaceDTO\FaceVersion.cs" />
     <Compile Include="VanRuiFace.cs" />
     <Compile Include="Face.cs" />
     <Compile Include="EyeCool\InputOutput\ReviewPeopleInput.cs" />

@@ -11,6 +11,7 @@ using HM.DTO;
 using System.Threading;
 using HM.Form_;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace HM.FacePlatform
 {
@@ -132,15 +133,36 @@ namespace HM.FacePlatform
             }
             else
             {
-                Program._Account = result;
-                Program._Mainform = new FrmMain();
-                Program._Mainform._ClosingHandler += new closingHandler(FrmLoginClosing);
-                Program._Mainform._ProjectCode = project.project_code;
-                Program._Mainform._ProjectName = project.project_name;
-                Program._Mainform._PropertyHouseCode = "w" + project.project_code + "0123456789012345678";
-                Program._Mainform._VirtualHouseCode = "n" + project.project_code + "0123456789012345678";
-                this.Hide();
-                Program._Mainform.ShowDialog();
+                AutoUpdate.UpdateHelper updateHelper = new AutoUpdate.UpdateHelper
+                {
+                    _OnError = OnError
+                };
+                updateHelper.Init();
+                bool needUpdate = updateHelper.QuickVersionUpdate();
+                string msg = string.Format("最新版本为{0}。立即更新吗？", updateHelper.TempUpdateInfo()?.AppInfo?.Version);
+                if (needUpdate && (updateHelper.IsMandatoryUpdate() || MessageBox.Show(msg, "更新提醒！", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes))
+                {
+                    int n = RunUpdater();
+                    if (n <= 0)
+                    {
+                        this.UIThread(() =>
+                        {
+                            this.btnLogin.Visible = true;
+                        });
+                    }
+                }
+                else
+                {
+                    Program._Account = result;
+                    Program._Mainform = new FrmMain();
+                    Program._Mainform._ClosingHandler += new closingHandler(FrmLoginClosing);
+                    Program._Mainform._ProjectCode = project.project_code;
+                    Program._Mainform._ProjectName = project.project_name;
+                    Program._Mainform._PropertyHouseCode = "w" + project.project_code + "0123456789012345678";
+                    Program._Mainform._VirtualHouseCode = "n" + project.project_code + "0123456789012345678";
+                    this.Hide();
+                    Program._Mainform.ShowDialog();
+                }
             }
         }
 
@@ -201,6 +223,43 @@ namespace HM.FacePlatform
         {
             _ClosingHandler?.Invoke();
             Close();
+        }
+
+        /// <summary>
+        /// 错误事件
+        /// </summary>
+        /// <param name="error"></param>
+        void OnError(string error)
+        {
+            this.UIThread(() =>
+            {
+                MessageBox.Show(error, "自动更新程序异常提醒", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            });
+        }
+        public static int RunUpdater()
+        {
+            try
+            {
+                FileInfo fileInfo = new FileInfo(Path.Combine(Application.StartupPath, "HM.AutoUpdate.exe"));
+                if (!fileInfo.Exists)
+                {
+                    return 0;
+                }
+                ProcessStartInfo processStartInfo = new ProcessStartInfo();
+                processStartInfo.FileName = fileInfo.FullName;
+                processStartInfo.WorkingDirectory = fileInfo.Directory.FullName;
+                processStartInfo.Arguments = "";
+                Process process = new Process();
+                process.StartInfo = processStartInfo;
+                process.Start();
+                process.WaitForExit();
+                return process.ExitCode;
+                //return 1;
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }

@@ -10,6 +10,8 @@ namespace HM.Form_
     {
         public HMToggle() : base()
         {
+            StatusOnText = "";
+            StatusOffText = "";
         }
 
 

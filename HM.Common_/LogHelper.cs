@@ -80,7 +80,7 @@ namespace HM.Common_
         /// 输出警告级别日志
         /// </summary>
         /// <param name="message">输出的消息</param>
-        public static void Warning(string message)
+        public static void Warn(string message)
         {
             GetIlog().Warn(message);
         }

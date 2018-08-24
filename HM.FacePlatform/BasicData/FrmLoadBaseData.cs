@@ -892,12 +892,13 @@ namespace HM.FacePlatform.BasicData
                                     }
                                 }
 
-                                if (user.UserHouses == null) user.UserHouses = new List<UserHouse>();
-                                user.UserHouses.Add(user_house);
+                                if (user.user_houses == null) user.user_houses = new List<UserHouse>();
+                                user.user_houses.Add(user_house);
 
-                                var newUser = _userBLL.Add(user);
-                                if (newUser != null)
+                                var newUserResult = _userBLL.Add(user);
+                                if (newUserResult.IsSuccess && newUserResult.Obj != null)
                                 {
+                                    var newUser = newUserResult.Obj;
                                     ActionLog log = new ActionLog
                                     {
                                         table_id = newUser.id,

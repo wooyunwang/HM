@@ -22,7 +22,7 @@ namespace HM.FacePlatform.BLL
 
             else
             {
-                return dal.Delete(mao_building);
+                return dal.Delete(mao_building) > 0;
             }
         }
     }

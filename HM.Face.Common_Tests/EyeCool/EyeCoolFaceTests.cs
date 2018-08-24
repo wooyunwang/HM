@@ -1,4 +1,6 @@
-﻿using HM.Enum_.FacePlatform;
+﻿using AutoMapper;
+using HM.Enum_.FacePlatform;
+using HM.Face.Common_.EyeCool;
 using HM.Utils_;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -10,10 +12,14 @@ namespace HM.Face.Common_.Tests
     public class EyeCoolFaceTests
     {
         Face api { get; set; }
+        IMapper mapper;
+
         public EyeCoolFaceTests()
         {
             log4net.Config.XmlConfigurator.Configure();
+            Mapper.Reset();
             AutoMapperConfiguration.Configure();
+
             api = FaceFactory.CreateFace("192.168.1.180", 8080, FaceVender.EyeCool);
             bool isNetOK = api.VisualTelnet("192.168.1.180", 8080);
             if (!isNetOK)

@@ -25,7 +25,7 @@ namespace HM.FacePlatform.Forms
         RegisterBLL _registerBLL;
         UserBLL _userBLL;
         MaoBLL _maoBLL;
-        ucFamily _ucFamily;
+        UcFamily _ucFamily;
         UserHouse _userHouse;
         User _user;
         House _house;
@@ -35,7 +35,7 @@ namespace HM.FacePlatform.Forms
 
         public Dictionary<string, PicUrlAndFaceIDVO> _dicPhoto = new Dictionary<string, PicUrlAndFaceIDVO>();
 
-        public PhotoRegisterFrm(ucFamily ucFamily)
+        public PhotoRegisterFrm(UcFamily ucFamily)
         {
             _ucFamily = ucFamily;
             _user = ucFamily._user;
@@ -68,7 +68,7 @@ namespace HM.FacePlatform.Forms
         private void btn_SelPic_Click(object sender, EventArgs e)
         {
             ClearMessage();
-            var result = _maoBLL.CheckAllMao();
+            var result = _maoBLL.CheckMao();
             if (result.IsSuccess)
             {
                 SelectPicture();
@@ -324,7 +324,7 @@ namespace HM.FacePlatform.Forms
 
                 if (register == null && !string.IsNullOrWhiteSpace(register.face_id))
                 {
-                    ActionResult result = face.MatchCompare2(item.FaceID, register.face_id);
+                    ActionResult result = face.MatchCompare2(item.FaceID, RegisterType.手动注册, register.face_id);
                     if (!result.IsSuccess)
                     {
                         ShowMessage(result.ToAlertString(), MessageType.Warning);
@@ -350,7 +350,7 @@ namespace HM.FacePlatform.Forms
                     check_state = CheckType.审核通过,
                 };
                 var registerResult = _registerBLL.Add(newRegister);
-                if (registerResult == null)
+                if (!registerResult.IsSuccess)
                 {
                     ShowMessage("**数据库异常，请稍后重试", MessageType.Error);
                     continue;

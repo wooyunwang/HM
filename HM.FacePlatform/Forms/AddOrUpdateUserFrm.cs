@@ -24,7 +24,7 @@ namespace HM.FacePlatform.Forms
         /// </summary>
         bool IsAdd { get { return _user_house == null; } }
         /// <summary>
-        /// 
+        /// 构造函数（用于修改）
         /// </summary>
         /// <param name="uc_register"></param>
         /// <param name="user_house">关系对象必须包含user、house</param>
@@ -37,7 +37,7 @@ namespace HM.FacePlatform.Forms
             _house = user_house.House;
         }
         /// <summary>
-        /// 
+        /// 构造函数（用于新增）
         /// </summary>
         /// <param name="uc_register"></param>
         /// <param name="house"></param>
@@ -206,11 +206,15 @@ namespace HM.FacePlatform.Forms
                     uh.user_type = BindHelper.EnumValue<UserType>(dropUserType) ?? UserType.未知;
                     uh.relation = tbRelation.Text.Trim();
                     uh.user_uid = "";
-                    var result = _userHouseBLL.Add(_user_house);
-                    if (result != null)
+                    var result_add = _userHouseBLL.Add(_user_house);
+                    if (result_add.IsSuccess)
                     {
-                        _user_house = result;
+                        _user_house = result_add.Obj;
                         m_Tip.ShowItTop(BtnAdd, "新增成功");
+                    }
+                    else
+                    {
+                        m_Tip.ShowItTop(BtnAdd, result_add.ToAlertString());
                     }
                 }
                 else
@@ -224,10 +228,14 @@ namespace HM.FacePlatform.Forms
                     uh.house_code = _house.house_code;
                     uh.user_type = BindHelper.EnumValue<UserType>(dropUserType) ?? UserType.未知;
                     uh.relation = tbRelation.Text.Trim();
-                    bool result = _userHouseBLL.Edit(_user_house);
-                    if (result)
+                    var result_edit = _userHouseBLL.Edit(_user_house);
+                    if (result_edit.IsSuccess)
                     {
                         m_Tip.ShowItTop(BtnAdd, "修改成功");
+                    }
+                    else
+                    {
+                        m_Tip.ShowItTop(BtnAdd, result_edit.ToAlertString());
                     }
                 }
 

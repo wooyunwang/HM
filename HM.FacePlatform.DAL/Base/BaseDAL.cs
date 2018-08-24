@@ -45,11 +45,18 @@ namespace HM.FacePlatform.DAL
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
-        public virtual T FirstOrDefault(Expression<Func<T, bool>> where)
+        public virtual T FirstOrDefault(Expression<Func<T, bool>> where = null)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
-                return db.Set<T>().AsNoTracking().Where<T>(where).FirstOrDefault<T>();
+                if (where == null)
+                {
+                    return db.Set<T>().AsNoTracking().FirstOrDefault<T>();
+                }
+                else
+                {
+                    return db.Set<T>().AsNoTracking().Where<T>(where).FirstOrDefault<T>();
+                }
             }
         }
         public virtual T FirstOrDefault<S>(Expression<Func<T, bool>> whereLambds, bool isAsc, Func<T, S> orderByLambds)
@@ -71,7 +78,7 @@ namespace HM.FacePlatform.DAL
         /// 全量
         /// </summary>
         /// <returns></returns>
-        public virtual IList<T> Get()
+        public virtual List<T> Get()
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
@@ -84,7 +91,7 @@ namespace HM.FacePlatform.DAL
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
-        public virtual IList<T> Get(Expression<Func<T, bool>> where)
+        public virtual List<T> Get(Expression<Func<T, bool>> where)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
@@ -97,7 +104,7 @@ namespace HM.FacePlatform.DAL
         /// <param name="where"></param>
         /// <param name="lstSubSetType"></param>
         /// <returns></returns>
-        public virtual IList<T> Get(Expression<Func<T, bool>> where, params Type[] lstSubSetType)
+        public virtual List<T> Get(Expression<Func<T, bool>> where, params Type[] lstSubSetType)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
@@ -123,7 +130,7 @@ namespace HM.FacePlatform.DAL
         /// <param name="isAsc"></param>
         /// <param name="orderByLambds"></param>
         /// <returns></returns>
-        public virtual IList<T> Get<S>(Expression<Func<T, bool>> whereLambds, bool isAsc, Func<T, S> orderByLambds)
+        public virtual List<T> Get<S>(Expression<Func<T, bool>> whereLambds, bool isAsc, Func<T, S> orderByLambds)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
@@ -150,7 +157,7 @@ namespace HM.FacePlatform.DAL
         /// <param name="isAsc"></param>
         /// <param name="orderByLambds"></param>
         /// <returns></returns>
-        public virtual IList<T> Get<S>(int pageIndex, int pageSize, out int rows, out int totalPage, Expression<Func<T, bool>> whereLambds, bool isAsc, Expression<Func<T, S>> orderByLambds)
+        public virtual List<T> Get<S>(int pageIndex, int pageSize, out int rows, out int totalPage, Expression<Func<T, bool>> whereLambds, bool isAsc, Expression<Func<T, S>> orderByLambds)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
@@ -244,7 +251,7 @@ namespace HM.FacePlatform.DAL
         /// <param name="isAsc"></param>
         /// <param name="orderKey"></param>
         /// <returns></returns>
-        public virtual IList<T> Get(int pageIndex, int pageSize, out int rows, out int totalPage, string sql, string where, bool isAsc, string orderKey)
+        public virtual List<T> Get(int pageIndex, int pageSize, out int rows, out int totalPage, string sql, string where, bool isAsc, string orderKey)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
@@ -292,7 +299,7 @@ namespace HM.FacePlatform.DAL
         /// </summary>
         /// <param name="entitys"></param>
         /// <returns></returns>
-        public virtual bool Add(IList<T> entitys)
+        public virtual int Add(IList<T> entitys)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
@@ -301,17 +308,17 @@ namespace HM.FacePlatform.DAL
                     db.Entry<T>(entity).State = EntityState.Added;
                 }
                 // entitys.ForEach(c=>db.Entry<T>(c).State = EntityState.Added);//等价于上面的循环
-                return db.SaveChanges() > 0;
+                return db.SaveChanges();
             }
         }
         #endregion
 
-        public virtual void AddOrUpdate(Expression<Func<T, object>> identifierExpression, params T[] entities)
+        public virtual int AddOrUpdate(Expression<Func<T, object>> identifierExpression, params T[] entities)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
                 db.Set<T>().AddOrUpdate(identifierExpression, entities);
-                db.SaveChanges();
+                return db.SaveChanges();
             }
         }
 
@@ -321,13 +328,13 @@ namespace HM.FacePlatform.DAL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual bool Edit(T entity)
+        public virtual int Edit(T entity)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
                 db.Set<T>().Attach(entity);
                 db.Entry<T>(entity).State = EntityState.Modified;//将所有属性标记为修改状态
-                return db.SaveChanges() > 0;
+                return db.SaveChanges();
             }
         }
 
@@ -357,13 +364,13 @@ namespace HM.FacePlatform.DAL
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        public virtual bool Delete(T entity)
+        public virtual int Delete(T entity)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
                 db.Set<T>().Attach(entity);
                 db.Entry<T>(entity).State = EntityState.Deleted;
-                return db.SaveChanges() > 0;
+                return db.SaveChanges();
             }
         }
         /// <summary>

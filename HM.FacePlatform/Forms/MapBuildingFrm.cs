@@ -1,5 +1,5 @@
 ﻿using HM.DTO;
-using HM.DTO.FaceForm;
+using HM.DTO.FacePlatform;
 using HM.FacePlatform.Model;
 using HM.Form_;
 using System;
@@ -49,7 +49,7 @@ namespace HM.FacePlatform.Forms
                 result.Obj = new PagerData<BuildingForMapDto>()
                 {
                     pages = 0,
-                    rows = new List<BuildingForMapDto>(),
+                    rows = new System.Collections.Generic.List<BuildingForMapDto>(),
                     total = 0
                 };
             }
@@ -94,8 +94,8 @@ namespace HM.FacePlatform.Forms
         bool hasChange = false;
         private void BtnBatchMap_Click(object sender, EventArgs e)
         {
-            List<string> lstToDel = new List<string>();
-            List<MaoBuilding> lstToAdd = new List<MaoBuilding>();
+            System.Collections.Generic.List<string> lstToDel = new System.Collections.Generic.List<string>();
+            System.Collections.Generic.List<MaoBuilding> lstToAdd = new System.Collections.Generic.List<MaoBuilding>();
             foreach (DataGridViewRow row in DgvBuilding.Rows)
             {
                 BuildingForMapDto buildingForMapDto = row.DataBoundItem as BuildingForMapDto;

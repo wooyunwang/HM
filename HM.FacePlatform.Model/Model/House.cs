@@ -65,6 +65,6 @@ namespace HM.FacePlatform.Model
         /// <summary>
         /// 小区用户与房屋关系集合
         /// </summary>
-        public virtual ICollection<UserHouse> UserHouses { get; set; }
+        public virtual ICollection<UserHouse> user_houses { get; set; }
     }
 }

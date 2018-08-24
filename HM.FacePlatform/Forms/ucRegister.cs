@@ -13,30 +13,26 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
+using HM.DTO.FacePlatform;
 
 namespace HM.FacePlatform
 {
     public partial class UcRegister : HMUserControl
     {
-
         MaoBLL _maoBLL = new MaoBLL();
         MaoFailedJobBLL _maoFailedJobBLL = new MaoFailedJobBLL();
         BuildingBLL _buildingBLL = new BuildingBLL();
         HouseBLL _houseBLL = new HouseBLL();
         UserBLL _userBLL = new UserBLL();
         RegisterBLL _registerBLL = new RegisterBLL();
+        string _propertyHouseCode;
 
-        IList<Mao> _maos;
-        House _propertyHouse;
-
-        VankeBalloonToolTip m_Tip;//提示
-        string theSelectBuilding_code = string.Empty;
-        public string theSelectHouseCode = string.Empty;
-        public string theSelectHouseName = string.Empty;
+        VankeBalloonToolTip _Tip;//提示
+        TreeNode _selectedTreeNode = null;
 
         /// <summary>
         /// 
@@ -46,25 +42,34 @@ namespace HM.FacePlatform
             //允许线程直接访问控件
             Control.CheckForIllegalCrossThreadCalls = false;
 
-            m_Tip = new VankeBalloonToolTip(this);
+            _Tip = new VankeBalloonToolTip(this);
 
             InitializeComponent();
 
-            dgUser.AllowUserToAddRows = false;
-            dgUser.AutoGenerateColumns = false;
-            dgUser.RowHeadersVisible = false;
+            DgvHouse.AllowUserToAddRows = false;
+            DgvHouse.AutoGenerateColumns = false;
+            DgvHouse.RowHeadersVisible = false;
             splitter1.BackColor = Color.FromArgb(224, 224, 224);
             FlpUser.HorizontalScroll.Maximum = 0;
             FlpUser.AutoScroll = true;
 
-            _propertyHouse = _houseBLL.FirstOrDefault(it => it.house_code == Program._Mainform._PropertyHouseCode);
-
+            _propertyHouseCode = Program._Mainform._PropertyHouseCode;
         }
-
-        void Register_Load(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void UcRegister_Load(object sender, EventArgs e)
         {
-
-            LoadBuilding();
+            if (HtcMain.SelectedTab != MtpUser)
+            {
+                HtcMain.SelectedTab = MtpUser;
+            }
+            else
+            {
+                HtcMain_SelectedIndexChanged(HtcMain, new TabControlEventArgs(MtpUser, HtcMain.TabPages.IndexOf(MtpUser), new TabControlAction()));
+            }
             Task.Run(() =>
             {
                 while (true)
@@ -74,6 +79,28 @@ namespace HM.FacePlatform
                 }
             });
         }
+
+        /// <summary>
+        /// 选项卡切换事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void HtcMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (HtcMain.SelectedTab.Equals(MtpUser))
+            {
+                LoadBuilding();
+            }
+            else if (HtcMain.SelectedTab.Equals(MtpWorker))
+            {
+                PagerWorker.Bind();
+            }
+            else
+            {
+                throw new Exception("添加一个Tab,请在此方法添加对应的处理！");
+            }
+        }
+
         /// <summary>
         /// 获取注册人靓比例
         /// </summary>
@@ -89,28 +116,36 @@ namespace HM.FacePlatform
             }
         }
         #region 
-        void LoadMao()
+        /// <summary>
+        /// 切换显示方式
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TogTree_CheckedChanged(object sender, EventArgs e)
         {
-            _maos = _maoBLL.Get();
+            LoadBuilding();
         }
         /// <summary>
         /// 加载楼栋
         /// </summary>
         void LoadBuilding()
         {
-            this.UIThread(() =>
-            {
-                labProject.Text = Program._Mainform._ProjectName;
-            });
+            labProject.Text = Program._Mainform._ProjectName;
 
-            IList<Building> buildings = _buildingBLL.Get(it => it.project_code == Program._Mainform._ProjectCode);
-            CreateNodes(buildings);
-            //让第一行被选中
-            if (treBuilding.Nodes.Count > 0)
+            if (TogTree.Checked)
             {
-                if (treBuilding.Nodes[0].Nodes.Count > 0)
+                CreateNodes();
+            }
+            else
+            {
+                CreateNodesByMao();
+            }
+            //让第一行被选中
+            if (TvBuilding.Nodes.Count > 0)
+            {
+                if (TvBuilding.Nodes[0].Nodes.Count > 0)
                 {
-                    SelectNode(treBuilding.Nodes[0].Nodes[0]);
+                    TvBuilding.SelectedNode = TvBuilding.Nodes[0].Nodes[0];
                 }
             }
         }
@@ -118,9 +153,9 @@ namespace HM.FacePlatform
         /// 以项目作为根结点的树
         /// </summary>
         /// <param name="buildings"></param>
-        void CreateNodes(IList<Building> buildings)
+        void CreateNodes()
         {
-            treBuilding.Nodes.Clear();
+            TvBuilding.Nodes.Clear();
             //创建根结点
             TreeNode nodeProject = new TreeNode
             {
@@ -130,6 +165,8 @@ namespace HM.FacePlatform
                 ImageIndex = 0,
                 SelectedImageIndex = 0
             };
+
+            IList<Building> buildings = _buildingBLL.Get(it => it.project_code == Program._Mainform._ProjectCode);
 
             foreach (Building _building in buildings)
             {
@@ -142,26 +179,26 @@ namespace HM.FacePlatform
                 };
                 nodeProject.Nodes.Add(nodeBuilding);
             }
-            treBuilding.Nodes.Add(nodeProject);
-            treBuilding.ExpandAll();
+            TvBuilding.Nodes.Add(nodeProject);
+            TvBuilding.ExpandAll();
         }
         /// <summary>
         /// 以猫为父节点创建的树
         /// </summary>
         void CreateNodesByMao()
         {
-            treBuilding.Nodes.Clear();
-
-            foreach (Mao _mao in _maos)
+            TvBuilding.Nodes.Clear();
+            var lstMao = FacePlatformCache.GetALL<Mao>();
+            foreach (Mao mao in lstMao)
             {
                 TreeNode nodeMao = new TreeNode();
-                nodeMao.Text = _mao.mao_name;
-                nodeMao.Tag = _mao;
+                nodeMao.Text = mao.mao_name;
+                nodeMao.Tag = mao;
                 nodeMao.ForeColor = Color.Blue;
                 nodeMao.ImageIndex = 0;
                 nodeMao.SelectedImageIndex = 0;
 
-                IList<Building> buildings = _buildingBLL.Get(it => it.MaoBuildings.Any(mb => mb.mao_id == _mao.id));
+                IList<Building> buildings = _buildingBLL.Get(it => it.MaoBuildings.Any(mb => mb.mao_id == mao.id));
                 foreach (Building _building in buildings)
                 {
                     TreeNode nodeBuilding = new TreeNode();
@@ -171,58 +208,54 @@ namespace HM.FacePlatform
                     nodeBuilding.SelectedImageIndex = 0;
                     nodeMao.Nodes.Add(nodeBuilding);
                 }
-                treBuilding.Nodes.Add(nodeMao);
+                TvBuilding.Nodes.Add(nodeMao);
             }
 
-            treBuilding.ExpandAll();
+            TvBuilding.ExpandAll();
         }
         /// <summary>
         /// 让某一行被选中
         /// </summary>
-        void SelectNode(TreeNode nodeVar)
+        /// <param name="treeNode"></param>
+        void SelectNodeStyle(TreeView treeView, TreeNodeCollection nodes, TreeNode treeNodeSelected)
         {
-            //取消选中
-            foreach (TreeNode nodeF in treBuilding.Nodes)
+            foreach (TreeNode nodeItem in nodes)
             {
-                nodeF.ForeColor = Color.Black;
-                nodeF.BackColor = Color.White;
-                foreach (TreeNode node in nodeF.Nodes)
+                nodeItem.ForeColor = Color.Black;
+                nodeItem.BackColor = Color.White;
+                if (nodeItem.Nodes != null && nodeItem.Nodes.Count > 0)
                 {
-                    node.ForeColor = Color.Black;
-                    node.BackColor = Color.White;
+                    SelectNodeStyle(treeView, nodeItem.Nodes, treeNodeSelected);
+                }
+                if (nodeItem == treeNodeSelected)
+                {
+                    //treeNodeSelected.Checked = true;
+                    treeNodeSelected.ForeColor = Color.White;
+                    treeNodeSelected.BackColor = Color.FromArgb(67, 152, 237);
                 }
             }
-            treBuilding.SelectedNode = nodeVar;
-            nodeVar.Checked = true;
-            nodeVar.ForeColor = Color.White;
-            nodeVar.BackColor = Color.FromArgb(67, 152, 237);
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void treBuilding_AfterSelect(object sender, TreeViewEventArgs e)
+        void TvBuilding_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            if (treBuilding.SelectedNode != null)
+            if (TvBuilding.SelectedNode != null)
             {
-                theSelectHouseCode = string.Empty;
-
-                SelectNode(treBuilding.SelectedNode);
+                SelectNodeStyle(TvBuilding, TvBuilding.Nodes, TvBuilding.SelectedNode);
                 txtUserName.Text = string.Empty;
 
-                if (treBuilding.SelectedNode.Parent == null)
+                if (TvBuilding.SelectedNode.Tag is Building)
                 {
-                    theSelectBuilding_code = string.Empty;//选中的是项目
+                    _selectedTreeNode = TvBuilding.SelectedNode;
                 }
                 else
                 {
-                    theSelectBuilding_code = treBuilding.SelectedNode.Tag.ToString();//选中的是楼栋
-                    Task.Run(() =>
-                    {
-                        pagerHouse.Bind();
-                    });
+                    _selectedTreeNode = null;
                 }
+                PagerHouse.Bind();
             }
         }
         /// <summary>
@@ -230,33 +263,50 @@ namespace HM.FacePlatform
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int pagerHouse_EventPaging(EventPagingArg e)
+        private int PagerHouse_EventPaging(EventPagingArg e)
         {
-            string userName = txtUserName.Text.Trim();
-            var result = _houseBLL.GetHousePageByBuildingCode(pagerHouse.PageIndex, pagerHouse.PageSize, userName);
+            DgvHouse.ClearSelection();
+            DgvHouse.DataSource = null;
+            ActionResult<PagerData<HouseForRegisterDto>> result = null;
+            if (_selectedTreeNode == null)
+            {
+                result = new ActionResult<PagerData<HouseForRegisterDto>>()
+                {
+                    IsSuccess = false
+                };
+            }
+            else
+            {
+                string userName = txtUserName.Text.Trim();
+                var building = _selectedTreeNode.Tag as Building;
+                result = _houseBLL.GetPageHouseForRegisterDto(PagerHouse.PageIndex, PagerHouse.PageSize, building.building_code, userName);
+            }
             if (!result.IsSuccess)
             {
-                HMMessageBox.Show(this, result.ToAlertString());
-                result.Obj = new PagerData<House>()
+                if (_selectedTreeNode != null)
+                {
+                    HMMessageBox.Show(this, result.ToAlertString());
+                }
+                result.Obj = new PagerData<HouseForRegisterDto>()
                 {
                     pages = 0,
-                    rows = new List<House>(),
+                    rows = new System.Collections.Generic.List<HouseForRegisterDto>(),
                     total = 0
                 };
             }
             //绑定分页控件
-            pagerHouse.bsPager.DataSource = result.Obj.rows;
-            pagerHouse.bnPager.BindingSource = pagerHouse.bsPager;
+            PagerHouse.bsPager.DataSource = result.Obj.rows;
+            PagerHouse.bnPager.BindingSource = PagerHouse.bsPager;
             //分页控件绑定DataGridView
-            dgUser.DataSource = pagerHouse.bsPager;
+            DgvHouse.DataSource = PagerHouse.bsPager;
             //返回总记录数
             return result.Obj.total;
         }
 
-        public void btnSelect_Click(object sender, EventArgs e)
+        public void BtnSearchHouse_Click(object sender, EventArgs e)
         {
             btnNewUser.Visible = false;
-            pagerHouse.Bind();
+            PagerHouse.Bind();
             btnNewUser.Visible = true;
         }
         /// <summary>
@@ -273,11 +323,11 @@ namespace HM.FacePlatform
         public void BindHouse(string house_code)
         {
             btnNewUser.Visible = false;
-            pagerHouse.Bind();
-            foreach (DataGridViewRow row in dgUser.Rows)
+            PagerHouse.Bind();
+            foreach (DataGridViewRow row in DgvHouse.Rows)
             {
-                House house = row.DataBoundItem as House;
-                if (house.house_code == house_code)
+                HouseForRegisterDto houseForRegisterDto = row.DataBoundItem as HouseForRegisterDto;
+                if (houseForRegisterDto.house_code == house_code)
                 {
                     row.Selected = true;
                 }
@@ -289,26 +339,27 @@ namespace HM.FacePlatform
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void dgUser_SelectionChanged(object sender, EventArgs e)
+        void DgvHouse_SelectionChanged(object sender, EventArgs e)
         {
-            ClearUser();
-            var dgv = (DataGridView)sender;
-            if (dgv == null || dgv.SelectedRows.Count <= 0)
+            try
             {
-                //
-            }
-            else
-            {
-                var row = dgv.SelectedRows[0];
-                House house = (House)row.DataBoundItem;
-
-                Task.Run(() =>
+                ClearUser();
+                HMDataGridView hmDGV = (HMDataGridView)sender;
+                if (hmDGV != null && hmDGV.Rows.Count > 0 && hmDGV.SelectedRows.Count > 0)
                 {
-                    BindHouseUser(house.house_code);
-                });
-
-                btnNewUser.Visible = !(house.house_code == _propertyHouse.house_code);
+                    HouseForRegisterDto houseForRegisterDto = hmDGV.SelectedRows[0].DataBoundItem as HouseForRegisterDto;
+                    Task.Run(() =>
+                    {
+                        BindHouseUser(houseForRegisterDto.house_code);
+                    });
+                    btnNewUser.Visible = !(houseForRegisterDto.house_code == _propertyHouseCode);
+                }
             }
+            catch (Exception ex)
+            {
+
+            }
+
         }
         /// <summary>
         /// 绑定房屋下的业主（拥有、居住等）
@@ -316,53 +367,55 @@ namespace HM.FacePlatform
         /// <param name="house_code"></param>
         public void BindHouseUser(string house_code)
         {
-            IList<User> lstUser = _userBLL.Get(it => it.UserHouses.Any(uh => uh.house_code == house_code && it.is_del != IsDelType.是));
-
-            this.UIThread(() =>
+            ActionResult<System.Collections.Generic.List<UserHouse>> result = _houseBLL.GetUserHouseWithUserAndHouse(house_code);
+            if (result.IsSuccess)
             {
-                FlpUser.Controls.Clear();
-                if (lstUser != null && lstUser.Any())
+                this.UIThread(() =>
                 {
-                    foreach (User user in lstUser)
+                    FlpUser.Controls.Clear();
+                    if (result.Obj != null && result.Obj.Any())
                     {
-                        ucFamily u1 = new ucFamily(user.UserHouses.Where(it => it.house_code == house_code).FirstOrDefault());
-                        u1.UpdateAction += new Action<ucFamily>((uc_Family) =>
+                        foreach (UserHouse userHouse in result.Obj)
                         {
-                            //AddOrUpdateUserFrm form = new AddOrUpdateUserFrm(this, uc_Family);
-                            //form.ShowDialog();
-                        });
-                        FlpUser.Controls.Add(u1);
+                            UcFamily ucFamily = new UcFamily(userHouse);
+                            ucFamily.UpdateAction = new Action<UcFamily>((uc_Family) =>
+                            {
+                                AddOrUpdateUserFrm frm = new AddOrUpdateUserFrm(this, userHouse);
+                                frm.ShowDialog();
+                            });
+                            FlpUser.Controls.Add(ucFamily);
+                        }
                     }
-                }
-                else
+                    else
+                    {
+                        ucNoData u = new ucNoData();
+                        u.Note = "暂无用户数据";
+                        FlpUser.Controls.Add(u);
+                    }
+                });
+            }
+            else
+            {
+                this.UIThread(() =>
                 {
-                    ucNoData u = new ucNoData();
-                    u.Note = "暂无用户数据";
-                    FlpUser.Controls.Add(u);
-                }
-            });
+                    HMMessageBox.Show(this, result.ToAlertString());
+                });
+            }
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dgUser_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        private void DgvHouse_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
-            HMDataGridView hmDGV = (HMDataGridView)sender;
-            var cells = hmDGV.Rows[e.RowIndex].Cells;
-            House house = hmDGV.Rows[e.RowIndex].DataBoundItem as House;
+            //HMDataGridView hmDGV = (HMDataGridView)sender;
+            //var cells = hmDGV.Rows[e.RowIndex].Cells;
+            //HouseForRegisterDto houseForRegisterDto = hmDGV.Rows[e.RowIndex].DataBoundItem as HouseForRegisterDto;
 
-            if (house == null) return;
-            cells["col_name_"].Value = string.Join("，", house.UserHouses
-                .Where(it => it.user_type == UserType.家庭成员 && it.is_del != IsDelType.是)
-                .Select(it => it.User.name));
-            cells["ColFamilyCount"].Value = house.UserHouses
-                .Where(it => it.user_type == UserType.家庭成员 && it.is_del != IsDelType.是).Count();
-            cells["ColGuestCount"].Value = house.UserHouses
-                .Where(it => it.user_type == UserType.访客 && it.is_del != IsDelType.是).Count();
+            //if (houseForRegisterDto == null) return;
         }
 
         #region 绑定工作人员数据
@@ -371,7 +424,7 @@ namespace HM.FacePlatform
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
-        private int pagerWorker_EventPaging(EventPagingArg e)
+        private int PagerWorker_EventPaging(EventPagingArg e)
         {
             string workerKey = tbWorkerSelect.Text.Trim();
 
@@ -380,25 +433,22 @@ namespace HM.FacePlatform
             else if (radSelectYes.Checked) registeState = true;
             else if (radSelectNo.Checked) registeState = false;
 
-            var result = _userBLL.GetUserByHouseCode(pagerWorker.PageIndex, pagerWorker.PageSize, _propertyHouse.building_code, workerKey, registeState);
+            var result = _userBLL.GetWorkerUserForRegister(PagerWorker.PageIndex, PagerWorker.PageSize, _propertyHouseCode, workerKey, registeState);
             if (!result.IsSuccess)
             {
                 HMMessageBox.Show(this, result.ToAlertString());
                 result.Obj = new PagerData<User>()
                 {
                     pages = 0,
-                    rows = new List<User>(),
+                    rows = new System.Collections.Generic.List<User>(),
                     total = 0
                 };
             }
             //绑定分页控件
-            pagerWorker.bsPager.DataSource = result.Obj.rows;
-            pagerWorker.bnPager.BindingSource = pagerWorker.bsPager;
+            PagerWorker.bsPager.DataSource = result.Obj.rows;
+            PagerWorker.bnPager.BindingSource = PagerWorker.bsPager;
             //分页控件绑定DataGridView
-            dgUser.DataSource = pagerWorker.bsPager;
-
             PageWorkerRender(result.Obj.rows);
-
             //返回总记录数
             return result.Obj.total;
         }
@@ -406,23 +456,25 @@ namespace HM.FacePlatform
         /// 呈现工作人员人脸信息
         /// </summary>
         /// <param name="obj"></param>
-        void PageWorkerRender(List<User> user_registers)
+        void PageWorkerRender(System.Collections.Generic.List<User> userWithRelations)
         {
             this.UIThread(() =>
             {
                 FlpWorker.Controls.Clear();
-                if (user_registers != null && user_registers.Any())
+                if (userWithRelations != null && userWithRelations.Any())
                 {
-                    foreach (User user_register in user_registers)
+                    foreach (User user_register in userWithRelations)
                     {
-                        ucFamily u1 = new ucFamily(user_register.UserHouses.Where(it => it.house_code == Program._Mainform._PropertyHouseCode).FirstOrDefault());
-                        u1.Width = FlpWorker.Width / 3 - 10;
-                        u1.UpdateAction += new Action<ucFamily>((uc_Family) =>
+                        var userHouse = user_register.user_houses.Where(it => it.house_code == _propertyHouseCode).FirstOrDefault();
+
+                        UcFamily ucFamily = new UcFamily(userHouse);
+                        ucFamily.Width = FlpWorker.Width / 3 - 10;
+                        ucFamily.UpdateAction = new Action<UcFamily>((uc_Family) =>
                         {
-                            //AddOrUpdateUserFrm form = new AddOrUpdateUserFrm(this, uc_Family);
-                            //form.ShowDialog();
+                            AddOrUpdateUserFrm form = new AddOrUpdateUserFrm(this, userHouse);
+                            form.ShowDialog();
                         });
-                        FlpWorker.Controls.Add(u1);
+                        FlpWorker.Controls.Add(ucFamily);
                     }
                 }
                 else
@@ -440,12 +492,12 @@ namespace HM.FacePlatform
         /// <param name="e"></param>
         void btnWorkerSelect_Click(object sender, EventArgs e)
         {
-            pagerWorker.Bind();
+            PagerWorker.Bind();
         }
 
         public void BindWorkers()
         {
-            pagerWorker.Bind();
+            PagerWorker.Bind();
         }
         #endregion
 
@@ -457,8 +509,7 @@ namespace HM.FacePlatform
         /// <param name="e"></param>
         void btnAddWorker_Click(object sender, EventArgs e)
         {
-            string houseCode = Program._Mainform._PropertyHouseCode;
-            var house = _houseBLL.FirstOrDefault(it => it.house_code == houseCode);
+            var house = _houseBLL.FirstOrDefault(it => it.house_code == _propertyHouseCode);
             if (house != null)
             {
                 AddOrUpdateWorkerFrm addOrUpdateUserFrm = new AddOrUpdateWorkerFrm(this, house);
@@ -466,25 +517,11 @@ namespace HM.FacePlatform
             }
             else
             {
-                LogHelper.Fatal($"找不到虚拟楼栋下的虚拟房屋【{houseCode}】！");
+                LogHelper.Fatal($"找不到虚拟楼栋下的虚拟房屋【{_propertyHouseCode}】！");
             }
         }
 
-        /// <summary>
-        /// 选项卡切换事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControl1.SelectedIndex == 1)
-            {
-                if (FlpWorker.Controls.Count == 0)//没有数据，可能是第一次加载
-                {
-                    pagerWorker.Bind();
-                }
-            }
-        }
+
         void tbSelect_TextChanged(object sender, EventArgs e)
         {
             txtUserName.Text = Validate_.GetSafeString(ControlType.姓名类, txtUserName.Text);
@@ -501,16 +538,27 @@ namespace HM.FacePlatform
         /// <param name="e"></param>
         void btnNewUser_Click(object sender, EventArgs e)
         {
-            if (dgUser.SelectedRows != null && dgUser.SelectedRows.Count > 0)
+            if (DgvHouse.SelectedRows != null && DgvHouse.SelectedRows.Count > 0)
             {
-                House house = dgUser.SelectedRows[0].DataBoundItem as House;
-                AddOrUpdateUserFrm addOrUpdateUserFrm = new AddOrUpdateUserFrm(this, house);
-                addOrUpdateUserFrm.ShowDialog();
-                RegCount();
+                HouseForRegisterDto houseForRegisterDto = DgvHouse.SelectedRows[0].DataBoundItem as HouseForRegisterDto;
+                var house = _houseBLL.FirstOrDefault(it => it.house_code == houseForRegisterDto.house_code);
+                if (house != null)
+                {
+                    AddOrUpdateUserFrm addOrUpdateUserFrm = new AddOrUpdateUserFrm(this, house);
+                    DialogResult dr = addOrUpdateUserFrm.ShowDialog();
+                    if (dr != DialogResult.Cancel)
+                    {
+                        RegCount();
+                    }
+                }
+                else
+                {
+                    _Tip.ShowItTop(btnNewUser, "房屋信息已无效！");
+                }
             }
             else
             {
-                m_Tip.ShowItTop(btnNewUser, "未选定房屋！");
+                _Tip.ShowItTop(btnNewUser, "未选定房屋！");
             }
         }
         #endregion
@@ -539,7 +587,7 @@ namespace HM.FacePlatform
         {
             if (tbPicUrl.Text.Trim() == string.Empty)
             {
-                m_Tip.ShowIt(tbPicUrl, "请选择照片文件路径!");
+                _Tip.ShowIt(tbPicUrl, "请选择照片文件路径!");
                 return;
             }
 
@@ -560,7 +608,7 @@ namespace HM.FacePlatform
                     }
                     else
                     {
-                        m_Tip.ShowIt(tbPicUrl, "请选择包含照片文件的路径!");
+                        _Tip.ShowIt(tbPicUrl, "请选择包含照片文件的路径!");
                     }
                 }
             }
@@ -573,7 +621,7 @@ namespace HM.FacePlatform
         /// <param name="fiList"></param>
         void RegPicList(FileInfo[] files)
         {
-            var result = _maoBLL.CheckAllMao();
+            var result = _maoBLL.CheckMao();
             if (result.IsSuccess)
             {
                 var faces = result.Obj.Where(it => it.Value.Item1 == true)
@@ -595,7 +643,7 @@ namespace HM.FacePlatform
         /// </summary>
         /// <param name="faces"></param>
         /// <param name="files"></param>
-        void RegPicList(List<Face.Common_.Face> faces, FileInfo[] files)
+        void RegPicList(System.Collections.Generic.List<Face.Common_.Face> faces, FileInfo[] files)
         {
             int defaultDays = Config_.GetInt("FaceEndTime") ?? 0;
             DateTime endDate = Convert.ToDateTime(DateTime.Now.AddDays(defaultDays).ToString("yyyy-MM-dd 23:59:59"));
@@ -643,7 +691,7 @@ namespace HM.FacePlatform
 
                             if (!string.IsNullOrEmpty(result.Obj.face[0]?.face_id))
                             {
-                                var resultMC = face.MatchCompare1(faceId, worker.UserHouses.ToList()[0].User.Registers.ToList()[0].face_id);
+                                var resultMC = face.MatchCompare1(faceId, worker.user_houses.ToList()[0].User.registers.ToList()[0].face_id);
                                 if (!resultMC.IsSuccess)
                                 {
                                     ShowMessage(result.ToAlertString(), MessageType.Warning);
@@ -774,17 +822,17 @@ namespace HM.FacePlatform
 
         void radSelectAll_CheckedChanged(object sender, EventArgs e)
         {
-            if (radSelectAll.Checked) pagerWorker.Bind();
+            if (radSelectAll.Checked) PagerWorker.Bind();
         }
 
         void radSelectYes_CheckedChanged(object sender, EventArgs e)
         {
-            if (radSelectYes.Checked) pagerWorker.Bind();
+            if (radSelectYes.Checked) PagerWorker.Bind();
         }
 
         void radSelectNo_CheckedChanged(object sender, EventArgs e)
         {
-            if (radSelectNo.Checked) pagerWorker.Bind();
+            if (radSelectNo.Checked) PagerWorker.Bind();
         }
 
 

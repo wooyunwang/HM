@@ -26,7 +26,7 @@ namespace HM.Common_
                 Type type = ((MethodInfo)context.TargetMethod).ReturnParameter.ParameterType;
                 if (type == typeof(ActionResult) || type.BaseType == typeof(ActionResult))
                 {
-                    var strArguments = Json_.GetString(context.Arguments, new List<string>() { "file" });
+                    var strArguments = Json_.GetString(context.Arguments, new System.Collections.Generic.List<string>() { "file", "imageBase64" });
 
                     string strMsg = Exception_.GetInnerException(ex).Message;
 

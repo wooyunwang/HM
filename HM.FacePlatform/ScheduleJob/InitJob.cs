@@ -41,7 +41,7 @@ namespace HM.FacePlatform
             while (true)
             {
                 //1、获取需要同步人脸信息的小区用户（子对象包括需要同步的人脸数据）
-                PagerData<User> pagerData = _userBLL.GetUserForPushToDevice(pageNumber - 1, rowsPerPage, fromDate, toDate);
+                PagerData<User> pagerData = _userBLL.GetUserForPushToDevice((int)(pageNumber - 1), (int)rowsPerPage, (DateTime)fromDate, toDate);
                 if (pagerData == null || pagerData.rows == null || pagerData.rows.Count < 0)
                 {
                     jobFrom.ShowMessage(showName + "没有需要同步的数据", MessageType.Information);
@@ -64,7 +64,7 @@ namespace HM.FacePlatform
                     //2、遍历用户
                     foreach (var user in user_registers)
                     {
-                        if (user.Registers == null && !user.Registers.Any())
+                        if (user.registers == null && !user.registers.Any())
                         {
                             continue;
                         }
@@ -74,14 +74,14 @@ namespace HM.FacePlatform
                             IEnumerable<Mao> lstUserMao;
                             if (isSection)
                             {
-                                lstUserMao = lstMao.Where(it => it.MaoBuildings.Any(mb => user.UserHouses.Any(uh => uh.House.building_code == mb.building_code)));
+                                lstUserMao = lstMao.Where(it => it.MaoBuildings.Any(mb => user.user_houses.Any(uh => uh.House.building_code == mb.building_code)));
                             }
                             else
                             {
                                 lstUserMao = lstMao;
                             }
                             //2.2、遍历人脸信息
-                            foreach (var register in user.Registers)
+                            foreach (var register in user.registers)
                             {
                                 //2.2.1、根据用户->房屋->楼栋->关联的人脸一体机
 
@@ -114,7 +114,7 @@ namespace HM.FacePlatform
                                                     RegisterType = register.register_type,
                                                     RoomNo = "",
                                                     Sex = user.sex,
-                                                    UserType = user.UserHouses.ToList()?[0].relation
+                                                    UserType = user.user_houses.ToList()?[0].relation
                                                 });
                                                 if (!arRegister.IsSuccess)
                                                 {

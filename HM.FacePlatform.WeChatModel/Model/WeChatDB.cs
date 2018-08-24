@@ -38,47 +38,47 @@ namespace HM.FacePlatform.WeChatModel
         /// <summary>
         /// 微信账号
         /// </summary>
-        public virtual DbSet<w_account> w_account { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual DbSet<w_card> w_card { get; set; }
+        //public virtual DbSet<w_account> w_account { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public virtual DbSet<w_card> w_card { get; set; }
         /// <summary>
         /// 进出历史
         /// </summary>
         public virtual DbSet<w_entry_history> w_entry_history { get; set; }
         /// <summary>
-        /// 
+        /// 手机短信
         /// </summary>
         public virtual DbSet<w_face_mob_sms> w_face_mob_sms { get; set; }
+        ///// <summary>
+        ///// 系统参数
+        ///// </summary>
+        //public virtual DbSet<w_face_sysparamter> w_face_sysparamter { get; set; }
         /// <summary>
-        /// 
-        /// </summary>
-        public virtual DbSet<w_face_sysparamter> w_face_sysparamter { get; set; }
-        /// <summary>
-        /// 
+        /// 人脸注册信息
         /// </summary>
         public virtual DbSet<w_register> w_register { get; set; }
+        ///// <summary>
+        ///// 通行记录
+        ///// </summary>
+        //public virtual DbSet<w_register_bak> w_register_bak { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public virtual DbSet<w_sms> w_sms { get; set; }
         /// <summary>
-        /// 通行记录
-        /// </summary>
-        public virtual DbSet<w_register_bak> w_register_bak { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual DbSet<w_sms> w_sms { get; set; }
-        /// <summary>
-        /// 
+        /// 人脸用户
         /// </summary>
         public virtual DbSet<w_user> w_user { get; set; }
         /// <summary>
-        /// 
+        /// 用户失败记录
         /// </summary>
         public virtual DbSet<w_user_fail> w_user_fail { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public virtual DbSet<v_register> v_register { get; set; }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public virtual DbSet<v_register> v_register { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -310,29 +310,29 @@ namespace HM.FacePlatform.WeChatModel
                 .Property(e => e.project_code)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<w_register_bak>()
-                .Property(e => e.guid_value)
-                .IsUnicode(false);
+            //modelBuilder.Entity<w_register_bak>()
+            //    .Property(e => e.guid_value)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<w_register_bak>()
-                .Property(e => e.face_uid)
-                .IsUnicode(false);
+            //modelBuilder.Entity<w_register_bak>()
+            //    .Property(e => e.face_uid)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<w_register_bak>()
-                .Property(e => e.photo_path)
-                .IsUnicode(false);
+            //modelBuilder.Entity<w_register_bak>()
+            //    .Property(e => e.photo_path)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<w_register_bak>()
-                .Property(e => e.check_note)
-                .IsUnicode(false);
+            //modelBuilder.Entity<w_register_bak>()
+            //    .Property(e => e.check_note)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<w_register_bak>()
-                .Property(e => e.people_id)
-                .IsUnicode(false);
+            //modelBuilder.Entity<w_register_bak>()
+            //    .Property(e => e.people_id)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<w_register_bak>()
-                .Property(e => e.project_code)
-                .IsUnicode(false);
+            //modelBuilder.Entity<w_register_bak>()
+            //    .Property(e => e.project_code)
+            //    .IsUnicode(false);
 
             modelBuilder.Entity<w_sms>()
                 .Property(e => e.sms_uid)
@@ -414,29 +414,29 @@ namespace HM.FacePlatform.WeChatModel
                 .Property(e => e.project_code)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<v_register>()
-                .Property(e => e.guid_value)
-                .IsUnicode(false);
+            //modelBuilder.Entity<v_register>()
+            //    .Property(e => e.guid_value)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<v_register>()
-                .Property(e => e.face_uid)
-                .IsUnicode(false);
+            //modelBuilder.Entity<v_register>()
+            //    .Property(e => e.face_uid)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<v_register>()
-                .Property(e => e.photo_path)
-                .IsUnicode(false);
+            //modelBuilder.Entity<v_register>()
+            //    .Property(e => e.photo_path)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<v_register>()
-                .Property(e => e.check_note)
-                .IsUnicode(false);
+            //modelBuilder.Entity<v_register>()
+            //    .Property(e => e.check_note)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<v_register>()
-                .Property(e => e.people_id)
-                .IsUnicode(false);
+            //modelBuilder.Entity<v_register>()
+            //    .Property(e => e.people_id)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<v_register>()
-                .Property(e => e.project_code)
-                .IsUnicode(false);
+            //modelBuilder.Entity<v_register>()
+            //    .Property(e => e.project_code)
+            //    .IsUnicode(false);
         }
     }
 }

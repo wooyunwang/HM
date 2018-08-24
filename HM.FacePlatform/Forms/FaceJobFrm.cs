@@ -48,10 +48,21 @@ namespace HM.FacePlatform.Forms
         /// <returns></returns>
         public ActionResult BasicCheck()
         {
+            var checkResult = _maoBLL.CheckMao();
             return new ActionResult()
             {
                 IsSuccess = true
             };
+        }
+
+        /// <summary>
+        /// 基本的检查
+        /// </summary>
+        /// <returns></returns>
+        public void BasicCheckRender(ActionResult actionResult)
+        {
+
+            this.Close();
         }
         /// <summary>
         /// 审核
@@ -210,12 +221,25 @@ namespace HM.FacePlatform.Forms
             //    }
             //}
         }
-
+        /// <summary>
+        /// 房屋删除用户
+        /// </summary>
+        /// <param name="userHouse"></param>
+        public void DeleteUserHouse(UserHouse userHouse)
+        {
+            //1、删除设备上的用户注册信息
+            //2、删除云数据上的用户注册信息
+            //3、删除本地数据库的用户注册信息
+            //4、删除设备上的关系
+            //5、删除云数据库上的关系
+            //6、删除本地的关系
+            //7、若非CRM数据，还要删除用户信息
+        }
         /// <summary>
         /// 删除
         /// </summary>
         /// <param name="imageItem"></param>
-        private void DeleteRegistedImage(ImageDetailItem imageItem)
+        public void DeleteRegistedImage(ImageDetailItem imageItem)
         {
 
             if (HMMessageBox.Show(this, "此人脸已审核通过，确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel) != DialogResult.OK)

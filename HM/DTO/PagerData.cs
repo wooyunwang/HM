@@ -9,7 +9,7 @@ namespace HM.DTO
     public class PagerData<T> where T : class
     {
         /// <summary>
-        /// 总数
+        /// 总数 
         /// </summary>
         public int total { get; set; }
         /// <summary>

@@ -141,5 +141,17 @@ namespace HM.Utils_
             ConfigurationManager.RefreshSection("appSettings");
         }
         #endregion
+
+        #region ConnectionStrings
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static string GetConnectionString(string name)
+        {
+            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+        }
+        #endregion
     }
 }

@@ -1,13 +1,11 @@
-﻿using System;
-using HM.FacePlatform.Model;
-using System.Linq;
-using System.Threading.Tasks;
-using HM.Enum_.FacePlatform;
-using System.Collections.Generic;
-using HM.DTO;
-using Z.EntityFramework.Plus;
-using System.Data.Entity;
+﻿using HM.DTO;
 using HM.DTO.FacePlatform;
+using HM.Enum_.FacePlatform;
+using HM.FacePlatform.Model;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using Z.EntityFramework.Plus;
 
 namespace HM.FacePlatform.DAL
 {
@@ -18,30 +16,25 @@ namespace HM.FacePlatform.DAL
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
+        /// <param name="buildingCode"></param>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public PagerData<House> GetHousePageByBuildingCode(int pageIndex, int pageSize, string userName)
+        public PagerData<HouseForRegisterDto> GetPageHouseForRegisterDto(int pageIndex, int pageSize, string buildingCode, string userName)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
-                IQueryable<House> query = null;
-                if (string.IsNullOrWhiteSpace(userName))
+                IQueryable<House> query = db.Houses.Where(it => it.building_code == buildingCode);
+                if (!string.IsNullOrWhiteSpace(userName))
                 {
-                    query = db.Houses.IncludeOptimized(
-                        x => x.UserHouses.Where(p =>
-                        p.is_del != IsDelType.是
-                        ));
+                    query = query.Where(it => it.user_houses.Any(uh => uh.is_del != IsDelType.是));
                 }
                 else
                 {
-                    query = db.Houses.IncludeOptimized(
-                        x => x.UserHouses.Where(p =>
-                        p.is_del != IsDelType.是
-                        && p.User.name.Contains(userName)
-                        ));
+                    query = query.Where(it => it.user_houses.Any(uh => uh.is_del != IsDelType.是
+                        && uh.User.name.Contains(userName)));
                 }
 
-                PagerData<House> pagerData = new PagerData<House>();
+                PagerData<HouseForRegisterDto> pagerData = new PagerData<HouseForRegisterDto>();
                 pagerData.total = query.Count();
                 if (pagerData.total % pageSize == 0)
                 {
@@ -51,13 +44,76 @@ namespace HM.FacePlatform.DAL
                 {
                     pagerData.pages = pagerData.total / pageSize + 1;
                 }
+
                 pagerData.rows = query.OrderBy(it => it.roomnumber)
                     .Skip(pageSize * pageIndex)
                     .Take(pageSize)
                     .AsNoTracking()
+                    .Select(it => new HouseForRegisterDto()
+                    {
+                        id = it.id,
+                        house_code = it.house_code,
+                        house_name = it.house_name,
+                        unit = it.unit,
+                        building_code = it.building_code,
+                        floor = it.floor,
+                        roomnumber = it.roomnumber,
+                        create_date = it.create_date,
+                        guest_count = it.user_houses.Where(uh => uh.is_del != IsDelType.是 && uh.user_type == UserType.访客).Count(),
+                        family_count = it.user_houses.Where(uh => uh.is_del != IsDelType.是 && uh.user_type == UserType.家庭成员).Count()
+                    })
                     .ToList();
+                #region 多对多关系处理
+                IEnumerable<string> lstHouseCode = pagerData.rows.Select(it => it.house_code);
+                var query2 = db.UserHouses
+                    .Where(it => it.is_del != IsDelType.是
+                    && (it.user_type == UserType.业主_拥有 || it.user_type == UserType.业主_居住)
+                    && lstHouseCode.Contains(it.house_code))
+                    .Select(it => new
+                    {
+                        it.user_type,
+                        it.house_code,
+                        it.User.name,
+                    });
+
+#if DEBUG
+                string sql2 = query2.ToString();
+#endif
+
+                var lstUserHouseDto = query2.ToList();
+
+                foreach (var row in pagerData.rows)
+                {
+                    var lstDto = lstUserHouseDto.Where(it => it.house_code == row.house_code).ToList();
+                    if (lstDto != null && lstDto.Any())
+                    {
+                        row.users_string = string.Join("；", lstDto.OrderBy(it => it.user_type).ThenBy(it => it.name).Select(it => it.name));//此处为内存排序
+                    }
+                }
+                #endregion
 
                 return pagerData;
+            }
+        }
+
+        /// <summary>
+        ///  通过房号获取房屋用户关系信息（包括User对象、House对象）
+        /// </summary>
+        /// <param name="house_code"></param>
+        /// <returns></returns>
+        public List<UserHouse> GetUserHouseWithUserAndHouse(string house_code)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                var query = db.UserHouses
+                    .Include(it => it.User)
+                    .Include(it => it.House)
+                    .Where(it => it.house_code == house_code && it.is_del != IsDelType.是);
+#if DEBUG
+                string sql = query.ToString();
+#endif
+                return query.ToList().OrderBy(it => it.user_type)
+                    .ThenBy(it => it.User.name).ToList();//MySql数据库中文排序有问题，只能利用内存排序。
             }
         }
         //        public int RecordCount(object parameters = null)

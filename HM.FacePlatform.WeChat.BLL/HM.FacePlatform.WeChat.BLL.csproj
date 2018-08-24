@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B7A546E5-8CF1-4C3E-ADA2-13E77C6698E8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HM.FacePlatform.WeChat.BLL</RootNamespace>
+    <AssemblyName>HM.FacePlatform.WeChat.BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\BaseBLL.cs" />
+    <Compile Include="CrmDataBLL.cs" />
+    <Compile Include="EntryHistoryBLL.cs" />
+    <Compile Include="HouseBLL.cs" />
+    <Compile Include="ProjectBLL.cs" />
+    <Compile Include="RegisterBLL.cs" />
+    <Compile Include="User_C_BLL.cs" />
+    <Compile Include="User_W_BLL.cs" />
+    <Compile Include="UserHouseBLL.cs" />
+    <Compile Include="BuildingBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HM.Common_\HM.Common_.csproj">
+      <Project>{A3D97C81-7036-4645-A3CF-2C9A3A366CDB}</Project>
+      <Name>HM.Common_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.FacePlatform.WeChat.DAL\HM.FacePlatform.WeChat.DAL.csproj">
+      <Project>{1AD57FBC-A61B-458F-8FAE-1B9510EDFF2E}</Project>
+      <Name>HM.FacePlatform.WeChat.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.FacePlatForm.WeChatModel\HM.FacePlatform.WeChatModel.csproj">
+      <Project>{1ef4b4c6-e477-4fde-8ad2-df72a24270ec}</Project>
+      <Name>HM.FacePlatform.WeChatModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.Utils_\HM.Utils_.csproj">
+      <Project>{38f4f95a-f905-43e1-8ad0-4d7d4820edef}</Project>
+      <Name>HM.Utils_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM\HM.csproj">
+      <Project>{61D0F886-DB69-45B7-AE4B-5405E6D58A8F}</Project>
+      <Name>HM</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

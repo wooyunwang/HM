@@ -147,10 +147,10 @@ namespace HM.FacePlatform.Model
         /// <summary>
         /// 注册的人脸
         /// </summary>
-        public virtual ICollection<Register> Registers { get; set; }
+        public virtual ICollection<Register> registers { get; set; }
         /// <summary>
         /// 小区用户与房屋关系集合
         /// </summary>
-        public virtual ICollection<UserHouse> UserHouses { get; set; }
+        public virtual ICollection<UserHouse> user_houses { get; set; }
     }
 }

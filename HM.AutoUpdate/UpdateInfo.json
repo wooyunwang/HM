@@ -1,0 +1,12 @@
+{
+  "AppInfo": {
+    "AppId": "HMControlCenter",
+    "EntryPoint": "HM.ControlCenter.exe",
+    "Description": "",
+    "Version": "3.0.0.5"
+  },
+  "Files": [
+  ],
+  "Mandatory": true,
+  "UpdateUrl": "http://10.0.76.16/AutoUpdate/updates/HMControlCenter/"
+}

@@ -42,20 +42,28 @@
   <ItemGroup>
     <Compile Include="Config\FaceConfigInfo.cs" />
     <Compile Include="DTO\ActionResult.cs" />
-    <Compile Include="DTO\FaceForm\BaseDataActionLogDto.cs" />
-    <Compile Include="DTO\FaceForm\ActionLogDto.cs" />
-    <Compile Include="DTO\FaceForm\BuildingForMapDto.cs" />
-    <Compile Include="DTO\FaceForm\CheckActionLogDto.cs" />
-    <Compile Include="DTO\FaceForm\RegisterManageDto.cs" />
-    <Compile Include="DTO\FaceForm\RegisterActionLogDto.cs" />
-    <Compile Include="DTO\FaceForm\UserForDataBaseDto.cs" />
+    <Compile Include="DTO\FacePlatformWCF\HouseDto.cs" />
+    <Compile Include="DTO\FacePlatformWCF\ProjectDto.cs" />
+    <Compile Include="DTO\FacePlatformWCF\BuildingDto.cs" />
+    <Compile Include="DTO\FacePlatformWCF\EntryHistoryDto.cs" />
+    <Compile Include="DTO\FacePlatformWCF\RegisterOutputDto.cs" />
+    <Compile Include="DTO\FacePlatformWCF\RegisterInputDto.cs" />
+    <Compile Include="DTO\FacePlatform\BaseDataActionLogDto.cs" />
+    <Compile Include="DTO\FacePlatform\ActionLogDto.cs" />
+    <Compile Include="DTO\FacePlatform\BuildingForMapDto.cs" />
+    <Compile Include="DTO\FacePlatform\CheckActionLogDto.cs" />
+    <Compile Include="DTO\FacePlatform\HouseForRegisterDto.cs" />
+    <Compile Include="DTO\FacePlatform\RegisterManageDto.cs" />
+    <Compile Include="DTO\FacePlatform\RegisterActionLogDto.cs" />
+    <Compile Include="DTO\FacePlatform\UserForDataBaseDto.cs" />
+    <Compile Include="DTO\JsonResponse.cs" />
     <Compile Include="DTO\PagerData.cs" />
     <Compile Include="GPIO\In_Port_Info.cs" />
     <Compile Include="GPIO\Out_Port_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DTO\FaceForm\UserDto.cs" />
-    <Compile Include="DTO\FaceForm\UserHouseDto.cs" />
-    <Compile Include="DTO\FaceForm\UserRegisterDto.cs" />
+    <Compile Include="DTO\FacePlatformWCF\UserDto.cs" />
+    <Compile Include="DTO\FacePlatformWCF\UserHouseDto.cs" />
+    <Compile Include="DTO\FacePlatformWCF\RegisterDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DTO\README.md" />

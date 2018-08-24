@@ -34,6 +34,15 @@
   <PropertyGroup>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
       <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
@@ -319,11 +328,11 @@
     <Compile Include="UserControls\ImageItem.Designer.cs">
       <DependentUpon>ImageItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ucFamily.cs">
+    <Compile Include="UserControls\UcFamily.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\ucFamily.Designer.cs">
-      <DependentUpon>ucFamily.cs</DependentUpon>
+    <Compile Include="UserControls\UcFamily.Designer.cs">
+      <DependentUpon>UcFamily.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ucNoCheck.cs">
       <SubType>UserControl</SubType>
@@ -429,8 +438,8 @@
     <EmbeddedResource Include="UserControls\ImageItem.resx">
       <DependentUpon>ImageItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ucFamily.resx">
-      <DependentUpon>ucFamily.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\UcFamily.resx">
+      <DependentUpon>UcFamily.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ucNoCheck.resx">
       <DependentUpon>ucNoCheck.cs</DependentUpon>
@@ -445,6 +454,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Templates\导入业主信息的模板.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -471,6 +481,9 @@
     </Compile>
     <None Include="quartz.config" />
     <None Include="README.md" />
+    <None Include="UpdateInfo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -478,6 +491,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HM.AutoUpdate\HM.AutoUpdate.csproj">
+      <Project>{433b3a9e-2b32-4b2f-874e-7f877678131c}</Project>
+      <Name>HM.AutoUpdate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HM.Common_\HM.Common_.csproj">
       <Project>{a3d97c81-7036-4645-a3cf-2c9a3a366cdb}</Project>
       <Name>HM.Common_</Name>

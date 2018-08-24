@@ -60,7 +60,6 @@
     <Compile Include="Model\c_user.cs" />
     <Compile Include="Model\c_user_house.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model\v_register.cs" />
     <Compile Include="Model\WeChatDB.cs" />
     <Compile Include="Model\w_account.cs" />
     <Compile Include="Model\w_card.cs" />
@@ -68,7 +67,6 @@
     <Compile Include="Model\w_face_mob_sms.cs" />
     <Compile Include="Model\w_face_sysparamter.cs" />
     <Compile Include="Model\w_register.cs" />
-    <Compile Include="Model\w_register_bak.cs" />
     <Compile Include="Model\w_sms.cs" />
     <Compile Include="Model\w_user.cs" />
     <Compile Include="Model\w_user_fail.cs" />
@@ -77,6 +75,15 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HM.Common_\HM.Common_.csproj">
+      <Project>{a3d97c81-7036-4645-a3cf-2c9a3a366cdb}</Project>
+      <Name>HM.Common_</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dto\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

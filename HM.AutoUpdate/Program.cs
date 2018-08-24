@@ -1,5 +1,4 @@
-﻿using HM.Form_;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -16,7 +15,6 @@ namespace HM.AutoUpdate
         [STAThread]
         static void Main()
         {
-            FormHelper.SetAccess("Users", Application.StartupPath);
 
             string strFullPath = Application.ExecutablePath;
             string strFileName = System.IO.Path.GetFileName(strFullPath);
@@ -24,7 +22,6 @@ namespace HM.AutoUpdate
 
             if (createdNew)
             {
-                FormHelper.SetZhCnCulturInfo();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
@@ -48,7 +45,8 @@ namespace HM.AutoUpdate
 
         public static void HandleException(Exception ex)
         {
-            Common_.LogHelper.Error(ex);
+            //暂时不处理
+            throw ex;
         }
     }
 }

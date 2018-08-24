@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace HM.Face.Common_.EyeCool
@@ -38,10 +39,12 @@ namespace HM.Face.Common_.EyeCool
         /// <summary>
         /// 注册时间(格式: yyyy-MM-dd HH:mm:ss)
         /// </summary>
-        public string regTime { set; get; }
+        [JsonConverter(typeof(EyeCoolDateTimeConverter))]
+        public DateTime regTime { set; get; }
         /// <summary>
         /// 有效期(格式: yyyy-MM-dd)
         /// </summary>
+        [JsonConverter(typeof(EyeCoolDateTimeConverter))]
         public DateTime? activeTime { set; get; }
         /// <summary>
         /// 审核状态
@@ -53,6 +56,7 @@ namespace HM.Face.Common_.EyeCool
         /// <summary>
         /// 审核时间(格式: yyyy-MM-dd HH:mm:ss)
         /// </summary>
+        [JsonConverter(typeof(EyeCoolDateTimeConverter))]
         public DateTime? checkTime { set; get; }
         /// <summary>
         /// 审核备注
@@ -67,6 +71,7 @@ namespace HM.Face.Common_.EyeCool
         /// 增、删、改的时间(数据同步用)change_time-->updateTime
         /// -->
         /// </summary>
+        [JsonConverter(typeof(EyeCoolDateTimeConverter))]
         public DateTime? updateTime { set; get; }
         /// <summary>
         /// 图片属性对象

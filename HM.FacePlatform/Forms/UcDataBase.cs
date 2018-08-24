@@ -164,8 +164,15 @@ namespace HM.FacePlatform
                         DialogResult dr = HMMessageBox.Show(this, "确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel);
                         if (dr == DialogResult.OK)
                         {
-                            int result = _maoBLL.Delete(it => it.id == mao.id);
-                            BindMao();
+                            var result = _maoBLL.Delete(it => it.id == mao.id);
+                            if (result.IsSuccess)
+                            {
+                                BindMao();
+                            }
+                            else
+                            {
+                                HMMessageBox.Show(this, result.ToAlertString());
+                            }
                         }
                     }
                 }
@@ -362,8 +369,8 @@ namespace HM.FacePlatform
                         dbMao.mao_name = mao_name;
                         dbMao.mao_no = mao_no;
                         dbMao.port = port;
-                        bool editResult = _maoBLL.Edit(dbMao);
-                        if (editResult)
+                        var editResult = _maoBLL.Edit(dbMao);
+                        if (editResult.IsSuccess)
                         {
                             Cache_.ClearCache(typeof(Mao).Name);
                             m_Tip.ShowItTop(BtnAddMao, "修改成功");
@@ -372,7 +379,7 @@ namespace HM.FacePlatform
                         }
                         else
                         {
-                            m_Tip.ShowItTop(BtnAddMao, "修改失败");
+                            m_Tip.ShowItTop(BtnAddMao, editResult.ToAlertString());
                         }
                     }
                     else

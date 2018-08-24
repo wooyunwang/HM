@@ -1,6 +1,6 @@
 ﻿using HM.Common_;
 using HM.DTO;
-using HM.DTO.FaceForm;
+using HM.DTO.FacePlatform;
 using HM.FacePlatform.DAL;
 using HM.FacePlatform.Model;
 using System;
@@ -33,7 +33,7 @@ namespace HM.FacePlatform.BLL
             return new ActionResult<PagerData<BuildingForMapDto>>()
             {
                 IsSuccess = true,
-                Obj = dal.GetBuildingForMap(pageIndex, pageSize, project_code, mao_id, build_name, hasMap)
+                Obj = dal.GetBuildingForMap((int)pageIndex, (int)pageSize, (string)project_code, (int)mao_id, (string)build_name, (bool?)hasMap)
             };
         }
         //public Building[] GetList(string project_code)

@@ -64,24 +64,27 @@ namespace HM.FacePlatform
         /// <param name="userID"></param>
         private void FlpRegisterRender(string userID)
         {
-            FlpRegister.Controls.Clear();
+            (this).UIThread(() =>
+            {
+                FlpRegister.Controls.Clear();
 
-            ActionResult<List<Register>> result = _registerBLL.GetWithUser(userID);
-            if (result.IsSuccess)
-            {
-                foreach (Register registerWithUser in result.Obj)
+                ActionResult<System.Collections.Generic.List<Register>> result = _registerBLL.GetWithUser(userID);
+                if (result.IsSuccess)
                 {
-                    ImageDetailItem uc = new ImageDetailItem(registerWithUser);
-                    FlpRegister.Controls.Add(uc);
-                    uc.ActionComplete = new Action<ImageDetailItem>(ImageDetailItemActionComplete);
+                    foreach (Register registerWithUser in result.Obj)
+                    {
+                        ImageDetailItem uc = new ImageDetailItem(registerWithUser);
+                        FlpRegister.Controls.Add(uc);
+                        uc.ActionComplete = new Action<ImageDetailItem>(ImageDetailItemActionComplete);
+                    }
                 }
-            }
-            else
-            {
-                ucNoData u = new ucNoData();
-                u.Note = "暂无人脸注册数据";
-                FlpRegister.Controls.Add(u);
-            }
+                else
+                {
+                    ucNoData u = new ucNoData();
+                    u.Note = "暂无人脸注册数据";
+                    FlpRegister.Controls.Add(u);
+                }
+            });
         }
         /// <summary>
         /// 
@@ -122,7 +125,7 @@ namespace HM.FacePlatform
                 result.Obj = new PagerData<RegisterManageDto>()
                 {
                     pages = 0,
-                    rows = new List<RegisterManageDto>(),
+                    rows = new System.Collections.Generic.List<RegisterManageDto>(),
                     total = 0
                 };
             }
@@ -208,7 +211,10 @@ namespace HM.FacePlatform
             if (hmDGV != null && hmDGV.Rows.Count > 0 && hmDGV.SelectedRows.Count > 0)
             {
                 RegisterManageDto dto = hmDGV.SelectedRows[0].DataBoundItem as RegisterManageDto;
-                FlpRegisterRender(dto.user_uid);
+                Task.Run(() =>
+                {
+                    FlpRegisterRender(dto.user_uid);
+                });
             }
         }
         /// <summary>
@@ -234,7 +240,7 @@ namespace HM.FacePlatform
         List<RegisterManageDto> GetCheckedRowData()
         {
             DgvRegister.EndEdit();
-            var data = new List<RegisterManageDto>();
+            var data = new System.Collections.Generic.List<RegisterManageDto>();
             foreach (DataGridViewRow row in DgvRegister.Rows)
             {
                 if (row.Cells["colCB"].EditedFormattedValue.ToBool_() ?? false)
@@ -251,7 +257,7 @@ namespace HM.FacePlatform
         /// <param name="e"></param>
         private void btnNextM_Click(object sender, EventArgs e)
         {
-            List<RegisterManageDto> data = GetCheckedRowData();
+            System.Collections.Generic.List<RegisterManageDto> data = GetCheckedRowData();
             if (!data.Any())
             {
                 _Tip.ShowIt(btnNextM, "请勾选人脸数据!");
@@ -278,7 +284,7 @@ namespace HM.FacePlatform
         /// <param name="e"></param>
         private void btnNextY_Click(object sender, EventArgs e)
         {
-            List<RegisterManageDto> data = GetCheckedRowData();
+            System.Collections.Generic.List<RegisterManageDto> data = GetCheckedRowData();
             if (!data.Any())
             {
                 _Tip.ShowIt(btnNextM, "请勾选人脸数据!");

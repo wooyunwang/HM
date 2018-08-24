@@ -133,8 +133,8 @@ namespace HM.FacePlatform
 
                 var dbSystemUser = _systemUserBLL.FirstOrDefault(it => it.id == systemUser.id);
                 dbSystemUser.is_del = isDelTypeResult;
-                bool result = _systemUserBLL.Edit(dbSystemUser);
-                if (result)
+                var result_edit = _systemUserBLL.Edit(dbSystemUser);
+                if (result_edit.IsSuccess)
                 {
                     systemUser = dbSystemUser;
                     HMMessageBox.Show(this, "操作成功！");
@@ -142,7 +142,7 @@ namespace HM.FacePlatform
                 }
                 else
                 {
-                    HMMessageBox.Show(this, "操作失败！");
+                    HMMessageBox.Show(this, result_edit.ToAlertString());
                 }
             }
             else if (hmDGV.Columns[e.ColumnIndex].Name == "col_reset_password")
@@ -151,8 +151,8 @@ namespace HM.FacePlatform
 
                 var dbSystemUser = _systemUserBLL.FirstOrDefault(it => it.id == systemUser.id);
                 dbSystemUser.password = dataCrypto.Encrypto(defaultPassword);
-                bool result = _systemUserBLL.Edit(dbSystemUser);
-                if (result)
+                var result_edit = _systemUserBLL.Edit(dbSystemUser);
+                if (result_edit.IsSuccess)
                 {
                     systemUser = dbSystemUser;
                     HMMessageBox.Show(this, "操作成功，密码重置为：" + defaultPassword);
@@ -160,7 +160,7 @@ namespace HM.FacePlatform
                 }
                 else
                 {
-                    HMMessageBox.Show(this, "操作失败！");
+                    HMMessageBox.Show(this, result_edit.ToAlertString());
                 }
             }
         }

@@ -5,46 +5,33 @@ namespace HM.FacePlatform.WeChatModel
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-
-    [Table("wechatface.w_user")]
-    public partial class w_user
+    /// <summary>
+    /// 人脸用户
+    /// </summary>
+    public partial class w_user : c_user
     {
-        public int id { get; set; }
-
-        [StringLength(50)]
-        public string user_uid { get; set; }
-
-        [StringLength(50)]
-        public string name { get; set; }
-
+        /// <summary>
+        /// 用户类型
+        /// </summary>
         [StringLength(20)]
         public string user_type { get; set; }
-
-        public DateTime? birthday { get; set; }
-
+        /// <summary>
+        /// 是否临时用户
+        /// <!--
+        /// 数据库有默认值，所以设计为非空
+        /// -->
+        /// </summary>
         [Column(TypeName = "bit")]
-        public bool? sex { get; set; }
-
-        public short? id_type { get; set; }
-
-        [StringLength(50)]
-        public string id_num { get; set; }
-
-        [StringLength(50)]
-        public string mobile { get; set; }
-
-        [StringLength(50)]
-        public string tel { get; set; }
-
-        public short? data_from { get; set; }
-
-        [Column(TypeName = "bit")]
-        public bool? is_temp { get; set; }
-
+        public bool is_temp { get; set; }
+        /// <summary>
+        /// 头像
+        /// </summary>
         [StringLength(100)]
         public string photo { get; set; }
+        /// <summary>
+        /// 数据来源
+        /// </summary>
+        public string data_from { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime? lastupdate_time { get; set; }
     }
 }

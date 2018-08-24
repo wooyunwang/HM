@@ -1,0 +1,82 @@
+﻿{
+  "HostUrl": "http://localhost/autoupdate/",
+  "HostUrl_backup": "http://blackcatone.vanrui.com/autoupdate/",
+  "DefaultSourceRootDirectory": "",
+  "DefaultPublishRootDirectory": "",
+  "ZipInfos": [
+    {
+      "AppId": "HMControlCenter",
+      "EntryPoint": "HM.ControlCenter.exe",
+      "Name": "黑猫一号·集中管控中心",
+      "Excludes": [
+        {
+          "ExcludeType": "Directory",
+          "Expression": "\\Temp",
+          "ExpressionComment": "临时文件夹"
+        },
+        {
+          "ExcludeType": "Directory",
+          "Expression": "\\Logs",
+          "ExpressionComment": "日志文件夹"
+        },
+        {
+          "ExcludeType": "Directory",
+          "Expression": "\\App_Data",
+          "ExpressionComment": "数据库文件夹"
+        },
+        {
+          "ExcludeType": "Directory",
+          "Expression": "\\App_Nginx",
+          "ExpressionComment": "Nginx Web服务器文件夹"
+        },
+        {
+          "ExcludeType": "File",
+          "Expression": "\\HM.ControlCenter.exe.config",
+          "ExpressionComment": "程序配置文件"
+        },
+        {
+          "ExcludeType": "File",
+          "Expression": "\\Config.ini",
+          "ExpressionComment": "ini配置文件"
+        }
+      ]
+    },
+    {
+      "AppId": "HMFacePlatform",
+      "EntryPoint": "HM.FacePlatform.exe",
+      "Name": "黑猫一号·人脸综合管理平台",
+      "Excludes": [
+        {
+          "ExcludeType": "Directory",
+          "Expression": "\\Temp",
+          "ExpressionComment": "临时文件夹"
+        },
+        {
+          "ExcludeType": "Directory",
+          "Expression": "\\Logs",
+          "ExpressionComment": "日志文件夹"
+        },
+        {
+          "ExcludeType": "Directory",
+          "Expression": "\\Photo\\Face",
+          "ExpressionComment": "人脸头像文件夹"
+        },
+        {
+          "ExcludeType": "Directory",
+          "Expression": "\\Photo\\Capture",
+          "ExpressionComment": "人脸头像抓拍文件夹"
+        },
+        {
+          "ExcludeType": "Directory",
+          "Expression": "\\Photo\\Compress",
+          "ExpressionComment": "人脸头像压缩文件夹"
+        },
+        {
+          "ExcludeType": "File",
+          "Expression": "\\HM.FacePlatform.exe.config",
+          "ExpressionComment": "程序配置文件"
+        }
+      ]
+    }
+  ]
+}

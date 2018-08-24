@@ -1,6 +1,6 @@
 ﻿namespace HM.FacePlatform.UserControls
 {
-    partial class ucFamily
+    partial class UcFamily
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -30,15 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lblName = new System.Windows.Forms.Label();
-            this.btnReg = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
+            this.BtnReg = new HM.Form_.HMTile();
+            this.BtnUpdate = new HM.Form_.HMTile();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblCountCompare = new System.Windows.Forms.Label();
             this.lblUserType = new System.Windows.Forms.Label();
             this.lblDataFrom = new System.Windows.Forms.Label();
             this.lblSex = new System.Windows.Forms.Label();
-            this.lblId = new System.Windows.Forms.Label();
             this.picIsRegisted = new System.Windows.Forms.PictureBox();
             this.picPhoto = new System.Windows.Forms.PictureBox();
+            this.BtnDelete = new HM.Form_.HMTile();
             ((System.ComponentModel.ISupportInitialize)(this.picIsRegisted)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPhoto)).BeginInit();
             this.SuspendLayout();
@@ -46,46 +47,46 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(110, 18);
+            this.lblName.Location = new System.Drawing.Point(97, 18);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(29, 12);
             this.lblName.TabIndex = 2;
             this.lblName.Text = "姓名";
             // 
-            // btnReg
+            // BtnReg
             // 
-            this.btnReg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
-            this.btnReg.FlatAppearance.BorderSize = 0;
-            this.btnReg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReg.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReg.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnReg.Location = new System.Drawing.Point(251, 82);
-            this.btnReg.Name = "btnReg";
-            this.btnReg.Size = new System.Drawing.Size(62, 25);
-            this.btnReg.TabIndex = 10;
-            this.btnReg.Text = "注册";
-            this.btnReg.UseVisualStyleBackColor = false;
-            this.btnReg.Click += new System.EventHandler(this.btnReg_Click);
+            this.BtnReg.Location = new System.Drawing.Point(207, 78);
+            this.BtnReg.Name = "BtnReg";
+            this.BtnReg.Size = new System.Drawing.Size(62, 25);
+            this.BtnReg.TabIndex = 10;
+            this.BtnReg.Text = "注册";
+            this.BtnReg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnReg.Click += new System.EventHandler(this.BtnReg_Click);
             // 
-            // btnUpdate
+            // BtnUpdate
             // 
-            this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
-            this.btnUpdate.FlatAppearance.BorderSize = 0;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnUpdate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnUpdate.Location = new System.Drawing.Point(167, 82);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(62, 25);
-            this.btnUpdate.TabIndex = 11;
-            this.btnUpdate.Text = "编辑";
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.BtnUpdate.Location = new System.Drawing.Point(139, 78);
+            this.BtnUpdate.Name = "BtnUpdate";
+            this.BtnUpdate.Size = new System.Drawing.Size(62, 25);
+            this.BtnUpdate.TabIndex = 11;
+            this.BtnUpdate.Text = "编辑";
+            this.BtnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
+            // 
+            // lblCountCompare
+            // 
+            this.lblCountCompare.AutoSize = true;
+            this.lblCountCompare.Location = new System.Drawing.Point(323, 10);
+            this.lblCountCompare.Name = "lblCountCompare";
+            this.lblCountCompare.Size = new System.Drawing.Size(23, 12);
+            this.lblCountCompare.TabIndex = 15;
+            this.lblCountCompare.Text = "0-0";
+            this.toolTip1.SetToolTip(this.lblCountCompare, "已审核-已注册");
             // 
             // lblUserType
             // 
             this.lblUserType.AutoSize = true;
-            this.lblUserType.Location = new System.Drawing.Point(110, 50);
+            this.lblUserType.Location = new System.Drawing.Point(97, 50);
             this.lblUserType.Name = "lblUserType";
             this.lblUserType.Size = new System.Drawing.Size(53, 12);
             this.lblUserType.TabIndex = 12;
@@ -103,27 +104,17 @@
             // lblSex
             // 
             this.lblSex.AutoSize = true;
-            this.lblSex.Location = new System.Drawing.Point(251, 18);
+            this.lblSex.Location = new System.Drawing.Point(212, 18);
             this.lblSex.Name = "lblSex";
             this.lblSex.Size = new System.Drawing.Size(29, 12);
             this.lblSex.TabIndex = 14;
             this.lblSex.Text = "性别";
             // 
-            // lblId
-            // 
-            this.lblId.AutoSize = true;
-            this.lblId.Location = new System.Drawing.Point(196, 50);
-            this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(17, 12);
-            this.lblId.TabIndex = 15;
-            this.lblId.Text = "Id";
-            this.lblId.Visible = false;
-            // 
             // picIsRegisted
             // 
             this.picIsRegisted.Image = global::HM.FacePlatform.Properties.Resources.registed;
-            this.picIsRegisted.Location = new System.Drawing.Point(110, 86);
-            this.picIsRegisted.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.picIsRegisted.Location = new System.Drawing.Point(311, 24);
+            this.picIsRegisted.Margin = new System.Windows.Forms.Padding(2);
             this.picIsRegisted.Name = "picIsRegisted";
             this.picIsRegisted.Size = new System.Drawing.Size(50, 18);
             this.picIsRegisted.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -142,21 +133,32 @@
             this.picPhoto.TabIndex = 1;
             this.picPhoto.TabStop = false;
             // 
-            // ucFamily
+            // BtnDelete
+            // 
+            this.BtnDelete.Location = new System.Drawing.Point(275, 78);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(62, 25);
+            this.BtnDelete.TabIndex = 18;
+            this.BtnDelete.Text = "删除";
+            this.BtnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
+            // 
+            // UcFamily
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.picIsRegisted);
-            this.Controls.Add(this.lblId);
+            this.Controls.Add(this.lblCountCompare);
             this.Controls.Add(this.lblSex);
             this.Controls.Add(this.lblDataFrom);
             this.Controls.Add(this.lblUserType);
-            this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.btnReg);
+            this.Controls.Add(this.BtnUpdate);
+            this.Controls.Add(this.BtnReg);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.picPhoto);
-            this.Name = "ucFamily";
+            this.Name = "UcFamily";
             this.Size = new System.Drawing.Size(374, 114);
             this.Load += new System.EventHandler(this.ucFamily_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picIsRegisted)).EndInit();
@@ -170,13 +172,14 @@
 
         public System.Windows.Forms.PictureBox picPhoto;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Button btnReg;
-        private System.Windows.Forms.Button btnUpdate;
+        private HM.Form_.HMTile BtnReg;
+        private HM.Form_.HMTile BtnUpdate;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label lblUserType;
         private System.Windows.Forms.Label lblDataFrom;
         private System.Windows.Forms.Label lblSex;
-        private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.PictureBox picIsRegisted;
+        private System.Windows.Forms.Label lblCountCompare;
+        private Form_.HMTile BtnDelete;
     }
 }

@@ -4,6 +4,8 @@ using System.IO;
 using HM.FacePlatform.Model;
 using HM.Common_;
 using System.Net;
+using HM.DTO.FacePlatform;
+using HM.DTO;
 
 namespace HM.FacePlatform.BLL
 {
@@ -41,7 +43,23 @@ namespace HM.FacePlatform.BLL
             }
         }
 
+        public bool DownloadFaceFile(Uri sourcePath, string objectPath)
+        {
+            try
+            {
+                string fileName = Path.GetFileName(sourcePath.AbsoluteUri);//wait
+                string finalObjectPath = Path.Combine(objectPath, fileName);
+                WebClient webClient = new WebClient();
+                webClient.DownloadFile(sourcePath, finalObjectPath);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("RegisterBLL.DownloadFaceFile: " + ex.Message);
+                return false;
+            }
 
+            return true;
+        }
         public bool DownloadFaceFile(string sourcePath, string objectPath)
         {
             try

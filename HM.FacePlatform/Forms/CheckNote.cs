@@ -13,6 +13,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Linq;
 using System.Threading.Tasks;
+using HM.DTO.FacePlatform;
+using HM.Form_;
 
 namespace HM.FacePlatform.Forms
 {
@@ -30,6 +32,10 @@ namespace HM.FacePlatform.Forms
         /// 
         /// </summary>
         MaoFailedJobBLL _maoFailedJobBLL;
+        /// <summary>
+        /// 
+        /// </summary>
+        HouseBLL _houseBLL;
         /// <summary>
         /// 提示
         /// </summary>
@@ -67,6 +73,7 @@ namespace HM.FacePlatform.Forms
             _registerBLL = new RegisterBLL();
             _maoBLL = new MaoBLL();
             _maoFailedJobBLL = new MaoFailedJobBLL();
+            _houseBLL = new HouseBLL();
 
             _usCheck = ucCheck;
             _userUid = userUid;
@@ -117,62 +124,78 @@ namespace HM.FacePlatform.Forms
                 this.Text = "单项审核";
             }
 
-            Register registerWithUser = _lstRegisterWithUser[0];
-            tbHouseName.Text = registerWithUser.user.user_houses.ToList()[0].House.house_name;//wait 不是这么玩的
-            tbName.Text = registerWithUser.user.name;
-            tbUserType.Text = Utils_.EnumHelper.GetName(registerWithUser.user.user_houses.ToList()[0].user_type);//wait 不是这么玩的
-            tbRelation.Text = "";//registerWithUser.relation;//wait 不是这么玩的
-            tbRegTime.Text = registerWithUser.user.end_time.ToString();
-            txtNote.Text = registerWithUser.user.check_note;
-            tbCheckPepole.Text = ""; //registerWithUser.check_by_name;//wait 不是这么玩的
-            tbCheckTime.Text = registerWithUser.user.check_time.ToString();
+            Init();
+        }
 
-            FlpRegistedRender();
-
-            if (!_isRead)
+        private void Init()
+        {
+            if (_lstRegisterWithUser.Any())
             {
-                btnOK.Visible = false;
-                btnNO.Visible = false;
-                this.Text = "查看审核";
-                txtNote.ReadOnly = true;
-                labPeople.Visible = true;
-                labCheckTime.Visible = true;
-                tbCheckPepole.Visible = true;
-                tbCheckTime.Visible = true;
+                Register registerWithUser = _lstRegisterWithUser[0];
+                CheckNoteDto checkNoteDto = new UserHouseBLL().GetForCheckNote(registerWithUser.user_uid);
+                if (checkNoteDto != null)
+                {
+                    tbHouseName.Text = checkNoteDto.house_name;
+                    tbUserType.Text = Utils_.EnumHelper.GetName(checkNoteDto.user_type);
+                    tbRelation.Text = checkNoteDto.relation;
+                    tbName.Text = checkNoteDto.user_name;
+                    tbRegTime.Text = checkNoteDto.reg_time.ToString("yyyy-MM-dd HH:mm:ss");
+                    txtNote.Text = checkNoteDto.check_note;
+                    tbCheckPepole.Text = checkNoteDto.check_by_name;
+                    tbCheckTime.Text = checkNoteDto.check_time.ToString("yyyy-MM-dd HH:mm:ss");
+                }
+
+                FlpRegistedRender();
+
+                if (_isRead)
+                {
+                    btnOK.Visible = false;
+                    btnNO.Visible = false;
+                    this.Text = "查看审核";
+                    txtNote.ReadOnly = true;
+                    labPeople.Visible = true;
+                    labCheckTime.Visible = true;
+                    tbCheckPepole.Visible = true;
+                    tbCheckTime.Visible = true;
+                }
             }
             else
             {
-
+                throw new Exception("进入审核界面，需要传入待审核的人脸信息");
             }
         }
+
         /// <summary>
         /// 呈现至FlowLayoutPanel容器
         /// </summary>
         private void FlpRegistedRender()
         {
-            FlpRegisted.Controls.Clear();
             ActionResult<List<Register>> result = _registerBLL.GetWithUser(_lstRegisterWithUser[0].user_uid);
-            if (result.IsSuccess)
+            this.UIThread(() =>
             {
-                FlpRegisted.SuspendLayout();
-                foreach (Register registerWithUser in result.Obj)
+                FlpRegisted.Controls.Clear();
+                if (result.IsSuccess)
                 {
-                    ImageItem imageItem = new ImageItem(registerWithUser);
-
-                    if (!_isRead || _lstRegisterWithUser.Count > 1) imageItem.isShowDelete = false;
-                    FlpRegisted.Controls.Add(imageItem);
-                    if (imageItem.isShowDelete)
+                    FlpRegisted.SuspendLayout();
+                    foreach (Register registerWithUser in result.Obj)
                     {
-                        imageItem.DeleteImageAction += new Action<ImageItem>(DeleteRegistedImage);
+                        ImageItem imageItem = new ImageItem(registerWithUser);
+
+                        if (!_isRead || _lstRegisterWithUser.Count > 1) imageItem.isShowDelete = false;
+                        FlpRegisted.Controls.Add(imageItem);
+                        if (imageItem.isShowDelete)
+                        {
+                            imageItem.DeleteImageAction += new Action<ImageItem>(DeleteRegistedImage);
+                        }
                     }
+                    FlpRegisted.ResumeLayout();
+                    FlpRegisted.PerformLayout();
                 }
-                FlpRegisted.ResumeLayout();
-                FlpRegisted.PerformLayout();
-            }
-            else
-            {
-                HMMessageBox.Show(this, result.ToAlertString());
-            }
+                else
+                {
+                    HMMessageBox.Show(this, result.ToAlertString());
+                }
+            });
         }
 
         private void DeleteRegistedImage(ImageItem imageItem)
@@ -180,73 +203,14 @@ namespace HM.FacePlatform.Forms
             if (HMMessageBox.Show(this, "此人脸已审核通过，确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel) != DialogResult.OK)
                 return;
 
-            ClearMessage();
-
-            var result = _maoBLL.CheckMao();
-            if (result.IsSuccess)
+            FaceJobFrm faceJobFrm = new FaceJobFrm();
+            ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck(true);
+            if (checkResult.IsSuccess)
             {
-                DateTime change_time = DateTime.Now;
-                imageItem._register.change_time = change_time;
-                var goodMaos = result.Obj.Where(it => it.Value.Item1 == true).Select(it => it.Value);
-                Parallel.ForEach(goodMaos,
-                   new ParallelOptions { MaxDegreeOfParallelism = Utils_.Config_.GetInt("MaxDegreeOfParallelism") ?? 2 },
-                   tplMao =>
-                   {
-                       Mao mao = tplMao.Item2;
-                       Face.Common_.Face face = tplMao.Item3;
-
-                       var itemResult = face.FaceDel(imageItem._register.user.people_id, new List<string>() { imageItem._register.photo_path });
-
-                       if (itemResult.IsSuccess)
-                       {
-                           ShowMessage("**" + mao.mao_name + "，删除成功", MessageType.Success);
-                       }
-
-                       else
-                       {
-                           ShowMessage("**" + mao.mao_name + "，删除失败(稍后将自动重试)：" + itemResult.ToAlertString(), MessageType.Error);
-
-                           MaoFailedJob job = new MaoFailedJob
-                           {
-                               register_or_user_id = imageItem._register.id,
-                               mao_id = mao.id,
-                               job_type = JobType.删除,
-                           };
-                           _maoFailedJobBLL.AddOrUpdate(it => new
-                           {
-                               it.register_or_user_id,
-                               it.mao_id,
-                               it.job_type
-                           }, job);
-                       }
-                   });
-            }
-            else
-            {
-                var badMaos = result.Obj.Where(it => it.Value.Item1 == false)
-                    .Select(it => it.Value).Select(it => it.Item2);
-                foreach (var mao in badMaos)
+                faceJobFrm.DeleteRegistedImage(checkResult.Obj, imageItem._register.user, imageItem, () =>
                 {
-                    ShowMessage($"人脸一体机【{mao.mao_name}】IP【{mao.ip}】端口【{mao.port}】连接失败！", MessageType.Error);
-                }
-                ShowMessage("这将导致删除失败！", MessageType.Error);
-            }
-
-            FlpRegistedRender();
-
-            ActionResult<List<Register>> lstRegisterWithUser = _registerBLL.GetWithUser(imageItem._register.user_uid);
-            if (lstRegisterWithUser.IsSuccess)
-            {
-                if (!lstRegisterWithUser.Any())
-                {
-                    UserBLL _userBLL = new UserBLL();
-                    User _user = _userBLL.FirstOrDefault(it => it.user_uid == imageItem._register.user_uid);
-                    if (_user != null)
-                    {
-                        _user.check_state = CheckType.待审核;
-                        _userBLL.Edit(_user);
-                    }
-                }
+                    FlpRegistedRender();
+                });
             }
         }
         /// <summary>
@@ -265,119 +229,43 @@ namespace HM.FacePlatform.Forms
         /// <param name="e"></param>
         private void btnNO_Click(object sender, EventArgs e)
         {
-            bool result = Check(CheckType.审核不通过);
-            if (result)
-            {
-                this.DialogResult = DialogResult.No;
-                this.Close();
-            }
+            Check(CheckType.审核不通过);
         }
         /// <summary>
         /// 审核
         /// </summary>
         /// <param name="checkType"></param>
-        private bool Check(CheckType checkType)
+        private void Check(CheckType checkType)
         {
-            ClearMessage();
-
             if (tbEnd.Visible)
             {
                 if (Convert.ToDateTime(tbEnd.Value.ToString("yyyy-MM-dd 23:59:59")) < Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd 23:59:59")))
                 {
                     _Tip.ShowItTop(tbEnd, "有效期时间不能小于当前时间");
-                    return false;
+                    return;
                 }
             }
-
-            var result = _maoBLL.CheckMao();
-            if (result.IsSuccess)
+            FaceJobFrm faceJobFrm = new FaceJobFrm();
+            ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck();
+            if (checkResult.IsSuccess)
             {
-                var goodMaos = result.Obj.Where(it => it.Value.Item1 == false).Select(it => it.Value);
-                result.Add(Check(goodMaos, checkType));
-                return result.IsSuccess;
-            }
-            else
-            {
-                var badMaos = result.Obj.Where(it => it.Value.Item1 == false)
-                    .Select(it => it.Value).Select(it => it.Item2);
-                foreach (var mao in badMaos)
-                {
-                    ShowMessage($"人脸一体机【{mao.mao_name}】IP【{mao.ip}】端口【{mao.port}】连接失败！", MessageType.Error);
-                }
-                ShowMessage("这将导致审核失败！", MessageType.Error);
-                return false;
-            }
-        }
-        /// <summary>
-        /// 审核
-        /// </summary>
-        /// <param name="goodMaos"></param>
-        /// <param name="checkType"></param>
-        /// <returns></returns>
-        private ActionResult Check(IEnumerable<Tuple<bool, Mao, Face.Common_.Face>> goodMaos, CheckType checkType)
-        {
-            ActionResult actionResult = new ActionResult();
-            string project_code = Program._Mainform._ProjectCode;
-
-            foreach (Register registerWithUser in _lstRegisterWithUser)
-            {
-                string check_note = txtNote.Text.Trim();
-
-                ShowMessage("##开始修改：" + registerWithUser.user.name, MessageType.Information);
-
-                int check_by = Program._Account.id;
-                DateTime change_time = DateTime.Now;
-
-                List<ActionResult> lstActionResult = new List<ActionResult>();
-                List<MaoFailedJob> lstMaoFailedJob = new List<MaoFailedJob>();
-                Parallel.ForEach(goodMaos,
-                    new ParallelOptions { MaxDegreeOfParallelism = Utils_.Config_.GetInt("MaxDegreeOfParallelism") ?? 2 },
-                    tplMao =>
+                faceJobFrm.Review(checkResult.Obj,
+                    _lstRegisterWithUser, checkType,
+                    txtNote.Text.Trim(),
+                    (actionResult) =>
                     {
-                        Mao mao = tplMao.Item2;
-                        Face.Common_.Face face = tplMao.Item3;
-
-                        var result = face.Review(project_code, registerWithUser.user.people_id, registerWithUser.face_id, checkType, "客户端审核");
-                        lstActionResult.Add(result);
-                        if (result.IsSuccess)
+                        if (actionResult.IsSuccess)
                         {
-                            ShowMessage($"【{ mao.mao_name }】【{registerWithUser.user.name}】的审核结果：【{ checkType }】", MessageType.Success);
+                            Init();
                         }
-                        else
+                        if (checkType == CheckType.审核不通过)
                         {
-                            ShowMessage($"【{ mao.mao_name }】【{registerWithUser.user.name}】的审核失败：【{ result.ToAlertString() }】", MessageType.Error);
-
-                            lstMaoFailedJob.Add(new MaoFailedJob
-                            {
-                                register_or_user_id = registerWithUser.id,
-                                mao_id = mao.id,
-                                job_type = checkType == CheckType.审核不通过 ? JobType.审核不通过 : JobType.审核
-                            });
+                            this.DialogResult = DialogResult.No;
+                            this.Close();
                         }
                     });
-
-                if (lstActionResult.Any(it => it.IsSuccess)) //只要有一个审核成功
-                {
-                    registerWithUser.check_state = checkType;
-                    registerWithUser.change_time = change_time;
-                    _registerBLL.Edit(registerWithUser);
-                    if (lstMaoFailedJob.Any())
-                    {
-                        _maoFailedJobBLL.AddOrUpdate(it => new
-                        {
-                            it.register_or_user_id,
-                            it.mao_id,
-                            it.job_type
-                        }, lstMaoFailedJob.ToArray());
-                    }
-                }
-                if (lstActionResult.Any(it => !it.IsSuccess)) //只要有一个审核失败，则不通过
-                {
-                    actionResult.IsSuccess = false;
-                }
+                faceJobFrm.ShowDialog();
             }
-
-            return actionResult;
         }
         /// <summary>
         /// 取消
@@ -388,28 +276,6 @@ namespace HM.FacePlatform.Forms
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
-        }
-        /// <summary>
-        /// 清空消息
-        /// </summary>
-        private void ClearMessage()
-        {
-            tbMessage.UIThread(() =>
-            {
-                tbMessage.Text = string.Empty;
-            });
-        }
-        /// <summary>
-        /// 显示消息
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="type"></param>
-        private void ShowMessage(string message, MessageType type)
-        {
-            tbMessage.UIThread(() =>
-            {
-                tbMessage.AppendText(message + Environment.NewLine, MessageColor.GetColorByMessgaeType(type));
-            });
         }
     }
 }

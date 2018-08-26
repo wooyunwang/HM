@@ -52,7 +52,6 @@ namespace HM.FacePlatform.Forms
             this.pnToRegister = new System.Windows.Forms.FlowLayoutPanel();
             this.gbRegisted = new System.Windows.Forms.GroupBox();
             this.pnRegisted = new System.Windows.Forms.FlowLayoutPanel();
-            this.ed_ResultBox = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Tsp.SuspendLayout();
             this.groupBox_Info.SuspendLayout();
@@ -273,7 +272,7 @@ namespace HM.FacePlatform.Forms
             // 
             this.splitContainer1.Panel2.Controls.Add(this.gbRegisted);
             this.splitContainer1.Panel2MinSize = 100;
-            this.splitContainer1.Size = new System.Drawing.Size(774, 267);
+            this.splitContainer1.Size = new System.Drawing.Size(774, 355);
             this.splitContainer1.SplitterDistance = 334;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 27;
@@ -284,7 +283,7 @@ namespace HM.FacePlatform.Forms
             this.groupBox_photo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox_photo.Location = new System.Drawing.Point(0, 0);
             this.groupBox_photo.Name = "groupBox_photo";
-            this.groupBox_photo.Size = new System.Drawing.Size(334, 267);
+            this.groupBox_photo.Size = new System.Drawing.Size(334, 355);
             this.groupBox_photo.TabIndex = 1;
             this.groupBox_photo.TabStop = false;
             this.groupBox_photo.Text = "照片";
@@ -295,7 +294,7 @@ namespace HM.FacePlatform.Forms
             this.pnToRegister.Location = new System.Drawing.Point(3, 17);
             this.pnToRegister.Margin = new System.Windows.Forms.Padding(2);
             this.pnToRegister.Name = "pnToRegister";
-            this.pnToRegister.Size = new System.Drawing.Size(328, 247);
+            this.pnToRegister.Size = new System.Drawing.Size(328, 335);
             this.pnToRegister.TabIndex = 1;
             // 
             // gbRegisted
@@ -304,7 +303,7 @@ namespace HM.FacePlatform.Forms
             this.gbRegisted.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbRegisted.Location = new System.Drawing.Point(0, 0);
             this.gbRegisted.Name = "gbRegisted";
-            this.gbRegisted.Size = new System.Drawing.Size(435, 267);
+            this.gbRegisted.Size = new System.Drawing.Size(435, 355);
             this.gbRegisted.TabIndex = 13;
             this.gbRegisted.TabStop = false;
             this.gbRegisted.Text = "已注册模板";
@@ -316,24 +315,12 @@ namespace HM.FacePlatform.Forms
             this.pnRegisted.Location = new System.Drawing.Point(3, 17);
             this.pnRegisted.Margin = new System.Windows.Forms.Padding(2);
             this.pnRegisted.Name = "pnRegisted";
-            this.pnRegisted.Size = new System.Drawing.Size(429, 247);
+            this.pnRegisted.Size = new System.Drawing.Size(429, 335);
             this.pnRegisted.TabIndex = 0;
-            // 
-            // ed_ResultBox
-            // 
-            this.ed_ResultBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ed_ResultBox.HideSelection = false;
-            this.ed_ResultBox.Location = new System.Drawing.Point(0, 267);
-            this.ed_ResultBox.Margin = new System.Windows.Forms.Padding(2);
-            this.ed_ResultBox.Name = "ed_ResultBox";
-            this.ed_ResultBox.Size = new System.Drawing.Size(774, 88);
-            this.ed_ResultBox.TabIndex = 28;
-            this.ed_ResultBox.Text = "";
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.splitContainer1);
-            this.panel1.Controls.Add(this.ed_ResultBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(20, 171);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
@@ -394,7 +381,6 @@ namespace HM.FacePlatform.Forms
         private HM.Form_.Old.PanelXP pnEndTime;
         private System.Windows.Forms.FlowLayoutPanel pnRegisted;
         private System.Windows.Forms.FlowLayoutPanel pnToRegister;
-        private System.Windows.Forms.RichTextBox ed_ResultBox;
         private System.Windows.Forms.Panel panel1;
     }
 }

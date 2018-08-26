@@ -198,12 +198,12 @@ namespace HM.Face.Common_
         public override ActionResult<bool> MatchCompare(string face_id1, string face_id2)
         {
             ActionResult<bool> result = new ActionResult<bool>();
-            if (!string.IsNullOrWhiteSpace(face_id1))
+            if (string.IsNullOrWhiteSpace(face_id1))
             {
                 result.IsSuccess = false;
                 result.Add("参数face_id1不能为空！");
             }
-            if (!string.IsNullOrWhiteSpace(face_id2))
+            if (string.IsNullOrWhiteSpace(face_id2))
             {
                 result.IsSuccess = false;
                 result.Add("参数face_id2不能为空！");
@@ -302,10 +302,18 @@ namespace HM.Face.Common_
                 tip = "图片比较"
             });
 
-            if (string.IsNullOrEmpty(output?.face?[0].face_id))
+            if (output.res_code_enum == ResponseCode._0000)
+            {
+                if (string.IsNullOrEmpty(output?.face?[0].face_id))
+                {
+                    result.IsSuccess = false;
+                    result.Add($"图片不包含人脸信息！");
+                }
+            }
+            else
             {
                 result.IsSuccess = false;
-                result.Add($"图片不包含人脸信息！");
+                result.Add(output.res_msg);
             }
 
             if (result.IsSuccess)
@@ -492,8 +500,46 @@ namespace HM.Face.Common_
                     people_id = peopleId,
                     faceIds = faceIds
                 };
-                PeopleRemoveOutput ouput = _API.PeopleRemove(input);
-                result.Add(ouput.ToActionResult());
+                PeopleRemoveOutput output = _API.PeopleRemove(input);
+                if (output.res_code_enum != ResponseCode._0001)
+                {
+                    if ((output.res_msg ?? "").Contains("未查询到对应的人脸"))
+                    {
+                        output.res_code = ResponseCode._0000.ToString().TrimStart('_');
+                    }
+                }
+                result.Add(output.ToActionResult());
+            }
+            return result;
+        }
+        /// <summary>
+        /// 人员删除操作
+        /// </summary>
+        /// <param name="peopleId"></param>
+        /// <returns></returns>
+        public override ActionResult UserDel(string peopleId)
+        {
+            ActionResult result = new ActionResult();
+
+            if (String.IsNullOrEmpty(peopleId))
+            {
+                result.IsSuccess = false;
+                result.Add("参数peopleId不能为空！");
+            }
+            if (result.IsSuccess)
+            {
+                var output = _API.PeopleDelete(new PeopleDeleteInput()
+                {
+                    people_id = peopleId
+                });
+                if (output.res_code_enum != ResponseCode._0000)
+                {
+                    if ((output.res_msg ?? "").Contains("未查询到对应的用户数据"))
+                    {
+                        output.res_code = ResponseCode._0000.ToString().TrimStart('_');
+                    }
+                }
+                result.Add(output.ToActionResult());
             }
             return result;
         }

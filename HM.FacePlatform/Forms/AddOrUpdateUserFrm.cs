@@ -2,9 +2,11 @@
 using HM.Enum_.FacePlatform;
 using HM.FacePlatform.BLL;
 using HM.FacePlatform.Model;
+using HM.Form_;
 using HM.Form_.Old;
 using HM.Utils_;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -173,31 +175,32 @@ namespace HM.FacePlatform.Forms
                 UserHouse uh = new UserHouse();
                 if (IsAdd)
                 {
-                    uh.House = _house;
-                    uh.User = new User()
+                    var user_uid = Key_.SequentialGuid();
+
+                    User user = new User()
                     {
                         name = name,
                         sex = BindHelper.EnumValue<SexType>(dropSex) ?? SexType.未知,
                         id_type = string.IsNullOrWhiteSpace(id_num) ? IdType.未知 : IdType.身份证,
                         mobile = mobile,
                         id_num = id_num,
+                        user_uid = user_uid,
+                        people_id = user_uid,
+                        check_note = "未注册人脸",
 
                         #region 默认部分
                         birthday = DateTime.MinValue,
                         change_time = DateTime.Now,
                         check_by = 0,
-                        check_note = "",
-                        check_state = CheckType.待审核,
+                        check_state = CheckType.审核不通过,
                         check_time = DateTime.MinValue,
                         create_time = DateTime.Now,
                         data_from = DataFromType.手动添加,
                         end_time = DateTime.MinValue,
                         id_pic = "",
                         is_del = IsDelType.否,
-                        people_id = "",
                         reg_time = DateTime.Now,
                         tel = "",
-                        user_uid = ""
                         #endregion
                     };
 
@@ -205,21 +208,27 @@ namespace HM.FacePlatform.Forms
                     uh.house_code = _house.house_code;
                     uh.user_type = BindHelper.EnumValue<UserType>(dropUserType) ?? UserType.未知;
                     uh.relation = tbRelation.Text.Trim();
-                    uh.user_uid = "";
-                    var result_add = _userHouseBLL.Add(_user_house);
-                    if (result_add.IsSuccess)
+                    uh.user_uid = user_uid;
+                    user.user_houses = new List<UserHouse>();
+                    user.user_houses.Add(uh);
+                    var addUserResult = _userBLL.Add(user);
+                    if (addUserResult.IsSuccess)
                     {
-                        _user_house = result_add.Obj;
-                        m_Tip.ShowItTop(BtnAdd, "新增成功");
+                        HMMessageBox.Show(this, "新增成功");
+                        DialogResult = DialogResult.OK;
+                        Task.Run(() =>
+                        {
+                            _ucRegister.BindHouseUser(_house.house_code);
+                        });
                     }
                     else
                     {
-                        m_Tip.ShowItTop(BtnAdd, result_add.ToAlertString());
+                        m_Tip.ShowItTop(BtnAdd, addUserResult.ToAlertString());
                     }
                 }
                 else
                 {
-                    uh = _userHouseBLL.FirstOrDefault(it => it.id == _user_house.id);
+                    uh = _userHouseBLL.GetUserHouseWithUser(_user_house.id);
                     uh.User.name = name;
                     uh.User.sex = BindHelper.EnumValue<SexType>(dropSex) ?? SexType.未知;
                     uh.User.id_type = string.IsNullOrWhiteSpace(id_num) ? IdType.未知 : IdType.身份证;
@@ -228,21 +237,21 @@ namespace HM.FacePlatform.Forms
                     uh.house_code = _house.house_code;
                     uh.user_type = BindHelper.EnumValue<UserType>(dropUserType) ?? UserType.未知;
                     uh.relation = tbRelation.Text.Trim();
-                    var result_edit = _userHouseBLL.Edit(_user_house);
-                    if (result_edit.IsSuccess)
+                    var editResult = _userHouseBLL.EditWithUser(uh);
+                    if (editResult.IsSuccess)
                     {
-                        m_Tip.ShowItTop(BtnAdd, "修改成功");
+                        HMMessageBox.Show(this, "修改成功");
+                        DialogResult = DialogResult.OK;
+                        Task.Run(() =>
+                        {
+                            _ucRegister.BindHouseUser(_house.house_code);
+                        });
                     }
                     else
                     {
-                        m_Tip.ShowItTop(BtnAdd, result_edit.ToAlertString());
+                        m_Tip.ShowItTop(BtnAdd, editResult.ToAlertString());
                     }
                 }
-
-                Task.Run(() =>
-                {
-                    _ucRegister.BindHouseUser(_house.house_code);
-                });
             }
             catch (Exception ex)
             {

@@ -104,7 +104,7 @@ namespace HM.FacePlatform
                 result.Obj = new PagerData<Register>()
                 {
                     pages = 0,
-                    rows = new System.Collections.Generic.List<Register>(),
+                    rows = new List<Register>(),
                     total = 0
                 };
             }
@@ -118,7 +118,7 @@ namespace HM.FacePlatform
         /// <summary>
         /// 
         /// </summary>
-        public void FlpWaitReviewRender(System.Collections.Generic.List<Register> lstRegisterWithUser)
+        public void FlpWaitReviewRender(List<Register> lstRegisterWithUser)
         {
             this.UIThread(() =>
             {
@@ -136,8 +136,8 @@ namespace HM.FacePlatform
                     foreach (var registerWithUser in lstRegisterWithUser)
                     {
                         ucNoCheck uc = new ucNoCheck();
-                        uc._register = registerWithUser;
-                        uc.CheckAction += new Action<ucNoCheck>(CheckDo);
+                        uc._registerWithUser = registerWithUser;
+                        uc.CheckAction = new Action<ucNoCheck>(CheckDo);
                         FlpWaitReview.Controls.Add(uc);
                     }
                     FlpWaitReview.ResumeLayout();
@@ -167,7 +167,7 @@ namespace HM.FacePlatform
                 result.Obj = new PagerData<Register>()
                 {
                     pages = 0,
-                    rows = new System.Collections.Generic.List<Register>(),
+                    rows = new List<Register>(),
                     total = 0
                 };
             }
@@ -181,7 +181,7 @@ namespace HM.FacePlatform
         /// <summary>
         /// 
         /// </summary>
-        public void FlpHasReviewRender(System.Collections.Generic.List<Register> lstRegisterWithUser)
+        public void FlpHasReviewRender(List<Register> lstRegisterWithUser)
         {
             this.UIThread(() =>
             {
@@ -199,8 +199,8 @@ namespace HM.FacePlatform
                     foreach (var registerWithUser in lstRegisterWithUser)
                     {
                         ucNoCheck uc = new ucNoCheck();
-                        uc._register = registerWithUser;
-                        uc.CheckAction += new Action<ucNoCheck>(CheckDo);
+                        uc._registerWithUser = registerWithUser;
+                        uc.CheckAction = new Action<ucNoCheck>(CheckDo);
                         FlpHasReview.Controls.Add(uc);
                     }
                     FlpHasReview.ResumeLayout();
@@ -233,7 +233,7 @@ namespace HM.FacePlatform
         /// <param name="ucNoCheck"></param>
         private void CheckDo(ucNoCheck ucNoCheck)
         {
-            CheckNote checkNote = new CheckNote(this, ucNoCheck._register.user_uid, !ucNoCheck.isForCheck);
+            CheckNote checkNote = new CheckNote(this, ucNoCheck._registerWithUser.user_uid, !ucNoCheck.isForCheck);
             DialogResult dr = checkNote.ShowDialog();
             if (dr == DialogResult.OK || dr == DialogResult.No)
             {
@@ -247,18 +247,18 @@ namespace HM.FacePlatform
         /// <param name="e"></param>
         private void BtnBatchReview_Click(object sender, EventArgs e)
         {
-            System.Collections.Generic.List<Register> lstRegister = new System.Collections.Generic.List<Register>();
+            List<Register> lstRegisterWithUser = new List<Register>();
             foreach (Control ucVar in FlpWaitReview.Controls)
             {
                 if (ucVar is ucNoCheck)
                 {
                     ucNoCheck uc = (ucNoCheck)ucVar;
-                    if (uc.IsSelect) lstRegister.Add(uc._register);
+                    if (uc.IsSelect) lstRegisterWithUser.Add(uc._registerWithUser);
                 }
             }
-            if (lstRegister.Any())
+            if (lstRegisterWithUser.Any())
             {
-                CheckNote checkNote = new CheckNote(this, lstRegister, false);//wait 最后一个参数需要重新研究下
+                CheckNote checkNote = new CheckNote(this, lstRegisterWithUser, false);//wait 最后一个参数需要重新研究下
                 DialogResult dr = checkNote.ShowDialog();
                 if (dr == DialogResult.OK || dr == DialogResult.No)
                 {

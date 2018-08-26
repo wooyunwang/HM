@@ -92,7 +92,7 @@ namespace HM.FacePlatform
         /// <param name="uc"></param>
         private void ImageDetailItemActionComplete(ImageDetailItem uc)
         {
-            FlpRegisterRender(uc._register.user_uid);
+            FlpRegisterRender(uc._registerWithUser.user_uid);
         }
         #endregion
 
@@ -185,18 +185,44 @@ namespace HM.FacePlatform
                 var cells = hmDGV.Rows[e.RowIndex].Cells;
                 RegisterManageDto dto = hmDGV.Rows[e.RowIndex].DataBoundItem as RegisterManageDto;
                 DialogResult dr;
+                CheckType targteCheckType;
                 if (dto.check_state == CheckType.审核通过)
                 {
                     dr = HMMessageBox.Show(this, "确定要禁用吗?", "禁用确认", MessageBoxButtons.OKCancel);
+                    targteCheckType = CheckType.审核不通过;
                 }
                 else
                 {
                     dr = HMMessageBox.Show(this, "确定要启用吗?", "启用确认", MessageBoxButtons.OKCancel);
+                    targteCheckType = CheckType.审核通过;
                 }
                 if (dr == DialogResult.OK)
                 {
                     FaceJobFrm faceJobFrm = new FaceJobFrm();
-                    faceJobFrm.Review();
+                    ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck(true);
+                    if (checkResult.IsSuccess)
+                    {
+                        var getResult = _registerBLL.GetWithUser(dto.user_uid);
+                        if (getResult.IsSuccess)
+                        {
+                            faceJobFrm.Review(checkResult.Obj,
+                            getResult.Obj,
+                            targteCheckType,
+                            "",
+                            (actionResult) =>
+                            {
+                                if (actionResult.IsSuccess)
+                                {
+                                    PagerRegister.Bind();
+                                }
+                            });
+                            faceJobFrm.ShowDialog();
+                        }
+                        else
+                        {
+                            HMMessageBox.Show(this, getResult.ToAlertString());
+                        }
+                    }
                 }
             }
         }
@@ -295,8 +321,8 @@ namespace HM.FacePlatform
                 if (result == DialogResult.OK)
                 {
                     FaceJobFrm faceJobFrm = new FaceJobFrm();
-                    ActionResult ar = faceJobFrm.BasicCheck();
-                    if (ar.IsSuccess)
+                    ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck();
+                    if (checkResult.IsSuccess)
                     {
                         faceJobFrm.SetEndTime(data, true);
                         result = faceJobFrm.ShowDialog();
@@ -304,10 +330,6 @@ namespace HM.FacePlatform
                         {
                             PagerRegister.Bind(); //重新绑定
                         }
-                    }
-                    else
-                    {
-                        HMMessageBox.Show(this, ar.ToAlertString());
                     }
                 }
             }

@@ -13,15 +13,15 @@ namespace HM.FacePlatform.UserControls
         #region 模板参数定义
         public Action<ImageDetailItem> ActionComplete;
 
-        public Register _register { get; set; }
+        public Register _registerWithUser { get; set; }
 
         private Image _Photo = Properties.Resources.userPhoto;
 
 
         #endregion
-        public ImageDetailItem(Register _register)
+        public ImageDetailItem(Register registerWithUser)
         {
-            this._register = _register;
+            this._registerWithUser = registerWithUser;
 
             InitializeComponent();
         }
@@ -35,10 +35,10 @@ namespace HM.FacePlatform.UserControls
         {
             picPhoto.BackgroundImage = _Photo;
 
-            if (!string.IsNullOrEmpty(_register.photo_path)) picPhoto.ImageLocation = Path.Combine(FacePlatformCache.GetPictureDirectory(), _register.photo_path);
+            if (!string.IsNullOrEmpty(_registerWithUser.photo_path)) picPhoto.ImageLocation = Path.Combine(FacePlatformCache.GetPictureDirectory(), _registerWithUser.photo_path);
 
-            this.labCreateTime.Text = _register.create_time.ToString();
-            this.lblRegisterType.Text = EnumHelper.GetName(_register.register_type) + " (" + EnumHelper.GetName(_register.check_state) + ")";
+            this.labCreateTime.Text = _registerWithUser.create_time.ToString();
+            this.lblRegisterType.Text = EnumHelper.GetName(_registerWithUser.register_type) + " (" + EnumHelper.GetName(_registerWithUser.check_state) + ")";
         }
 
         private void ImageDetailItem_Paint(object sender, PaintEventArgs e)

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
 using HM.Form_.Old;
+using HM.Enum_.FacePlatform;
 
 namespace HM.FacePlatform.Forms
 {
@@ -49,7 +50,7 @@ namespace HM.FacePlatform.Forms
                 result.Obj = new PagerData<BuildingForMapDto>()
                 {
                     pages = 0,
-                    rows = new System.Collections.Generic.List<BuildingForMapDto>(),
+                    rows = new List<BuildingForMapDto>(),
                     total = 0
                 };
             }
@@ -79,14 +80,14 @@ namespace HM.FacePlatform.Forms
             var cells = hmDGV.Rows[e.RowIndex].Cells;
             BuildingForMapDto buildingForMapDto = hmDGV.Rows[e.RowIndex].DataBoundItem as BuildingForMapDto;
 
-            //if (buildingForMapDto.has_map)
-            //{
-            //    cells["col_has_map"].Value = "是";
-            //}
-            //else
-            //{
-            //    cells["col_has_map"].Value = "否";
-            //}
+            if (buildingForMapDto.has_map)
+            {
+                cells["col_has_map_text"].Value = "是";
+            }
+            else
+            {
+                cells["col_has_map_text"].Value = "否";
+            }
         }
         /// <summary>
         /// 是否有变更
@@ -94,8 +95,8 @@ namespace HM.FacePlatform.Forms
         bool hasChange = false;
         private void BtnBatchMap_Click(object sender, EventArgs e)
         {
-            System.Collections.Generic.List<string> lstToDel = new System.Collections.Generic.List<string>();
-            System.Collections.Generic.List<MaoBuilding> lstToAdd = new System.Collections.Generic.List<MaoBuilding>();
+            List<string> lstToDel = new List<string>();
+            List<MaoBuilding> lstToAdd = new List<MaoBuilding>();
             foreach (DataGridViewRow row in DgvBuilding.Rows)
             {
                 BuildingForMapDto buildingForMapDto = row.DataBoundItem as BuildingForMapDto;
@@ -106,7 +107,10 @@ namespace HM.FacePlatform.Forms
                         lstToAdd.Add(new MaoBuilding()
                         {
                             building_code = buildingForMapDto.building_code,
-                            mao_id = _mao.id
+                            mao_id = _mao.id,
+                            change_time = DateTime.Now,
+                            create_time = DateTime.Now,
+                            is_del = IsDelType.否
                         });
                     }
                     else
@@ -115,16 +119,37 @@ namespace HM.FacePlatform.Forms
                     }
                 }
             }
+
+            ActionResult ar = new ActionResult();
             if (lstToAdd.Any())
             {
-                _maoBuildingBLL.Add(lstToAdd);
+                hasChange = true;
+                var result = _maoBuildingBLL.AddOrUpdate(it => new { it.building_code, it.mao_id },
+                    lstToAdd.ToArray());
+                ar.Add(result);
             }
             if (lstToDel.Any())
             {
-                _maoBuildingBLL.Delete(it => it.mao_id == _mao.id && lstToDel.Contains(it.building_code));
+                hasChange = true;
+                var result = _maoBuildingBLL.SoftDelete(_mao.id, lstToDel);
+                ar.Add(result);
             }
-            _Tip.ShowItTop(BtnBatchMap, "批量处理成功");
-            hasChange = true;
+            if (hasChange)
+            {
+                if (ar.IsSuccess)
+                {
+                    _Tip.ShowItTop(BtnBatchMap, "批量处理成功");
+                    PagerBuilding.Bind();
+                }
+                else
+                {
+                    HMMessageBox.Show(this, ar.ToAlertString());
+                }
+            }
+            else
+            {
+                _Tip.ShowItTop(BtnBatchMap, "未有变更");
+            }
         }
 
         private void MapBuildingFrm_FormClosed(object sender, FormClosedEventArgs e)

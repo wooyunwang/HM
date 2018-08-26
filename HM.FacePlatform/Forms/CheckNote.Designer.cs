@@ -32,9 +32,9 @@ namespace HM.FacePlatform.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckNote));
             this.label1 = new System.Windows.Forms.Label();
             this.txtNote = new HM.Form_.Old.TextBox.RTextBox();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnNO = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOK = new HM.Form_.HMTile();
+            this.btnNO = new HM.Form_.HMTile();
+            this.btnCancel = new HM.Form_.HMTile();
             this.groupBox_photo = new System.Windows.Forms.GroupBox();
             this.FlpRegisted = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -55,12 +55,9 @@ namespace HM.FacePlatform.Forms
             this.labPeople = new System.Windows.Forms.Label();
             this.tbCheckPepole = new HM.Form_.Old.TextBox.RTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.tbMessage = new System.Windows.Forms.RichTextBox();
             this.groupBox_photo.SuspendLayout();
             this.pnEndTime.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -77,7 +74,7 @@ namespace HM.FacePlatform.Forms
             this.txtNote.BackColor = System.Drawing.SystemColors.Window;
             this.txtNote.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNote.HotBackColor = System.Drawing.Color.White;
-            this.txtNote.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.txtNote.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.txtNote.Location = new System.Drawing.Point(117, 382);
             this.txtNote.LostBackColor = System.Drawing.SystemColors.Window;
             this.txtNote.LostBorderColor = System.Drawing.Color.Transparent;
@@ -89,49 +86,32 @@ namespace HM.FacePlatform.Forms
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
-            this.btnOK.FlatAppearance.BorderSize = 0;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOK.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnOK.Location = new System.Drawing.Point(289, 5);
+            this.btnOK.Location = new System.Drawing.Point(291, 9);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(65, 25);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "通过";
-            this.btnOK.UseVisualStyleBackColor = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnNO
             // 
             this.btnNO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNO.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
-            this.btnNO.FlatAppearance.BorderSize = 0;
-            this.btnNO.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNO.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnNO.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnNO.Location = new System.Drawing.Point(377, 5);
+            this.btnNO.Location = new System.Drawing.Point(379, 9);
             this.btnNO.Name = "btnNO";
             this.btnNO.Size = new System.Drawing.Size(65, 25);
             this.btnNO.TabIndex = 3;
             this.btnNO.Text = "不通过";
-            this.btnNO.UseVisualStyleBackColor = false;
             this.btnNO.Click += new System.EventHandler(this.btnNO_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
-            this.btnCancel.FlatAppearance.BorderSize = 0;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCancel.Location = new System.Drawing.Point(464, 5);
+            this.btnCancel.Location = new System.Drawing.Point(466, 9);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(65, 25);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "关闭";
-            this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // groupBox_photo
@@ -173,7 +153,7 @@ namespace HM.FacePlatform.Forms
             this.tbRegTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbRegTime.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.tbRegTime.HotBackColor = System.Drawing.Color.White;
-            this.tbRegTime.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.tbRegTime.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.tbRegTime.Location = new System.Drawing.Point(386, 160);
             this.tbRegTime.LostBackColor = System.Drawing.SystemColors.Window;
             this.tbRegTime.LostBorderColor = System.Drawing.Color.Transparent;
@@ -188,7 +168,7 @@ namespace HM.FacePlatform.Forms
             this.tbUserType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbUserType.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.tbUserType.HotBackColor = System.Drawing.Color.White;
-            this.tbUserType.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.tbUserType.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.tbUserType.Location = new System.Drawing.Point(104, 160);
             this.tbUserType.LostBackColor = System.Drawing.SystemColors.Window;
             this.tbUserType.LostBorderColor = System.Drawing.Color.Transparent;
@@ -203,7 +183,7 @@ namespace HM.FacePlatform.Forms
             this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbName.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.tbName.HotBackColor = System.Drawing.Color.White;
-            this.tbName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.tbName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.tbName.Location = new System.Drawing.Point(104, 125);
             this.tbName.LostBackColor = System.Drawing.SystemColors.Window;
             this.tbName.LostBorderColor = System.Drawing.Color.Transparent;
@@ -218,7 +198,7 @@ namespace HM.FacePlatform.Forms
             this.tbHouseName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbHouseName.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.tbHouseName.HotBackColor = System.Drawing.Color.White;
-            this.tbHouseName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.tbHouseName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.tbHouseName.Location = new System.Drawing.Point(104, 90);
             this.tbHouseName.LostBackColor = System.Drawing.SystemColors.Window;
             this.tbHouseName.LostBorderColor = System.Drawing.Color.Transparent;
@@ -285,7 +265,7 @@ namespace HM.FacePlatform.Forms
             this.tbRelation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbRelation.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.tbRelation.HotBackColor = System.Drawing.Color.White;
-            this.tbRelation.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.tbRelation.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.tbRelation.Location = new System.Drawing.Point(386, 126);
             this.tbRelation.LostBackColor = System.Drawing.SystemColors.Window;
             this.tbRelation.LostBorderColor = System.Drawing.Color.Transparent;
@@ -349,7 +329,7 @@ namespace HM.FacePlatform.Forms
             this.tbCheckTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbCheckTime.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.tbCheckTime.HotBackColor = System.Drawing.Color.White;
-            this.tbCheckTime.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.tbCheckTime.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.tbCheckTime.Location = new System.Drawing.Point(393, 436);
             this.tbCheckTime.LostBackColor = System.Drawing.SystemColors.Window;
             this.tbCheckTime.LostBorderColor = System.Drawing.Color.Transparent;
@@ -379,7 +359,7 @@ namespace HM.FacePlatform.Forms
             this.tbCheckPepole.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbCheckPepole.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.tbCheckPepole.HotBackColor = System.Drawing.Color.White;
-            this.tbCheckPepole.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.tbCheckPepole.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.tbCheckPepole.Location = new System.Drawing.Point(117, 436);
             this.tbCheckPepole.LostBackColor = System.Drawing.SystemColors.Window;
             this.tbCheckPepole.LostBorderColor = System.Drawing.Color.Transparent;
@@ -398,36 +378,14 @@ namespace HM.FacePlatform.Forms
             this.panel1.Location = new System.Drawing.Point(23, 491);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(539, 39);
+            this.panel1.Size = new System.Drawing.Size(539, 44);
             this.panel1.TabIndex = 118;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.tbMessage);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(13, 675);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(575, 56);
-            this.panel2.TabIndex = 119;
-            // 
-            // tbMessage
-            // 
-            this.tbMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbMessage.HideSelection = false;
-            this.tbMessage.Location = new System.Drawing.Point(0, 0);
-            this.tbMessage.Margin = new System.Windows.Forms.Padding(2);
-            this.tbMessage.Name = "tbMessage";
-            this.tbMessage.Size = new System.Drawing.Size(575, 56);
-            this.tbMessage.TabIndex = 29;
-            this.tbMessage.Text = "";
             // 
             // CheckNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 744);
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(589, 558);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tbCheckPepole);
             this.Controls.Add(this.labPeople);
@@ -453,12 +411,12 @@ namespace HM.FacePlatform.Forms
             this.MinimizeBox = false;
             this.Name = "CheckNote";
             this.Padding = new System.Windows.Forms.Padding(13, 60, 13, 13);
+            this.Resizable = false;
             this.Text = "审核";
             this.Load += new System.EventHandler(this.CheckNote_Load);
             this.groupBox_photo.ResumeLayout(false);
             this.pnEndTime.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -468,9 +426,9 @@ namespace HM.FacePlatform.Forms
 
         private System.Windows.Forms.Label label1;
         private RTextBox txtNote;
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnNO;
-        private System.Windows.Forms.Button btnCancel;
+        private HM.Form_.HMTile btnOK;
+        private HM.Form_.HMTile btnNO;
+        private HM.Form_.HMTile btnCancel;
         private System.Windows.Forms.GroupBox groupBox_photo;
         private System.Windows.Forms.Label label2;
         private RTextBox tbRegTime;
@@ -491,7 +449,5 @@ namespace HM.FacePlatform.Forms
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel FlpRegisted;
         private System.Windows.Forms.DateTimePicker tbEnd;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RichTextBox tbMessage;
     }
 }

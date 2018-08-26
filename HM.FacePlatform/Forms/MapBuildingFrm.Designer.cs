@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PnlInfo = new System.Windows.Forms.Panel();
             this.LblMaoInfo = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.GbxMap = new System.Windows.Forms.GroupBox();
+            this.RbnAll = new HM.Form_.HMRadioButton();
+            this.RbnNoMap = new HM.Form_.HMRadioButton();
+            this.RbnHasMap = new HM.Form_.HMRadioButton();
+            this.BtnBatchMap = new HM.Form_.HMTile();
+            this.BtnSearch = new HM.Form_.HMTile();
+            this.TxtBuildingName = new HM.Form_.Old.TextBox.RTextBox();
             this.LblBuildingName = new System.Windows.Forms.Label();
             this.DgvBuilding = new HM.Form_.HMDataGridView();
             this.PagerBuilding = new HM.Form_.HMPager();
-            this.TxtBuildingName = new HM.Form_.Old.TextBox.RTextBox();
-            this.BtnSearch = new HM.Form_.HMTile();
-            this.BtnBatchMap = new HM.Form_.HMTile();
-            this.GbxMap = new System.Windows.Forms.GroupBox();
-            this.RbnHasMap = new HM.Form_.HMRadioButton();
-            this.RbnNoMap = new HM.Form_.HMRadioButton();
-            this.RbnAll = new HM.Form_.HMRadioButton();
             this.colCB = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.col_building_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_building_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_has_map = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_has_map_text = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PnlInfo.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvBuilding)).BeginInit();
             this.GbxMap.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvBuilding)).BeginInit();
             this.SuspendLayout();
             // 
             // PnlInfo
@@ -91,6 +91,87 @@
             this.panel1.Size = new System.Drawing.Size(967, 67);
             this.panel1.TabIndex = 1;
             // 
+            // GbxMap
+            // 
+            this.GbxMap.Controls.Add(this.RbnAll);
+            this.GbxMap.Controls.Add(this.RbnNoMap);
+            this.GbxMap.Controls.Add(this.RbnHasMap);
+            this.GbxMap.Location = new System.Drawing.Point(265, 3);
+            this.GbxMap.Name = "GbxMap";
+            this.GbxMap.Size = new System.Drawing.Size(236, 54);
+            this.GbxMap.TabIndex = 123;
+            this.GbxMap.TabStop = false;
+            // 
+            // RbnAll
+            // 
+            this.RbnAll.AutoSize = true;
+            this.RbnAll.Checked = true;
+            this.RbnAll.Location = new System.Drawing.Point(24, 23);
+            this.RbnAll.Name = "RbnAll";
+            this.RbnAll.Size = new System.Drawing.Size(49, 15);
+            this.RbnAll.TabIndex = 2;
+            this.RbnAll.TabStop = true;
+            this.RbnAll.Text = "全部";
+            this.RbnAll.UseVisualStyleBackColor = true;
+            // 
+            // RbnNoMap
+            // 
+            this.RbnNoMap.AutoSize = true;
+            this.RbnNoMap.Location = new System.Drawing.Point(153, 23);
+            this.RbnNoMap.Name = "RbnNoMap";
+            this.RbnNoMap.Size = new System.Drawing.Size(62, 15);
+            this.RbnNoMap.TabIndex = 1;
+            this.RbnNoMap.Text = "未关联";
+            this.RbnNoMap.UseVisualStyleBackColor = true;
+            // 
+            // RbnHasMap
+            // 
+            this.RbnHasMap.AutoSize = true;
+            this.RbnHasMap.Location = new System.Drawing.Point(82, 23);
+            this.RbnHasMap.Name = "RbnHasMap";
+            this.RbnHasMap.Size = new System.Drawing.Size(62, 15);
+            this.RbnHasMap.TabIndex = 0;
+            this.RbnHasMap.TabStop = true;
+            this.RbnHasMap.Text = "已关联";
+            this.RbnHasMap.UseVisualStyleBackColor = true;
+            // 
+            // BtnBatchMap
+            // 
+            this.BtnBatchMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnBatchMap.Location = new System.Drawing.Point(759, 22);
+            this.BtnBatchMap.Name = "BtnBatchMap";
+            this.BtnBatchMap.Size = new System.Drawing.Size(89, 25);
+            this.BtnBatchMap.TabIndex = 122;
+            this.BtnBatchMap.Text = "批量关联";
+            this.BtnBatchMap.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnBatchMap.Click += new System.EventHandler(this.BtnBatchMap_Click);
+            // 
+            // BtnSearch
+            // 
+            this.BtnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnSearch.Location = new System.Drawing.Point(662, 22);
+            this.BtnSearch.Name = "BtnSearch";
+            this.BtnSearch.Size = new System.Drawing.Size(77, 25);
+            this.BtnSearch.TabIndex = 121;
+            this.BtnSearch.Text = "查询";
+            this.BtnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
+            // 
+            // TxtBuildingName
+            // 
+            this.TxtBuildingName.BackColor = System.Drawing.SystemColors.Window;
+            this.TxtBuildingName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TxtBuildingName.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.TxtBuildingName.HotBackColor = System.Drawing.Color.White;
+            this.TxtBuildingName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            this.TxtBuildingName.Location = new System.Drawing.Point(106, 22);
+            this.TxtBuildingName.LostBackColor = System.Drawing.SystemColors.Window;
+            this.TxtBuildingName.LostBorderColor = System.Drawing.Color.Transparent;
+            this.TxtBuildingName.MaxLength = 50;
+            this.TxtBuildingName.Name = "TxtBuildingName";
+            this.TxtBuildingName.Size = new System.Drawing.Size(141, 23);
+            this.TxtBuildingName.TabIndex = 69;
+            // 
             // LblBuildingName
             // 
             this.LblBuildingName.AutoSize = true;
@@ -109,57 +190,57 @@
             this.DgvBuilding.AllowUserToAddRows = false;
             this.DgvBuilding.AllowUserToDeleteRows = false;
             this.DgvBuilding.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            this.DgvBuilding.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
+            this.DgvBuilding.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.DgvBuilding.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DgvBuilding.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DgvBuilding.BackgroundColor = System.Drawing.SystemColors.Window;
             this.DgvBuilding.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DgvBuilding.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.DgvBuilding.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvBuilding.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvBuilding.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DgvBuilding.ColumnHeadersHeight = 36;
             this.DgvBuilding.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DgvBuilding.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCB,
             this.col_building_code,
             this.col_building_name,
-            this.col_has_map});
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.Wheat;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvBuilding.DefaultCellStyle = dataGridViewCellStyle13;
+            this.col_has_map_text});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Wheat;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvBuilding.DefaultCellStyle = dataGridViewCellStyle3;
             this.DgvBuilding.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvBuilding.EnableHeadersVisualStyles = false;
             this.DgvBuilding.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.DgvBuilding.Location = new System.Drawing.Point(20, 194);
             this.DgvBuilding.Name = "DgvBuilding";
             this.DgvBuilding.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvBuilding.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvBuilding.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.DgvBuilding.RowHeadersVisible = false;
             this.DgvBuilding.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvBuilding.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvBuilding.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.DgvBuilding.RowTemplate.Height = 50;
             this.DgvBuilding.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.DgvBuilding.Size = new System.Drawing.Size(967, 541);
@@ -178,87 +259,6 @@
             this.PagerBuilding.Size = new System.Drawing.Size(967, 24);
             this.PagerBuilding.TabIndex = 69;
             this.PagerBuilding.EventPaging += new HM.Form_.EventPagingHandler(this.PagerBuilding_EventPaging);
-            // 
-            // TxtBuildingName
-            // 
-            this.TxtBuildingName.BackColor = System.Drawing.SystemColors.Window;
-            this.TxtBuildingName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TxtBuildingName.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.TxtBuildingName.HotBackColor = System.Drawing.Color.White;
-            this.TxtBuildingName.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            this.TxtBuildingName.Location = new System.Drawing.Point(106, 22);
-            this.TxtBuildingName.LostBackColor = System.Drawing.SystemColors.Window;
-            this.TxtBuildingName.LostBorderColor = System.Drawing.Color.Transparent;
-            this.TxtBuildingName.MaxLength = 50;
-            this.TxtBuildingName.Name = "TxtBuildingName";
-            this.TxtBuildingName.Size = new System.Drawing.Size(141, 23);
-            this.TxtBuildingName.TabIndex = 69;
-            // 
-            // BtnSearch
-            // 
-            this.BtnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnSearch.Location = new System.Drawing.Point(662, 22);
-            this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(77, 25);
-            this.BtnSearch.TabIndex = 121;
-            this.BtnSearch.Text = "查询";
-            this.BtnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
-            // 
-            // BtnBatchMap
-            // 
-            this.BtnBatchMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnBatchMap.Location = new System.Drawing.Point(759, 22);
-            this.BtnBatchMap.Name = "BtnBatchMap";
-            this.BtnBatchMap.Size = new System.Drawing.Size(89, 25);
-            this.BtnBatchMap.TabIndex = 122;
-            this.BtnBatchMap.Text = "批量关联";
-            this.BtnBatchMap.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.BtnBatchMap.Click += new System.EventHandler(this.BtnBatchMap_Click);
-            // 
-            // GbxMap
-            // 
-            this.GbxMap.Controls.Add(this.RbnAll);
-            this.GbxMap.Controls.Add(this.RbnNoMap);
-            this.GbxMap.Controls.Add(this.RbnHasMap);
-            this.GbxMap.Location = new System.Drawing.Point(265, 3);
-            this.GbxMap.Name = "GbxMap";
-            this.GbxMap.Size = new System.Drawing.Size(236, 54);
-            this.GbxMap.TabIndex = 123;
-            this.GbxMap.TabStop = false;
-            // 
-            // RbnHasMap
-            // 
-            this.RbnHasMap.AutoSize = true;
-            this.RbnHasMap.Location = new System.Drawing.Point(82, 23);
-            this.RbnHasMap.Name = "RbnHasMap";
-            this.RbnHasMap.Size = new System.Drawing.Size(62, 15);
-            this.RbnHasMap.TabIndex = 0;
-            this.RbnHasMap.TabStop = true;
-            this.RbnHasMap.Text = "已关联";
-            this.RbnHasMap.UseVisualStyleBackColor = true;
-            // 
-            // RbnNoMap
-            // 
-            this.RbnNoMap.AutoSize = true;
-            this.RbnNoMap.Location = new System.Drawing.Point(153, 23);
-            this.RbnNoMap.Name = "RbnNoMap";
-            this.RbnNoMap.Size = new System.Drawing.Size(62, 15);
-            this.RbnNoMap.TabIndex = 1;
-            this.RbnNoMap.Text = "未关联";
-            this.RbnNoMap.UseVisualStyleBackColor = true;
-            // 
-            // RbnAll
-            // 
-            this.RbnAll.AutoSize = true;
-            this.RbnAll.Checked = true;
-            this.RbnAll.Location = new System.Drawing.Point(24, 23);
-            this.RbnAll.Name = "RbnAll";
-            this.RbnAll.Size = new System.Drawing.Size(49, 15);
-            this.RbnAll.TabIndex = 2;
-            this.RbnAll.TabStop = true;
-            this.RbnAll.Text = "全部";
-            this.RbnAll.UseVisualStyleBackColor = true;
             // 
             // colCB
             // 
@@ -287,12 +287,11 @@
             this.col_building_name.Name = "col_building_name";
             this.col_building_name.ReadOnly = true;
             // 
-            // col_has_map
+            // col_has_map_text
             // 
-            this.col_has_map.DataPropertyName = "has_map";
-            this.col_has_map.FillWeight = 30F;
-            this.col_has_map.HeaderText = "是否已关联";
-            this.col_has_map.Name = "col_has_map";
+            this.col_has_map_text.FillWeight = 30F;
+            this.col_has_map_text.HeaderText = "是否已关联";
+            this.col_has_map_text.Name = "col_has_map_text";
             // 
             // MapBuildingFrm
             // 
@@ -311,9 +310,9 @@
             this.PnlInfo.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvBuilding)).EndInit();
             this.GbxMap.ResumeLayout(false);
             this.GbxMap.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvBuilding)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -336,6 +335,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colCB;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_building_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_building_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_has_map;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_has_map_text;
     }
 }

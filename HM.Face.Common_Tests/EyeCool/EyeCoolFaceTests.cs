@@ -29,12 +29,12 @@ namespace HM.Face.Common_.Tests
         }
 
         [TestMethod()]
-        public void CheckingTest()
+        public void Checking2Test()
         {
-            string path = Path.Combine(Environment.CurrentDirectory, "Picture", "male.jpg");
+            string path = Path.Combine(Environment.CurrentDirectory, "Picture", "3a676bc4-72f6-4085-a267-fa58413fc16f.jpg");
             if (File.Exists(path))
             {
-                var result = api.Checking(
+                var result = api.Checking2(
                     Key_.SequentialGuid(),
                     RegisterType.手动注册,
                     path,

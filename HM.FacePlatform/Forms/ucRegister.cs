@@ -29,6 +29,7 @@ namespace HM.FacePlatform
         HouseBLL _houseBLL = new HouseBLL();
         UserBLL _userBLL = new UserBLL();
         RegisterBLL _registerBLL = new RegisterBLL();
+        UserHouseBLL _userHouseBLL = new UserHouseBLL();
         string _propertyHouseCode;
 
         VankeBalloonToolTip _Tip;//提示
@@ -290,7 +291,7 @@ namespace HM.FacePlatform
                 result.Obj = new PagerData<HouseForRegisterDto>()
                 {
                     pages = 0,
-                    rows = new System.Collections.Generic.List<HouseForRegisterDto>(),
+                    rows = new List<HouseForRegisterDto>(),
                     total = 0
                 };
             }
@@ -367,7 +368,7 @@ namespace HM.FacePlatform
         /// <param name="house_code"></param>
         public void BindHouseUser(string house_code)
         {
-            ActionResult<System.Collections.Generic.List<UserHouse>> result = _houseBLL.GetUserHouseWithUserAndHouse(house_code);
+            ActionResult<List<UserHouse>> result = _houseBLL.GetUserHouseWithUserAndHouse(house_code);
             if (result.IsSuccess)
             {
                 this.UIThread(() =>
@@ -382,6 +383,10 @@ namespace HM.FacePlatform
                             {
                                 AddOrUpdateUserFrm frm = new AddOrUpdateUserFrm(this, userHouse);
                                 frm.ShowDialog();
+                            });
+                            ucFamily.DeleteAction = new Action(() =>
+                            {
+                                BindHouseUser(house_code);
                             });
                             FlpUser.Controls.Add(ucFamily);
                         }
@@ -440,7 +445,7 @@ namespace HM.FacePlatform
                 result.Obj = new PagerData<User>()
                 {
                     pages = 0,
-                    rows = new System.Collections.Generic.List<User>(),
+                    rows = new List<User>(),
                     total = 0
                 };
             }
@@ -456,25 +461,28 @@ namespace HM.FacePlatform
         /// 呈现工作人员人脸信息
         /// </summary>
         /// <param name="obj"></param>
-        void PageWorkerRender(System.Collections.Generic.List<User> userWithRelations)
+        void PageWorkerRender(List<User> userWithRelations)
         {
             this.UIThread(() =>
             {
                 FlpWorker.Controls.Clear();
                 if (userWithRelations != null && userWithRelations.Any())
                 {
-                    foreach (User user_register in userWithRelations)
+                    foreach (User userWithRelation in userWithRelations)
                     {
-                        var userHouse = user_register.user_houses.Where(it => it.house_code == _propertyHouseCode).FirstOrDefault();
+                        var userHouse = _userHouseBLL.GetUserHouseWithUserAndHouse(userWithRelation.user_uid, _propertyHouseCode);
 
-                        UcFamily ucFamily = new UcFamily(userHouse);
-                        ucFamily.Width = FlpWorker.Width / 3 - 10;
-                        ucFamily.UpdateAction = new Action<UcFamily>((uc_Family) =>
+                        if (userHouse != null)
                         {
-                            AddOrUpdateUserFrm form = new AddOrUpdateUserFrm(this, userHouse);
-                            form.ShowDialog();
-                        });
-                        FlpWorker.Controls.Add(ucFamily);
+                            UcFamily ucFamily = new UcFamily(userHouse);
+                            ucFamily.Width = FlpWorker.Width / 3 - 10;
+                            ucFamily.UpdateAction = new Action<UcFamily>((uc_Family) =>
+                            {
+                                AddOrUpdateUserFrm form = new AddOrUpdateUserFrm(this, userHouse);
+                                form.ShowDialog();
+                            });
+                            FlpWorker.Controls.Add(ucFamily);
+                        }
                     }
                 }
                 else
@@ -567,7 +575,7 @@ namespace HM.FacePlatform
         {
             if (this.Visible)
             {
-                LoadBuilding();
+                //LoadBuilding();
             }
         }
 
@@ -643,7 +651,7 @@ namespace HM.FacePlatform
         /// </summary>
         /// <param name="faces"></param>
         /// <param name="files"></param>
-        void RegPicList(System.Collections.Generic.List<Face.Common_.Face> faces, FileInfo[] files)
+        void RegPicList(List<Face.Common_.Face> faces, FileInfo[] files)
         {
             int defaultDays = Config_.GetInt("FaceEndTime") ?? 0;
             DateTime endDate = Convert.ToDateTime(DateTime.Now.AddDays(defaultDays).ToString("yyyy-MM-dd 23:59:59"));

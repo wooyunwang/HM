@@ -10,9 +10,9 @@ namespace HM.FacePlatform.UserControls
 {
     public partial class ucNoCheck : UserControl
     {
-        public event Action<ucNoCheck> CheckAction;
+        public Action<ucNoCheck> CheckAction;
 
-        public Register _register { get; set; }
+        public Register _registerWithUser { get; set; }
         public bool isForCheck = true;
         public bool IsSelect { get; set; }
 
@@ -25,7 +25,6 @@ namespace HM.FacePlatform.UserControls
 
         private void ucNoCheck_Load(object sender, EventArgs e)
         {
-            this.btnCheck.Click += new EventHandler(this.btnCheck_Click);
             ReFlash();
         }
 
@@ -39,14 +38,14 @@ namespace HM.FacePlatform.UserControls
             }
 
             picPhoto.BackgroundImage = _Photo;
-            if (!string.IsNullOrEmpty(_register.photo_path)) picPhoto.ImageLocation = Path.Combine(FacePlatformCache.GetPictureDirectory(), _register.photo_path);
+            if (!string.IsNullOrEmpty(_registerWithUser.photo_path)) picPhoto.ImageLocation = Path.Combine(FacePlatformCache.GetPictureDirectory(), _registerWithUser.photo_path);
 
-            this.labName.Text = _register.user.name;
+            this.labName.Text = _registerWithUser.user.name;
             //this.labNum.Text = theCheck.num;
-            this.labTime.Text = _register.user.reg_time.ToString("yyyy-MM-dd HH:mm:ss");
-            this.labRegType.Text = Utils_.EnumHelper.GetName(_register.register_type);
+            this.labTime.Text = _registerWithUser.user.reg_time.ToString("yyyy-MM-dd HH:mm:ss");
+            this.labRegType.Text = Utils_.EnumHelper.GetName(_registerWithUser.register_type);
 
-            switch (_register.check_state)
+            switch (_registerWithUser.check_state)
             {
                 case CheckType.审核不通过:
                     {
@@ -86,11 +85,6 @@ namespace HM.FacePlatform.UserControls
         private void cbSel_CheckedChanged(object sender, EventArgs e)
         {
             IsSelect = cbSel.Checked;
-        }
-
-        private void ucNoCheck_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(e.Graphics, ((ucNoCheck)sender).ClientRectangle, Color.FromArgb(224, 224, 224), ButtonBorderStyle.Solid);
         }
 
         public void SelectCheckBox(bool isSelect)

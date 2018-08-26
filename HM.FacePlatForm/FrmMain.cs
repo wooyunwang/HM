@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace HM.FacePlatform
 {
@@ -111,6 +112,7 @@ namespace HM.FacePlatform
                 {
                     uc.Width = this.Width;
                     uc.Height = this.Height;
+                    uc.Name = strTag;
                     uc.Dock = DockStyle.Fill;
                     tp.Controls.Add(uc);
                     uc.Visible = true;
@@ -123,6 +125,13 @@ namespace HM.FacePlatform
             }
             #endregion
         }
+        //private bool HasTabPageInit(TabPage tabPage, string strTag)
+        //{
+        //    foreach (Control item in tabPage.Controls.ContainsKey)
+        //    {
+
+        //    }
+        //}
         /// <summary>
         /// 重置密码
         /// </summary>

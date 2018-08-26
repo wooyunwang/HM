@@ -167,6 +167,7 @@ namespace HM.FacePlatform
                             var result = _maoBLL.Delete(it => it.id == mao.id);
                             if (result.IsSuccess)
                             {
+                                FacePlatformCache.ClearCache<Mao>();
                                 BindMao();
                             }
                             else
@@ -349,7 +350,7 @@ namespace HM.FacePlatform
                     var addResult = _maoBLL.Add(mao);
                     if (addResult != null)
                     {
-                        Cache_.ClearCache(typeof(Mao).Name);
+                        FacePlatformCache.ClearCache<Mao>();
                         m_Tip.ShowItTop(BtnAddMao, "新建成功");
                         BindMao();
                         RenderMao(null);
@@ -372,7 +373,7 @@ namespace HM.FacePlatform
                         var editResult = _maoBLL.Edit(dbMao);
                         if (editResult.IsSuccess)
                         {
-                            Cache_.ClearCache(typeof(Mao).Name);
+                            FacePlatformCache.ClearCache<Mao>();
                             m_Tip.ShowItTop(BtnAddMao, "修改成功");
                             BindMao();
                             RenderMao(null);
@@ -552,20 +553,20 @@ namespace HM.FacePlatform
             TbxQuery.Text = Validate_.GetSafeString(ControlType.姓名类, TbxQuery.Text);
         }
 
-        private void DgvBuilding_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return;
-            if (DgvBuilding.Columns[e.ColumnIndex].Name == "colCB")
-            {
-                MaoBuilding _mao_building = new MaoBuilding()
-                {
-                    id = Convert.ToBoolean(DgvBuilding.Rows[e.RowIndex].Cells["colCB"].EditedFormattedValue) ? 0 : 1,
-                    mao_id = Convert.ToInt32(_SelectedMaoID),
-                    building_code = DgvBuilding.Rows[e.RowIndex].Cells["col_building_code"].Value.ToString()
-                };
-                _maoBuildingBLL.AddOrRemove(_mao_building);//wait
-            }
-        }
+        //private void DgvBuilding_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.RowIndex < 0) return;
+        //    if (DgvBuilding.Columns[e.ColumnIndex].Name == "colCB")
+        //    {
+        //        MaoBuilding _mao_building = new MaoBuilding()
+        //        {
+        //            id = Convert.ToBoolean(DgvBuilding.Rows[e.RowIndex].Cells["colCB"].EditedFormattedValue) ? 0 : 1,
+        //            mao_id = Convert.ToInt32(_SelectedMaoID),
+        //            building_code = DgvBuilding.Rows[e.RowIndex].Cells["col_building_code"].Value.ToString()
+        //        };
+        //        _maoBuildingBLL.AddOrRemove(_mao_building);//wait
+        //    }
+        //}
 
         private void BtnLoadBuilding_Click(object sender, EventArgs e)
         {

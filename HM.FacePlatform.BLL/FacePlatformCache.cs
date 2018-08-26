@@ -16,7 +16,7 @@ namespace HM.FacePlatform.BLL
         /// </summary>
         static TimeSpan _TimeOut = new TimeSpan(0, 30, 0);
         /// <summary>
-        /// 
+        /// 获取指定缓存数据
         /// </summary>
         /// <returns></returns>
         public static List<T> GetALL<T>() where T : class, new()
@@ -28,6 +28,14 @@ namespace HM.FacePlatform.BLL
                  return bll.Get();
              },
              _TimeOut);
+        }
+        /// <summary>
+        /// 清除指定缓存数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public static void ClearCache<T>()
+        {
+            Cache_.ClearCache(typeof(T).Name);
         }
         /// <summary>
         /// 获取重试次数，默认3次

@@ -26,12 +26,8 @@ namespace HM.FacePlatform.DAL
                 IQueryable<House> query = db.Houses.Where(it => it.building_code == buildingCode);
                 if (!string.IsNullOrWhiteSpace(userName))
                 {
-                    query = query.Where(it => it.user_houses.Any(uh => uh.is_del != IsDelType.是));
-                }
-                else
-                {
                     query = query.Where(it => it.user_houses.Any(uh => uh.is_del != IsDelType.是
-                        && uh.User.name.Contains(userName)));
+                      && uh.User.name.Contains(userName)));
                 }
 
                 PagerData<HouseForRegisterDto> pagerData = new PagerData<HouseForRegisterDto>();

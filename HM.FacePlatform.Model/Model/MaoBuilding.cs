@@ -1,5 +1,6 @@
 namespace HM.FacePlatform.Model
 {
+    using HM.Enum_.FacePlatform;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -35,5 +36,17 @@ namespace HM.FacePlatform.Model
         /// </summary>
         [ForeignKey("building_code")]
         public virtual Building Building { set; get; }
+        /// <summary>
+        /// 创建日期
+        /// </summary>
+        public DateTime create_time { get; set; }
+        /// <summary>
+        /// 是否已删除:1,是;0,否
+        /// </summary>
+        public IsDelType is_del { get; set; }
+        /// <summary>
+        /// 最后修改日期
+        /// </summary>
+        public DateTime change_time { get; set; }
     }
 }

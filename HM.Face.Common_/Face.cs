@@ -140,6 +140,13 @@ namespace HM.Face.Common_
         public abstract ActionResult FaceDel(string peopleId, List<string> faceIds);
 
         /// <summary>
+        /// 人员删除操作
+        /// </summary>
+        /// <param name="peopleId"></param>
+        /// <returns></returns>
+        public abstract ActionResult UserDel(string peopleId);
+
+        /// <summary>
         /// 设置人脸有效期
         /// </summary>
         /// <param name="people_id"></param>

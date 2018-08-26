@@ -451,9 +451,10 @@ namespace HM.Face.Common_.EyeCool.Tests
         {
             var input = new PeopleDeleteInput()
             {
-                people_id = "5708314bf980474a978b68e436d55944"
+                people_id = "63fabeab-9f15-45ca-a8bb-0685d9bd227c"
+                //people_id = "5708314bf980474a978b68e436d55944"
             };
-            var result1 = api.PeopleDelete(input);
+            var result1 = api.PeopleDelete_Debug(input);
 
             var result2 = api.PeopleDelete(input, false);
         }

@@ -1,4 +1,5 @@
-﻿using HM.FacePlatform.DAL;
+﻿using HM.DTO;
+using HM.FacePlatform.DAL;
 using HM.FacePlatform.Model;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,21 @@ namespace HM.FacePlatform.BLL
             {
                 return dal.Delete(mao_building) > 0;
             }
+        }
+
+        /// <summary>
+        /// 软删除某人脸一体机上的指定楼栋
+        /// </summary>
+        /// <param name="maoId"></param>
+        /// <param name="lstBuildingCode"></param>
+        /// <returns></returns>
+        public ActionResult<int> SoftDelete(int maoId, List<string> lstBuildingCode)
+        {
+            return new ActionResult<int>()
+            {
+                IsSuccess = true,
+                Obj = dal.SoftDelete(maoId, lstBuildingCode)
+            };
         }
     }
 }

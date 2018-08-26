@@ -188,7 +188,15 @@ namespace HM.Face.Common_
         {
             throw new NotImplementedException("未对接");
         }
-
+        /// <summary>
+        /// 人员删除操作
+        /// </summary>
+        /// <param name="peopleId"></param>
+        /// <returns></returns>
+        public override ActionResult UserDel(string peopleId)
+        {
+            throw new NotImplementedException("未对接");
+        }
         /// <summary>
         /// 设置人脸有效期
         /// </summary>

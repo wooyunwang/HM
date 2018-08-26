@@ -52,6 +52,7 @@
     <Compile Include="DTO\FacePlatform\ActionLogDto.cs" />
     <Compile Include="DTO\FacePlatform\BuildingForMapDto.cs" />
     <Compile Include="DTO\FacePlatform\CheckActionLogDto.cs" />
+    <Compile Include="DTO\FacePlatform\CheckNoteDto.cs" />
     <Compile Include="DTO\FacePlatform\HouseForRegisterDto.cs" />
     <Compile Include="DTO\FacePlatform\RegisterManageDto.cs" />
     <Compile Include="DTO\FacePlatform\RegisterActionLogDto.cs" />

@@ -124,7 +124,11 @@ namespace HM.FacePlatform.DAL
                     x => x.user_houses.Where(p =>
                     p.is_del != IsDelType.是 && p.house_code == houseCode
                     ))
-                    .Where(it => it.is_del != IsDelType.是);
+                    .Where(it => it.is_del != IsDelType.是)
+                    .Where(it => it.user_houses.Any(p =>
+                         p.is_del != IsDelType.是
+                         && p.house_code == houseCode
+                    ));
 
                 if (!string.IsNullOrWhiteSpace(key))
                 {
@@ -142,6 +146,9 @@ namespace HM.FacePlatform.DAL
                     CheckType check_state = registeState.Value ? CheckType.审核通过 : CheckType.审核不通过;
                     query = query.Where(it => it.check_state == check_state);
                 }
+#if DEBUG
+                string sql = query.ToString();
+#endif
                 PagerData<User> pagerData = new PagerData<User>();
                 pagerData.total = query.Count();
                 if (pagerData.total % pageSize == 0)

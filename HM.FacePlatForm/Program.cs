@@ -1,4 +1,7 @@
-﻿using HM.Enum_.FacePlatform;
+﻿using AutoMapper;
+using HM.Enum_.FacePlatform;
+using HM.Face.Common_;
+using HM.Face.Common_.EyeCool;
 using HM.FacePlatform.Model;
 using HM.Form_;
 using Microsoft.Owin.Hosting;
@@ -48,6 +51,10 @@ namespace HM.FacePlatform
             if (createdNew)
             {
                 FormHelper.SetZhCnCulturInfo();
+
+                #region 映射
+                AutoMapperConfiguration.Configure();
+                #endregion
 
                 #region 启动OWIN host 
                 string baseAddress = Utils_.Config_.GetString("WebAppBaseAddress");

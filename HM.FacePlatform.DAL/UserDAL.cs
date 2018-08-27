@@ -1,15 +1,13 @@
-﻿using HM.FacePlatform.Model;
-using System;
-using System.Linq;
-
-using System.Data;
-using System.Data.Entity.Migrations;
-using HM.DTO;
-using Z.EntityFramework.Plus;
-using System.Data.Entity;
-using HM.Enum_.FacePlatform;
-using System.Collections.Generic;
+﻿using HM.DTO;
 using HM.DTO.FacePlatform;
+using HM.Enum_.FacePlatform;
+using HM.FacePlatform.Model;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using Z.EntityFramework.Plus;
 
 namespace HM.FacePlatform.DAL
 {
@@ -18,33 +16,66 @@ namespace HM.FacePlatform.DAL
         /// <summary>
         /// 分页获取需要同步至设备的用户数据
         /// </summary>
+        /// <param name="maoId"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <param name="fromDate"></param>
         /// <param name="toDate"></param>
+        /// <param name="returnTotal">是否返回total</param>
         /// <returns>用户数据包括人脸注册数据</returns>
-        public PagerData<User> GetUserForPushToDevice(int pageIndex, int pageSize, DateTime fromDate, DateTime? toDate)
+        public PagerData<User> GetUserWithRegisterForPushToDevice(int? maoId, int pageIndex, int pageSize, DateTime fromDate, DateTime? toDate, bool returnTotal = true)
         {
             using (FacePlatformDB db = new FacePlatformDB())
             {
-                var query = db.Users.IncludeOptimized(
+                var query = db.Users.Where(it => it.is_del != IsDelType.是);
+
+                if (maoId.HasValue)
+                {
+                    query = from q in db.Users
+                            join uh in db.UserHouses
+                            on q.user_uid equals uh.user_uid
+                            join h in db.Houses
+                            on uh.house_code equals h.house_code
+                            join mb in db.MaoBuildings
+                            on h.building_code equals mb.building_code
+                            where uh.is_del != IsDelType.是
+                            && mb.is_del != IsDelType.是
+                            && mb.mao_id == maoId
+                            select q;
+                }
+
+                query = query.IncludeOptimized(
                     x => x.registers.Where(p =>
                     p.is_del != IsDelType.是
+                    && p.check_state != CheckType.审核不通过 //审核不通过的，不能同步，接口也不支持！
                     && p.create_time > fromDate
                     && p.create_time < toDate
-                    ))
-                    .Where(it => it.is_del != IsDelType.是);
+                    ));
+
+#if DEBUG
+                string sql = query.ToString();
+#endif
 
                 PagerData<User> pagerData = new PagerData<User>();
-                pagerData.total = query.Count();
-                if (pagerData.total % pageSize == 0)
+
+                if (returnTotal)
                 {
-                    pagerData.pages = pagerData.total / pageSize;
+                    pagerData.total = query.Count();
+                    if (pagerData.total % pageSize == 0)
+                    {
+                        pagerData.pages = pagerData.total / pageSize;
+                    }
+                    else
+                    {
+                        pagerData.pages = pagerData.total / pageSize + 1;
+                    }
                 }
                 else
                 {
-                    pagerData.pages = pagerData.total / pageSize + 1;
+                    pagerData.total = -1;
+                    pagerData.pages = -1;
                 }
+
                 pagerData.rows = query.OrderBy(it => it.id)
                     .Skip(pageSize * pageIndex)
                     .Take(pageSize)
@@ -200,6 +231,19 @@ namespace HM.FacePlatform.DAL
                 string sql = query.ToString();
 #endif
                 return query.ToList();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user_uid"></param>
+        /// <returns></returns>
+        public UserType GetUserType(string user_uid)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                return db.UserHouses.Where(it => it.user_uid == user_uid && it.is_del != IsDelType.是).OrderBy(it => it.id).Select(it => it.user_type).FirstOrDefault();
             }
         }
 

@@ -241,7 +241,7 @@ namespace HM.FacePlatform.Forms
                 endDate = tbEnd.Value.AddDays(1).AddSeconds(-1);
             }
             FaceJobFrm faceJobFrm = new FaceJobFrm();
-            ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck();
+            ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck(user_uid: _ucFamily._user.user_uid);
             if (checkResult.IsSuccess)
             {
                 faceJobFrm.Register(checkResult.Obj, _ucFamily, _dicPhoto, endDate, (lstPhotoUrlForRemove) =>

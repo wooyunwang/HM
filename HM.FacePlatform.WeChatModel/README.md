@@ -22,7 +22,7 @@
 1. 运行services.msc，重启MySQL服务.
 2. 在MySQL运行一下命令：   
 ``` sql
-use face_platform_18;   
+use face_platform_18_09;   
 set @@optimizer_switch='derived_merge=OFF';
 
 use wechatface;   

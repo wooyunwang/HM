@@ -352,7 +352,7 @@ namespace HM.Face.Common_
             ActionResult<RegisterOutput> result = new ActionResult<RegisterOutput>();
             PeopleCreateOutput peopleCreateOutput = _API.PeopleCreate(new PeopleCreateInput()
             {
-                activeTime = input.activeTime,
+                activeTime = input.ActiveTime,
                 birthday = input.Birthday,
                 cardNo = input.CRMId,
                 cid = input.CertificateType,
@@ -364,14 +364,14 @@ namespace HM.Face.Common_
                 phone = input.Phone,
                 rctype = input.GetEyeCoolRCType(),
                 sex = input.GetEyeCoolSex(),
-                tip = input.UserType
+                tip = Utils_.EnumHelper.GetName(input.UserType)
             });
             if (peopleCreateOutput.res_code_enum == ResponseCode._0000)
             {
                 PeopleAddOutput peopleAddOutput = _API.PeopleAdd(new PeopleAddInput()
                 {
                     face_id = input.FaceId,
-                    is_audit = input.IsNeedAudit(Vendor),
+                    is_audit = input.NeedAudit(Vendor),
                     people_id = input.PeopleId
                 });
                 if (peopleAddOutput.res_code_enum == ResponseCode._0000)
@@ -476,19 +476,19 @@ namespace HM.Face.Common_
         /// 人脸删除操作
         /// </summary>
         /// <param name="peopleId"></param>
-        /// <param name="faceIds"></param>
+        /// <param name="faceId"></param>
         /// <returns></returns>
         [ActionResultTryCatch]
-        public override ActionResult FaceDel(string peopleId, List<string> faceIds)
+        public override ActionResult FaceDel(string peopleId, string faceId)
         {
             ActionResult result = new ActionResult();
 
-            if (String.IsNullOrEmpty(peopleId))
+            if (String.IsNullOrWhiteSpace(peopleId))
             {
                 result.IsSuccess = false;
                 result.Add("参数peopleId不能为空！");
             }
-            if (faceIds == null || !faceIds.Any())
+            if (String.IsNullOrWhiteSpace(faceId))
             {
                 result.IsSuccess = false;
                 result.Add("参数faceIds不能为空！");
@@ -498,10 +498,10 @@ namespace HM.Face.Common_
                 PeopleRemoveInput input = new PeopleRemoveInput()
                 {
                     people_id = peopleId,
-                    faceIds = faceIds
+                    face_id = faceId
                 };
                 PeopleRemoveOutput output = _API.PeopleRemove(input);
-                if (output.res_code_enum != ResponseCode._0001)
+                if (output.res_code_enum != ResponseCode._0000)
                 {
                     if ((output.res_msg ?? "").Contains("未查询到对应的人脸"))
                     {

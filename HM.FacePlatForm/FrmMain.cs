@@ -38,6 +38,10 @@ namespace HM.FacePlatform
         /// 关闭窗口触发的事件
         /// </summary>
         public event closingHandler _ClosingHandler;
+        /// <summary>
+        /// 
+        /// </summary>
+        ScheduleJob _ScheduleJob;
 
         public FrmMain()
         {
@@ -80,6 +84,12 @@ namespace HM.FacePlatform
             {
                 HtcMain_Selected(HtcMain, new TabControlEventArgs(MtpDataBase, HtcMain.TabPages.IndexOf(MtpDataBase), new TabControlAction()));
             }
+
+            if (_ScheduleJob == null)
+            {
+                _ScheduleJob = new ScheduleJob();
+            }
+            _ScheduleJob.Show();
         }
         private void HtcMain_Selected(object sender, TabControlEventArgs e)
         {

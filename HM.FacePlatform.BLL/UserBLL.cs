@@ -15,18 +15,19 @@ namespace HM.FacePlatform.BLL
         new UserDAL dal = new UserDAL();
 
         /// <summary>
-        /// 分页获取需要同步至设备的用户数据
+        /// 分页获取需要同步至设备的用户数据（分块）
         /// </summary>
+        /// <param name="mao"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <param name="fromDate"></param>
         /// <param name="toDate"></param>
+        /// <param name="withCount">是否返回total</param>
         /// <returns>用户数据包括人脸注册数据</returns>
-        public PagerData<User> GetUserForPushToDevice(int pageIndex, int pageSize, DateTime fromDate, DateTime? toDate)
+        public PagerData<User> GetUserWithRegisterForPushToDevice(int? mao, int pageIndex, int pageSize, DateTime fromDate, DateTime? toDate, bool returnTotal = true)
         {
-            return dal.GetUserForPushToDevice(pageIndex, pageSize, fromDate, toDate);
+            return dal.GetUserWithRegisterForPushToDevice(mao, pageIndex, pageSize, fromDate, toDate, returnTotal);
         }
-
         /// <summary>
         /// 分页获取需要同步至云平台的用户数据
         /// </summary>
@@ -106,6 +107,16 @@ namespace HM.FacePlatform.BLL
                     Obj = worker
                 };
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="user_uid"></param>
+        /// <returns></returns>
+        public UserType GetUserType(string user_uid)
+        {
+            return dal.GetUserType(user_uid);
         }
 
         //public bool IsExist(string type, int id, string value)

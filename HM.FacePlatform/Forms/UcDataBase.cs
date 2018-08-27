@@ -1,6 +1,7 @@
 ﻿using HM.Common_;
 using HM.DTO;
 using HM.DTO.FacePlatform;
+using HM.Enum_.FacePlatform;
 using HM.FacePlatform.BasicData;
 using HM.FacePlatform.BLL;
 using HM.FacePlatform.Forms;
@@ -61,6 +62,7 @@ namespace HM.FacePlatform
 
         private void BtnRefreshMao_Click(object sender, EventArgs e)
         {
+            FacePlatformCache.ClearCache<Mao>();
             BindMao();
         }
 
@@ -187,18 +189,32 @@ namespace HM.FacePlatform
                     if (dr == DialogResult.OK)
                     {
                         Mao _mao = _maoBLL.FirstOrDefault(it => it.id == mao.id);
+
+                        bool isFaceSection = Config_.GetBool("IsFaceSection") ?? false;
+                        if (isFaceSection)
+                        {
+                            bool anyMaoBuilding = _maoBuildingBLL.Any(it => it.mao_id == mao.id && it.is_del != IsDelType.是);
+                            if (!anyMaoBuilding)
+                            {
+                                HMMessageBox.Show(this, "系统已启用分区块功能，但您未关联楼栋，不能进行初始化！");
+                                return;
+                            }
+                        }
+
                         if (_mao != null)
                         {
-                            _mao.is_init = true;
-                            _maoBLL.Edit(_mao);
-
                             Task.Run(() =>
                             {
                                 InitJob job = new InitJob(_mao);
                                 job.Execute();
+                            }).ContinueWith((task) =>
+                            {
+                                _mao.is_init = true;
+                                _maoBLL.Edit(_mao);
+                                BindMao();
                             });
+                            cells[e.ColumnIndex].ReadOnly = true;
                         }
-                        BindMao();
                     }
                 }
                 else if (cells[e.ColumnIndex].OwningColumn.Name == "col_abandon_init")

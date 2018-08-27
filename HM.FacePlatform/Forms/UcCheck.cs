@@ -48,7 +48,16 @@ namespace HM.FacePlatform
             BindHelper.EnumBind<RegisterType>(CbxWait_RegisterType);
             BindHelper.EnumBind<RegisterType>(CbxHas_RegisterType);
 
-            BindHelper.EnumBind<CheckType>(CbxHas_CheckType);
+            BindHelper.EnumBind<CheckType>(CbxHas_CheckType, selectValue: CheckType.审核通过);
+
+            if (HtcMain.SelectedTab != MtpWaitReview)
+            {
+                HtcMain.SelectedTab = MtpWaitReview;
+            }
+            else
+            {
+                HtcMain_SelectedIndexChanged(HtcMain, new TabControlEventArgs(MtpWaitReview, HtcMain.TabPages.IndexOf(MtpWaitReview), new TabControlAction()));
+            }
 
             //加一个线程刷新实时的注册数据
             Task.Run(() =>
@@ -56,6 +65,17 @@ namespace HM.FacePlatform
                 AutoRefresh();
             });
         }
+
+        /// <summary>
+        /// 标签切换时显示
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HtcMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
         /// <summary>
         /// 自动刷新
         /// </summary>
@@ -63,8 +83,11 @@ namespace HM.FacePlatform
         {
             while (true)
             {
-                LoadData();
-                Thread.Sleep(1000 * 60 * 10);//10分钟自动刷一次
+                if (this.Visible == true)
+                {
+                    LoadData();
+                    Thread.Sleep(1000 * 60 * 10);//10分钟自动刷一次
+                }
             }
         }
         /// <summary>
@@ -72,6 +95,7 @@ namespace HM.FacePlatform
         /// </summary>
         public void LoadData()
         {
+
             if (HtcMain.SelectedTab.Equals(MtpWaitReview))
             {
                 pagerWaitReview.Bind();
@@ -155,12 +179,12 @@ namespace HM.FacePlatform
             string userName = TxtHas_Name.Text.Trim();
             UserType? userType = BindHelper.EnumValue<UserType>(CbxHas_UserType);
             RegisterType? registerType = BindHelper.EnumValue<RegisterType>(CbxHas_RegisterType);
-
+            CheckType? checkType = BindHelper.EnumValue<CheckType>(CbxHas_CheckType);
             var result = _registerBLL.GetWithUser(pagerHasReview.PageIndex, pagerHasReview.PageSize,
                 userName,
                 userType,
                 registerType,
-                CheckType.待审核);
+                checkType);
             if (!result.IsSuccess)
             {
                 HMMessageBox.Show(this, result.ToAlertString());
@@ -201,6 +225,7 @@ namespace HM.FacePlatform
                         ucNoCheck uc = new ucNoCheck();
                         uc._registerWithUser = registerWithUser;
                         uc.CheckAction = new Action<ucNoCheck>(CheckDo);
+                        uc.isForCheck = false;
                         FlpHasReview.Controls.Add(uc);
                     }
                     FlpHasReview.ResumeLayout();
@@ -286,14 +311,6 @@ namespace HM.FacePlatform
             }
             catch { }
         }
-        /// <summary>
-        /// 标签切换时显示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void HtcMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadData();
-        }
+
     }
 }

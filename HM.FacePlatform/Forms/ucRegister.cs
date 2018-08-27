@@ -607,7 +607,7 @@ namespace HM.FacePlatform
                 {
                     if (fiList.Length > 0)
                     {
-                        tbShow.Text = string.Empty;//清空
+                        TxtShow.Text = string.Empty;//清空
                         Thread t2 = new Thread(() =>
                         {
                             RegPicList(fiList);
@@ -816,7 +816,7 @@ namespace HM.FacePlatform
         {
             //tbShow.ForeColor = MessageColor.GetColorByMessgaeType(type);
 
-            if (tbShow.InvokeRequired)
+            if (TxtShow.InvokeRequired)
             {
                 DGShowMsg msgDelegate = ShowMessage;
                 Invoke(msgDelegate, new object[] { message, type });
@@ -824,7 +824,7 @@ namespace HM.FacePlatform
             else
             {
                 //tbShow.AppendText(msg + "\r\n");
-                tbShow.AppendText(message + "\r\n", MessageColor.GetColorByMessgaeType(type));
+                TxtShow.AppendText(message + "\r\n", MessageColor.GetColorByMessgaeType(type));
             }
         }
 

@@ -449,7 +449,7 @@ namespace HM.FacePlatform
             this.TxtHas_Name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TxtHas_Name.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.TxtHas_Name.HotBackColor = System.Drawing.Color.White;
-            this.TxtHas_Name.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.TxtHas_Name.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
             this.TxtHas_Name.Location = new System.Drawing.Point(79, 13);
             this.TxtHas_Name.LostBackColor = System.Drawing.SystemColors.Window;
             this.TxtHas_Name.LostBorderColor = System.Drawing.Color.Transparent;
@@ -459,7 +459,6 @@ namespace HM.FacePlatform
             // 
             // BtnSelecteHasReview
             // 
-            this.BtnSelecteHasReview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnSelecteHasReview.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BtnSelecteHasReview.Location = new System.Drawing.Point(752, 11);
             this.BtnSelecteHasReview.Name = "BtnSelecteHasReview";

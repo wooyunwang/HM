@@ -13,11 +13,8 @@ namespace HM.FacePlatform.BLL
 {
     public class MaoBLL : BaseBLL<Mao>
     {
-        MaoDAL _maoDAL;
-        public MaoBLL()
-        {
-            _maoDAL = new MaoDAL();
-        }
+        new MaoDAL dal = new MaoDAL();
+
         /// <summary>
         /// 选择一个可用的人脸一体机
         /// </summary>
@@ -98,18 +95,14 @@ namespace HM.FacePlatform.BLL
             };
             return ar;
         }
-
-        public bool IsExistUsingBuilding(int id)
+        /// <summary>
+        /// 获得小区用户所在区域的人脸一体机
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
+        public List<Mao> GetForFaceSection(string user_id)
         {
-            try
-            {
-                return _maoDAL.Any(it => it.id == id);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Error("MaoBLL.IsExistUsingBuilding: " + ex.Message);
-            }
-            return true;
+            return dal.GetForFaceSection(user_id);
         }
     }
 }

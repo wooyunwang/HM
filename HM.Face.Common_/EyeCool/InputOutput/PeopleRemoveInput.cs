@@ -15,26 +15,6 @@ namespace HM.Face.Common_.EyeCool
         /// <summary>
         /// 人脸特征ID
         /// </summary>
-        public string face_id
-        {
-            get
-            {
-                if (faceIds != null && faceIds.Count > 0)
-                {
-                    return string.Join(",", faceIds);
-                }
-                else
-                {
-                    //不能返回Null，单元测试api报错
-                    return "";
-                }
-            }
-        }
-        /// <summary>
-        /// 人脸特征ID集合
-        /// </summary>
-        [System.Obsolete("此属性非接口参数", false)]
-        [JsonIgnore]
-        public List<string> faceIds { get; set; }
+        public string face_id { get; set; }
     }
 }

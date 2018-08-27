@@ -44,7 +44,7 @@
             // 
             // btnCheck
             // 
-            this.btnCheck.Location = new System.Drawing.Point(235, 76);
+            this.btnCheck.Location = new System.Drawing.Point(235, 69);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(62, 25);
             this.btnCheck.TabIndex = 20;
@@ -55,7 +55,7 @@
             // abc
             // 
             this.abc.AutoSize = true;
-            this.abc.Location = new System.Drawing.Point(115, 13);
+            this.abc.Location = new System.Drawing.Point(115, 14);
             this.abc.Name = "abc";
             this.abc.Size = new System.Drawing.Size(35, 12);
             this.abc.TabIndex = 19;
@@ -76,7 +76,7 @@
             // cbSel
             // 
             this.cbSel.AutoSize = true;
-            this.cbSel.Location = new System.Drawing.Point(289, 5);
+            this.cbSel.Location = new System.Drawing.Point(285, 13);
             this.cbSel.Name = "cbSel";
             this.cbSel.Size = new System.Drawing.Size(15, 14);
             this.cbSel.TabIndex = 21;
@@ -95,7 +95,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(115, 75);
+            this.label2.Location = new System.Drawing.Point(115, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 12);
             this.label2.TabIndex = 23;
@@ -138,7 +138,7 @@
             this.labCheckState.AutoSize = true;
             this.labCheckState.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labCheckState.ForeColor = System.Drawing.Color.Green;
-            this.labCheckState.Location = new System.Drawing.Point(247, 5);
+            this.labCheckState.Location = new System.Drawing.Point(238, 13);
             this.labCheckState.Name = "labCheckState";
             this.labCheckState.Size = new System.Drawing.Size(39, 15);
             this.labCheckState.TabIndex = 38;
@@ -149,6 +149,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.labCheckState);
             this.Controls.Add(this.cbSel);
             this.Controls.Add(this.labRegType);
@@ -161,7 +162,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.abc);
             this.Name = "ucNoCheck";
-            this.Size = new System.Drawing.Size(308, 108);
+            this.Size = new System.Drawing.Size(306, 106);
             this.Load += new System.EventHandler(this.ucNoCheck_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picPhoto)).EndInit();
             this.ResumeLayout(false);

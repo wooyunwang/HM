@@ -53,9 +53,9 @@
             this.pnHead.Controls.Add(this.pnButton);
             this.pnHead.Controls.Add(this.pnProcess);
             this.pnHead.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnHead.Location = new System.Drawing.Point(0, 0);
+            this.pnHead.Location = new System.Drawing.Point(5, 5);
             this.pnHead.Name = "pnHead";
-            this.pnHead.Size = new System.Drawing.Size(398, 26);
+            this.pnHead.Size = new System.Drawing.Size(254, 18);
             this.pnHead.TabIndex = 0;
             // 
             // pnButton
@@ -64,9 +64,9 @@
             this.pnButton.Controls.Add(this.btnMin);
             this.pnButton.Controls.Add(this.btnMax);
             this.pnButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnButton.Location = new System.Drawing.Point(318, 0);
+            this.pnButton.Location = new System.Drawing.Point(200, 0);
             this.pnButton.Name = "pnButton";
-            this.pnButton.Size = new System.Drawing.Size(80, 26);
+            this.pnButton.Size = new System.Drawing.Size(54, 18);
             this.pnButton.TabIndex = 118;
             // 
             // btnMin
@@ -80,7 +80,7 @@
             this.btnMin.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnMin.Location = new System.Drawing.Point(3, 0);
             this.btnMin.Name = "btnMin";
-            this.btnMin.Size = new System.Drawing.Size(24, 26);
+            this.btnMin.Size = new System.Drawing.Size(15, 18);
             this.btnMin.TabIndex = 31;
             this.btnMin.Tag = "1";
             this.btnMin.UseVisualStyleBackColor = false;
@@ -95,9 +95,9 @@
             this.btnMax.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.HotTrack;
             this.btnMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMax.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnMax.Location = new System.Drawing.Point(45, 0);
+            this.btnMax.Location = new System.Drawing.Point(30, 0);
             this.btnMax.Name = "btnMax";
-            this.btnMax.Size = new System.Drawing.Size(24, 26);
+            this.btnMax.Size = new System.Drawing.Size(15, 18);
             this.btnMax.TabIndex = 1;
             this.btnMax.Tag = "0";
             this.btnMax.UseVisualStyleBackColor = false;
@@ -110,7 +110,7 @@
             this.pnProcess.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnProcess.Location = new System.Drawing.Point(0, 0);
             this.pnProcess.Name = "pnProcess";
-            this.pnProcess.Size = new System.Drawing.Size(398, 26);
+            this.pnProcess.Size = new System.Drawing.Size(254, 18);
             this.pnProcess.TabIndex = 117;
             // 
             // pbProcess
@@ -119,11 +119,10 @@
             this.pbProcess.BorderColor = System.Drawing.SystemColors.Window;
             this.pbProcess.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbProcess.Location = new System.Drawing.Point(0, 0);
-            this.pbProcess.Margin = new System.Windows.Forms.Padding(4);
             this.pbProcess.Maximum = 10;
             this.pbProcess.Minimum = 0;
             this.pbProcess.Name = "pbProcess";
-            this.pbProcess.Size = new System.Drawing.Size(398, 26);
+            this.pbProcess.Size = new System.Drawing.Size(254, 18);
             this.pbProcess.TabIndex = 116;
             this.pbProcess.Value = 0;
             this.pbProcess.ValueColor = System.Drawing.Color.Lime;
@@ -132,9 +131,9 @@
             // 
             this.pnMessage.Controls.Add(this.tbMessage);
             this.pnMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnMessage.Location = new System.Drawing.Point(0, 26);
+            this.pnMessage.Location = new System.Drawing.Point(5, 23);
             this.pnMessage.Name = "pnMessage";
-            this.pnMessage.Size = new System.Drawing.Size(398, 205);
+            this.pnMessage.Size = new System.Drawing.Size(254, 125);
             this.pnMessage.TabIndex = 1;
             // 
             // tbMessage
@@ -147,7 +146,7 @@
             this.tbMessage.Location = new System.Drawing.Point(0, 0);
             this.tbMessage.Name = "tbMessage";
             this.tbMessage.ReadOnly = true;
-            this.tbMessage.Size = new System.Drawing.Size(398, 205);
+            this.tbMessage.Size = new System.Drawing.Size(254, 125);
             this.tbMessage.TabIndex = 30;
             this.tbMessage.Text = "";
             // 
@@ -157,25 +156,28 @@
             this.menuMessage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuClear});
             this.menuMessage.Name = "menuMessage";
-            this.menuMessage.Size = new System.Drawing.Size(153, 32);
+            this.menuMessage.Size = new System.Drawing.Size(125, 26);
             // 
             // menuClear
             // 
             this.menuClear.Name = "menuClear";
-            this.menuClear.Size = new System.Drawing.Size(152, 28);
+            this.menuClear.Size = new System.Drawing.Size(124, 22);
             this.menuClear.Text = "清除信息";
             this.menuClear.Click += new System.EventHandler(this.menuClear_Click);
             // 
             // ScheduleJob
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 231);
+            this.ClientSize = new System.Drawing.Size(264, 153);
             this.Controls.Add(this.pnMessage);
             this.Controls.Add(this.pnHead);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ScheduleJob";
+            this.Padding = new System.Windows.Forms.Padding(5);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = "人脸综合平台同步服务";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ScheduleJob_FormClosing);
             this.Load += new System.EventHandler(this.ScheduleJob_Load);

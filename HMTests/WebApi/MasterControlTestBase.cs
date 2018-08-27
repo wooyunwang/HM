@@ -20,20 +20,20 @@ namespace HM.MasterControl.WebApi.Tests
     /// </summary>
     public class MasterControlTestBase
     {
-        /// <summary>
-        /// 主控程序WebAPI本地测试url
-        /// </summary>
-        protected readonly string _baseUrl = "http://localhost:9000";
-        protected Token _token { get; set; }
+        ///// <summary>
+        ///// 主控程序WebAPI本地测试url
+        ///// </summary>
+        //protected readonly string _baseUrl = "http://localhost:9000";
+        //protected Token _token { get; set; }
 
 
-        public MasterControlTestBase()
-        {
-            var dict = new SortedDictionary<string, string>();
-            dict.Add("client_id", "VankeService");
-            dict.Add("client_secret", "Vanke123#");
-            dict.Add("grant_type", "client_credentials");
-            _token = _baseUrl.AppendPathSegment("token").PostUrlEncodedAsync(dict).ReceiveJson<Token>().Result;
-        }
+        //public MasterControlTestBase()
+        //{
+        //    var dict = new SortedDictionary<string, string>();
+        //    dict.Add("client_id", "VankeService");
+        //    dict.Add("client_secret", "Vanke123#");
+        //    dict.Add("grant_type", "client_credentials");
+        //    _token = _baseUrl.AppendPathSegment("token").PostUrlEncodedAsync(dict).ReceiveJson<Token>().Result;
+        //}
     }
 }

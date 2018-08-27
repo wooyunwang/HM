@@ -47,7 +47,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(97, 18);
+            this.lblName.Location = new System.Drawing.Point(101, 18);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(29, 12);
             this.lblName.TabIndex = 2;
@@ -55,9 +55,9 @@
             // 
             // BtnReg
             // 
-            this.BtnReg.Location = new System.Drawing.Point(207, 78);
+            this.BtnReg.Location = new System.Drawing.Point(228, 78);
             this.BtnReg.Name = "BtnReg";
-            this.BtnReg.Size = new System.Drawing.Size(62, 25);
+            this.BtnReg.Size = new System.Drawing.Size(48, 25);
             this.BtnReg.TabIndex = 10;
             this.BtnReg.Text = "注册";
             this.BtnReg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -65,9 +65,9 @@
             // 
             // BtnUpdate
             // 
-            this.BtnUpdate.Location = new System.Drawing.Point(139, 78);
+            this.BtnUpdate.Location = new System.Drawing.Point(175, 78);
             this.BtnUpdate.Name = "BtnUpdate";
-            this.BtnUpdate.Size = new System.Drawing.Size(62, 25);
+            this.BtnUpdate.Size = new System.Drawing.Size(48, 25);
             this.BtnUpdate.TabIndex = 11;
             this.BtnUpdate.Text = "编辑";
             this.BtnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -76,7 +76,7 @@
             // lblCountCompare
             // 
             this.lblCountCompare.AutoSize = true;
-            this.lblCountCompare.Location = new System.Drawing.Point(323, 10);
+            this.lblCountCompare.Location = new System.Drawing.Point(127, 75);
             this.lblCountCompare.Name = "lblCountCompare";
             this.lblCountCompare.Size = new System.Drawing.Size(23, 12);
             this.lblCountCompare.TabIndex = 15;
@@ -86,7 +86,7 @@
             // lblUserType
             // 
             this.lblUserType.AutoSize = true;
-            this.lblUserType.Location = new System.Drawing.Point(97, 50);
+            this.lblUserType.Location = new System.Drawing.Point(101, 50);
             this.lblUserType.Name = "lblUserType";
             this.lblUserType.Size = new System.Drawing.Size(53, 12);
             this.lblUserType.TabIndex = 12;
@@ -95,7 +95,7 @@
             // lblDataFrom
             // 
             this.lblDataFrom.AutoSize = true;
-            this.lblDataFrom.Location = new System.Drawing.Point(251, 50);
+            this.lblDataFrom.Location = new System.Drawing.Point(241, 50);
             this.lblDataFrom.Name = "lblDataFrom";
             this.lblDataFrom.Size = new System.Drawing.Size(29, 12);
             this.lblDataFrom.TabIndex = 13;
@@ -104,7 +104,7 @@
             // lblSex
             // 
             this.lblSex.AutoSize = true;
-            this.lblSex.Location = new System.Drawing.Point(212, 18);
+            this.lblSex.Location = new System.Drawing.Point(241, 18);
             this.lblSex.Name = "lblSex";
             this.lblSex.Size = new System.Drawing.Size(29, 12);
             this.lblSex.TabIndex = 14;
@@ -113,7 +113,7 @@
             // picIsRegisted
             // 
             this.picIsRegisted.Image = global::HM.FacePlatform.Properties.Resources.registed;
-            this.picIsRegisted.Location = new System.Drawing.Point(311, 24);
+            this.picIsRegisted.Location = new System.Drawing.Point(115, 89);
             this.picIsRegisted.Margin = new System.Windows.Forms.Padding(2);
             this.picIsRegisted.Name = "picIsRegisted";
             this.picIsRegisted.Size = new System.Drawing.Size(50, 18);
@@ -126,7 +126,7 @@
             this.picPhoto.BackColor = System.Drawing.Color.White;
             this.picPhoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPhoto.InitialImage = global::HM.FacePlatform.Properties.Resources.userPhoto;
-            this.picPhoto.Location = new System.Drawing.Point(2, 10);
+            this.picPhoto.Location = new System.Drawing.Point(4, 10);
             this.picPhoto.Name = "picPhoto";
             this.picPhoto.Size = new System.Drawing.Size(85, 93);
             this.picPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -135,9 +135,9 @@
             // 
             // BtnDelete
             // 
-            this.BtnDelete.Location = new System.Drawing.Point(275, 78);
+            this.BtnDelete.Location = new System.Drawing.Point(281, 78);
             this.BtnDelete.Name = "BtnDelete";
-            this.BtnDelete.Size = new System.Drawing.Size(62, 25);
+            this.BtnDelete.Size = new System.Drawing.Size(48, 25);
             this.BtnDelete.TabIndex = 18;
             this.BtnDelete.Text = "删除";
             this.BtnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -148,6 +148,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.picIsRegisted);
             this.Controls.Add(this.lblCountCompare);
@@ -159,7 +160,7 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.picPhoto);
             this.Name = "UcFamily";
-            this.Size = new System.Drawing.Size(374, 114);
+            this.Size = new System.Drawing.Size(335, 112);
             this.Load += new System.EventHandler(this.ucFamily_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picIsRegisted)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPhoto)).EndInit();

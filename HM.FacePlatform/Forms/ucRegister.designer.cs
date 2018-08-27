@@ -31,17 +31,17 @@ namespace HM.FacePlatform
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.HtcMain = new HM.Form_.HMTabControl();
             this.MtpUser = new System.Windows.Forms.TabPage();
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -52,16 +52,15 @@ namespace HM.FacePlatform
             this.ColGuestCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.PagerHouse = new HM.Form_.HMPager();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.PnlUserCondition = new System.Windows.Forms.Panel();
             this.label2 = new HM.Form_.HMLabel();
             this.BtnSearchHouse = new HM.Form_.HMTile();
             this.txtUserName = new HM.Form_.Old.TextBox.RTextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
+            this.PnlRight = new System.Windows.Forms.Panel();
             this.FlpUser = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.PnlAddUser = new System.Windows.Forms.Panel();
             this.btnNewUser = new HM.Form_.HMTile();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.PnlLeft = new System.Windows.Forms.Panel();
             this.TvBuilding = new System.Windows.Forms.TreeView();
             this.panelShow = new System.Windows.Forms.Panel();
             this.TogTree = new HM.Form_.HMToggle();
@@ -69,11 +68,11 @@ namespace HM.FacePlatform
             this.labProject = new HM.Form_.HMLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MtpWorker = new System.Windows.Forms.TabPage();
-            this.panel11 = new System.Windows.Forms.Panel();
+            this.PnlWorkerLeft = new System.Windows.Forms.Panel();
             this.FlpWorker = new System.Windows.Forms.FlowLayoutPanel();
             this.PnlPagerWorker = new System.Windows.Forms.Panel();
             this.PagerWorker = new HM.Form_.HMPager();
-            this.panel12 = new System.Windows.Forms.Panel();
+            this.PnlWorkerCondition = new System.Windows.Forms.Panel();
             this.GbxRegisteState = new System.Windows.Forms.GroupBox();
             this.radSelectAll = new HM.Form_.HMRadioButton();
             this.radSelectNo = new HM.Form_.HMRadioButton();
@@ -81,8 +80,8 @@ namespace HM.FacePlatform
             this.tbWorkerSelect = new HM.Form_.Old.TextBox.RTextBox();
             this.btnWorkerSelect = new HM.Form_.HMTile();
             this.LblKey = new HM.Form_.HMLabel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.tbShow = new System.Windows.Forms.RichTextBox();
+            this.PnlWorkerRight = new System.Windows.Forms.Panel();
+            this.TxtShow = new System.Windows.Forms.RichTextBox();
             this.label3 = new HM.Form_.HMLabel();
             this.lbtnSelUrl = new System.Windows.Forms.LinkLabel();
             this.labRegInfor = new HM.Form_.HMLabel();
@@ -116,19 +115,18 @@ namespace HM.FacePlatform
             this.MtpUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvHouse)).BeginInit();
             this.panel5.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.PnlUserCondition.SuspendLayout();
+            this.PnlRight.SuspendLayout();
+            this.PnlAddUser.SuspendLayout();
+            this.PnlLeft.SuspendLayout();
             this.panelShow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.MtpWorker.SuspendLayout();
-            this.panel11.SuspendLayout();
+            this.PnlWorkerLeft.SuspendLayout();
             this.PnlPagerWorker.SuspendLayout();
-            this.panel12.SuspendLayout();
+            this.PnlWorkerCondition.SuspendLayout();
             this.GbxRegisteState.SuspendLayout();
-            this.panel6.SuspendLayout();
+            this.PnlWorkerRight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLoadingIn)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,9 +150,9 @@ namespace HM.FacePlatform
             this.MtpUser.Controls.Add(this.splitter1);
             this.MtpUser.Controls.Add(this.DgvHouse);
             this.MtpUser.Controls.Add(this.panel5);
-            this.MtpUser.Controls.Add(this.panel4);
-            this.MtpUser.Controls.Add(this.panel2);
-            this.MtpUser.Controls.Add(this.panel1);
+            this.MtpUser.Controls.Add(this.PnlUserCondition);
+            this.MtpUser.Controls.Add(this.PnlRight);
+            this.MtpUser.Controls.Add(this.PnlLeft);
             this.MtpUser.Location = new System.Drawing.Point(4, 34);
             this.MtpUser.Name = "MtpUser";
             this.MtpUser.Padding = new System.Windows.Forms.Padding(3);
@@ -176,36 +174,36 @@ namespace HM.FacePlatform
             this.DgvHouse.AllowUserToAddRows = false;
             this.DgvHouse.AllowUserToDeleteRows = false;
             this.DgvHouse.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            this.DgvHouse.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
+            this.DgvHouse.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.DgvHouse.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DgvHouse.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DgvHouse.BackgroundColor = System.Drawing.SystemColors.Window;
             this.DgvHouse.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DgvHouse.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.DgvHouse.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvHouse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvHouse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DgvHouse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvHouse.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_house_name_,
             this.colUsersString,
             this.ColFamilyCount,
             this.ColGuestCount});
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.Wheat;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvHouse.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Wheat;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvHouse.DefaultCellStyle = dataGridViewCellStyle6;
             this.DgvHouse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvHouse.EnableHeadersVisualStyles = false;
             this.DgvHouse.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
@@ -213,23 +211,23 @@ namespace HM.FacePlatform
             this.DgvHouse.Name = "DgvHouse";
             this.DgvHouse.ReadOnly = true;
             this.DgvHouse.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvHouse.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvHouse.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.DgvHouse.RowHeadersVisible = false;
             this.DgvHouse.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvHouse.RowsDefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvHouse.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.DgvHouse.RowTemplate.Height = 50;
             this.DgvHouse.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvHouse.Size = new System.Drawing.Size(561, 378);
+            this.DgvHouse.Size = new System.Drawing.Size(584, 378);
             this.DgvHouse.TabIndex = 66;
             this.DgvHouse.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.DgvHouse_RowPrePaint);
             this.DgvHouse.SelectionChanged += new System.EventHandler(this.DgvHouse_SelectionChanged);
@@ -237,8 +235,8 @@ namespace HM.FacePlatform
             // col_house_name_
             // 
             this.col_house_name_.DataPropertyName = "house_name";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.col_house_name_.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.col_house_name_.DefaultCellStyle = dataGridViewCellStyle3;
             this.col_house_name_.FillWeight = 80F;
             this.col_house_name_.HeaderText = "房号";
             this.col_house_name_.MinimumWidth = 120;
@@ -256,8 +254,8 @@ namespace HM.FacePlatform
             // ColFamilyCount
             // 
             this.ColFamilyCount.DataPropertyName = "family_count";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColFamilyCount.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColFamilyCount.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColFamilyCount.FillWeight = 20F;
             this.ColFamilyCount.HeaderText = "成员";
             this.ColFamilyCount.MinimumWidth = 80;
@@ -267,8 +265,8 @@ namespace HM.FacePlatform
             // ColGuestCount
             // 
             this.ColGuestCount.DataPropertyName = "guest_count";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColGuestCount.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColGuestCount.DefaultCellStyle = dataGridViewCellStyle5;
             this.ColGuestCount.FillWeight = 20F;
             this.ColGuestCount.HeaderText = "访客";
             this.ColGuestCount.MinimumWidth = 80;
@@ -281,7 +279,7 @@ namespace HM.FacePlatform
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel5.Location = new System.Drawing.Point(264, 431);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(561, 28);
+            this.panel5.Size = new System.Drawing.Size(584, 28);
             this.panel5.TabIndex = 66;
             // 
             // PagerHouse
@@ -294,20 +292,20 @@ namespace HM.FacePlatform
             this.PagerHouse.PageCount = 0;
             this.PagerHouse.PageCurrent = 1;
             this.PagerHouse.PageSize = 20;
-            this.PagerHouse.Size = new System.Drawing.Size(561, 28);
+            this.PagerHouse.Size = new System.Drawing.Size(584, 28);
             this.PagerHouse.TabIndex = 66;
             this.PagerHouse.EventPaging += new HM.Form_.EventPagingHandler(this.PagerHouse_EventPaging);
             // 
-            // panel4
+            // PnlUserCondition
             // 
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.BtnSearchHouse);
-            this.panel4.Controls.Add(this.txtUserName);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(264, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(561, 50);
-            this.panel4.TabIndex = 66;
+            this.PnlUserCondition.Controls.Add(this.label2);
+            this.PnlUserCondition.Controls.Add(this.BtnSearchHouse);
+            this.PnlUserCondition.Controls.Add(this.txtUserName);
+            this.PnlUserCondition.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PnlUserCondition.Location = new System.Drawing.Point(264, 3);
+            this.PnlUserCondition.Name = "PnlUserCondition";
+            this.PnlUserCondition.Size = new System.Drawing.Size(584, 50);
+            this.PnlUserCondition.TabIndex = 66;
             // 
             // label2
             // 
@@ -347,51 +345,41 @@ namespace HM.FacePlatform
             this.txtUserName.TabIndex = 1;
             this.txtUserName.TextChanged += new System.EventHandler(this.tbSelect_TextChanged);
             // 
-            // panel2
+            // PnlRight
             // 
-            this.panel2.Controls.Add(this.panel10);
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(825, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(389, 456);
-            this.panel2.TabIndex = 66;
-            // 
-            // panel10
-            // 
-            this.panel10.BackColor = System.Drawing.Color.White;
-            this.panel10.Controls.Add(this.FlpUser);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(0, 50);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(389, 406);
-            this.panel10.TabIndex = 68;
+            this.PnlRight.Controls.Add(this.FlpUser);
+            this.PnlRight.Controls.Add(this.PnlAddUser);
+            this.PnlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.PnlRight.Location = new System.Drawing.Point(848, 3);
+            this.PnlRight.Name = "PnlRight";
+            this.PnlRight.Size = new System.Drawing.Size(366, 456);
+            this.PnlRight.TabIndex = 66;
             // 
             // FlpUser
             // 
             this.FlpUser.AutoSize = true;
             this.FlpUser.BackColor = System.Drawing.Color.White;
             this.FlpUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FlpUser.Location = new System.Drawing.Point(0, 0);
+            this.FlpUser.Location = new System.Drawing.Point(0, 50);
             this.FlpUser.Name = "FlpUser";
-            this.FlpUser.Size = new System.Drawing.Size(389, 406);
+            this.FlpUser.Size = new System.Drawing.Size(366, 406);
             this.FlpUser.TabIndex = 66;
             // 
-            // panel3
+            // PnlAddUser
             // 
-            this.panel3.Controls.Add(this.btnNewUser);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(389, 50);
-            this.panel3.TabIndex = 67;
+            this.PnlAddUser.Controls.Add(this.btnNewUser);
+            this.PnlAddUser.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PnlAddUser.Location = new System.Drawing.Point(0, 0);
+            this.PnlAddUser.Name = "PnlAddUser";
+            this.PnlAddUser.Size = new System.Drawing.Size(366, 50);
+            this.PnlAddUser.TabIndex = 67;
             // 
             // btnNewUser
             // 
             this.btnNewUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNewUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
             this.btnNewUser.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnNewUser.Location = new System.Drawing.Point(294, 15);
+            this.btnNewUser.Location = new System.Drawing.Point(271, 15);
             this.btnNewUser.Name = "btnNewUser";
             this.btnNewUser.Size = new System.Drawing.Size(78, 25);
             this.btnNewUser.TabIndex = 3;
@@ -399,15 +387,15 @@ namespace HM.FacePlatform
             this.btnNewUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnNewUser.Click += new System.EventHandler(this.btnNewUser_Click);
             // 
-            // panel1
+            // PnlLeft
             // 
-            this.panel1.Controls.Add(this.TvBuilding);
-            this.panel1.Controls.Add(this.panelShow);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(261, 456);
-            this.panel1.TabIndex = 66;
+            this.PnlLeft.Controls.Add(this.TvBuilding);
+            this.PnlLeft.Controls.Add(this.panelShow);
+            this.PnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.PnlLeft.Location = new System.Drawing.Point(3, 3);
+            this.PnlLeft.Name = "PnlLeft";
+            this.PnlLeft.Size = new System.Drawing.Size(261, 456);
+            this.PnlLeft.TabIndex = 66;
             // 
             // TvBuilding
             // 
@@ -484,8 +472,8 @@ namespace HM.FacePlatform
             // 
             // MtpWorker
             // 
-            this.MtpWorker.Controls.Add(this.panel11);
-            this.MtpWorker.Controls.Add(this.panel6);
+            this.MtpWorker.Controls.Add(this.PnlWorkerLeft);
+            this.MtpWorker.Controls.Add(this.PnlWorkerRight);
             this.MtpWorker.Location = new System.Drawing.Point(4, 34);
             this.MtpWorker.Name = "MtpWorker";
             this.MtpWorker.Padding = new System.Windows.Forms.Padding(3);
@@ -494,16 +482,16 @@ namespace HM.FacePlatform
             this.MtpWorker.Text = "工作人员人脸注册";
             this.MtpWorker.UseVisualStyleBackColor = true;
             // 
-            // panel11
+            // PnlWorkerLeft
             // 
-            this.panel11.Controls.Add(this.FlpWorker);
-            this.panel11.Controls.Add(this.PnlPagerWorker);
-            this.panel11.Controls.Add(this.panel12);
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(3, 3);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(948, 456);
-            this.panel11.TabIndex = 66;
+            this.PnlWorkerLeft.Controls.Add(this.FlpWorker);
+            this.PnlWorkerLeft.Controls.Add(this.PnlPagerWorker);
+            this.PnlWorkerLeft.Controls.Add(this.PnlWorkerCondition);
+            this.PnlWorkerLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PnlWorkerLeft.Location = new System.Drawing.Point(3, 3);
+            this.PnlWorkerLeft.Name = "PnlWorkerLeft";
+            this.PnlWorkerLeft.Size = new System.Drawing.Size(948, 456);
+            this.PnlWorkerLeft.TabIndex = 66;
             // 
             // FlpWorker
             // 
@@ -540,18 +528,18 @@ namespace HM.FacePlatform
             this.PagerWorker.TabIndex = 100;
             this.PagerWorker.EventPaging += new HM.Form_.EventPagingHandler(this.PagerWorker_EventPaging);
             // 
-            // panel12
+            // PnlWorkerCondition
             // 
-            this.panel12.Controls.Add(this.GbxRegisteState);
-            this.panel12.Controls.Add(this.tbWorkerSelect);
-            this.panel12.Controls.Add(this.btnWorkerSelect);
-            this.panel12.Controls.Add(this.LblKey);
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel12.Location = new System.Drawing.Point(0, 0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(948, 51);
-            this.panel12.TabIndex = 66;
-            this.panel12.Visible = false;
+            this.PnlWorkerCondition.Controls.Add(this.GbxRegisteState);
+            this.PnlWorkerCondition.Controls.Add(this.tbWorkerSelect);
+            this.PnlWorkerCondition.Controls.Add(this.btnWorkerSelect);
+            this.PnlWorkerCondition.Controls.Add(this.LblKey);
+            this.PnlWorkerCondition.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PnlWorkerCondition.Location = new System.Drawing.Point(0, 0);
+            this.PnlWorkerCondition.Name = "PnlWorkerCondition";
+            this.PnlWorkerCondition.Size = new System.Drawing.Size(948, 51);
+            this.PnlWorkerCondition.TabIndex = 66;
+            this.PnlWorkerCondition.Visible = false;
             // 
             // GbxRegisteState
             // 
@@ -638,32 +626,32 @@ namespace HM.FacePlatform
             this.LblKey.TabIndex = 66;
             this.LblKey.Text = "模糊查询:";
             // 
-            // panel6
+            // PnlWorkerRight
             // 
-            this.panel6.Controls.Add(this.tbShow);
-            this.panel6.Controls.Add(this.label3);
-            this.panel6.Controls.Add(this.lbtnSelUrl);
-            this.panel6.Controls.Add(this.labRegInfor);
-            this.panel6.Controls.Add(this.tbPicUrl);
-            this.panel6.Controls.Add(this.label15);
-            this.panel6.Controls.Add(this.btnRegS);
-            this.panel6.Controls.Add(this.pbLoadingIn);
-            this.panel6.Controls.Add(this.btnAddWorker);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(951, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(263, 456);
-            this.panel6.TabIndex = 66;
+            this.PnlWorkerRight.Controls.Add(this.TxtShow);
+            this.PnlWorkerRight.Controls.Add(this.label3);
+            this.PnlWorkerRight.Controls.Add(this.lbtnSelUrl);
+            this.PnlWorkerRight.Controls.Add(this.labRegInfor);
+            this.PnlWorkerRight.Controls.Add(this.tbPicUrl);
+            this.PnlWorkerRight.Controls.Add(this.label15);
+            this.PnlWorkerRight.Controls.Add(this.btnRegS);
+            this.PnlWorkerRight.Controls.Add(this.pbLoadingIn);
+            this.PnlWorkerRight.Controls.Add(this.btnAddWorker);
+            this.PnlWorkerRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.PnlWorkerRight.Location = new System.Drawing.Point(951, 3);
+            this.PnlWorkerRight.Name = "PnlWorkerRight";
+            this.PnlWorkerRight.Size = new System.Drawing.Size(263, 456);
+            this.PnlWorkerRight.TabIndex = 66;
             // 
-            // tbShow
+            // TxtShow
             // 
-            this.tbShow.HideSelection = false;
-            this.tbShow.Location = new System.Drawing.Point(16, 127);
-            this.tbShow.Margin = new System.Windows.Forms.Padding(2);
-            this.tbShow.Name = "tbShow";
-            this.tbShow.Size = new System.Drawing.Size(221, 81);
-            this.tbShow.TabIndex = 113;
-            this.tbShow.Text = "";
+            this.TxtShow.HideSelection = false;
+            this.TxtShow.Location = new System.Drawing.Point(16, 127);
+            this.TxtShow.Margin = new System.Windows.Forms.Padding(2);
+            this.TxtShow.Name = "TxtShow";
+            this.TxtShow.Size = new System.Drawing.Size(221, 81);
+            this.TxtShow.TabIndex = 113;
+            this.TxtShow.Text = "";
             // 
             // label3
             // 
@@ -794,8 +782,8 @@ namespace HM.FacePlatform
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.DataPropertyName = "cardCount";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewTextBoxColumn4.FillWeight = 74.86698F;
             this.dataGridViewTextBoxColumn4.HeaderText = "门禁卡";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
@@ -805,8 +793,8 @@ namespace HM.FacePlatform
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "familyCount";
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn5.FillWeight = 61.44244F;
             this.dataGridViewTextBoxColumn5.HeaderText = "成员";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
@@ -816,8 +804,8 @@ namespace HM.FacePlatform
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "guestCount";
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn6.FillWeight = 40.15079F;
             this.dataGridViewTextBoxColumn6.HeaderText = "访客";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
@@ -956,26 +944,25 @@ namespace HM.FacePlatform
             this.MtpUser.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DgvHouse)).EndInit();
             this.panel5.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.PnlUserCondition.ResumeLayout(false);
+            this.PnlUserCondition.PerformLayout();
+            this.PnlRight.ResumeLayout(false);
+            this.PnlRight.PerformLayout();
+            this.PnlAddUser.ResumeLayout(false);
+            this.PnlLeft.ResumeLayout(false);
             this.panelShow.ResumeLayout(false);
             this.panelShow.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.MtpWorker.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
+            this.PnlWorkerLeft.ResumeLayout(false);
+            this.PnlWorkerLeft.PerformLayout();
             this.PnlPagerWorker.ResumeLayout(false);
-            this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
+            this.PnlWorkerCondition.ResumeLayout(false);
+            this.PnlWorkerCondition.PerformLayout();
             this.GbxRegisteState.ResumeLayout(false);
             this.GbxRegisteState.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
+            this.PnlWorkerRight.ResumeLayout(false);
+            this.PnlWorkerRight.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLoadingIn)).EndInit();
             this.ResumeLayout(false);
 
@@ -986,28 +973,28 @@ namespace HM.FacePlatform
         private HM.Form_.HMTabControl HtcMain;
         private System.Windows.Forms.TabPage MtpUser;
         private System.Windows.Forms.TabPage MtpWorker;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel PnlLeft;
         private HM.Form_.HMLabel labProject;
         private HM.Form_.HMLabel label2;
         private RTextBox txtUserName;
         private HM.Form_.HMTile BtnSearchHouse;
         private HM.Form_.HMPager PagerHouse;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel PnlRight;
         private ucPanel ucPanel1;
         public System.Windows.Forms.TreeView TvBuilding;
         public System.Windows.Forms.Panel panelShow;
         private System.Windows.Forms.PictureBox pictureBox1;
-        public System.Windows.Forms.Panel panel4;
+        public System.Windows.Forms.Panel PnlUserCondition;
         public System.Windows.Forms.Panel panel5;
         public System.Windows.Forms.FlowLayoutPanel FlpUser;
         public HM.Form_.HMDataGridView DgvHouse;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel PnlWorkerRight;
         private HM.Form_.HMTile btnAddWorker;
         private HM.Form_.HMLabel LblKey;
         private HM.Form_.HMTile btnWorkerSelect;
         private RTextBox tbWorkerSelect;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel PnlWorkerLeft;
+        private System.Windows.Forms.Panel PnlWorkerCondition;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -1027,8 +1014,7 @@ namespace HM.FacePlatform
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
         private HM.Form_.HMTile btnNewUser;
         private System.Windows.Forms.PictureBox pbLoadingIn;
-        public System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel10;
+        public System.Windows.Forms.Panel PnlAddUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
         private System.Windows.Forms.Splitter splitter1;
@@ -1047,7 +1033,7 @@ namespace HM.FacePlatform
         private HM.Form_.HMRadioButton radSelectAll;
         private HM.Form_.HMLabel labRegCount;
         private HM.Form_.HMLabel label3;
-        private System.Windows.Forms.RichTextBox tbShow;
+        private System.Windows.Forms.RichTextBox TxtShow;
         private System.Windows.Forms.GroupBox GbxRegisteState;
         private Form_.HMToggle TogTree;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_house_name_;

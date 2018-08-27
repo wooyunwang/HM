@@ -18,12 +18,20 @@ namespace HM.FacePlatform
         int formMiddleHeight;
         int formWidth;
         int formMinHeight;
+
         public ScheduleJob()
         {
             InitializeComponent();
-
+            //不出现在任务栏
+            this.ShowInTaskbar = false;
+            //置顶
+            this.TopMost = true;
+            //隐藏默认按钮
+            this.ControlBox = false;
             scheduler = StdSchedulerFactory.GetDefaultScheduler();
         }
+
+
 
         private void ScheduleJob_Load(object sender, EventArgs e)
         {
@@ -42,11 +50,12 @@ namespace HM.FacePlatform
             {
                 //ShowMessage("系统启动", MessageType.Information);
 
-                BaseJob.jobFrom = this;
+                BaseJob._JobFrom = this;
 
                 scheduler.Start();
             });
         }
+
 
         private void btnMin_Click(object sender, EventArgs e)
         {
@@ -55,7 +64,7 @@ namespace HM.FacePlatform
             btnMax.BackgroundImage = Properties.Resources.Middlemum;
             btnMax.Tag = "1";
 
-            this.Size = new Size(formWidth, formMinHeight);
+            this.Size = new Size(formWidth, formMinHeight + this.Padding.Top + this.Padding.Bottom);
             ResetLoaction();
             this.TopMost = true;
         }
@@ -109,7 +118,7 @@ namespace HM.FacePlatform
         {
             Rectangle workingArea = Screen.GetWorkingArea(this);
             this.Location = new Point(workingArea.Right - Size.Width - 5,
-                                      workingArea.Bottom - Size.Height - 5);
+                                      workingArea.Bottom - Size.Height - 25);
         }
 
         /// <summary>

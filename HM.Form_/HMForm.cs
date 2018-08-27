@@ -18,6 +18,7 @@ namespace HM.Form_
             // 
             // HMForm
             // 
+            this.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(300, 300);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HMForm";
@@ -35,7 +36,8 @@ namespace HM.Form_
         }
         protected override void OnCreateControl()
         {
+            this.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
             base.OnCreateControl();
-        }        
+        }
     }
 }

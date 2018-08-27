@@ -33,111 +33,117 @@ namespace HM.FacePlatform
 
         private void Init()
         {
-            bool isSection = true;
-            int pageNumber = 1, rowsPerPage = 50, totalPage = 0;
+            string ip = _mao.GetIP();
+            int port = _mao.GetPort();
+            Face.Common_.Face face = FaceFactory.CreateFace(ip, port, FaceVender.EyeCool);
+            bool isOk = NetWork_.VisualTelnet(ip, port);
+            if (!isOk)
+            {
+                _JobFrom.ShowMessage($"人脸一体机【{_mao.mao_name}】IP【{_mao.ip}】端口【{_mao.port}】网络异常，初始化失败！", MessageType.Information);
+                return;
+            }
+            bool isFaceSection = Config_.GetBool("IsFaceSection") ?? false;
+            if (isFaceSection)
+            {
+                _JobFrom.ShowMessage($"系统已启用分区块功能，请确认已人脸一体机已关联楼栋！", MessageType.Information);
+            }
+            int pageIndex = 0, pageSize = 50, totalPage = 0;
             DateTime fromDate = GetMinDateTime();
             DateTime toDate = DateTime.Now;
-
+            bool returnTotal = true;
             while (true)
             {
-                //1、获取需要同步人脸信息的小区用户（子对象包括需要同步的人脸数据）
-                PagerData<User> pagerData = _userBLL.GetUserForPushToDevice((int)(pageNumber - 1), (int)rowsPerPage, (DateTime)fromDate, toDate);
-                if (pagerData == null || pagerData.rows == null || pagerData.rows.Count < 0)
+                PagerData<User> pagerData = null;
+                try
                 {
-                    jobFrom.ShowMessage(showName + "没有需要同步的数据", MessageType.Information);
+                    if (isFaceSection)
+                    {
+                        pagerData = _userBLL.GetUserWithRegisterForPushToDevice(_mao.id, pageIndex, pageSize, fromDate, toDate, returnTotal);
+                    }
+                    else
+                    {
+                        pagerData = _userBLL.GetUserWithRegisterForPushToDevice(null, pageIndex, pageSize, fromDate, toDate, returnTotal);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _JobFrom.ShowMessage($"数据查询失败：{ Exception_.GetInnerException(ex).Message }", MessageType.Error);
                     return;
                 }
-                else
+
+                try
                 {
-                    //
-                    IList<Mao> lstMao = _maoBLL.Get();
-                    Dictionary<int, Face.Common_.Face> dicMao = new Dictionary<int, Face.Common_.Face>();
-                    foreach (var mao in lstMao)
+                    if (pagerData == null || pagerData.rows == null || pagerData.rows.Count <= 0)
                     {
-                        Face.Common_.Face face = FaceFactory.CreateFace(mao.ip, mao.port.ToInt_() ?? 8080, FaceVender.EyeCool);
-                        dicMao.Add(mao.id, face); ;
-                    }
-
-                    jobFrom.ShowMessage(string.Format(showName + "开始同步数据到<{0}>，同步成功前请不要退出本系统", _mao.mao_name), MessageType.Information);
-
-                    IEnumerable<User> user_registers = pagerData.rows;
-                    //2、遍历用户
-                    foreach (var user in user_registers)
-                    {
-                        if (user.registers == null && !user.registers.Any())
+                        if (true)
                         {
-                            continue;
+                            _JobFrom.ShowMessage(showName + "没有需要同步的数据", MessageType.Information);
                         }
-                        else
+                        return;
+                    }
+                    else
+                    {
+                        _JobFrom.ShowMessage($"{showName}开始同步数据到【{_mao.mao_name}】，同步成功前请不要退出本系统", MessageType.Information);
+
+                        List<User> userWithRegisters = pagerData.rows;
+                        //2、遍历用户
+                        foreach (var user in userWithRegisters)
                         {
-                            //2.1、获取用户的可用人脸信息
-                            IEnumerable<Mao> lstUserMao;
-                            if (isSection)
-                            {
-                                lstUserMao = lstMao.Where(it => it.MaoBuildings.Any(mb => user.user_houses.Any(uh => uh.House.building_code == mb.building_code)));
-                            }
-                            else
-                            {
-                                lstUserMao = lstMao;
-                            }
-                            //2.2、遍历人脸信息
+                            if (user.registers == null && !user.registers.Any()) continue;
+
+                            //2.1、遍历人脸信息
                             foreach (var register in user.registers)
                             {
                                 //2.2.1、根据用户->房屋->楼栋->关联的人脸一体机
-
-                                //2.2.2、并行注册
-                                Parallel.ForEach(lstMao, mao =>
+                                string fileName = Path.Combine(_PictureDirectory, register.photo_path);
+                                if (!File.Exists(fileName))
                                 {
-                                    if (dicMao.ContainsKey(mao.id))
+                                    _JobFrom.ShowMessage($"找不到用户【{user.name}】的图片【{fileName}】，register.id【{ register.id }】", MessageType.Error);
+                                    return;
+                                }
+                                ActionResult arChecking = face.Checking(register.face_id,
+                                    RegisterType.手动注册,//客户端同步默认为手动注册
+                                    Image_.ImageToBase64(fileName),
+                                    showName);
+                                if (arChecking.IsSuccess)
+                                {
+                                    _JobFrom.ShowMessage($"用户【{ user.name }】的人脸图片校验成功【register.id:{register.id}】同步成功！", MessageType.Success);
+
+                                    ActionResult arRegister = face.Register(new RegisterInput()
                                     {
-                                        var face = dicMao[mao.id];
-                                        if (face.VisualTelnet(mao.ip, mao.port.ToInt_() ?? 8080))
+                                        ActiveTime = user.end_time,
+                                        Birthday = user.birthday,
+                                        CertificateType = Face.Common_.EyeCool.CertificateType.唯一标识,
+                                        cNO = _mao.mao_no,
+                                        CRMId = user.user_uid,
+                                        FaceId = register.face_id,
+                                        Name = user.name,
+                                        PeopleId = user.people_id,
+                                        Phone = user.mobile,
+                                        ProjectCode = _ProjectCode,
+                                        RegisterType = register.register_type,
+                                        RoomNo = "",
+                                        Sex = user.sex,
+                                        UserType = _userBLL.GetUserType(user.user_uid),
+                                        IsNeedAudit = register.check_state != CheckType.审核通过
+                                    });
+                                    if (arRegister.IsSuccess)
+                                    {
+                                        //因是初始化动作，无需变更user的时间
+                                        _JobFrom.ShowMessage($"用户【{ user.name }】的人脸注册信息【register.id:{register.id}】同步成功！", MessageType.Success);
+                                        //添加操作记录
+                                        _actionLogBLL.Add(new ActionLog
                                         {
-                                            ActionResult arChecking = face.Checking(register.face_id,
-                                                RegisterType.手动注册,
-                                                register.photo_path,
-                                                "同步");
-                                            if (arChecking.IsSuccess)
-                                            {
-                                                ActionResult arRegister = face.Register(new RegisterInput()
-                                                {
-                                                    activeTime = user.end_time,
-                                                    Birthday = user.birthday,
-                                                    CertificateType = Face.Common_.EyeCool.CertificateType.唯一标识,
-                                                    cNO = mao.mao_no,
-                                                    CRMId = user.user_uid,
-                                                    FaceId = "",
-                                                    Name = user.name,
-                                                    PeopleId = user.people_id,
-                                                    Phone = user.mobile,
-                                                    ProjectCode = "",
-                                                    RegisterType = register.register_type,
-                                                    RoomNo = "",
-                                                    Sex = user.sex,
-                                                    UserType = user.user_houses.ToList()?[0].relation
-                                                });
-                                                if (!arRegister.IsSuccess)
-                                                {
-                                                    MaoFailedJob job = new MaoFailedJob
-                                                    {
-                                                        register_or_user_id = register.id,
-                                                        mao_id = _mao.id,
-                                                        job_type = JobType.注册,
-                                                    };
-                                                    _maoFailedJobBLL.AddOrUpdate(it => new
-                                                    {
-                                                        it.register_or_user_id,
-                                                        it.mao_id,
-                                                        it.job_type
-                                                    }, job);
-                                                }
-                                            }
-                                            else
-                                            {
-                                                LogHelper.Error(arChecking.ToAlertString());
-                                            }
-                                        }
-                                        else
+                                            table_id = register.id,
+                                            action_type = ActionType.平台注册,
+                                            action = ActionName.新增,
+                                            action_by = Program._Account.id,
+                                            remark = showName,
+                                        });
+                                    }
+                                    else
+                                    {
+                                        if (!arRegister.Any("此照片已绑定"))
                                         {
                                             MaoFailedJob job = new MaoFailedJob
                                             {
@@ -152,26 +158,44 @@ namespace HM.FacePlatform
                                                 it.job_type
                                             }, job);
                                         }
+                                        _JobFrom.ShowMessage($"用户【{ user.name }】的人脸图片【register.id:{register.id}】校验失败：{ arRegister.ToAlertString() }", MessageType.Error);
                                     }
-                                });
+                                }
+                                else
+                                {
+                                    _JobFrom.ShowMessage($"人脸图片检查不通过：{arChecking.ToAlertString()}", MessageType.Error);
+                                    MaoFailedJob job = new MaoFailedJob
+                                    {
+                                        register_or_user_id = register.id,
+                                        mao_id = _mao.id,
+                                        job_type = JobType.注册,
+                                    };
+                                    _maoFailedJobBLL.AddOrUpdate(it => new
+                                    {
+                                        it.register_or_user_id,
+                                        it.mao_id,
+                                        it.job_type
+                                    }, job);
+                                }
                             }
                         }
                     }
 
-                    pageNumber++;
-                    if (pageNumber > totalPage)
+                    pageIndex++;
+                    returnTotal = false;
+                    if (pageIndex >= totalPage)
                     {
-                        jobFrom.ShowMessage("本次任务执行完毕！", MessageType.Information);
+                        _JobFrom.ShowMessage("本次任务执行完毕！", MessageType.Information);
                         break;
                     }
                 }
+                catch (Exception ex)
+                {
+                    _JobFrom.ShowMessage($"同步异常：{ Exception_.GetInnerException(ex).Message }", MessageType.Error);
+                }
             }
 
-            //_mao.last_pull_date = toDate;//防止同步过程中有数据写入，暂不更新last_pull_date
-            //_mao.is_init = 1;
-            //_maoBLL.Update(_mao);//同步结束，更新猫初始化状态
-
-            jobFrom.ShowMessage(string.Format("##" + showName + "同步数据到<{0}>成功", _mao.mao_name), MessageType.Information);
+            _JobFrom.ShowMessage(string.Format("" + showName + "本次同步数据到人脸一体机【{0}】>完成！", _mao.mao_name), MessageType.Information);
         }
     }
 }

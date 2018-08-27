@@ -456,7 +456,7 @@ namespace HM.Face.Common_.EyeCool.Tests
             };
             var result1 = api.PeopleDelete_Debug(input);
 
-            var result2 = api.PeopleDelete(input, false);
+            var result2 = api.PeopleDelete_Debug(input, false);
         }
 
         [TestMethod()]
@@ -465,7 +465,7 @@ namespace HM.Face.Common_.EyeCool.Tests
             var input = new PeopleRemoveInput()
             {
                 people_id = "e8cfc9b179b44bd1a1e5f4eb673a05b6",
-                faceIds = new List<string>() { "e2080713-3532-44f2-a619-24acf3f1ab03" }
+                face_id = "e2080713-3532-44f2-a619-24acf3f1ab03"
             };
             var result1 = api.PeopleRemove(input);
 

@@ -135,9 +135,9 @@ namespace HM.Face.Common_
         /// 人脸删除操作
         /// </summary>
         /// <param name="peopleId"></param>
-        /// <param name="faceIds"></param>
+        /// <param name="faceId"></param>
         /// <returns></returns>
-        public abstract ActionResult FaceDel(string peopleId, List<string> faceIds);
+        public abstract ActionResult FaceDel(string peopleId, string faceId);
 
         /// <summary>
         /// 人员删除操作

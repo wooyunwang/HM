@@ -24,13 +24,13 @@ namespace HM.FacePlatform
         readonly string showName = "[修正]";
         public void Execute(IJobExecutionContext context)
         {
-            if (!maos.Any())
+            if (!BLL.FacePlatformCache.GetALL<Mao>().Any())
             {
-                jobFrom.ShowMessage("还没有配置猫，请在[基础数据]添加配置", MessageType.Warning);
+                _JobFrom.ShowMessage("还没有配置猫，请在[基础数据]添加配置", MessageType.Warning);
                 return;
             }
 
-            ExecutePush();
+            //ExecutePush();
         }
 
         private void ExecutePush()
@@ -41,9 +41,10 @@ namespace HM.FacePlatform
 
             foreach (MaoFailedJob job in jobs)
             {
-                if (job.retry_time >= maxRetryTime) continue;
+                if (job.retry_time >= _MaxRetryTime) continue;
 
                 Mao _taskMao = new Mao();
+                var maos = BLL.FacePlatformCache.GetALL<Mao>();
                 foreach (Mao _mao in maos)
                 {
                     if (_mao.id == job.mao_id)
@@ -83,7 +84,7 @@ namespace HM.FacePlatform
             ActionResult<List<Register>> result = _registerBLL.GetWithUser(job.register_or_user_id);
             if (!result.IsSuccess)
             {
-                jobFrom.ShowMessage(result.ToAlertString(), MessageType.Information);
+                _JobFrom.ShowMessage(result.ToAlertString(), MessageType.Information);
             }
             else if (result.Obj == null || result.Obj.Any())
             {
@@ -93,26 +94,26 @@ namespace HM.FacePlatform
             {
                 foreach (var register in result.Obj)
                 {
-                   // jobFrom.ShowMessage(string.Format(showName + "第{0}次更新<{1}>上<{2}>的审核状态/过期时间", job.retry_time, _mao.mao_name, _user.name)
-                   //, MessageType.Information);
+                    // jobFrom.ShowMessage(string.Format(showName + "第{0}次更新<{1}>上<{2}>的审核状态/过期时间", job.retry_time, _mao.mao_name, _user.name)
+                    //, MessageType.Information);
 
-                   // ActionResult result = _registerBLL.UpdateExpireDate(_user, _mao, _user.end_time, isFirstMao, 0);//更新过期时间
-                   // if (result.IsSuccess)
-                   // {
-                   //     result = _registerBLL.Check(_user, _user.check_state, _user.check_note, 0, projectCode, _mao, isFirstMao);//更新审核状态
-                   // }
+                    // ActionResult result = _registerBLL.UpdateExpireDate(_user, _mao, _user.end_time, isFirstMao, 0);//更新过期时间
+                    // if (result.IsSuccess)
+                    // {
+                    //     result = _registerBLL.Check(_user, _user.check_state, _user.check_note, 0, projectCode, _mao, isFirstMao);//更新审核状态
+                    // }
 
-                   // if (result.IsSuccess)
-                   // {
-                   //     job.is_del = IsDelType.是;
-                   //     jobFrom.ShowMessage(string.Format("**" + showName + "审核状态/过期时间更新成功"), MessageType.Success);
-                   // }
-                   // else
-                   // {
-                   //     jobFrom.ShowMessage(string.Format("**" + showName + "审核状态/过期时间更新失败(稍后将自动重试)：{0}", result.ToAlertString()), MessageType.Error);
-                   // }
+                    // if (result.IsSuccess)
+                    // {
+                    //     job.is_del = IsDelType.是;
+                    //     jobFrom.ShowMessage(string.Format("**" + showName + "审核状态/过期时间更新成功"), MessageType.Success);
+                    // }
+                    // else
+                    // {
+                    //     jobFrom.ShowMessage(string.Format("**" + showName + "审核状态/过期时间更新失败(稍后将自动重试)：{0}", result.ToAlertString()), MessageType.Error);
+                    // }
 
-                   // _maoFailedJobBLL.Update(job);
+                    // _maoFailedJobBLL.Update(job);
                 }
             }
         }

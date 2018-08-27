@@ -54,10 +54,10 @@ namespace HM.FacePlatform.Forms
             this.tbCheckTime = new HM.Form_.Old.TextBox.RTextBox();
             this.labPeople = new System.Windows.Forms.Label();
             this.tbCheckPepole = new HM.Form_.Old.TextBox.RTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.PnlButton = new System.Windows.Forms.Panel();
             this.groupBox_photo.SuspendLayout();
             this.pnEndTime.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.PnlButton.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -87,31 +87,34 @@ namespace HM.FacePlatform.Forms
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnOK.Location = new System.Drawing.Point(291, 9);
+            this.btnOK.Location = new System.Drawing.Point(309, 9);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(65, 25);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "通过";
+            this.btnOK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // btnNO
             // 
             this.btnNO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNO.Location = new System.Drawing.Point(379, 9);
+            this.btnNO.Location = new System.Drawing.Point(387, 9);
             this.btnNO.Name = "btnNO";
             this.btnNO.Size = new System.Drawing.Size(65, 25);
             this.btnNO.TabIndex = 3;
             this.btnNO.Text = "不通过";
+            this.btnNO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnNO.Click += new System.EventHandler(this.btnNO_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(466, 9);
+            this.btnCancel.Location = new System.Drawing.Point(465, 9);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(65, 25);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "关闭";
+            this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // groupBox_photo
@@ -370,23 +373,25 @@ namespace HM.FacePlatform.Forms
             this.tbCheckPepole.Text = "管理员";
             this.tbCheckPepole.Visible = false;
             // 
-            // panel1
+            // PnlButton
             // 
-            this.panel1.Controls.Add(this.btnOK);
-            this.panel1.Controls.Add(this.btnNO);
-            this.panel1.Controls.Add(this.btnCancel);
-            this.panel1.Location = new System.Drawing.Point(23, 491);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(539, 44);
-            this.panel1.TabIndex = 118;
+            this.PnlButton.Controls.Add(this.btnOK);
+            this.PnlButton.Controls.Add(this.btnNO);
+            this.PnlButton.Controls.Add(this.btnCancel);
+            this.PnlButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PnlButton.Location = new System.Drawing.Point(13, 501);
+            this.PnlButton.Margin = new System.Windows.Forms.Padding(2);
+            this.PnlButton.Name = "PnlButton";
+            this.PnlButton.Size = new System.Drawing.Size(563, 44);
+            this.PnlButton.TabIndex = 118;
             // 
             // CheckNote
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(589, 558);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.PnlButton);
             this.Controls.Add(this.tbCheckPepole);
             this.Controls.Add(this.labPeople);
             this.Controls.Add(this.tbCheckTime);
@@ -416,7 +421,7 @@ namespace HM.FacePlatform.Forms
             this.Load += new System.EventHandler(this.CheckNote_Load);
             this.groupBox_photo.ResumeLayout(false);
             this.pnEndTime.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.PnlButton.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -446,7 +451,7 @@ namespace HM.FacePlatform.Forms
         private RTextBox tbCheckTime;
         private System.Windows.Forms.Label labPeople;
         private RTextBox tbCheckPepole;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel PnlButton;
         private System.Windows.Forms.FlowLayoutPanel FlpRegisted;
         private System.Windows.Forms.DateTimePicker tbEnd;
     }

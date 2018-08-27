@@ -19,6 +19,7 @@ namespace HM.FacePlatform.Model
         /// <summary>
         /// 人脸一体机编号
         /// </summary>
+        [Required]
         public int mao_id { get; set; }
         /// <summary>
         /// 楼栋编码

@@ -20,13 +20,35 @@ namespace HM.Common_
             try
             {
                 context.Proceed();
+
+#if DEBUG
+                Type type = ((MethodInfo)context.TargetMethod).ReturnParameter.ParameterType;
+                if (type == typeof(ActionResult) || type.BaseType == typeof(ActionResult))
+                {
+                    var strArguments = Json_.GetString(context.Arguments, new List<string>() { "file", "imageBase64" });
+
+                    if (context.ReturnValue is ActionResult)
+                    {
+                        var returnValue = context.ReturnValue as ActionResult;
+                        if (!returnValue.IsSuccess)
+                        {
+                            LogHelper.Debug($@"
+命名空间：{context.Target.ToString()}
+方法：{ context.TargetMethod.ToString() }
+参数：{ strArguments }
+异常：{ returnValue.ToAlertString() }
+");
+                        }
+                    }
+                }
+#endif
             }
             catch (Exception ex)
             {
                 Type type = ((MethodInfo)context.TargetMethod).ReturnParameter.ParameterType;
                 if (type == typeof(ActionResult) || type.BaseType == typeof(ActionResult))
                 {
-                    var strArguments = Json_.GetString(context.Arguments, new System.Collections.Generic.List<string>() { "file", "imageBase64" });
+                    var strArguments = Json_.GetString(context.Arguments, new List<string>() { "file", "imageBase64" });
 
                     string strMsg = Exception_.GetInnerException(ex).Message;
 

@@ -21,7 +21,7 @@ namespace HM.Face.Common_
         /// <summary>
         /// 用户类型:拥有、居住、物业管理、临时人员
         /// </summary>
-        public string UserType { get; set; }
+        public UserType UserType { get; set; }
         /// <summary>
         /// 项目编码
         /// </summary>
@@ -57,7 +57,11 @@ namespace HM.Face.Common_
         /// <summary>
         /// 到期日期
         /// </summary>
-        public DateTime activeTime { get; set; }
+        public DateTime ActiveTime { get; set; }
+        /// <summary>
+        /// 是否需要审核，若有设定，则不根据RegisterType进行判断
+        /// </summary>
+        public bool? IsNeedAudit { get; set; }
         /// <summary>
         /// 猫编号
         /// </summary>
@@ -108,11 +112,12 @@ namespace HM.Face.Common_
             }
         }
         /// <summary>
-        /// 若是微信的，需要审核
+        /// 若未指定，若是微信的，则需要审核
         /// </summary>
         /// <returns></returns>
-        public bool IsNeedAudit(FaceVender faceVender)
+        public bool NeedAudit(FaceVender faceVender)
         {
+            if (IsNeedAudit.HasValue) return IsNeedAudit.Value;
             switch (faceVender)
             {
                 case FaceVender.EyeCool:

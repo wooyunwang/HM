@@ -77,17 +77,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HM.ControlCenter\HM.ControlCenter.csproj">
-      <Project>{C1E7C5B7-0BFA-4F28-B441-C66D76B538BE}</Project>
-      <Name>HM.ControlCenter</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HM.Enum_\HM.Enum_.csproj">
       <Project>{F26F1383-FCCA-410D-8E7E-376FAED6B8F1}</Project>
       <Name>HM.Enum_</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HM.MasterControl\HM.MasterControl.csproj">
-      <Project>{30AFD40B-AC57-47FE-8A07-E6FBA341FC71}</Project>
-      <Name>HM.MasterControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\HM.Utils_\HM.Utils_.csproj">
       <Project>{38f4f95a-f905-43e1-8ad0-4d7d4820edef}</Project>

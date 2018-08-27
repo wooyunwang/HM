@@ -336,7 +336,7 @@ namespace HM.FacePlatform.Client
 
                         var registerResult = faceItem.Register(new Face.Common_.RegisterInput()
                         {
-                            activeTime = dto.end_time ?? dto.create_time,
+                            ActiveTime = dto.end_time ?? dto.create_time,
                             Birthday = userWithHouse.birthday,
                             CertificateType = Face.Common_.EyeCool.CertificateType.唯一标识,
                             cNO = maoItem.mao_no,
@@ -412,7 +412,7 @@ namespace HM.FacePlatform.Client
                     var face = checkedMao.Value.Item3;
                     if (dto.is_del)
                     {
-                        ActionResult delResult = face.FaceDel(dto.people_id, new List<string>() { dto.face_uid });
+                        ActionResult delResult = face.FaceDel(dto.people_id, dto.face_uid);
 
                         if (delResult.IsSuccess)
                             LogHelper.Info($"【{ mao.mao_name }】上照片【{ dto.face_uid }】删除成功");

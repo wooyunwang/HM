@@ -179,7 +179,7 @@ namespace HM.FacePlatform.Forms
                         job = tbJob.Text.Trim(),
                         user_uid = user_uid,
                         people_id = user_uid,
-                        check_note = "未注册人脸",
+                        check_note = "",
 
                         #region 默认部分
                         birthday = DateTime.MinValue,

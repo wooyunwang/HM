@@ -1,25 +1,23 @@
 ﻿using HM.Common_;
-using HM.Enum_;
-using HM.Form_;
 using HM.DTO;
+using HM.Enum_;
+using HM.Enum_.FacePlatform;
+using HM.Face.Common_;
+using HM.FacePlatform.BLL;
+using HM.FacePlatform.Model;
+using HM.FacePlatform.UserControls;
+using HM.FacePlatform.VO;
+using HM.Form_;
+using HM.Utils_;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HM.FacePlatform.BLL;
-using HM.FacePlatform.UserControls;
-using HM.FacePlatform.Model;
-using System.Threading;
-using HM.FacePlatform.VO;
-using HM.Enum_.FacePlatform;
-using HM.Utils_;
-using HM.Face.Common_;
-using System.IO;
 
 namespace HM.FacePlatform.Forms
 {
@@ -59,25 +57,26 @@ namespace HM.FacePlatform.Forms
         /// <param name="isForce">强制检查：只要一个有问题，则必定返回false</param>
         ///  <param name="user_uid">用户唯一标识，用于</param>
         /// <returns>返回的Obj中，为可用人脸一体机的列表</returns>
-        public ActionResult<List<Mao>> BasicCheck(bool isForce = false, string user_uid = null)
+        public ActionResult<MaoCheckResult> BasicCheck(bool isForce = false, string user_uid = null)
         {
-            ActionResult<List<Mao>> ar = new ActionResult<List<Mao>>();
-            ar.Obj = ar.Obj ?? new List<Mao>();
-            var lstMao = FacePlatformCache.GetALL<Mao>();
-            var lstSectionMaoMao = GetSectionMao(lstMao, user_uid);
+            ActionResult<MaoCheckResult> ar = new ActionResult<MaoCheckResult>();
+            ar.Obj = ar.Obj ?? new MaoCheckResult();
+            var lstMao = GetSectionMao(user_uid);
             if (!lstMao.Any())
             {
                 ar.IsSuccess = false;
-                ar.Add("未添加人脸一体机！");
-            }
-            else if (!lstSectionMaoMao.Any())
-            {
-                ar.IsSuccess = false;
-                ar.Add("用户所在楼栋未关联人脸一体机！");
+                if (string.IsNullOrWhiteSpace(user_uid))
+                {
+                    ar.Add("未添加人脸一体机！");
+                }
+                else
+                {
+                    ar.Add($"用户【{ user_uid }】所在楼栋未关联人脸一体机！");
+                }
             }
             else
             {
-                Dictionary<int, bool> dic = new Dictionary<int, bool>();
+                ConcurrentDictionary<int, bool> dic = new ConcurrentDictionary<int, bool>();
                 Parallel.ForEach(lstMao, new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 }, mao =>
                 {
                     string ip = mao.GetIP();
@@ -85,13 +84,14 @@ namespace HM.FacePlatform.Forms
                     bool isOk = NetWork_.VisualTelnet(ip, port);
                     if (!isOk)
                     {
-                        ar.Add($"人脸一体机【{mao.mao_no}】ip【{ip}】端口【{port}】网络不通畅！");
+                        ar.Add($"人脸一体机【{ mao.mao_no }】ip【{ ip }】端口【{ port }】网络不通畅！");
+                        ar.Obj.BadMaos.Add(mao);
                     }
                     else
                     {
-                        ar.Obj.Add(mao);
+                        ar.Obj.GoodMaos.Add(mao);
                     }
-                    dic.Add(mao.id, isOk);
+                    dic.TryAdd(mao.id, isOk);
                 });
                 if (lstMao.Count == dic.Count(it => it.Value == false))
                 {
@@ -132,22 +132,22 @@ namespace HM.FacePlatform.Forms
             }
             return ar;
         }
-
-        public List<Mao> GetSectionMao(List<Mao> lstMao, string user_id)
+        public List<Mao> GetSectionMao(string user_id)
         {
             if (string.IsNullOrWhiteSpace(user_id))
             {
-                return lstMao;
-            }
-
-            if (Config_.GetBool("IsFaceSection") ?? false)
-            {
-                var lstSectionMao = _maoBLL.GetForFaceSection(user_id);
-                return lstSectionMao.Where(it => lstMao.Any(m => m.id == it.id)).ToList();
+                return _maoBLL.Get();
             }
             else
             {
-                return lstMao;
+                if (Config_.GetBool("IsFaceSection") ?? false)
+                {
+                    return _maoBLL.GetForFaceSection(user_id);
+                }
+                else
+                {
+                    return _maoBLL.Get();
+                }
             }
         }
         /// <summary>
@@ -161,12 +161,12 @@ namespace HM.FacePlatform.Forms
         /// <summary>
         /// 注册
         /// </summary>
-        /// <param name="lstMao">可用的人脸一体机</param>
+        /// <param name="maoCheckResult">人脸一体机检查结果</param>
         /// <param name="ucFamily"></param>
         /// <param name="dicPhoto"></param>
         /// <param name="endTime"></param>
         /// <param name="registerCompleted"></param>
-        public void Register(List<Mao> lstMao, UcFamily ucFamily, Dictionary<string, PicUrlAndFaceIDVO> dicPhoto, DateTime? endTime, Action<List<string>> registerCompleted)
+        public void Register(MaoCheckResult maoCheckResult, UcFamily ucFamily, Dictionary<string, PicUrlAndFaceIDVO> dicPhoto, DateTime? endTime, Action<List<string>> registerCompleted)
         {
             User user = ucFamily._user;
 
@@ -178,22 +178,30 @@ namespace HM.FacePlatform.Forms
             }
             Task.Run(() =>
             {
+                var goodMaos = maoCheckResult.GoodMaos;
+                if (!goodMaos.Any())
+                {
+                    ShowMessage($"关联的人脸一体机皆通讯异常！注册失败", MessageType.Information);
+                    return;
+                }
                 List<string> lstPhotoUrlForRemove = new List<string>();
-
                 //找到第一个有效的人脸注册信息！
                 var register = _registerBLL.FirstOrDefault(it => it.is_del != IsDelType.是 && it.user_uid == user.user_uid);
                 foreach (PicUrlAndFaceIDVO item in dicPhoto.Values)
                 {
-                    ShowMessage("开始注册：" + item.image_path, MessageType.Information);
-
                     //随机抽选一个台人脸一体机
-                    Mao mao = lstMao[new Random().Next(lstMao.Count - 1)];
+                    Mao mao = goodMaos[new Random().Next(goodMaos.Count - 1)];
+
+                    string ip = mao.GetIP();
+                    int port = mao.GetPort();
                     Face.Common_.Face face = FaceFactory.CreateFace(mao.GetIP(), mao.GetPort(), FaceVender.EyeCool);
+
+                    ShowMessage($"开始注册用户【{ user.name }】的人脸信息【{ item.image_path }】", MessageType.Information);
 
                     string faceId = item.face_id;
 
                     faceId = Key_.SequentialGuid();
-                    ActionResult checkResult = face.Checking(faceId, RegisterType.手动注册, Image_.ImageToBase64(item.image_path), "");
+                    ActionResult checkResult = face.Checking(faceId, RegisterType.手动注册, Image_.ImageToBase64(item.image_path), "客户端检查");
                     if (!checkResult.IsSuccess)
                     {
                         ShowMessage(checkResult.ToAlertString(), MessageType.Warning);
@@ -226,7 +234,7 @@ namespace HM.FacePlatform.Forms
                     string savedPictureName = _registerBLL.FileSaveAs(item.image_path, FacePlatformCache.GetPictureDirectory());//保存图片到本地
                     if (string.IsNullOrEmpty(savedPictureName))
                     {
-                        ShowMessage("图片保存失败，请稍后重试", MessageType.Error);
+                        ShowMessage("图片保存失败，请稍后重试！", MessageType.Error);
                         continue;
                     }
 
@@ -241,33 +249,33 @@ namespace HM.FacePlatform.Forms
                     var registerResult = _registerBLL.Add(newRegister);
                     if (!registerResult.IsSuccess)
                     {
-                        ShowMessage("**数据库异常，请稍后重试", MessageType.Error);
+                        ShowMessage("数据库异常，请稍后重试!", MessageType.Error);
                         continue;
                     }
 
                     lstPhotoUrlForRemove.Add(item.image_path);//图片添加到删除列表
                     List<bool> lstIsAudited = new List<bool>();
 
-                    Parallel.ForEach(lstMao, new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 }, itemMao =>
+                    Parallel.ForEach(goodMaos, new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 }, itemMao =>
                     {
-                        if (itemMao != mao)//已添加过图片，无需再添加
+                        Face.Common_.Face faceItem = FaceFactory.CreateFace(itemMao.GetIP(), itemMao.GetPort(), FaceVender.EyeCool);
+
+                        if (itemMao.id != mao.id)//已添加过图片，无需再添加
                         {
-                            ActionResult result = face.Checking(faceId, RegisterType.手动注册, Image_.ImageToBase64(item.image_path), "");
+                            ActionResult result = faceItem.Checking(faceId, RegisterType.手动注册, Image_.ImageToBase64(item.image_path), "客户端检查");
                             if (!result.IsSuccess)
                             {
                                 ShowMessage(result.ToAlertString(), MessageType.Warning);
-                                //理论上来说，已有一台人脸一体机校验通过，这里不应该进得来
                                 return;
                             }
                         }
-                        Face.Common_.Face faceItem = FaceFactory.CreateFace(itemMao.GetIP(), itemMao.GetPort(), FaceVender.EyeCool);
                         var registerResultItem = faceItem.Register(new RegisterInput()
                         {
                             ActiveTime = endTime.Value,
                             Birthday = ucFamily._user.birthday,
                             CertificateType = Face.Common_.EyeCool.CertificateType.唯一标识,
-                            cNO = itemMao.mao_no,
-                            CRMId = ucFamily._user.user_uid,
+                            MaoNO = itemMao.mao_no,
+                            UserUid = ucFamily._user.user_uid,
                             FaceId = faceId,
                             Name = ucFamily._user.name,
                             PeopleId = ucFamily._user.people_id,
@@ -281,7 +289,7 @@ namespace HM.FacePlatform.Forms
 
                         if (registerResultItem.IsSuccess)
                         {
-                            ShowMessage("**" + itemMao.mao_name + "，注册成功", MessageType.Success);
+                            ShowMessage($"人脸一体机【{ itemMao.mao_name }】上注册用户【{user.name}】的人脸信息成功！", MessageType.Success);
                             lstIsAudited.Add(registerResultItem.Obj.IsAudited);
                             if (register == null)
                             {
@@ -291,7 +299,7 @@ namespace HM.FacePlatform.Forms
                         }
                         else
                         {
-                            ShowMessage("**" + itemMao.mao_name + "，注册失败(稍后将自动重试)：" + registerResultItem.ToAlertString(), MessageType.Error);
+                            ShowMessage($"人脸一体机【{ itemMao.mao_name }】上注册用户【{user.name}】的人脸信息失败(稍后将自动重试)：" + registerResultItem.ToAlertString(), MessageType.Error);
 
                             MaoFailedJob job = new MaoFailedJob
                             {
@@ -307,6 +315,25 @@ namespace HM.FacePlatform.Forms
                             }, job);
                         }
                     });
+
+                    if (maoCheckResult.BadMaos.Any())
+                    {
+                        foreach (var badMao in maoCheckResult.BadMaos)
+                        {
+                            ShowMessage($"人脸一体机【{ badMao.mao_name }】网络不通畅，注册用户【{user.name}】的人脸信息失败(稍后将自动重试)", MessageType.Error);
+                        }
+                        _maoFailedJobBLL.AddOrUpdate(it => new
+                        {
+                            it.register_or_user_id,
+                            it.mao_id,
+                            it.job_type
+                        }, maoCheckResult.BadMaos.Select(it => new MaoFailedJob
+                        {
+                            register_or_user_id = newRegister.id,
+                            mao_id = it.id,
+                            job_type = JobType.注册,
+                        }).ToArray());
+                    }
 
                     if (lstIsAudited.Any(it => it == false))
                     {
@@ -338,28 +365,38 @@ namespace HM.FacePlatform.Forms
                 BtnClose.Enabled = true;
             });
         }
-
         /// <summary>
         /// 审核
         /// </summary>
-        /// <param name="lstMao"></param>
+        /// <param name="maoCheckResult"></param>
         /// <param name="lstRegisterWithUser"></param>
         /// <param name="checkType"></param>
         /// <param name="check_note"></param>
         /// <param name="reviewCompleted"></param>
-        public void Review(List<Mao> lstMao, List<Register> lstRegisterWithUser, CheckType checkType, string check_note, Action<ActionResult> reviewCompleted)
+        public void Review(List<Register> lstRegisterWithUser, CheckType checkType, string check_note, Action<ActionResult> reviewCompleted)
         {
             Task.Run(() =>
             {
                 string project_code = Program._Mainform._ProjectCode;
 
+                var lstALLMao = _maoBLL.Get();
                 foreach (Register registerWithUser in lstRegisterWithUser)
                 {
-                    ShowMessage("开始修改：" + registerWithUser.user.name, MessageType.Information);
+                    List<Mao> lstMao = null;
+                    bool isFaceSection = Config_.GetBool("IsFaceSection") ?? false;
+                    if (isFaceSection)
+                    {
+                        lstMao = _maoBLL.GetForFaceSection(registerWithUser.user.user_uid);
+                    }
+                    else
+                    {
+                        lstMao = lstALLMao;
+                    }
+
+                    ShowMessage($"开始审核用户【{registerWithUser.user.name}】的人脸注册信息", MessageType.Information);
 
                     int check_by = Program._Account.id;
                     DateTime change_time = DateTime.Now;
-
                     List<ActionResult> lstActionResult = new List<ActionResult>();
                     List<MaoFailedJob> lstMaoFailedJob = new List<MaoFailedJob>();
                     Parallel.ForEach(lstMao,
@@ -367,22 +404,37 @@ namespace HM.FacePlatform.Forms
                         (mao) =>
                         {
                             Face.Common_.Face face = FaceFactory.CreateFace(mao.GetIP(), mao.GetPort(), FaceVender.EyeCool);
-
-                            var result = face.Review(project_code, registerWithUser.user.people_id, registerWithUser.face_id, checkType, "客户端审核");
-                            lstActionResult.Add(result);
-                            if (result.IsSuccess)
+                            if (face.VisualTelnet(mao.GetIP(), mao.GetPort()))
                             {
-                                ShowMessage($"【{ mao.mao_name }】【{registerWithUser.user.name}】的审核结果：【{ checkType }】", MessageType.Success);
+                                var result = face.Review(project_code, registerWithUser.user.people_id, registerWithUser.face_id, checkType, "客户端审核");
+                                lstActionResult.Add(result);
+                                if (result.IsSuccess)
+                                {
+                                    ShowMessage($"人脸一体机【{ mao.mao_name }】对【{registerWithUser.user.name}】的审核结果：【{ checkType }】", MessageType.Success);
+                                }
+                                else
+                                {
+                                    ShowMessage($"人脸一体机【{ mao.mao_name }】对【{registerWithUser.user.name}】的审核失败：【{ result.ToAlertString() }】", MessageType.Error);
+
+                                    lstMaoFailedJob.Add(new MaoFailedJob
+                                    {
+                                        register_or_user_id = registerWithUser.id,
+                                        mao_id = mao.id,
+                                        job_type = JobType.审核,
+                                        failed_message = result.ToAlertString()
+                                    });
+                                }
                             }
                             else
                             {
-                                ShowMessage($"【{ mao.mao_name }】【{registerWithUser.user.name}】的审核失败：【{ result.ToAlertString() }】", MessageType.Error);
+                                ShowMessage($"人脸一体机【{ mao.mao_name }】对【{registerWithUser.user.name}】的审核失败（稍后自动重试）：【网络不通畅】", MessageType.Error);
 
                                 lstMaoFailedJob.Add(new MaoFailedJob
                                 {
                                     register_or_user_id = registerWithUser.id,
                                     mao_id = mao.id,
-                                    job_type = checkType == CheckType.审核不通过 ? JobType.审核不通过 : JobType.审核
+                                    job_type = JobType.审核,
+                                    failed_message = "网络不通畅"
                                 });
                             }
                         });
@@ -443,13 +495,74 @@ namespace HM.FacePlatform.Forms
             {
                 try
                 {
-                    _actionResult.Obj = true;
-                    for (int i = 0; i < 1000; i++)
+                    DateTime endTime = DateTime.Now.Date.AddDays(1).AddSeconds(-1);
+                    if (isYear)
                     {
-                        ShowMessage($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}现在是测试{i}", MessageType.Information);
-                        Thread.Sleep(10);
+                        endTime = endTime.AddYears(1);
                     }
-                    _actionResult.IsSuccess = true;
+                    else
+                    {
+                        endTime = endTime.AddMonths(1);
+                    }
+
+                    ActionResult result = new ActionResult();
+
+                    var lstALLMao = _maoBLL.Get();
+                    foreach (RegisterManageDto dto in data)
+                    {
+                        List<Mao> lstMao = null;
+                        bool isFaceSection = Config_.GetBool("IsFaceSection") ?? false;
+                        if (isFaceSection)
+                        {
+                            lstMao = _maoBLL.GetForFaceSection(dto.user_uid);
+                        }
+                        else
+                        {
+                            lstMao = lstALLMao;
+                        }
+                        List<ActionResult> lstActionResult = new List<ActionResult>();
+                        List<MaoFailedJob> lstMaoFailedJob = new List<MaoFailedJob>();
+                        Parallel.ForEach(lstMao,
+                            new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 },
+                            (mao) =>
+                            {
+                                Face.Common_.Face face = FaceFactory.CreateFace(mao.GetIP(), mao.GetPort(), FaceVender.EyeCool);
+                                if (face.VisualTelnet(mao.GetIP(), mao.GetPort()))
+                                {
+                                    var updateResult = face.UpdateActiveTime(dto.user_uid, endTime);
+                                    if (updateResult.IsSuccess)
+                                    {
+                                        ShowMessage($"人脸一体机【{ mao.mao_name }】对【{dto.user_name}】的延期成功", MessageType.Error);
+                                    }
+                                    else
+                                    {
+                                        ShowMessage($"人脸一体机【{ mao.mao_name }】对【{dto.user_name}】的延期设置失败（稍后自动重试）：【{updateResult.ToAlertString()}】", MessageType.Error);
+                                    }
+                                    lstActionResult.Add(updateResult);
+                                }
+                                else
+                                {
+                                    ShowMessage($"人脸一体机【{ mao.mao_name }】对【{dto.user_name}】的延期设置失败（稍后自动重试）：【网络不通畅】", MessageType.Error);
+
+                                    lstMaoFailedJob.Add(new MaoFailedJob
+                                    {
+                                        register_or_user_id = dto.id,
+                                        mao_id = mao.id,
+                                        job_type = JobType.审核,
+                                        failed_message = "网络不通畅"
+                                    });
+                                }
+                            });
+
+                        if (lstActionResult.Any(it => it.IsSuccess)) //只要有一个延期成功
+                        {
+                            _userBLL.Edit(it => it.user_uid == dto.user_uid, it => new User
+                            {
+                                change_time = DateTime.Now,
+                                end_time = endTime
+                            });
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -463,60 +576,13 @@ namespace HM.FacePlatform.Forms
             {
                 BtnClose.Enabled = true;
             });
-
-
-            //DateTime endTime = DateTime.Now.Date.AddDays(1).AddSeconds(-1);
-            //if (isYear)
-            //{
-            //    endTime = endTime.AddYears(1);
-            //}
-            //else
-            //{
-            //    endTime = endTime.AddMonths(1);
-            //}
-
-            //ActionResult result = new ActionResult();
-            //foreach (DataGridViewRow dr in DgvRegister.Rows)
-            //{
-            //    if (Convert.ToBoolean(dr.Cells["colCB"].EditedFormattedValue.ToString()))
-            //    {
-            //        ShowMessage("##开始修改：" + dr.Cells["col_name"].EditedFormattedValue.ToString(), MessageType.Information);
-
-            //        bool isFirstMao = true;
-            //        string _user_uid = dr.Cells["col_user_uid"].EditedFormattedValue.ToString();
-            //        User _user = _userBLL.Get(new { user_uid = _user_uid });
-            //        _user.change_time = DateTime.Now;
-            //        foreach (Mao _mao in _maos)
-            //        {
-            //            result = _registerBLL.UpdateExpireDate(_user, _mao, endTime, isFirstMao, Program._Account.id);
-
-            //            if (result.IsSuccess)
-            //            {
-            //                ShowMessage("**" + _mao.mao_name + "，修改成功", MessageType.Success);
-            //            }
-            //            else
-            //            {
-            //                ShowMessage("**" + _mao.mao_name + "，修改失败(稍后将自动重试)：" + result.ToAlertString(), MessageType.Error);
-
-            //                MaoFailedJob job = new MaoFailedJob
-            //                {
-            //                    register_or_user_id = _user.id,
-            //                    mao_id = _mao.id,
-            //                    job_type = JobType.审核,
-            //                };
-            //                _maoFailedJobBLL.AddOrUpdate(job);
-            //            }
-            //            isFirstMao = false;
-            //        }
-            //    }
-            //}
         }
         /// <summary>
         /// 房屋删除用户
         /// </summary>
-        /// <param name="lstMao"></param>
+        /// <param name="maoCheckResult"></param>
         /// <param name="userHouseWithUserAndHouse"></param>
-        public void DeleteUserHouse(List<Mao> lstMao, UserHouse userHouseWithUserAndHouse)
+        public void DeleteUserHouse(MaoCheckResult maoCheckResult, UserHouse userHouseWithUserAndHouse)
         {
             ClearMessage();
 
@@ -530,41 +596,51 @@ namespace HM.FacePlatform.Forms
                         ShowMessage($"不能删除CRM用户【{ user.name }】！", MessageType.Warning);
                         return;
                     }
+
+                    var goodMaos = maoCheckResult.GoodMaos;
+                    if (!goodMaos.Any())
+                    {
+                        ShowMessage($"关联的人脸一体机皆通讯异常！删除失败", MessageType.Information);
+                        return;
+                    }
+                    if (!maoCheckResult.BadMaos.Any())
+                    {
+                        ShowMessage($"需要所有关联的人脸一体机通讯正常，才允许删除！", MessageType.Information);
+                        return;
+                    }
+
                     var registers = _registerBLL.Get(it => it.user_uid == userHouseWithUserAndHouse.user_uid && it.is_del != IsDelType.是);
 
                     if (registers.Any())
                     {
-                        var lstFaceId = registers.Select(it => it.face_id).ToList();
                         List<ActionResult> lstDelResult = new List<ActionResult>();
                         List<MaoFailedJob> lstMaoFailedJob = new List<MaoFailedJob>();
-                        Parallel.ForEach(lstMao, new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 }, (mao) =>
+                        Parallel.ForEach(goodMaos, new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 }, (mao) =>
                         {
                             Face.Common_.Face face = FaceFactory.CreateFace(mao.GetIP(), mao.GetPort(), FaceVender.EyeCool);
-                            foreach (var faceId in lstFaceId)
+                            foreach (var register in registers)
                             {
-                                var delResult = face.FaceDel(userHouseWithUserAndHouse.User.people_id, faceId);
+                                var delResult = face.FaceDel(userHouseWithUserAndHouse.User.people_id, register.face_id);
                                 lstDelResult.Add(delResult);
                                 if (delResult.IsSuccess)
                                 {
-                                    ShowMessage($"从人脸一体机【{ mao.mao_name }】上删除用户【{ user.name }】的人脸注册信息【{ faceId }】成功！", MessageType.Success);
+                                    ShowMessage($"从人脸一体机【{ mao.mao_name }】上删除用户【{ user.name }】的人脸注册信息【register.id{ register.id }】成功！", MessageType.Success);
                                 }
                                 else
                                 {
-                                    ShowMessage($"从人脸一体机【{ mao.mao_name }】上删除用户【{ user.name }】的人脸注册信息【{ faceId }】失败(稍后将自动重试)：{ delResult.ToAlertString() }！", MessageType.Error);
+                                    ShowMessage($"从人脸一体机【{ mao.mao_name }】上删除用户【{ user.name }】的人脸注册信息【register.id{ register.id }】失败(稍后将自动重试)：{ delResult.ToAlertString() }！", MessageType.Error);
 
-                                    registers.ForEach((register) =>
+                                    lstMaoFailedJob.Add(new MaoFailedJob
                                     {
-                                        MaoFailedJob job = new MaoFailedJob
-                                        {
-                                            register_or_user_id = register.id,
-                                            mao_id = mao.id,
-                                            job_type = JobType.删除,
-                                        };
-                                        lstMaoFailedJob.Add(job);
+                                        register_or_user_id = register.id,
+                                        mao_id = mao.id,
+                                        job_type = JobType.注册,
+                                        failed_message = delResult.ToAlertString()
                                     });
                                 }
                             }
                         });
+
                         //只要有一个已删除
                         if (lstDelResult.Any(it => it.IsSuccess == true))
                         {
@@ -591,14 +667,14 @@ namespace HM.FacePlatform.Forms
                                 ShowMessage($"删除用户【{ user.name }】的人脸信息失败：{ editResult.ToAlertString() }！", MessageType.Error);
                             }
                         }
-                        else if (lstDelResult.Count(it => it.IsSuccess == false) == lstMao.Count)
+                        else if (lstDelResult.Count(it => it.IsSuccess == false) == goodMaos.Count)
                         {
                             ShowMessage($"删除用户【{ user.name }】的人脸信息都失败，导致删除用户失败！", MessageType.Error);
                             return;
                         }
                     }
                     List<ActionResult> lstDelUserResult = new List<ActionResult>();
-                    Parallel.ForEach(lstMao, new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 }, (mao) =>
+                    Parallel.ForEach(goodMaos, new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 }, (mao) =>
                     {
                         Face.Common_.Face face = FaceFactory.CreateFace(mao.GetIP(), mao.GetPort(), FaceVender.EyeCool);
                         var delUserResult = face.UserDel(user.people_id);
@@ -621,6 +697,7 @@ namespace HM.FacePlatform.Forms
                         var editUserHouseResult = _userHouseBLL.Edit(userHouseWithUserAndHouse);
                         if (editUserHouseResult.IsSuccess)
                         {
+                            this.DialogResult = DialogResult.OK;
                             ShowMessage($"删除用户【{ user.name }】成功！", MessageType.Success);
                         }
                         else
@@ -649,11 +726,11 @@ namespace HM.FacePlatform.Forms
         /// <summary>
         /// 删除
         /// </summary>
-        /// <param name="lstMao"></param>
+        /// <param name="maoCheckResult"></param>
         /// <param name="user"></param>
         /// <param name="imageItem"></param>
         /// <param name="deleteCompleted"></param>
-        public void DeleteRegistedImage(List<Mao> lstMao, User user, ImageItem imageItem, Action deleteCompleted)
+        public void DeleteRegistedImage(MaoCheckResult maoCheckResult, User user, ImageItem imageItem, Action deleteCompleted)
         {
             ClearMessage();
 
@@ -661,8 +738,20 @@ namespace HM.FacePlatform.Forms
             {
                 try
                 {
+                    var goodMaos = maoCheckResult.GoodMaos;
+                    if (!goodMaos.Any())
+                    {
+                        ShowMessage($"关联的人脸一体机皆通讯异常！删除失败", MessageType.Information);
+                        return;
+                    }
+                    if (!maoCheckResult.BadMaos.Any())
+                    {
+                        ShowMessage($"需要所有关联的人脸一体机通讯正常，才允许删除！", MessageType.Information);
+                        return;
+                    }
+
                     List<bool> lstDel = new List<bool>();
-                    Parallel.ForEach(lstMao, new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 }, (mao) =>
+                    Parallel.ForEach(goodMaos, new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 }, (mao) =>
                     {
                         Face.Common_.Face face = FaceFactory.CreateFace(mao.GetIP(), mao.GetPort(), FaceVender.EyeCool);
 
@@ -674,29 +763,20 @@ namespace HM.FacePlatform.Forms
                         }
                         else
                         {
-                            if (delResult.Any("未查询到对应的人脸"))
-                            {
-                                lstDel.Add(true);
-                                ShowMessage($"从人脸一体机【{ mao.mao_name }】上删除成功！", MessageType.Success);
-                            }
-                            else
-                            {
-                                lstDel.Add(false);
-                                ShowMessage($"从人脸一体机【{ mao.mao_name }】上删除失败(稍后将自动重试)：{ delResult.ToAlertString() }！", MessageType.Error);
+                            lstDel.Add(false);
+                            ShowMessage($"从人脸一体机【{ mao.mao_name }】上删除失败(稍后将自动重试)：{ delResult.ToAlertString() }！", MessageType.Error);
 
-                                MaoFailedJob job = new MaoFailedJob
-                                {
-                                    register_or_user_id = imageItem._register.id,
-                                    mao_id = mao.id,
-                                    job_type = JobType.删除,
-                                };
-                                _maoFailedJobBLL.AddOrUpdate(it => new
-                                {
-                                    it.register_or_user_id,
-                                    it.mao_id,
-                                    it.job_type
-                                }, job);
-                            }
+                            _maoFailedJobBLL.AddOrUpdate(it => new
+                            {
+                                it.register_or_user_id,
+                                it.mao_id,
+                                it.job_type
+                            }, new MaoFailedJob
+                            {
+                                register_or_user_id = imageItem._register.id,
+                                mao_id = mao.id,
+                                job_type = JobType.注册,
+                            });
                         }
                     });
 
@@ -788,7 +868,6 @@ namespace HM.FacePlatform.Forms
 
             //BindRegInfor(theSelectUserID);
         }
-
         /// <summary>
         /// 显示消息
         /// </summary>
@@ -801,7 +880,9 @@ namespace HM.FacePlatform.Forms
                 tbMessage.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "：" + message + Environment.NewLine + tbMessage.Text;
             }, true);
         }
-
+        /// <summary>
+        /// 清空
+        /// </summary>
         private void ClearMessage()
         {
             tbMessage.UIThread(() =>
@@ -809,7 +890,11 @@ namespace HM.FacePlatform.Forms
                 tbMessage.Text = string.Empty;
             });
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FaceJobFrm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_actionResult.Obj)
@@ -821,7 +906,11 @@ namespace HM.FacePlatform.Forms
                 e.Cancel = true;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnClose_Click(object sender, EventArgs e)
         {
             if (_actionResult.IsSuccess)

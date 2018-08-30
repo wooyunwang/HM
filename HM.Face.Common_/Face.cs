@@ -46,10 +46,15 @@ namespace HM.Face.Common_
         /// <returns></returns>
         public abstract Uri GetRootUri();
         /// <summary>
+        /// 获取人脸一体机上时间
+        /// </summary>
+        /// <returns></returns>
+        public abstract ClockInfo GetClockInfo(TimeSpan? ts = null);
+        /// <summary>
         /// 获取人脸版本信息
         /// </summary>
         /// <returns></returns>
-        public abstract FaceVersion GetFaceVersion();
+        public abstract FaceVersion GetFaceVersion(TimeSpan? ts = null);
         /// <summary>
         /// 检查图片是否包含人脸
         /// </summary>

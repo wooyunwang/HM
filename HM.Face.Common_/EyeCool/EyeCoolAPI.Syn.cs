@@ -13,13 +13,24 @@ namespace HM.Face.Common_.EyeCool
     public partial class EyeCoolAPI
     {
         /// <summary>
-        /// 获取版本信息
+        /// 获取人脸一体机上时间
         /// </summary>
+        /// <param name="timeSpan">超时时间</param>
         /// <returns></returns>
         [EyeCoolRequest]
-        public FaceVersion GetFaceVersion()
+        public ClockInfo GetClockInfo(TimeSpan? timeSpan = null)
         {
-            return GetFaceVersionAsync().Result;
+            return GetClockInfoAsync(timeSpan).Result;
+        }
+        /// <summary>
+        /// 获取版本信息
+        /// </summary>
+        /// <param name="timeSpan">超时时间</param>
+        /// <returns></returns>
+        [EyeCoolRequest]
+        public FaceVersion GetFaceVersion(TimeSpan? timeSpan = null)
+        {
+            return GetFaceVersionAsync(timeSpan).Result;
         }
         /// <summary>
         /// 用于采集人员(如业主)身份基础信息（注册）

@@ -6,21 +6,20 @@
   <processing-directives>
     <overwrite-existing-data>true</overwrite-existing-data>
   </processing-directives>
-
   <schedule>
     <job>
       <name>PullJob</name>
       <group>ScheduleJob</group>
-      <description>定时获取猫上更新的数据</description>
-      <job-type>FacePlatform.PullJob,FacePlatform</job-type>
+      <description>定时获取人脸一体机上更新的数据</description>
+      <job-type>HM.FacePlatform.PullJob,HM.FacePlatform</job-type>
       <durable>true</durable>
       <recover>false</recover>
     </job>
     <job>
       <name>PushJob</name>
       <group>ScheduleJob</group>
-      <description>定时将平台操作更新失败数据推送到猫</description>
-      <job-type>FacePlatform.PushJob,FacePlatform</job-type>
+      <description>定时将平台操作更新失败数据推送到人脸一体机</description>
+      <job-type>HM.FacePlatform.PushJob,HM.FacePlatform</job-type>
       <durable>true</durable>
       <recover>false</recover>
     </job>
@@ -30,7 +29,7 @@
         <group>ScheduleJobTrigger</group>
         <job-name>PullJob</job-name>
         <job-group>ScheduleJob</job-group>
-        <cron-expression>0 0/1 * * * ?</cron-expression>
+        <cron-expression>0 0/15 * * * ?</cron-expression>
       </cron>
     </trigger>
     <trigger>
@@ -39,9 +38,8 @@
         <group>ScheduleJobTrigger</group>
         <job-name>PushJob</job-name>
         <job-group>ScheduleJob</job-group>
-        <cron-expression>0 0/1 * * * ?</cron-expression>
+        <cron-expression>0 0/15 * * * ?</cron-expression>
       </cron>
     </trigger>
-
   </schedule>
 </job-scheduling-data>

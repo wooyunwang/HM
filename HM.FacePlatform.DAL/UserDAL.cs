@@ -235,7 +235,7 @@ namespace HM.FacePlatform.DAL
         }
 
         /// <summary>
-        /// 
+        /// 获取用户的用户类型（默认第一个）
         /// </summary>
         /// <param name="user_uid"></param>
         /// <returns></returns>
@@ -244,6 +244,26 @@ namespace HM.FacePlatform.DAL
             using (FacePlatformDB db = new FacePlatformDB())
             {
                 return db.UserHouses.Where(it => it.user_uid == user_uid && it.is_del != IsDelType.是).OrderBy(it => it.id).Select(it => it.user_type).FirstOrDefault();
+            }
+        }
+
+        /// <summary>
+        /// 获取用户（包含指定的人脸注册信息）
+        /// </summary>
+        /// <param name="user_uid"></param>
+        /// <param name="lstFaceId"></param>
+        /// <returns></returns>
+        public User GetUserWithRegister(string user_uid, IEnumerable<string> lstFaceId)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                var query = db.Users.Where(it => it.user_uid == user_uid)
+                     .IncludeOptimized(
+                     x => x.registers.Where(p => lstFaceId.Contains(p.face_id)));
+#if DEBUG
+                string sql = query.ToString();
+#endif
+                return query.FirstOrDefault();
             }
         }
 

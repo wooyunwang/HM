@@ -21,7 +21,9 @@ namespace HM.Face.Common_
             {
                 context.Proceed();
 
-#if DEBUG
+                //string faceLogType = Config_.GetString("FaceLogType");
+                //if (!string.IsNullOrWhiteSpace(faceLogType))
+                //{
                 Type type = ((MethodInfo)context.TargetMethod).ReturnParameter.ParameterType;
                 if (type == typeof(ResponseBase) || type.BaseType == typeof(ResponseBase))
                 {
@@ -30,19 +32,17 @@ namespace HM.Face.Common_
                     if (context.ReturnValue is ResponseBase)
                     {
                         var returnValue = context.ReturnValue as ResponseBase;
-                        if (returnValue.res_code_enum != ResponseCode._0000)
-                        {
-                            LogHelper.Debug($@"
+
+                        LogHelper.Debug($@"
 命名空间：{context.Target.ToString()}
 方法：{ context.TargetMethod.ToString() }
 参数：{ strArguments }
 返回码：{ returnValue.res_code_enum }
 返回消息：{ returnValue.res_msg }
 ");
-                        }
                     }
                 }
-#endif
+                //}
             }
             catch (Exception ex)
             {

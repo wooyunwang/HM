@@ -148,7 +148,7 @@ namespace HM.FacePlatform.UserControls
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             FaceJobFrm faceJobFrm = new FaceJobFrm();
-            ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck(true);
+            ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck(true);
             if (checkResult.IsSuccess)
             {
                 faceJobFrm.DeleteUserHouse(checkResult.Obj, _userHouseWithUserAndHouse);

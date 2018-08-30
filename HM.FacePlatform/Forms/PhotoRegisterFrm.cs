@@ -73,7 +73,7 @@ namespace HM.FacePlatform.Forms
         private void btn_SelPic_Click(object sender, EventArgs e)
         {
             FaceJobFrm faceJobFrm = new FaceJobFrm();
-            ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck();
+            ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck();
             if (checkResult.IsSuccess)
             {
                 SelectPicture();
@@ -204,7 +204,7 @@ namespace HM.FacePlatform.Forms
                     _register.photo_path = item.image_path;
                     ImageItem imageItem = new ImageItem(_register);
                     pnToRegister.Controls.Add(imageItem);
-                    imageItem.DeleteImageAction += new Action<ImageItem>(DeleteToRegisterImage);
+                    imageItem.DeleteImageAction = new Action<ImageItem>(DeleteToRegisterImage);
                 }
             });
         }
@@ -241,7 +241,7 @@ namespace HM.FacePlatform.Forms
                 endDate = tbEnd.Value.AddDays(1).AddSeconds(-1);
             }
             FaceJobFrm faceJobFrm = new FaceJobFrm();
-            ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck(user_uid: _ucFamily._user.user_uid);
+            ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck(user_uid: _ucFamily._user.user_uid);
             if (checkResult.IsSuccess)
             {
                 faceJobFrm.Register(checkResult.Obj, _ucFamily, _dicPhoto, endDate, (lstPhotoUrlForRemove) =>
@@ -277,7 +277,7 @@ namespace HM.FacePlatform.Forms
                 {
                     ImageItem imageItem = new ImageItem(_register);
                     pnRegisted.Controls.Add(imageItem);
-                    imageItem.DeleteImageAction += new Action<ImageItem>(DeleteRegistedImage);
+                    imageItem.DeleteImageAction = new Action<ImageItem>(DeleteRegistedImage);
                 }
             });
         }
@@ -291,7 +291,7 @@ namespace HM.FacePlatform.Forms
                 return;
 
             FaceJobFrm faceJobFrm = new FaceJobFrm();
-            ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck(true);
+            ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck(true);
             if (checkResult.IsSuccess)
             {
                 faceJobFrm.DeleteRegistedImage(checkResult.Obj, _user, imageItem, () =>

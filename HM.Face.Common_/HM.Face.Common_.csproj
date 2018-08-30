@@ -68,6 +68,7 @@
     <Compile Include="Base\EyeCoolRequestAttribute.cs" />
     <Compile Include="Base\Warn.cs" />
     <Compile Include="EyeCool\EyeCoolAPI.Debug.cs" />
+    <Compile Include="FaceDTO\ClockInfo.cs" />
     <Compile Include="FaceFactory.cs" />
     <Compile Include="EyeCoolFace.cs" />
     <Compile Include="EyeCool\Base\EyeCoolDateConverter.cs" />

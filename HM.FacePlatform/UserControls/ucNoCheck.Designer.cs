@@ -29,15 +29,13 @@
         private void InitializeComponent()
         {
             this.btnCheck = new HM.Form_.HMTile();
-            this.abc = new System.Windows.Forms.Label();
+            this.Lbl_Name = new System.Windows.Forms.Label();
             this.picPhoto = new System.Windows.Forms.PictureBox();
             this.cbSel = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.labName = new System.Windows.Forms.Label();
-            this.labTime = new System.Windows.Forms.Label();
-            this.labNum = new System.Windows.Forms.Label();
-            this.labRegType = new System.Windows.Forms.Label();
+            this.Lbl_Time = new System.Windows.Forms.Label();
+            this.LblName = new System.Windows.Forms.Label();
+            this.LblTime = new System.Windows.Forms.Label();
+            this.LblRegisterType = new System.Windows.Forms.Label();
             this.labCheckState = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picPhoto)).BeginInit();
             this.SuspendLayout();
@@ -52,14 +50,14 @@
             this.btnCheck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
             // 
-            // abc
+            // Lbl_Name
             // 
-            this.abc.AutoSize = true;
-            this.abc.Location = new System.Drawing.Point(115, 14);
-            this.abc.Name = "abc";
-            this.abc.Size = new System.Drawing.Size(35, 12);
-            this.abc.TabIndex = 19;
-            this.abc.Text = "姓名:";
+            this.Lbl_Name.AutoSize = true;
+            this.Lbl_Name.Location = new System.Drawing.Point(115, 14);
+            this.Lbl_Name.Name = "Lbl_Name";
+            this.Lbl_Name.Size = new System.Drawing.Size(35, 12);
+            this.Lbl_Name.TabIndex = 19;
+            this.Lbl_Name.Text = "姓名:";
             // 
             // picPhoto
             // 
@@ -83,55 +81,41 @@
             this.cbSel.UseVisualStyleBackColor = true;
             this.cbSel.CheckedChanged += new System.EventHandler(this.cbSel_CheckedChanged);
             // 
-            // label1
+            // Lbl_Time
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(115, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 12);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "时间:";
+            this.Lbl_Time.AutoSize = true;
+            this.Lbl_Time.Location = new System.Drawing.Point(115, 44);
+            this.Lbl_Time.Name = "Lbl_Time";
+            this.Lbl_Time.Size = new System.Drawing.Size(35, 12);
+            this.Lbl_Time.TabIndex = 22;
+            this.Lbl_Time.Text = "时间:";
             // 
-            // label2
+            // LblName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(115, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
-            this.label2.TabIndex = 23;
-            this.label2.Text = "注册类型:";
+            this.LblName.AutoSize = true;
+            this.LblName.Location = new System.Drawing.Point(156, 13);
+            this.LblName.Name = "LblName";
+            this.LblName.Size = new System.Drawing.Size(17, 12);
+            this.LblName.TabIndex = 24;
+            this.LblName.Text = "__";
             // 
-            // labName
+            // LblTime
             // 
-            this.labName.AutoSize = true;
-            this.labName.Location = new System.Drawing.Point(156, 13);
-            this.labName.Name = "labName";
-            this.labName.Size = new System.Drawing.Size(0, 12);
-            this.labName.TabIndex = 24;
+            this.LblTime.AutoSize = true;
+            this.LblTime.Location = new System.Drawing.Point(156, 44);
+            this.LblTime.Name = "LblTime";
+            this.LblTime.Size = new System.Drawing.Size(17, 12);
+            this.LblTime.TabIndex = 25;
+            this.LblTime.Text = "__";
             // 
-            // labTime
+            // LblRegisterType
             // 
-            this.labTime.AutoSize = true;
-            this.labTime.Location = new System.Drawing.Point(156, 44);
-            this.labTime.Name = "labTime";
-            this.labTime.Size = new System.Drawing.Size(0, 12);
-            this.labTime.TabIndex = 25;
-            // 
-            // labNum
-            // 
-            this.labNum.AutoSize = true;
-            this.labNum.Location = new System.Drawing.Point(156, 75);
-            this.labNum.Name = "labNum";
-            this.labNum.Size = new System.Drawing.Size(0, 12);
-            this.labNum.TabIndex = 26;
-            // 
-            // labRegType
-            // 
-            this.labRegType.AutoSize = true;
-            this.labRegType.Location = new System.Drawing.Point(174, 76);
-            this.labRegType.Name = "labRegType";
-            this.labRegType.Size = new System.Drawing.Size(0, 12);
-            this.labRegType.TabIndex = 27;
+            this.LblRegisterType.AutoSize = true;
+            this.LblRegisterType.Location = new System.Drawing.Point(115, 74);
+            this.LblRegisterType.Name = "LblRegisterType";
+            this.LblRegisterType.Size = new System.Drawing.Size(53, 12);
+            this.LblRegisterType.TabIndex = 27;
+            this.LblRegisterType.Text = "注册类型";
             // 
             // labCheckState
             // 
@@ -152,15 +136,13 @@
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.labCheckState);
             this.Controls.Add(this.cbSel);
-            this.Controls.Add(this.labRegType);
-            this.Controls.Add(this.labNum);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.LblRegisterType);
             this.Controls.Add(this.btnCheck);
             this.Controls.Add(this.picPhoto);
-            this.Controls.Add(this.labTime);
-            this.Controls.Add(this.labName);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.abc);
+            this.Controls.Add(this.LblTime);
+            this.Controls.Add(this.LblName);
+            this.Controls.Add(this.Lbl_Time);
+            this.Controls.Add(this.Lbl_Name);
             this.Name = "ucNoCheck";
             this.Size = new System.Drawing.Size(306, 106);
             this.Load += new System.EventHandler(this.ucNoCheck_Load);
@@ -173,15 +155,13 @@
         #endregion
 
         private HM.Form_.HMTile btnCheck;
-        private System.Windows.Forms.Label abc;
+        private System.Windows.Forms.Label Lbl_Name;
         public System.Windows.Forms.PictureBox picPhoto;
         private System.Windows.Forms.CheckBox cbSel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label labName;
-        private System.Windows.Forms.Label labTime;
-        private System.Windows.Forms.Label labNum;
-        private System.Windows.Forms.Label labRegType;
+        private System.Windows.Forms.Label Lbl_Time;
+        private System.Windows.Forms.Label LblName;
+        private System.Windows.Forms.Label LblTime;
+        private System.Windows.Forms.Label LblRegisterType;
         private System.Windows.Forms.Label labCheckState;
     }
 }

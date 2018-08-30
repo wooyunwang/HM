@@ -18,7 +18,7 @@ namespace HM.Utils_
         /// <returns></returns>
         public static bool VisualTelnet(string ip, int port)
         {
-            int millisecondsTimeout = 50;//等待时间
+            int millisecondsTimeout = 200;//等待时间
             TcpClient client = new TcpClient();
             try
             {

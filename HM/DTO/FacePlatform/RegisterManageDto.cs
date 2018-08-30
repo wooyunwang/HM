@@ -9,6 +9,10 @@ namespace HM.FacePlatform.Model
     public partial class RegisterManageDto
     {
         /// <summary>
+        /// f_Register的id
+        /// </summary>
+        public int id { get; set; }
+        /// <summary>
         /// 小区用户唯一标识
         /// </summary>
         public string user_uid { get; set; }

@@ -187,6 +187,7 @@
       <DependentUpon>FrmLoadBaseData.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\BindHelper.cs" />
+    <Compile Include="Common\MaoCheckResult.cs" />
     <Compile Include="DataCrypto.cs" />
     <Compile Include="Forms\AddOrUpdateSystemUser.cs">
       <SubType>Form</SubType>

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HM.Enum_;
 using HM.Form_;
+using HM.Utils_;
 
 namespace HM.FacePlatform
 {
@@ -165,6 +166,72 @@ namespace HM.FacePlatform
         private void menuClear_Click(object sender, EventArgs e)
         {
             tbMessage.Text = string.Empty;
+        }
+
+        private void menuPull_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    this.UIThread(() =>
+                    {
+                        menuPull.Enabled = false;
+                    });
+                    PullJob job = new PullJob();
+                    job.Execute();
+                }
+                catch (Exception ex)
+                {
+                    ShowMessage(Exception_.GetInnerException(ex).Message, MessageType.Error);
+                }
+                finally
+                {
+                    this.UIThread(() =>
+                    {
+                        menuPull.Enabled = true;
+                    });
+                }
+            }).ContinueWith((task) =>
+            {
+                this.UIThread(() =>
+                {
+                    menuPull.Enabled = true;
+                });
+            });
+        }
+
+        private void menuPush_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    this.UIThread(() =>
+                    {
+                        menuPull.Enabled = false;
+                    });
+                    PushJob job = new PushJob();
+                    job.Execute();
+                }
+                catch (Exception ex)
+                {
+                    ShowMessage(Exception_.GetInnerException(ex).Message, MessageType.Error);
+                }
+                finally
+                {
+                    this.UIThread(() =>
+                    {
+                        menuPull.Enabled = true;
+                    });
+                }
+            }).ContinueWith((task) =>
+            {
+                this.UIThread(() =>
+                {
+                    menuPull.Enabled = true;
+                });
+            });
         }
     }
 }

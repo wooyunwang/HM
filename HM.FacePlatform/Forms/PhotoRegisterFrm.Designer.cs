@@ -332,6 +332,7 @@ namespace HM.FacePlatform.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(814, 546);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox_Info);

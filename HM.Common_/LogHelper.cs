@@ -1,6 +1,7 @@
 ﻿using HM.Enum_;
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace HM.Common_
@@ -12,14 +13,14 @@ namespace HM.Common_
     /// </summary>
     public partial class LogHelper
     {
-        private static Dictionary<string, log4net.ILog> _DicILog = new Dictionary<string, log4net.ILog>();
+        private static ConcurrentDictionary<string, log4net.ILog> _DicILog = new ConcurrentDictionary<string, log4net.ILog>();
 
         public static log4net.ILog GetIlog(LogType? logType = null)
         {
             string key = (logType ?? LogType.Default).ToString();
             if (!_DicILog.ContainsKey(key))
             {
-                _DicILog.Add(key, log4net.LogManager.GetLogger(key));
+                _DicILog.TryAdd(key, log4net.LogManager.GetLogger(key));
             }
             return _DicILog[key];
         }

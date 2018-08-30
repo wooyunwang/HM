@@ -272,7 +272,7 @@ namespace HM.FacePlatform.Client
                                                 RegisterInputDto dto = new RegisterInputDto()
                                                 {
                                                     ///1-业主卡、2-身份证、3-唯一标识、4-其他卡号、5-共有卡
-                                                    guid_value = data.CardNo,
+                                                    guid_value = data.UserUid,
                                                     guid_type = 3,//3-唯一标识
                                                     face_uid = faceObj.FaceId,
                                                     photo_string = base64,

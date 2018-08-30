@@ -126,19 +126,35 @@ namespace HM.FacePlatform.Forms
                 hasChange = true;
                 var result = _maoBuildingBLL.AddOrUpdate(it => new { it.building_code, it.mao_id },
                     lstToAdd.ToArray());
+                if (result.IsSuccess)
+                {
+                    //将新增楼栋相关的已注册的人脸信息，添加到此人脸一体机中
+                }
                 ar.Add(result);
             }
             if (lstToDel.Any())
             {
                 hasChange = true;
                 var result = _maoBuildingBLL.SoftDelete(_mao.id, lstToDel);
+                if (result.IsSuccess)
+                {
+                    //将已注册成功，或待审核的人脸信息，从此人脸一体机中删除
+                }
                 ar.Add(result);
             }
             if (hasChange)
             {
                 if (ar.IsSuccess)
                 {
-                    _Tip.ShowItTop(BtnBatchMap, "批量处理成功");
+                    if (lstToAdd.Any())
+                    {
+                        var editResult = new BLL.MaoBLL().Edit(it => it.id == _mao.id, it => new Mao()
+                        {
+                            is_init = false
+                        });
+                        HMMessageBox.Show(this, "您已关联了新的楼栋，请重新初始化");
+                    }
+                    HMMessageBox.Show(this, "关联变更成功，相关设备数据同步中，请参考右下角同步结果！");
                     PagerBuilding.Bind();
                 }
                 else

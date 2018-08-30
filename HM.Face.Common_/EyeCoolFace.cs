@@ -71,12 +71,38 @@ namespace HM.Face.Common_
             return _API.ROOT_URL;
         }
         /// <summary>
+        /// 获取人脸一体机上时间
+        /// </summary>
+        /// <param name="timeSpan">超时时间</param>
+        /// <returns></returns>
+        public override ClockInfo GetClockInfo(TimeSpan? timeSpan = null)
+        {
+            try
+            {
+                return _API.GetClockInfo(timeSpan);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(ex);
+                return null;
+            }
+        }
+        /// <summary>
         /// 获取人脸版本信息
         /// </summary>
+        /// <param name="timeSpan">超时时间</param>
         /// <returns></returns>
-        public override FaceVersion GetFaceVersion()
+        public override FaceVersion GetFaceVersion(TimeSpan? timeSpan = null)
         {
-            return _API.GetFaceVersion();
+            try
+            {
+                return _API.GetFaceVersion(timeSpan);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(ex);
+                return null;
+            }
         }
         /// <summary>
         /// 检查图片是否包含人脸
@@ -298,7 +324,7 @@ namespace HM.Face.Common_
             {
                 face_id = Utils_.Key_.SequentialGuid(),
                 file = imageBase64,
-                rctype = FaceEnumConverter.RegisterType_RCType(registerType),
+                rctype = EyeCoolAndClientConverter.RegisterType_RCType(registerType),
                 tip = "图片比较"
             });
 
@@ -354,17 +380,17 @@ namespace HM.Face.Common_
             {
                 activeTime = input.ActiveTime,
                 birthday = input.Birthday,
-                cardNo = input.CRMId,
+                cardNo = input.UserUid,
                 cid = input.CertificateType,
-                cNO = input.cNO,
+                cNO = input.MaoNO,
                 crowd_name = input.ProjectCode,
                 fNo = input.RoomNo,
                 people_id = input.PeopleId,
                 people_name = input.Name,
                 phone = input.Phone,
-                rctype = input.GetEyeCoolRCType(),
-                sex = input.GetEyeCoolSex(),
-                tip = Utils_.EnumHelper.GetName(input.UserType)
+                rctype = EyeCoolAndClientConverter.RegisterType_RCType(input.RegisterType),
+                sex = EyeCoolAndClientConverter.SexType_Sex(input.Sex),
+                tip = EyeCoolAndClientConverter.UserType_Tip(input.UserType)
             });
             if (peopleCreateOutput.res_code_enum == ResponseCode._0000)
             {
@@ -435,7 +461,7 @@ namespace HM.Face.Common_
                 crowd_name = projectCode,
                 people_id = peopleId,
                 face_id = faceId,
-                //state = state
+                state = EyeCoolAndClientConverter.CheckType_ReviewState(state)
             });
 
             if (output.res_code_enum == ResponseCode._0000)
@@ -503,7 +529,9 @@ namespace HM.Face.Common_
                 PeopleRemoveOutput output = _API.PeopleRemove(input);
                 if (output.res_code_enum != ResponseCode._0000)
                 {
-                    if ((output.res_msg ?? "").Contains("未查询到对应的人脸"))
+                    //未查询到对应的人员数据
+                    //未查询到对应的人脸
+                    if ((output.res_msg ?? "").Contains("未查询到"))
                     {
                         output.res_code = ResponseCode._0000.ToString().TrimStart('_');
                     }
@@ -534,7 +562,9 @@ namespace HM.Face.Common_
                 });
                 if (output.res_code_enum != ResponseCode._0000)
                 {
-                    if ((output.res_msg ?? "").Contains("未查询到对应的用户数据"))
+                    //未查询到对应的用户模板数据
+                    //未查询到对应的用户数据
+                    if ((output.res_msg ?? "").Contains("未查询到"))
                     {
                         output.res_code = ResponseCode._0000.ToString().TrimStart('_');
                     }

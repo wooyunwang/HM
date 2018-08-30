@@ -13,15 +13,29 @@ namespace HM.Face.Common_.EyeCool
     public partial class EyeCoolAPI
     {
         /// <summary>
+        /// 获取人脸一体机上时间
+        /// </summary>
+        /// <param name="timeSpan">超时时间</param>
+        /// <returns></returns>
+        public async Task<ClockInfo> GetClockInfoAsync(TimeSpan? timeSpan = null)
+        {
+            RequestBase input = new RequestBase();
+            FillIDAndKey(input);
+            return await ROOT_URL.AbsoluteUri.AppendPathSegment("/faceInterface/biovregister/get_clock_info")
+                .WithTimeout(timeSpan ?? new TimeSpan(0, 0, 0, 0, 500))
+                .PostJsonAsync(input).ReceiveJson<ClockInfo>();
+        }
+        /// <summary>
         /// 获取版本信息
         /// </summary>
+        /// <param name="timeSpan">超时时间</param>
         /// <returns></returns>
-        public async Task<FaceVersion> GetFaceVersionAsync()
+        public async Task<FaceVersion> GetFaceVersionAsync(TimeSpan? timeSpan = null)
         {
             RequestBase input = new RequestBase();
             FillIDAndKey(input);
             return await ROOT_URL.AbsoluteUri.AppendPathSegment("/faceInterface/biovregister/get_jar_info")
-                .WithTimeout(1)
+                .WithTimeout(timeSpan ?? new TimeSpan(0, 0, 0, 0, 500))
                 .PostJsonAsync(input).ReceiveJson<FaceVersion>();
         }
         /// <summary>

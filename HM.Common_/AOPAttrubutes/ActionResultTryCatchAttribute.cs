@@ -21,6 +21,7 @@ namespace HM.Common_
             {
                 context.Proceed();
 
+
 #if DEBUG
                 Type type = ((MethodInfo)context.TargetMethod).ReturnParameter.ParameterType;
                 if (type == typeof(ActionResult) || type.BaseType == typeof(ActionResult))

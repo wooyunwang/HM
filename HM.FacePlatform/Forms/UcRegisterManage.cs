@@ -125,7 +125,7 @@ namespace HM.FacePlatform
                 result.Obj = new PagerData<RegisterManageDto>()
                 {
                     pages = 0,
-                    rows = new System.Collections.Generic.List<RegisterManageDto>(),
+                    rows = new List<RegisterManageDto>(),
                     total = 0
                 };
             }
@@ -199,14 +199,13 @@ namespace HM.FacePlatform
                 if (dr == DialogResult.OK)
                 {
                     FaceJobFrm faceJobFrm = new FaceJobFrm();
-                    ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck(true);
+                    ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck(true);
                     if (checkResult.IsSuccess)
                     {
                         var getResult = _registerBLL.GetWithUser(dto.user_uid);
                         if (getResult.IsSuccess)
                         {
-                            faceJobFrm.Review(checkResult.Obj,
-                            getResult.Obj,
+                            faceJobFrm.Review(getResult.Obj,
                             targteCheckType,
                             "",
                             (actionResult) =>
@@ -321,7 +320,7 @@ namespace HM.FacePlatform
                 if (result == DialogResult.OK)
                 {
                     FaceJobFrm faceJobFrm = new FaceJobFrm();
-                    ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck();
+                    ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck();
                     if (checkResult.IsSuccess)
                     {
                         faceJobFrm.SetEndTime(data, true);

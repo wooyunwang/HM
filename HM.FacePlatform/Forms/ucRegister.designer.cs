@@ -732,7 +732,7 @@ namespace HM.FacePlatform
             this.pbLoadingIn.BackColor = System.Drawing.Color.Transparent;
             this.pbLoadingIn.BackgroundImage = global::HM.FacePlatform.Properties.Resources.loading;
             this.pbLoadingIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pbLoadingIn.Location = new System.Drawing.Point(159, 243);
+            this.pbLoadingIn.Location = new System.Drawing.Point(123, 259);
             this.pbLoadingIn.Name = "pbLoadingIn";
             this.pbLoadingIn.Size = new System.Drawing.Size(24, 25);
             this.pbLoadingIn.TabIndex = 66;

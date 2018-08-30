@@ -18,7 +18,7 @@ namespace HM.Face.Common_
         /// <summary>
         /// 用户唯一值（包括userID）
         /// </summary>
-        public string CardNo { set; get; }
+        public string UserUid { set; get; }
         /// <summary>
         /// 注册方式
         /// </summary>
@@ -48,7 +48,7 @@ namespace HM.Face.Common_
         /// 0待审核、1通过、2不通过
         /// -->
         /// </summary>
-        public ReviewState? CheckState { set; get; }
+        public CheckType? CheckState { set; get; }
         /// <summary>
         /// 审核时间(格式: yyyy-MM-dd HH:mm:ss)
         /// </summary>
@@ -86,7 +86,7 @@ namespace HM.Face.Common_
         /// <summary>
         /// 性别，1：男，0：女
         /// </summary>
-        public int Sex { get; set; }
+        public SexType Sex { get; set; }
         /// <summary>
         /// 人员手机号码
         /// </summary>
@@ -94,7 +94,7 @@ namespace HM.Face.Common_
         /// <summary>
         /// 用户类型
         /// </summary>
-        public string tag { get; set; }
+        public UserType UserType { get; set; }
     }
     /// <summary>
     /// 

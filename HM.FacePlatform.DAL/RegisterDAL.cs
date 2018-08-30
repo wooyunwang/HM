@@ -72,6 +72,7 @@ namespace HM.FacePlatform.DAL
                     .Where(where).AsNoTracking()
                     .Select(it => new RegisterManageDto()
                     {
+                        id = it.id,
                         user_uid = it.user_uid,
                         face_id = it.face_id,
                         photo_path = it.photo_path,

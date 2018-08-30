@@ -2,7 +2,9 @@
 using HM.DTO;
 using HM.Enum_;
 using HM.Enum_.FacePlatform;
+using HM.Face.Common_;
 using HM.FacePlatform.Model;
+using HM.Utils_;
 using Quartz;
 using System;
 using System.Collections.Generic;
@@ -21,16 +23,31 @@ namespace HM.FacePlatform
     [DisallowConcurrentExecution]
     public class PushJob : BaseJob, IJob
     {
-        readonly string showName = "[修正]";
+        public PushJob()
+        {
+            _showName = "【同步-修正】";
+        }
         public void Execute(IJobExecutionContext context)
         {
-            if (!BLL.FacePlatformCache.GetALL<Mao>().Any())
-            {
-                _JobFrom.ShowMessage("还没有配置猫，请在[基础数据]添加配置", MessageType.Warning);
-                return;
-            }
+            Execute();
+        }
+        /// <summary>
+        /// 人脸一体机 —— 重新执行的时候，要重新拉数据
+        /// </summary>
+        List<Mao> _maos = null;
 
-            //ExecutePush();
+        public void Execute()
+        {
+            _maos = _maoBLL.Get();
+            if (_maos.Any())
+            {
+                ExecutePush();
+            }
+            else
+            {
+                _JobFrom.ShowMessage("还没有配置人脸一体机，请在[基础数据]添加配置", MessageType.Warning);
+            }
+            ExecutePush();
         }
 
         private void ExecutePush()
@@ -56,115 +73,153 @@ namespace HM.FacePlatform
 
                 if (_taskMao.id == 0) continue;
 
-                job.last_retry_date = DateTime.Now;
-                job.retry_time++;
-
                 switch (job.job_type)
                 {
                     case JobType.注册:
                         Register(job, _taskMao);
                         break;
                     case JobType.审核:
-                        Check(job, _taskMao, CheckType.审核通过);
-                        break;
-                    case JobType.删除:
-                        //Delete(job, _taskMao);
-                        break;
-                    case JobType.审核不通过:
-                        Check(job, _taskMao, CheckType.审核不通过);
+                        Check(job, _taskMao);
                         break;
                     default:
                         break;
                 }
             }
         }
-
-        private void Check(MaoFailedJob job, Mao _mao, CheckType checkType)
+        /// <summary>
+        /// 自动修复一体机上人脸注册信息的状态
+        /// </summary>
+        /// <param name="job"></param>
+        /// <param name="mao"></param>
+        /// <param name="checkType"></param>
+        private void Check(MaoFailedJob job, Mao mao)
         {
-            ActionResult<List<Register>> result = _registerBLL.GetWithUser(job.register_or_user_id);
-            if (!result.IsSuccess)
+            var register = _registerBLL.FirstOrDefault(it => it.id == job.register_or_user_id);
+            if (register == null)
             {
-                _JobFrom.ShowMessage(result.ToAlertString(), MessageType.Information);
-            }
-            else if (result.Obj == null || result.Obj.Any())
-            {
+                job.is_del = IsDelType.是;
+                job.last_retry_date = DateTime.Now;
+                job.retry_time++;
+                job.retry_message = $"数据异常，找不到人脸注册信息【register.id:{job.register_or_user_id}】";
+                _JobFrom.ShowMessage($"{_showName}{job.retry_message}", MessageType.Error);
+                _maoFailedJobBLL.Edit(job);
                 return;
+            }
+            var user = _userBLL.FirstOrDefault(it => it.user_uid == register.user_uid);
+            if (user == null)
+            {
+                job.is_del = IsDelType.是;
+                job.last_retry_date = DateTime.Now;
+                job.retry_time++;
+                job.retry_message = $"数据异常，找不到用户【{user.name}】的信息";
+                _JobFrom.ShowMessage($"{_showName}{job.retry_message}", MessageType.Error);
+                _maoFailedJobBLL.Edit(job);
+                return;
+            }
+
+            _JobFrom.ShowMessage($"{ _showName }第{ job.retry_time }次更新人脸一体机【{mao.mao_name}】上<{ user.name }>的审核状态！", MessageType.Information);
+
+
+            Face.Common_.Face face = FaceFactory.CreateFace(mao.GetIP(), mao.GetPort(), FaceVender.EyeCool);
+            var reviewResult = face.Review(_ProjectCode, user.people_id, register.face_id, register.check_state, _showName);
+            if (reviewResult.IsSuccess)
+            {
+                _JobFrom.ShowMessage($"{_showName} 人脸一体机【{mao.mao_name}】上<{ user.name }>的审核状态同步成功！", MessageType.Success);
+                job.retry_time++;
+                job.last_retry_date = DateTime.Now;
+                job.is_del = IsDelType.是;
+                job.retry_message = "审核状态同步成功！";
             }
             else
             {
-                foreach (var register in result.Obj)
+                job.retry_time++;
+                job.last_retry_date = DateTime.Now;
+                job.retry_message = reviewResult.ToAlertString();
+                _JobFrom.ShowMessage($"{_showName} 人脸一体机【{mao.mao_name}】上<{ user.name }>的审核状态同步失败：{ job.retry_message }！", MessageType.Success);
+            }
+
+            _maoFailedJobBLL.Edit(job);
+        }
+        /// <summary>
+        /// 自动修复向一体机上注册人脸信息
+        /// </summary>
+        /// <param name="job"></param>
+        /// <param name="mao"></param>
+        private void Register(MaoFailedJob job, Mao mao)
+        {
+            Register register = _registerBLL.FirstOrDefault(it => it.id == job.register_or_user_id);
+            if (register == null)
+            {
+                job.is_del = IsDelType.是;
+                job.last_retry_date = DateTime.Now;
+                job.retry_time++;
+                job.retry_message = $"数据异常，找不到人脸注册信息【register.id:{job.register_or_user_id}】";
+                _JobFrom.ShowMessage($"{_showName}{job.retry_message}", MessageType.Error);
+                _maoFailedJobBLL.Edit(job);
+                return;
+            }
+            var user = _userBLL.FirstOrDefault(it => it.user_uid == register.user_uid);
+            if (user == null)
+            {
+                job.is_del = IsDelType.是;
+                job.last_retry_date = DateTime.Now;
+                job.retry_time++;
+                job.retry_message = $"数据异常，找不到用户【{user.name}】的信息";
+                _JobFrom.ShowMessage($"{_showName}{job.retry_message}", MessageType.Error);
+                _maoFailedJobBLL.Edit(job);
+                return;
+            }
+            _JobFrom.ShowMessage($"{ _showName }第{ job.retry_time }次更新人脸一体机【{mao.mao_name}】上【{ user.name }】的审核状态！", MessageType.Information);
+
+            Face.Common_.Face face = FaceFactory.CreateFace(mao.GetIP(), mao.GetPort(), FaceVender.EyeCool);
+
+            if (register.is_del == IsDelType.是)
+            {
+                _JobFrom.ShowMessage($"{ _showName }第{ job.retry_time }次删除人脸一体机【{mao.mao_name}】上【{ user.name }】的人脸注册信息【{ register.face_id }】！", MessageType.Information);
+
+                var delResult = face.FaceDel(user.people_id, register.face_id);
+                if (delResult.IsSuccess)
                 {
-                    // jobFrom.ShowMessage(string.Format(showName + "第{0}次更新<{1}>上<{2}>的审核状态/过期时间", job.retry_time, _mao.mao_name, _user.name)
-                    //, MessageType.Information);
-
-                    // ActionResult result = _registerBLL.UpdateExpireDate(_user, _mao, _user.end_time, isFirstMao, 0);//更新过期时间
-                    // if (result.IsSuccess)
-                    // {
-                    //     result = _registerBLL.Check(_user, _user.check_state, _user.check_note, 0, projectCode, _mao, isFirstMao);//更新审核状态
-                    // }
-
-                    // if (result.IsSuccess)
-                    // {
-                    //     job.is_del = IsDelType.是;
-                    //     jobFrom.ShowMessage(string.Format("**" + showName + "审核状态/过期时间更新成功"), MessageType.Success);
-                    // }
-                    // else
-                    // {
-                    //     jobFrom.ShowMessage(string.Format("**" + showName + "审核状态/过期时间更新失败(稍后将自动重试)：{0}", result.ToAlertString()), MessageType.Error);
-                    // }
-
-                    // _maoFailedJobBLL.Update(job);
+                    job.is_del = IsDelType.是;
+                    job.last_retry_date = DateTime.Now;
+                    job.retry_time++;
+                    job.retry_message = $"删除【{user.name}】的人脸注册信息【{ register.face_id }】成功";
+                    _JobFrom.ShowMessage($"{ _showName }{ job.retry_message }", MessageType.Success);
+                }
+                else
+                {
+                    job.is_del = IsDelType.是;
+                    job.last_retry_date = DateTime.Now;
+                    job.retry_time++;
+                    job.retry_message = delResult.ToAlertString();
+                    _JobFrom.ShowMessage($"{ _showName } 删除【{user.name}】的人脸注册信息【{ register.face_id }】失败：{ delResult.ToAlertString() }", MessageType.Error);
                 }
             }
-        }
+            else
+            {
+                _JobFrom.ShowMessage($"{ _showName }第{ job.retry_time }次注册人脸一体机【{mao.mao_name}】上【{ user.name }】的人脸注册信息【{ register.face_id }】！", MessageType.Information);
 
-        private void Register(MaoFailedJob job, Mao _mao)
-        {
-            //Register _register = _registerBLL.Get(job.register_or_user_id);
+                string fileName = Path.Combine(_PictureDirectory, register.photo_path);
+                ActionResult registerResult = Register(user, register, face, mao, fileName, false);
 
-            //if (_register == null) return;
+                if (registerResult.IsSuccess)
+                {
+                    job.is_del = IsDelType.是;
+                    job.last_retry_date = DateTime.Now;
+                    job.retry_time++;
+                    job.retry_message = "";
+                    _JobFrom.ShowMessage(string.Format("**" + _showName + "照片注册成功"), MessageType.Success);
+                }
+                else
+                {
+                    job.last_retry_date = DateTime.Now;
+                    job.retry_time++;
+                    job.retry_message = registerResult.ToAlertString();
+                    _JobFrom.ShowMessage($"{ _showName } 注册【{user.name}】的人脸注册信息【{ register.face_id }】失败：{ registerResult.ToAlertString() }", MessageType.Error);
+                }
+            }
 
-            //UserRegisterDto user_register = _registerBLL.GetUserRegisterByUid(_register.user_uid);
-
-            //if (user_register.id < 1) return;
-
-            //if (_register.is_del == IsDelType.是)
-            //{
-            //    jobFrom.ShowMessage(string.Format(showName + "第{0}次删除<{1}>上<{2}>的照片{3}"
-            //        , job.retry_time, _mao.mao_name, user_register.name, _register.photo_path), MessageType.Information);
-
-            //    ActionResult result = _registerBLL.DeleteRegistedPhoto(user_register.people_id, _register, "", _mao, isFirstMao, 0);
-            //    if (result.IsSuccess)
-            //    {
-            //        job.is_del = IsDelType.是;
-            //        jobFrom.ShowMessage(string.Format("**" + showName + "照片删除成功"), MessageType.Success);
-            //    }
-            //    else
-            //    {
-            //        jobFrom.ShowMessage(string.Format("**" + showName + "照片删除失败(稍后将自动重试)：{0}", result.ToAlertString()), MessageType.Error);
-            //    }
-            //}
-            //else
-            //{
-            //    jobFrom.ShowMessage(string.Format(showName + "第{0}次注册<{1}>上<{2}>的照片{3}"
-            //        , job.retry_time, _mao.mao_name, user_register.name, _register.photo_path), MessageType.Information);
-
-            //    string fileName = Path.Combine(photoPath, _register.photo_path);
-            //    ActionResult result = _registerBLL.Register(user_register
-            //        , fileName, _register.face_id, user_register.end_time, (int)RegisterType.手动注册, projectCode
-            //        , _mao, isFirstMao, _register.id, 0);
-            //    if (result.IsSuccess)
-            //    {
-            //        job.is_del = IsDelType.是;
-            //        jobFrom.ShowMessage(string.Format("**" + showName + "照片注册成功"), MessageType.Success);
-            //    }
-            //    else
-            //    {
-            //        jobFrom.ShowMessage(string.Format("**" + showName + "照片注册失败(稍后将自动重试)：{0}", result.ToAlertString()), MessageType.Error);
-            //    }
-            //}
-
-            //_maoFailedJobBLL.Update(job);
+            _maoFailedJobBLL.Edit(job);
         }
     }
 }

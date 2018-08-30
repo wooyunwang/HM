@@ -20,13 +20,5 @@ namespace HM.Enum_.FacePlatform
         /// 审核
         /// </summary>
         审核 = 2,
-        /// <summary>
-        /// 删除
-        /// </summary>
-        删除 = 3,
-        /// <summary>
-        /// 
-        /// </summary>
-        审核不通过 = 4
     }
 }

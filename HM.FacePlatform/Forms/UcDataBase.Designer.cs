@@ -38,11 +38,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -53,20 +48,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.HtcMain = new HM.Form_.HMTabControl();
             this.MtpMao = new System.Windows.Forms.TabPage();
             this.panel5 = new HM.Form_.Old.Panel();
             this.DgvBuilding = new HM.Form_.HMDataGridView();
+            this.col_building_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_building_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvMao = new HM.Form_.HMDataGridView();
-            this.col_mao_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_mao_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_ip = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_port = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_map_building = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.col_edit = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.col_del = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.col_init = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.col_abandon_init = new System.Windows.Forms.DataGridViewLinkColumn();
             this.PnlMaoTool = new System.Windows.Forms.Panel();
             this.BtnRefreshMao = new HM.Form_.HMTile();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -106,8 +99,16 @@
             this.ColName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TvBuilding = new System.Windows.Forms.TreeView();
-            this.col_building_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_building_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_mao_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_mao_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ip = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_port = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_map_building = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.col_edit = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.col_del = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.col_init = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.col_abandon_init = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.col_version = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HtcMain.SuspendLayout();
             this.MtpMao.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -126,7 +127,7 @@
             this.HtcMain.Controls.Add(this.MtpMao);
             this.HtcMain.Controls.Add(this.MtpDataBase);
             this.HtcMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.HtcMain.ItemSize = new System.Drawing.Size(110, 30);
+            this.HtcMain.ItemSize = new System.Drawing.Size(138, 30);
             this.HtcMain.Location = new System.Drawing.Point(0, 0);
             this.HtcMain.Name = "HtcMain";
             this.HtcMain.SelectedIndex = 0;
@@ -144,7 +145,7 @@
             this.MtpMao.Name = "MtpMao";
             this.MtpMao.Size = new System.Drawing.Size(1192, 562);
             this.MtpMao.TabIndex = 66;
-            this.MtpMao.Text = "猫信息管理";
+            this.MtpMao.Text = "人脸一体机管理";
             this.MtpMao.UseVisualStyleBackColor = true;
             // 
             // panel5
@@ -243,6 +244,22 @@
             this.DgvBuilding.Size = new System.Drawing.Size(885, 304);
             this.DgvBuilding.TabIndex = 67;
             // 
+            // col_building_code
+            // 
+            this.col_building_code.DataPropertyName = "building_code";
+            this.col_building_code.FillWeight = 20F;
+            this.col_building_code.HeaderText = "楼栋编码";
+            this.col_building_code.Name = "col_building_code";
+            // 
+            // col_building_name
+            // 
+            this.col_building_name.DataPropertyName = "building_name";
+            this.col_building_name.FillWeight = 80F;
+            this.col_building_name.HeaderText = "楼栋名称";
+            this.col_building_name.MinimumWidth = 300;
+            this.col_building_name.Name = "col_building_name";
+            this.col_building_name.ReadOnly = true;
+            // 
             // DgvMao
             // 
             this.DgvMao.AllowUserToAddRows = false;
@@ -275,7 +292,8 @@
             this.col_edit,
             this.col_del,
             this.col_init,
-            this.col_abandon_init});
+            this.col_abandon_init,
+            this.col_version});
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -313,99 +331,6 @@
             this.DgvMao.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvMao_DataBindingComplete);
             this.DgvMao.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.DgvMao_RowPrePaint);
             this.DgvMao.SelectionChanged += new System.EventHandler(this.DgvMao_SelectionChanged);
-            // 
-            // col_mao_no
-            // 
-            this.col_mao_no.DataPropertyName = "mao_no";
-            this.col_mao_no.FillWeight = 0.5251024F;
-            this.col_mao_no.HeaderText = "猫编号";
-            this.col_mao_no.MinimumWidth = 60;
-            this.col_mao_no.Name = "col_mao_no";
-            this.col_mao_no.ReadOnly = true;
-            // 
-            // col_mao_name
-            // 
-            this.col_mao_name.DataPropertyName = "mao_name";
-            this.col_mao_name.FillWeight = 52.51024F;
-            this.col_mao_name.HeaderText = "猫名称";
-            this.col_mao_name.MinimumWidth = 200;
-            this.col_mao_name.Name = "col_mao_name";
-            this.col_mao_name.ReadOnly = true;
-            // 
-            // col_ip
-            // 
-            this.col_ip.DataPropertyName = "ip";
-            this.col_ip.FillWeight = 42.00819F;
-            this.col_ip.HeaderText = "IP";
-            this.col_ip.MinimumWidth = 120;
-            this.col_ip.Name = "col_ip";
-            this.col_ip.ReadOnly = true;
-            // 
-            // col_port
-            // 
-            this.col_port.DataPropertyName = "port";
-            this.col_port.FillWeight = 31.50615F;
-            this.col_port.HeaderText = "端口";
-            this.col_port.MinimumWidth = 60;
-            this.col_port.Name = "col_port";
-            this.col_port.ReadOnly = true;
-            // 
-            // col_map_building
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.NullValue = "去设置";
-            this.col_map_building.DefaultCellStyle = dataGridViewCellStyle8;
-            this.col_map_building.FillWeight = 10F;
-            this.col_map_building.HeaderText = "关联楼栋";
-            this.col_map_building.MinimumWidth = 80;
-            this.col_map_building.Name = "col_map_building";
-            this.col_map_building.ReadOnly = true;
-            this.col_map_building.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_map_building.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // col_edit
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_edit.DefaultCellStyle = dataGridViewCellStyle9;
-            this.col_edit.FillWeight = 10.50205F;
-            this.col_edit.HeaderText = "编辑";
-            this.col_edit.MinimumWidth = 60;
-            this.col_edit.Name = "col_edit";
-            this.col_edit.ReadOnly = true;
-            // 
-            // col_del
-            // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_del.DefaultCellStyle = dataGridViewCellStyle10;
-            this.col_del.FillWeight = 10.50205F;
-            this.col_del.HeaderText = "删除";
-            this.col_del.MinimumWidth = 60;
-            this.col_del.Name = "col_del";
-            this.col_del.ReadOnly = true;
-            this.col_del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_del.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // col_init
-            // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_init.DefaultCellStyle = dataGridViewCellStyle11;
-            this.col_init.FillWeight = 10.50205F;
-            this.col_init.HeaderText = "初始化";
-            this.col_init.MinimumWidth = 80;
-            this.col_init.Name = "col_init";
-            this.col_init.ReadOnly = true;
-            // 
-            // col_abandon_init
-            // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.col_abandon_init.DefaultCellStyle = dataGridViewCellStyle12;
-            this.col_abandon_init.FillWeight = 10F;
-            this.col_abandon_init.HeaderText = "放弃初始化";
-            this.col_abandon_init.MinimumWidth = 100;
-            this.col_abandon_init.Name = "col_abandon_init";
-            this.col_abandon_init.ReadOnly = true;
-            this.col_abandon_init.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.col_abandon_init.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // PnlMaoTool
             // 
@@ -542,7 +467,7 @@
             this.LblMaoPort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LblMaoPort.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.LblMaoPort.ForeColor = System.Drawing.Color.Black;
-            this.LblMaoPort.Location = new System.Drawing.Point(61, 165);
+            this.LblMaoPort.Location = new System.Drawing.Point(37, 165);
             this.LblMaoPort.Name = "LblMaoPort";
             this.LblMaoPort.Size = new System.Drawing.Size(35, 17);
             this.LblMaoPort.TabIndex = 73;
@@ -555,7 +480,7 @@
             this.LblMaoIP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LblMaoIP.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.LblMaoIP.ForeColor = System.Drawing.Color.Black;
-            this.LblMaoIP.Location = new System.Drawing.Point(61, 117);
+            this.LblMaoIP.Location = new System.Drawing.Point(37, 117);
             this.LblMaoIP.Name = "LblMaoIP";
             this.LblMaoIP.Size = new System.Drawing.Size(22, 17);
             this.LblMaoIP.TabIndex = 72;
@@ -608,11 +533,11 @@
             this.LblMaoName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LblMaoName.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.LblMaoName.ForeColor = System.Drawing.Color.Black;
-            this.LblMaoName.Location = new System.Drawing.Point(61, 70);
+            this.LblMaoName.Location = new System.Drawing.Point(37, 70);
             this.LblMaoName.Name = "LblMaoName";
-            this.LblMaoName.Size = new System.Drawing.Size(47, 17);
+            this.LblMaoName.Size = new System.Drawing.Size(71, 17);
             this.LblMaoName.TabIndex = 69;
-            this.LblMaoName.Text = "猫名称:";
+            this.LblMaoName.Text = "一体机名称:";
             // 
             // LblMaoNo
             // 
@@ -621,11 +546,11 @@
             this.LblMaoNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LblMaoNo.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.LblMaoNo.ForeColor = System.Drawing.Color.Black;
-            this.LblMaoNo.Location = new System.Drawing.Point(61, 23);
+            this.LblMaoNo.Location = new System.Drawing.Point(37, 23);
             this.LblMaoNo.Name = "LblMaoNo";
-            this.LblMaoNo.Size = new System.Drawing.Size(47, 17);
+            this.LblMaoNo.Size = new System.Drawing.Size(35, 17);
             this.LblMaoNo.TabIndex = 70;
-            this.LblMaoNo.Text = "猫编号:";
+            this.LblMaoNo.Text = "编号:";
             // 
             // MtpDataBase
             // 
@@ -950,21 +875,105 @@
             this.TvBuilding.TabIndex = 0;
             this.TvBuilding.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvBuilding_AfterSelect);
             // 
-            // col_building_code
+            // col_mao_no
             // 
-            this.col_building_code.DataPropertyName = "building_code";
-            this.col_building_code.FillWeight = 20F;
-            this.col_building_code.HeaderText = "楼栋编码";
-            this.col_building_code.Name = "col_building_code";
+            this.col_mao_no.DataPropertyName = "mao_no";
+            this.col_mao_no.FillWeight = 5F;
+            this.col_mao_no.HeaderText = "编号";
+            this.col_mao_no.MinimumWidth = 60;
+            this.col_mao_no.Name = "col_mao_no";
+            this.col_mao_no.ReadOnly = true;
             // 
-            // col_building_name
+            // col_mao_name
             // 
-            this.col_building_name.DataPropertyName = "building_name";
-            this.col_building_name.FillWeight = 80F;
-            this.col_building_name.HeaderText = "楼栋名称";
-            this.col_building_name.MinimumWidth = 300;
-            this.col_building_name.Name = "col_building_name";
-            this.col_building_name.ReadOnly = true;
+            this.col_mao_name.DataPropertyName = "mao_name";
+            this.col_mao_name.FillWeight = 40F;
+            this.col_mao_name.HeaderText = "猫名称";
+            this.col_mao_name.MinimumWidth = 200;
+            this.col_mao_name.Name = "col_mao_name";
+            this.col_mao_name.ReadOnly = true;
+            // 
+            // col_ip
+            // 
+            this.col_ip.DataPropertyName = "ip";
+            this.col_ip.FillWeight = 20F;
+            this.col_ip.HeaderText = "IP";
+            this.col_ip.MinimumWidth = 120;
+            this.col_ip.Name = "col_ip";
+            this.col_ip.ReadOnly = true;
+            // 
+            // col_port
+            // 
+            this.col_port.DataPropertyName = "port";
+            this.col_port.FillWeight = 10F;
+            this.col_port.HeaderText = "端口";
+            this.col_port.MinimumWidth = 60;
+            this.col_port.Name = "col_port";
+            this.col_port.ReadOnly = true;
+            // 
+            // col_map_building
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.NullValue = "去设置";
+            this.col_map_building.DefaultCellStyle = dataGridViewCellStyle8;
+            this.col_map_building.FillWeight = 10F;
+            this.col_map_building.HeaderText = "关联楼栋";
+            this.col_map_building.MinimumWidth = 80;
+            this.col_map_building.Name = "col_map_building";
+            this.col_map_building.ReadOnly = true;
+            this.col_map_building.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_map_building.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // col_edit
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_edit.DefaultCellStyle = dataGridViewCellStyle9;
+            this.col_edit.FillWeight = 10.50205F;
+            this.col_edit.HeaderText = "编辑";
+            this.col_edit.MinimumWidth = 60;
+            this.col_edit.Name = "col_edit";
+            this.col_edit.ReadOnly = true;
+            // 
+            // col_del
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_del.DefaultCellStyle = dataGridViewCellStyle10;
+            this.col_del.FillWeight = 10.50205F;
+            this.col_del.HeaderText = "删除";
+            this.col_del.MinimumWidth = 60;
+            this.col_del.Name = "col_del";
+            this.col_del.ReadOnly = true;
+            this.col_del.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_del.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // col_init
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_init.DefaultCellStyle = dataGridViewCellStyle11;
+            this.col_init.FillWeight = 10.50205F;
+            this.col_init.HeaderText = "初始化";
+            this.col_init.MinimumWidth = 80;
+            this.col_init.Name = "col_init";
+            this.col_init.ReadOnly = true;
+            // 
+            // col_abandon_init
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.col_abandon_init.DefaultCellStyle = dataGridViewCellStyle12;
+            this.col_abandon_init.FillWeight = 10F;
+            this.col_abandon_init.HeaderText = "放弃初始化";
+            this.col_abandon_init.MinimumWidth = 100;
+            this.col_abandon_init.Name = "col_abandon_init";
+            this.col_abandon_init.ReadOnly = true;
+            this.col_abandon_init.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.col_abandon_init.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // col_version
+            // 
+            this.col_version.HeaderText = "版本&状态";
+            this.col_version.MinimumWidth = 100;
+            this.col_version.Name = "col_version";
+            this.col_version.ReadOnly = true;
             // 
             // UcDataBase
             // 
@@ -1030,15 +1039,6 @@
         private System.Windows.Forms.TreeView TvBuilding;
         private Form_.HMTile BtnCancelMao;
         private Form_.HMTile BtnRefreshMao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_mao_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_mao_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_ip;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_port;
-        private System.Windows.Forms.DataGridViewLinkColumn col_map_building;
-        private System.Windows.Forms.DataGridViewLinkColumn col_edit;
-        private System.Windows.Forms.DataGridViewLinkColumn col_del;
-        private System.Windows.Forms.DataGridViewLinkColumn col_init;
-        private System.Windows.Forms.DataGridViewLinkColumn col_abandon_init;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUserCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -1049,5 +1049,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDataFrom;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_building_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_building_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_mao_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_mao_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_ip;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_port;
+        private System.Windows.Forms.DataGridViewLinkColumn col_map_building;
+        private System.Windows.Forms.DataGridViewLinkColumn col_edit;
+        private System.Windows.Forms.DataGridViewLinkColumn col_del;
+        private System.Windows.Forms.DataGridViewLinkColumn col_init;
+        private System.Windows.Forms.DataGridViewLinkColumn col_abandon_init;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_version;
     }
 }

@@ -20,7 +20,7 @@ namespace HM.Face.Common_.EyeCool.Tests
         {
             log4net.Config.XmlConfigurator.Configure();
             SetZhCnCulturInfo();
-            api = new EyeCoolAPI("192.168.1.180", 8080);
+            api = new EyeCoolAPI("192.168.1.178", 8080);
         }
         /// <summary>
         /// 中文区域性初始化
@@ -101,6 +101,12 @@ namespace HM.Face.Common_.EyeCool.Tests
             }
         }
 #endif
+
+        [TestMethod()]
+        public void GetClockInfo_DebugTest()
+        {
+            var result = api.GetClockInfo_Debug();
+        }
 
         [TestMethod()]
         public void GetFaceVersion()
@@ -511,5 +517,7 @@ namespace HM.Face.Common_.EyeCool.Tests
                 Assert.Fail("找不到单元测试所需图片");
             }
         }
+
+
     }
 }

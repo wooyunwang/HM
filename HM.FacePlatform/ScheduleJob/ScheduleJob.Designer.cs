@@ -40,6 +40,8 @@
             this.tbMessage = new System.Windows.Forms.RichTextBox();
             this.menuMessage = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuClear = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPull = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuPush = new System.Windows.Forms.ToolStripMenuItem();
             this.pnHead.SuspendLayout();
             this.pnButton.SuspendLayout();
             this.pnProcess.SuspendLayout();
@@ -154,16 +156,32 @@
             // 
             this.menuMessage.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuMessage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuClear});
+            this.menuClear,
+            this.menuPull,
+            this.menuPush});
             this.menuMessage.Name = "menuMessage";
-            this.menuMessage.Size = new System.Drawing.Size(125, 26);
+            this.menuMessage.Size = new System.Drawing.Size(181, 92);
             // 
             // menuClear
             // 
             this.menuClear.Name = "menuClear";
-            this.menuClear.Size = new System.Drawing.Size(124, 22);
+            this.menuClear.Size = new System.Drawing.Size(180, 22);
             this.menuClear.Text = "清除信息";
             this.menuClear.Click += new System.EventHandler(this.menuClear_Click);
+            // 
+            // menuPull
+            // 
+            this.menuPull.Name = "menuPull";
+            this.menuPull.Size = new System.Drawing.Size(180, 22);
+            this.menuPull.Text = "手动启动同步-拉取";
+            this.menuPull.Click += new System.EventHandler(this.menuPull_Click);
+            // 
+            // menuPush
+            // 
+            this.menuPush.Name = "menuPush";
+            this.menuPush.Size = new System.Drawing.Size(180, 22);
+            this.menuPush.Text = "手动启动同步-修正";
+            this.menuPush.Click += new System.EventHandler(this.menuPush_Click);
             // 
             // ScheduleJob
             // 
@@ -202,6 +220,7 @@
         private System.Windows.Forms.Button btnMin;
         private System.Windows.Forms.ContextMenuStrip menuMessage;
         private System.Windows.Forms.ToolStripMenuItem menuClear;
-
+        private System.Windows.Forms.ToolStripMenuItem menuPull;
+        private System.Windows.Forms.ToolStripMenuItem menuPush;
     }
 }

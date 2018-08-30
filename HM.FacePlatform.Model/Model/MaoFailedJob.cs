@@ -47,5 +47,15 @@ namespace HM.FacePlatform.Model
         /// 是否删除
         /// </summary>
         public IsDelType is_del { get; set; }
+        /// <summary>
+        /// 失败缘由
+        /// </summary>
+        [MaxLength(1024)]
+        public string failed_message { get; set; }
+        /// <summary>
+        /// 重试结果信息
+        /// </summary>
+        [MaxLength(1024)]
+        public string retry_message { get; set; }
     }
 }

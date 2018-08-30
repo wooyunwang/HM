@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="EyeCool\EyeCoolFaceTests.cs" />
     <Compile Include="EyeCool\EyeCoolAPITests.cs" />
+    <Compile Include="MappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +96,14 @@
     <ProjectReference Include="..\HM.Face.Common_\HM.Face.Common_.csproj">
       <Project>{52CC6BDC-99B7-4A88-B3CA-BBE35CD22D0A}</Project>
       <Name>HM.Face.Common_</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.FacePlatForm.Client\HM.FacePlatform.Client.csproj">
+      <Project>{f4ac8a4f-fca2-4c47-9730-27d2b46f809c}</Project>
+      <Name>HM.FacePlatform.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HM.FacePlatForm.Server\HM.FacePlatform.Server.csproj">
+      <Project>{c48773ca-2bfa-4498-8ec4-157bbf5d01a7}</Project>
+      <Name>HM.FacePlatform.Server</Name>
     </ProjectReference>
     <ProjectReference Include="..\HM.Utils_\HM.Utils_.csproj">
       <Project>{38f4f95a-f905-43e1-8ad0-4d7d4820edef}</Project>

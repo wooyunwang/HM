@@ -8,7 +8,7 @@ namespace HM.FacePlatform.UserControls
 {
     public partial class ImageItem : UserControl
     {
-        public event Action<ImageItem> DeleteImageAction;
+        public Action<ImageItem> DeleteImageAction;
         public Register _register { get; set; }
         public bool isShowDelete = true;
         public ImageItem(Register _register)

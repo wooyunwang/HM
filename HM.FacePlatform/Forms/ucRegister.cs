@@ -379,15 +379,15 @@ namespace HM.FacePlatform
                         foreach (UserHouse userHouse in result.Obj)
                         {
                             UcFamily ucFamily = new UcFamily(userHouse);
-                            ucFamily.UpdateAction = new Action<UcFamily>((uc_Family) =>
+                            ucFamily.UpdateAction = (uc_Family) =>
                             {
                                 AddOrUpdateUserFrm frm = new AddOrUpdateUserFrm(this, userHouse);
                                 frm.ShowDialog();
-                            });
-                            ucFamily.DeleteAction = new Action(() =>
+                            };
+                            ucFamily.DeleteAction = () =>
                             {
                                 BindHouseUser(house_code);
-                            });
+                            };
                             FlpUser.Controls.Add(ucFamily);
                         }
                     }
@@ -476,11 +476,15 @@ namespace HM.FacePlatform
                         {
                             UcFamily ucFamily = new UcFamily(userHouse);
                             ucFamily.Width = FlpWorker.Width / 3 - 10;
-                            ucFamily.UpdateAction = new Action<UcFamily>((uc_Family) =>
+                            ucFamily.UpdateAction = (uc_Family) =>
                             {
                                 AddOrUpdateUserFrm form = new AddOrUpdateUserFrm(this, userHouse);
                                 form.ShowDialog();
-                            });
+                            };
+                            ucFamily.DeleteAction = () =>
+                            {
+                                BindWorkers();
+                            };
                             FlpWorker.Controls.Add(ucFamily);
                         }
                     }

@@ -60,12 +60,20 @@ namespace HM.Face.Common_
         {
             throw new NotImplementedException("未对接");
         }
-
+        /// <summary>
+        /// 获取人脸一体机上时间
+        /// </summary>
+        /// <param name="timeSpan">超时时间</param>
+        /// <returns></returns>
+        public override ClockInfo GetClockInfo(TimeSpan? timeSpan = null)
+        {
+            throw new NotImplementedException("未对接");
+        }
         /// <summary>
         /// 获取人脸版本信息
         /// </summary>
         /// <returns></returns>
-        public override FaceVersion GetFaceVersion()
+        public override FaceVersion GetFaceVersion(TimeSpan? timeSpan = null)
         {
             throw new NotImplementedException("未对接");
         }

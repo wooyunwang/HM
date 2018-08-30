@@ -356,6 +356,27 @@ namespace HM.FacePlatform.DAL
             }
         }
 
+        /// <summary>
+        /// 修改指定条件的指定指定字段的值
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="updateFactory">
+        /// x => new T()
+        /// {
+        /// is_del = IsDelType.是,
+        /// change_time = DateTime.Now
+        /// }
+        /// </param>
+        /// <returns></returns>
+        public virtual int Edit(Expression<Func<T, bool>> where, Expression<Func<T, T>> updateFactory)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                db.Set<T>().Where(where).Update(updateFactory);
+                return db.SaveChanges();
+            }
+        }
+
         #endregion
 
         #region Delete

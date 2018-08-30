@@ -82,7 +82,7 @@ namespace HM.FacePlatform.Client
             }
 
             if (!isSuccess) return false;
-            JsonResponse<Building[]> buildings = HM.Utils_.Json_.GetObject<JsonResponse<Building[]>>(response);
+            JsonResponse<Building[]> buildings = Json_.GetObject<JsonResponse<Building[]>>(response);
             if (buildings.status == 0)
             {
                 LogHelper.Error("服务器返回错误：" + buildings.message);

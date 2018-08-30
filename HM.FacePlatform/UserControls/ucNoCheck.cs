@@ -40,10 +40,9 @@ namespace HM.FacePlatform.UserControls
             picPhoto.BackgroundImage = _Photo;
             if (!string.IsNullOrEmpty(_registerWithUser.photo_path)) picPhoto.ImageLocation = Path.Combine(FacePlatformCache.GetPictureDirectory(), _registerWithUser.photo_path);
 
-            this.labName.Text = _registerWithUser.user.name;
-            //this.labNum.Text = theCheck.num;
-            this.labTime.Text = _registerWithUser.user.reg_time.ToString("yyyy-MM-dd HH:mm:ss");
-            this.labRegType.Text = Utils_.EnumHelper.GetName(_registerWithUser.register_type);
+            this.LblName.Text = _registerWithUser.user.name;
+            this.LblTime.Text = _registerWithUser.user.reg_time.ToString("yyyy-MM-dd HH:mm:ss");
+            this.LblRegisterType.Text = Utils_.EnumHelper.GetName(_registerWithUser.register_type);
 
             switch (_registerWithUser.check_state)
             {

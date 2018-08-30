@@ -339,8 +339,8 @@ namespace HM.FacePlatform.Client
                             ActiveTime = dto.end_time ?? dto.create_time,
                             Birthday = userWithHouse.birthday,
                             CertificateType = Face.Common_.EyeCool.CertificateType.唯一标识,
-                            cNO = maoItem.mao_no,
-                            CRMId = userWithHouse.user_uid,
+                            MaoNO = maoItem.mao_no,
+                            UserUid = userWithHouse.user_uid,
                             FaceId = faceId,
                             Name = userWithHouse.name,
                             PeopleId = userWithHouse.people_id,
@@ -349,7 +349,7 @@ namespace HM.FacePlatform.Client
                             RegisterType = ClientAndServerConverter.NullableShortToRegisterType(dto.register_type),
                             RoomNo = "",//wait
                             Sex = userWithHouse.sex,
-                            UserType = userWithHouse.user_houses.Any() ? userWithHouse.user_houses.ToList()[0].relation : "" //wait
+                            UserType = userBLL.GetUserType(userWithHouse.user_uid)
                         });
 
                         if (registerResult.IsSuccess)

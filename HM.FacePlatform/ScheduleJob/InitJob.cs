@@ -1,16 +1,13 @@
-﻿using HM.Common_;
-using HM.DTO;
-using HM.DTO.FacePlatform;
+﻿using HM.DTO;
 using HM.Enum_;
 using HM.Enum_.FacePlatform;
 using HM.Face.Common_;
 using HM.FacePlatform.Model;
+using HM.Utils_;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using HM.Utils_;
 
 namespace HM.FacePlatform
 {
@@ -83,7 +80,7 @@ namespace HM.FacePlatform
                     }
                     else
                     {
-                        _JobFrom.ShowMessage($"{showName}开始同步数据到【{_mao.mao_name}】，同步成功前请不要退出本系统", MessageType.Information);
+                        _JobFrom.ShowMessage($"{ showName }开始同步数据到【{_mao.mao_name}】，同步成功前请不要退出本系统", MessageType.Information);
 
                         List<User> userWithRegisters = pagerData.rows;
                         //2、遍历用户
@@ -98,7 +95,7 @@ namespace HM.FacePlatform
                                 string fileName = Path.Combine(_PictureDirectory, register.photo_path);
                                 if (!File.Exists(fileName))
                                 {
-                                    _JobFrom.ShowMessage($"找不到用户【{user.name}】的图片【{fileName}】，register.id【{ register.id }】", MessageType.Error);
+                                    _JobFrom.ShowMessage($"{ showName }找不到用户【{user.name}】的图片【{fileName}】，register.id【{ register.id }】", MessageType.Error);
                                     return;
                                 }
                                 ActionResult arChecking = face.Checking(register.face_id,
@@ -107,15 +104,15 @@ namespace HM.FacePlatform
                                     showName);
                                 if (arChecking.IsSuccess)
                                 {
-                                    _JobFrom.ShowMessage($"用户【{ user.name }】的人脸图片校验成功【register.id:{register.id}】同步成功！", MessageType.Success);
+                                    _JobFrom.ShowMessage($"{ showName }用户【{ user.name }】的人脸图片校验成功【register.id:{register.id}】同步成功！", MessageType.Success);
 
                                     ActionResult arRegister = face.Register(new RegisterInput()
                                     {
                                         ActiveTime = user.end_time,
                                         Birthday = user.birthday,
                                         CertificateType = Face.Common_.EyeCool.CertificateType.唯一标识,
-                                        cNO = _mao.mao_no,
-                                        CRMId = user.user_uid,
+                                        MaoNO = _mao.mao_no,
+                                        UserUid = user.user_uid,
                                         FaceId = register.face_id,
                                         Name = user.name,
                                         PeopleId = user.people_id,
@@ -158,12 +155,12 @@ namespace HM.FacePlatform
                                                 it.job_type
                                             }, job);
                                         }
-                                        _JobFrom.ShowMessage($"用户【{ user.name }】的人脸图片【register.id:{register.id}】校验失败：{ arRegister.ToAlertString() }", MessageType.Error);
+                                        _JobFrom.ShowMessage($"用户【{ user.name }】的人脸注册信息【register.id:{register.id}】注册失败：{ arRegister.ToAlertString() }", MessageType.Error);
                                     }
                                 }
                                 else
                                 {
-                                    _JobFrom.ShowMessage($"人脸图片检查不通过：{arChecking.ToAlertString()}", MessageType.Error);
+                                    _JobFrom.ShowMessage($"{ showName }人脸图片检查不通过：{arChecking.ToAlertString()}", MessageType.Error);
                                     MaoFailedJob job = new MaoFailedJob
                                     {
                                         register_or_user_id = register.id,
@@ -185,17 +182,17 @@ namespace HM.FacePlatform
                     returnTotal = false;
                     if (pageIndex >= totalPage)
                     {
-                        _JobFrom.ShowMessage("本次任务执行完毕！", MessageType.Information);
+                        _JobFrom.ShowMessage($"{ showName }本次任务执行完毕！", MessageType.Information);
                         break;
                     }
                 }
                 catch (Exception ex)
                 {
-                    _JobFrom.ShowMessage($"同步异常：{ Exception_.GetInnerException(ex).Message }", MessageType.Error);
+                    _JobFrom.ShowMessage($"{ showName }同步异常：{ Exception_.GetInnerException(ex).Message }", MessageType.Error);
                 }
             }
 
-            _JobFrom.ShowMessage(string.Format("" + showName + "本次同步数据到人脸一体机【{0}】>完成！", _mao.mao_name), MessageType.Information);
+            _JobFrom.ShowMessage($"{ showName }本次同步数据到人脸一体机【{_mao.mao_name}】>完成！", MessageType.Information);
         }
     }
 }

@@ -31,6 +31,21 @@ namespace HM.Face.Common_.EyeCool
         {
             throw new Exception("测试异常时候EyeCoolRequest特性的捕捉情况！");
         }
+        /// <summary>
+        /// 获取人脸一体机上时间
+        /// </summary>
+        /// <returns></returns>
+        public dynamic GetClockInfo_Debug()
+        {
+            RequestBase input = new RequestBase();
+            FillIDAndKey(input);
+            return ROOT_URL.AbsoluteUri.AppendPathSegment("/faceInterface/biovregister/get_clock_info")
+                  .PostJsonAsync(input).ReceiveJson<dynamic>().Result;
+        }
+        /// <summary>
+        /// 获取版本信息
+        /// </summary>
+        /// <returns></returns>
         public dynamic GetFaceVersion_Debug()
         {
             RequestBase input = new RequestBase();

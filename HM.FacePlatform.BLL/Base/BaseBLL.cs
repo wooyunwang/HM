@@ -105,6 +105,28 @@ namespace HM.FacePlatform.BLL
                 Obj = dal.Edit(entitys)
             };
         }
+
+        /// <summary>
+        /// 修改指定条件的指定指定字段的值
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="updateFactory">
+        /// x => new T()
+        /// {
+        /// is_del = IsDelType.是,
+        /// change_time = DateTime.Now
+        /// }
+        /// </param>
+        /// <returns></returns>
+        [ActionResultTryCatch]
+        public virtual ActionResult<int> Edit(Expression<Func<T, bool>> where, Expression<Func<T, T>> updateFactory)
+        {
+            return new ActionResult<int>()
+            {
+                IsSuccess = true,
+                Obj = dal.Edit(where, updateFactory)
+            };
+        }
         #endregion
 
         #region Delete

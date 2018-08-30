@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using HM.DTO.FacePlatform;
+using HM.Enum_.FacePlatform;
 
 namespace HM.FacePlatform.DAL
 {
@@ -19,7 +20,7 @@ namespace HM.FacePlatform.DAL
                 var query = from maobuilding in db.MaoBuildings
                             join building in db.Buildings
                             on maobuilding.building_code equals building.building_code
-                            where maobuilding.mao_id == mao_id
+                            where maobuilding.mao_id == mao_id && maobuilding.is_del != IsDelType.是
                             orderby building.building_name
                             select building;
 #if DEBUG
@@ -52,10 +53,11 @@ namespace HM.FacePlatform.DAL
                 {
                     if (hasMap.Value)
                     {
-                        query = query.Where(it => it.MaoBuildings.Any(mb => mb.mao_id == mao_id));
+                        query = query.Where(it => it.MaoBuildings.Any(mb => mb.mao_id == mao_id && mb.is_del != IsDelType.是));
                     }
-                    else {
-                        query = query.Where(it => !it.MaoBuildings.Any(mb => mb.mao_id == mao_id));
+                    else
+                    {
+                        query = query.Where(it => !it.MaoBuildings.Any(mb => mb.mao_id == mao_id && mb.is_del != IsDelType.是));
                     }
                 }
 #if DEBUG
@@ -78,7 +80,7 @@ namespace HM.FacePlatform.DAL
                     building_code = it.building_code,
                     building_name = it.building_name,
                     project_code = it.project_code,
-                    has_map = it.MaoBuildings.Any(mb => mb.mao_id == mao_id)
+                    has_map = it.MaoBuildings.Any(mb => mb.mao_id == mao_id && mb.is_del != IsDelType.是)
                 });
                 query2 = query2.OrderBy(it => it.building_name);
                 query2 = query2.Skip(pageSize * pageIndex).Take(pageSize);

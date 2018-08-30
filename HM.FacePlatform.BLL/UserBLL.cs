@@ -108,15 +108,24 @@ namespace HM.FacePlatform.BLL
                 };
             }
         }
-
         /// <summary>
-        /// 
+        /// 获取用户的用户类型（默认第一个）
         /// </summary>
         /// <param name="user_uid"></param>
         /// <returns></returns>
         public UserType GetUserType(string user_uid)
         {
             return dal.GetUserType(user_uid);
+        }
+        /// <summary>
+        /// 获取用户（包含指定的人脸注册信息）
+        /// </summary>
+        /// <param name="user_uid"></param>
+        /// <param name="lstFaceId"></param>
+        /// <returns></returns>
+        public User GetUserWithRegister(string user_uid, IEnumerable<string> lstFaceId)
+        {
+            return dal.GetUserWithRegister(user_uid, lstFaceId);
         }
 
         //public bool IsExist(string type, int id, string value)

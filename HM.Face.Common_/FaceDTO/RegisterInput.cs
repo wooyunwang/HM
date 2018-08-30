@@ -27,9 +27,9 @@ namespace HM.Face.Common_
         /// </summary>
         public string ProjectCode { get; set; }
         /// <summary>
-        /// CRM唯一标识
+        /// 用户唯一标识
         /// </summary>
-        public string CRMId { get; set; }
+        public string UserUid { get; set; }
         /// <summary>
         /// 证件类型
         /// </summary>
@@ -65,52 +65,7 @@ namespace HM.Face.Common_
         /// <summary>
         /// 猫编号
         /// </summary>
-        public string cNO { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete("此转换存在一定问题")]
-        public RCType GetEyeCoolRCType()
-        {
-            switch (RegisterType)
-            {
-                case RegisterType.未知:
-                    return RCType.手动注册;
-                case RegisterType.微信注册:
-                    return RCType.微信注册;
-                case RegisterType.手动注册:
-                    return RCType.手动注册;
-                case RegisterType.刷卡注册:
-                    return RCType.手动注册;
-                case RegisterType.人脸一体机自动注册:
-                    return RCType.自动注册;
-                case RegisterType.人脸一体机手动注册:
-                    return RCType.手动注册;
-                default:
-                    return RCType.手动注册;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete("此转换存在一定问题")]
-        public int GetEyeCoolSex()
-        {
-            //性别，1：男，0：女 默认1
-            switch (Sex)
-            {
-                case SexType.未知:
-                    return 1;
-                case SexType.男:
-                    return 1;
-                case SexType.女:
-                    return 0;
-                default:
-                    return 1;
-            }
-        }
+        public string MaoNO { get; set; }
         /// <summary>
         /// 若未指定，若是微信的，则需要审核
         /// </summary>
@@ -121,7 +76,7 @@ namespace HM.Face.Common_
             switch (faceVender)
             {
                 case FaceVender.EyeCool:
-                    return GetEyeCoolRCType() == RCType.微信注册;
+                    return EyeCoolAndClientConverter.RegisterType_RCType(this.RegisterType) == RCType.微信注册;
                 case FaceVender.VanRui:
                 default:
                     return false;

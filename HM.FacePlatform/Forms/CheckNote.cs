@@ -1,6 +1,5 @@
-﻿using HM.Common_;
-using HM.DTO;
-using HM.Enum_;
+﻿using HM.DTO;
+using HM.DTO.FacePlatform;
 using HM.Enum_.FacePlatform;
 using HM.FacePlatform.BLL;
 using HM.FacePlatform.Model;
@@ -9,12 +8,8 @@ using HM.Form_;
 using HM.Form_.Old;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Linq;
-using System.Threading.Tasks;
-using HM.DTO.FacePlatform;
-using HM.Form_;
+using System.Windows.Forms;
 
 namespace HM.FacePlatform.Forms
 {
@@ -185,7 +180,7 @@ namespace HM.FacePlatform.Forms
                         FlpRegisted.Controls.Add(imageItem);
                         if (imageItem.isShowDelete)
                         {
-                            imageItem.DeleteImageAction += new Action<ImageItem>(DeleteRegistedImage);
+                            imageItem.DeleteImageAction = new Action<ImageItem>(DeleteRegistedImage);
                         }
                     }
                     FlpRegisted.ResumeLayout();
@@ -204,7 +199,7 @@ namespace HM.FacePlatform.Forms
                 return;
 
             FaceJobFrm faceJobFrm = new FaceJobFrm();
-            ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck(true);
+            ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck(true);
             if (checkResult.IsSuccess)
             {
                 faceJobFrm.DeleteRegistedImage(checkResult.Obj, imageItem._register.user, imageItem, () =>
@@ -246,11 +241,10 @@ namespace HM.FacePlatform.Forms
                 }
             }
             FaceJobFrm faceJobFrm = new FaceJobFrm();
-            ActionResult<List<Mao>> checkResult = faceJobFrm.BasicCheck();
+            ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck();
             if (checkResult.IsSuccess)
             {
-                faceJobFrm.Review(checkResult.Obj,
-                    _lstRegisterWithUser, checkType,
+                faceJobFrm.Review(_lstRegisterWithUser, checkType,
                     txtNote.Text.Trim(),
                     (actionResult) =>
                     {
@@ -258,13 +252,12 @@ namespace HM.FacePlatform.Forms
                         {
                             Init();
                         }
-                        if (checkType == CheckType.审核不通过)
-                        {
-                            this.DialogResult = DialogResult.No;
-                            this.Close();
-                        }
                     });
-                faceJobFrm.ShowDialog();
+                this.DialogResult = faceJobFrm.ShowDialog();
+                if (this.DialogResult == DialogResult.OK)
+                {
+                    this.Close();
+                }
             }
         }
         /// <summary>
@@ -274,7 +267,10 @@ namespace HM.FacePlatform.Forms
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            if (this.DialogResult == DialogResult.None)
+            {
+                this.DialogResult = DialogResult.Cancel;
+            }
             this.Close();
         }
     }

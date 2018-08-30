@@ -2,7 +2,7 @@
 using HM.DTO.FacePlatform;
 using HM.FacePlatform.WeChatModel;
 
-namespace HM.Face.Common_.EyeCool
+namespace HM.FacePlatform.Server
 {
     /// <summary>
     /// 云平台数据库与DTO的映射配置
@@ -11,12 +11,12 @@ namespace HM.Face.Common_.EyeCool
     {
         public DtoMappingProfile()
         {
-            CreateMap<BuildingDto, c_building>();
+            //CreateMap<BuildingDto, c_building>();
             //.ForMember(dest => dest.building_code, opt => opt.MapFrom(src => src.building_code))
             //.ForMember(dest => dest.building_name, opt => opt.MapFrom(src => src.building_name))
             //.ForMember(dest => dest.project_code, opt => opt.MapFrom(src => src.project_code))
             //.ForMember(dest => dest.data_from, opt => opt.MapFrom(src => src.data_from));
-            CreateMap<c_building, BuildingDto>();
+            //CreateMap<c_building, BuildingDto>();
 
             CreateMap<HouseDto, c_house>();
             //.ForMember(dest => dest.house_code, opt => opt.MapFrom(src => src.house_code))

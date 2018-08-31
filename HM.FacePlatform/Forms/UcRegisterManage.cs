@@ -18,7 +18,7 @@ using System.Windows.Forms;
 
 namespace HM.FacePlatform
 {
-    public partial class UcRegisterManage : HMUserControl
+    public partial class UcRegisterManage : UcBase
     {
         RegisterBLL _registerBLL = new RegisterBLL();
         readonly string enableText = "启用";
@@ -68,31 +68,46 @@ namespace HM.FacePlatform
             {
                 FlpRegister.Controls.Clear();
 
-                ActionResult<System.Collections.Generic.List<Register>> result = _registerBLL.GetWithUser(userID);
+                ActionResult<List<Register>> result = _registerBLL.GetWithUser(userID);
                 if (result.IsSuccess)
                 {
                     foreach (Register registerWithUser in result.Obj)
                     {
                         ImageDetailItem uc = new ImageDetailItem(registerWithUser);
                         FlpRegister.Controls.Add(uc);
-                        uc.ActionComplete = new Action<ImageDetailItem>(ImageDetailItemActionComplete);
+                        uc.DeleteImageAction = DeleteRegistedImage;
                     }
                 }
                 else
                 {
-                    ucNoData u = new ucNoData();
-                    u.Note = "暂无人脸注册数据";
-                    FlpRegister.Controls.Add(u);
+                    ucNoData uc = new ucNoData();
+                    uc.Note = "暂无人脸注册数据";
+                    FlpRegister.Controls.Add(uc);
                 }
             });
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="uc"></param>
-        private void ImageDetailItemActionComplete(ImageDetailItem uc)
+
+        private void DeleteRegistedImage(ImageDetailItem imageDetailItem)
         {
-            FlpRegisterRender(uc._registerWithUser.user_uid);
+            if (HMMessageBox.Show(this, "此人脸已审核通过，确定要删除吗?", "删除确认", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                return;
+
+            FaceJobFrm faceJobFrm = new FaceJobFrm();
+            ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck(true);
+            if (checkResult.IsSuccess)
+            {
+                faceJobFrm.DeleteRegistedImage(checkResult.Obj, imageDetailItem._registerWithUser.user, imageDetailItem._registerWithUser, () =>
+                {
+                    if (FlpRegister.Controls.Count > 1)
+                    {
+                        FlpRegisterRender(imageDetailItem._registerWithUser.user.user_uid);
+                    }
+                    else
+                    {
+                        BtnSelectRegister_Click(BtnSelectRegister, null);
+                    }
+                });
+            }
         }
         #endregion
 
@@ -199,7 +214,7 @@ namespace HM.FacePlatform
                 if (dr == DialogResult.OK)
                 {
                     FaceJobFrm faceJobFrm = new FaceJobFrm();
-                    ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck(true);
+                    ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck();
                     if (checkResult.IsSuccess)
                     {
                         var getResult = _registerBLL.GetWithUser(dto.user_uid);
@@ -265,7 +280,7 @@ namespace HM.FacePlatform
         List<RegisterManageDto> GetCheckedRowData()
         {
             DgvRegister.EndEdit();
-            var data = new System.Collections.Generic.List<RegisterManageDto>();
+            var data = new List<RegisterManageDto>();
             foreach (DataGridViewRow row in DgvRegister.Rows)
             {
                 if (row.Cells["colCB"].EditedFormattedValue.ToBool_() ?? false)
@@ -282,7 +297,7 @@ namespace HM.FacePlatform
         /// <param name="e"></param>
         private void btnNextM_Click(object sender, EventArgs e)
         {
-            System.Collections.Generic.List<RegisterManageDto> data = GetCheckedRowData();
+            List<RegisterManageDto> data = GetCheckedRowData();
             if (!data.Any())
             {
                 _Tip.ShowIt(btnNextM, "请勾选人脸数据!");
@@ -309,7 +324,7 @@ namespace HM.FacePlatform
         /// <param name="e"></param>
         private void btnNextY_Click(object sender, EventArgs e)
         {
-            System.Collections.Generic.List<RegisterManageDto> data = GetCheckedRowData();
+            List<RegisterManageDto> data = GetCheckedRowData();
             if (!data.Any())
             {
                 _Tip.ShowIt(btnNextM, "请勾选人脸数据!");

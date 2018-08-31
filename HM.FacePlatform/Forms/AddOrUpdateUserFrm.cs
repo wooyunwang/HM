@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace HM.FacePlatform.Forms
 {
-    public partial class AddOrUpdateUserFrm : Form_.HMForm
+    public partial class AddOrUpdateUserFrm : FrmBase
     {
         UserBLL _userBLL = new UserBLL();
         UserHouseBLL _userHouseBLL = new UserHouseBLL();

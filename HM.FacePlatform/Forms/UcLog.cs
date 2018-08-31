@@ -11,7 +11,7 @@ using HM.Utils_;
 
 namespace HM.FacePlatform
 {
-    public partial class UcLog : HMUserControl
+    public partial class UcLog : UcBase
     {
         ActionLogBLL _actionLogBLL;
         UserBLL _userBLL;

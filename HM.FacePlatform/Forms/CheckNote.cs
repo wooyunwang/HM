@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace HM.FacePlatform.Forms
 {
-    public partial class CheckNote : HMForm
+    public partial class CheckNote : FrmBase
     {
         /// <summary>
         /// 
@@ -202,7 +202,7 @@ namespace HM.FacePlatform.Forms
             ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck(true);
             if (checkResult.IsSuccess)
             {
-                faceJobFrm.DeleteRegistedImage(checkResult.Obj, imageItem._register.user, imageItem, () =>
+                faceJobFrm.DeleteRegistedImage(checkResult.Obj, imageItem._register.user, imageItem._register, () =>
                 {
                     FlpRegistedRender();
                 });

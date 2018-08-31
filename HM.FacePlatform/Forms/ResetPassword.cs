@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace HM.FacePlatform.Forms
 {
-    public partial class ResetPassword : HMForm
+    public partial class ResetPassword : FrmBase
     {
         SystemUserBLL _systemUserBLL;
         VankeBalloonToolTip toolTip;

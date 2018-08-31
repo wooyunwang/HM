@@ -28,7 +28,7 @@ namespace HM.FacePlatform
             Init();
         }
 
-        private void Init()
+        public void Init()
         {
             string ip = _mao.GetIP();
             int port = _mao.GetPort();
@@ -189,6 +189,40 @@ namespace HM.FacePlatform
                 catch (Exception ex)
                 {
                     _JobFrom.ShowMessage($"{ showName }同步异常：{ Exception_.GetInnerException(ex).Message }", MessageType.Error);
+                }
+            }
+
+            _JobFrom.ShowMessage($"{ showName }本次同步数据到人脸一体机【{_mao.mao_name}】>完成！", MessageType.Information);
+        }
+        /// <summary>
+        /// 关联楼栋时所需要做的数据处理
+        /// </summary>
+        /// <param name="lstToAdd"></param>
+        /// <param name="lstToDel"></param>
+        public void MapBuilding(List<MaoBuilding> lstToAdd, List<string> lstToDel)
+        {
+            Face.Common_.Face face = FaceFactory.CreateFace(_mao.GetIP(), _mao.GetPort(), FaceVender.EyeCool);
+            if (lstToAdd.Any())
+            {
+                var lstUserWithRegister = _userBLL.GetUserWithRegisterForMapBuilding(lstToAdd.Select(it => it.building_code));
+                foreach (var user in lstUserWithRegister)
+                {
+                    foreach (var register in user.registers)
+                    {
+                        Register(user, register, face, _mao);
+                    }
+                }
+            }
+
+            if (lstToDel.Any())
+            {
+                var lstUserWithRegister = _userBLL.GetUserWithRegisterForMapBuilding(lstToDel);
+                foreach (var user in lstUserWithRegister)
+                {
+                    foreach (var register in user.registers)
+                    {
+                        Delete(user, register, _mao, face);
+                    }
                 }
             }
 

@@ -3,10 +3,11 @@ using System.IO;
 using System.Windows.Forms;
 using HM.FacePlatform.BLL;
 using HM.FacePlatform.Model;
+using HM.Form_;
 
 namespace HM.FacePlatform.UserControls
 {
-    public partial class ImageItem : UserControl
+    public partial class ImageItem : HMUserControl
     {
         public Action<ImageItem> DeleteImageAction;
         public Register _register { get; set; }

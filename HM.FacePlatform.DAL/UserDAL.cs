@@ -266,6 +266,28 @@ namespace HM.FacePlatform.DAL
                 return query.FirstOrDefault();
             }
         }
+        
+        /// <summary>
+        /// 获取相关楼栋下的用户（包含相关的人脸注册信息【排除已删除的】）
+        /// </summary>
+        /// <param name="lstBuildingCode"></param>
+        /// <returns></returns>
+        public List<User> GetUserWithRegisterForMapBuilding(IEnumerable<string> lstBuildingCode)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                var query = db.Users.Where(it => it.is_del != IsDelType.是)
+                    .Where(it =>
+                       it.user_houses.Any(
+                       uh => lstBuildingCode.Contains(uh.House.building_code
+                       )))
+                    .IncludeOptimized(x => x.registers.Where(p => p.is_del != IsDelType.是));
+#if DEBUG
+                string sql = query.ToString();
+#endif
+                return query.ToList();
+            }
+        }
 
         //[Obsolete("wait")]
         //public int? Add(User user, UserHouse userHouse)

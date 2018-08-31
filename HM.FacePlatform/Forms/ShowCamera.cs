@@ -9,7 +9,7 @@ using HM.Form_;
 
 namespace HM.FacePlatform.Forms
 {
-    public partial class ShowCamera : HM.Form_.HMForm
+    public partial class ShowCamera : FrmBase
     {
         public delegate void CapturedEventHandler();
         public event CapturedEventHandler CapturedEvent;

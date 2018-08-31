@@ -11,7 +11,7 @@ using ZedGraph;
 
 namespace HM.FacePlatform
 {
-    public partial class UcCount : HMUserControl
+    public partial class UcCount : UcBase
     {
         private float AngleIn = 20;
         private float AngleOut = 34;

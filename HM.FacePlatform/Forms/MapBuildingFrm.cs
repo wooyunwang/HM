@@ -8,10 +8,11 @@ using System.Windows.Forms;
 using System.Linq;
 using HM.Form_.Old;
 using HM.Enum_.FacePlatform;
+using System.Threading.Tasks;
 
 namespace HM.FacePlatform.Forms
 {
-    public partial class MapBuildingFrm : HM.Form_.HMForm
+    public partial class MapBuildingFrm : FrmBase
     {
         VankeBalloonToolTip _Tip;//提示
         BLL.BuildingBLL _buildingBLL = new BLL.BuildingBLL();
@@ -146,14 +147,19 @@ namespace HM.FacePlatform.Forms
             {
                 if (ar.IsSuccess)
                 {
-                    if (lstToAdd.Any())
+                    //if (lstToAdd.Any())
+                    //{
+                    //    var editResult = new BLL.MaoBLL().Edit(it => it.id == _mao.id, it => new Mao()
+                    //    {
+                    //        is_init = false
+                    //    });
+                    //    HMMessageBox.Show(this, "您已关联了新的楼栋，请重新初始化");
+                    //}
+                    Task.Run(() =>
                     {
-                        var editResult = new BLL.MaoBLL().Edit(it => it.id == _mao.id, it => new Mao()
-                        {
-                            is_init = false
-                        });
-                        HMMessageBox.Show(this, "您已关联了新的楼栋，请重新初始化");
-                    }
+                        InitJob job = new InitJob(_mao);
+                        job.MapBuilding(lstToAdd, lstToDel);
+                    });
                     HMMessageBox.Show(this, "关联变更成功，相关设备数据同步中，请参考右下角同步结果！");
                     PagerBuilding.Bind();
                 }

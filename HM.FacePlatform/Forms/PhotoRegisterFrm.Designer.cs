@@ -51,7 +51,7 @@ namespace HM.FacePlatform.Forms
             this.groupBox_photo = new System.Windows.Forms.GroupBox();
             this.pnToRegister = new System.Windows.Forms.FlowLayoutPanel();
             this.gbRegisted = new System.Windows.Forms.GroupBox();
-            this.pnRegisted = new System.Windows.Forms.FlowLayoutPanel();
+            this.FlpRegisted = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Tsp.SuspendLayout();
             this.groupBox_Info.SuspendLayout();
@@ -299,7 +299,7 @@ namespace HM.FacePlatform.Forms
             // 
             // gbRegisted
             // 
-            this.gbRegisted.Controls.Add(this.pnRegisted);
+            this.gbRegisted.Controls.Add(this.FlpRegisted);
             this.gbRegisted.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbRegisted.Location = new System.Drawing.Point(0, 0);
             this.gbRegisted.Name = "gbRegisted";
@@ -308,15 +308,15 @@ namespace HM.FacePlatform.Forms
             this.gbRegisted.TabStop = false;
             this.gbRegisted.Text = "已注册模板";
             // 
-            // pnRegisted
+            // FlpRegisted
             // 
-            this.pnRegisted.AutoScroll = true;
-            this.pnRegisted.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnRegisted.Location = new System.Drawing.Point(3, 17);
-            this.pnRegisted.Margin = new System.Windows.Forms.Padding(2);
-            this.pnRegisted.Name = "pnRegisted";
-            this.pnRegisted.Size = new System.Drawing.Size(429, 335);
-            this.pnRegisted.TabIndex = 0;
+            this.FlpRegisted.AutoScroll = true;
+            this.FlpRegisted.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FlpRegisted.Location = new System.Drawing.Point(3, 17);
+            this.FlpRegisted.Margin = new System.Windows.Forms.Padding(2);
+            this.FlpRegisted.Name = "FlpRegisted";
+            this.FlpRegisted.Size = new System.Drawing.Size(429, 335);
+            this.FlpRegisted.TabIndex = 0;
             // 
             // panel1
             // 
@@ -380,7 +380,7 @@ namespace HM.FacePlatform.Forms
         private System.Windows.Forms.DateTimePicker tbEnd;
         private System.Windows.Forms.Label labEndTime;
         private HM.Form_.Old.PanelXP pnEndTime;
-        private System.Windows.Forms.FlowLayoutPanel pnRegisted;
+        private System.Windows.Forms.FlowLayoutPanel FlpRegisted;
         private System.Windows.Forms.FlowLayoutPanel pnToRegister;
         private System.Windows.Forms.Panel panel1;
     }

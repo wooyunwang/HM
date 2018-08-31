@@ -1,5 +1,7 @@
 ﻿using MetroFramework.Controls;
 using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace HM.Form_
 {

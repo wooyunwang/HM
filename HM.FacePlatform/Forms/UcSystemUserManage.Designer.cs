@@ -35,15 +35,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DgvSystemUser = new HM.Form_.HMDataGridView();
-            this.PagerSystemManage = new HM.Form_.HMPager();
-            this.pnToolBar = new System.Windows.Forms.Panel();
-            this.BtnAdd = new HM.Form_.HMTile();
-            this.PnlMain = new HM.Form_.HMPanel();
             this.col_user_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_is_admin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_last_login_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_disable = new System.Windows.Forms.DataGridViewLinkColumn();
             this.col_reset_password = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.PagerSystemManage = new HM.Form_.HMPager();
+            this.pnToolBar = new System.Windows.Forms.Panel();
+            this.BtnAdd = new HM.Form_.HMTile();
+            this.PnlMain = new HM.Form_.HMPanel();
             ((System.ComponentModel.ISupportInitialize)(this.DgvSystemUser)).BeginInit();
             this.pnToolBar.SuspendLayout();
             this.PnlMain.SuspendLayout();
@@ -63,11 +63,10 @@
             this.DgvSystemUser.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.DgvSystemUser.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Empty;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DgvSystemUser.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DgvSystemUser.ColumnHeadersHeight = 36;
@@ -89,7 +88,7 @@
             this.DgvSystemUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvSystemUser.EnableHeadersVisualStyles = false;
             this.DgvSystemUser.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.DgvSystemUser.Location = new System.Drawing.Point(0, 51);
+            this.DgvSystemUser.Location = new System.Drawing.Point(10, 61);
             this.DgvSystemUser.Name = "DgvSystemUser";
             this.DgvSystemUser.ReadOnly = true;
             this.DgvSystemUser.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -109,61 +108,10 @@
             this.DgvSystemUser.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.DgvSystemUser.RowTemplate.Height = 50;
             this.DgvSystemUser.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvSystemUser.Size = new System.Drawing.Size(1200, 525);
+            this.DgvSystemUser.Size = new System.Drawing.Size(1180, 505);
             this.DgvSystemUser.TabIndex = 67;
             this.DgvSystemUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSystemUser_CellContentClick);
             this.DgvSystemUser.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.DgvSystemUser_RowPrePaint);
-            // 
-            // PagerSystemManage
-            // 
-            this.PagerSystemManage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PagerSystemManage.Location = new System.Drawing.Point(0, 576);
-            this.PagerSystemManage.Name = "PagerSystemManage";
-            this.PagerSystemManage.NMax = 0;
-            this.PagerSystemManage.PageCount = 0;
-            this.PagerSystemManage.PageCurrent = 1;
-            this.PagerSystemManage.PageSize = 20;
-            this.PagerSystemManage.Size = new System.Drawing.Size(1200, 24);
-            this.PagerSystemManage.TabIndex = 68;
-            this.PagerSystemManage.EventPaging += new HM.Form_.EventPagingHandler(this.PagerSystemManage_EventPaging);
-            // 
-            // pnToolBar
-            // 
-            this.pnToolBar.Controls.Add(this.BtnAdd);
-            this.pnToolBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnToolBar.Location = new System.Drawing.Point(0, 0);
-            this.pnToolBar.Margin = new System.Windows.Forms.Padding(2);
-            this.pnToolBar.Name = "pnToolBar";
-            this.pnToolBar.Size = new System.Drawing.Size(1200, 51);
-            this.pnToolBar.TabIndex = 0;
-            // 
-            // BtnAdd
-            // 
-            this.BtnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnAdd.Location = new System.Drawing.Point(1061, 12);
-            this.BtnAdd.Name = "BtnAdd";
-            this.BtnAdd.Size = new System.Drawing.Size(121, 25);
-            this.BtnAdd.TabIndex = 110;
-            this.BtnAdd.Text = "新增登录用户";
-            this.BtnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
-            // 
-            // PnlMain
-            // 
-            this.PnlMain.Controls.Add(this.DgvSystemUser);
-            this.PnlMain.Controls.Add(this.pnToolBar);
-            this.PnlMain.Controls.Add(this.PagerSystemManage);
-            this.PnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PnlMain.HorizontalScrollbarBarColor = true;
-            this.PnlMain.HorizontalScrollbarHighlightOnWheel = false;
-            this.PnlMain.HorizontalScrollbarSize = 10;
-            this.PnlMain.Location = new System.Drawing.Point(0, 0);
-            this.PnlMain.Name = "PnlMain";
-            this.PnlMain.Size = new System.Drawing.Size(1200, 600);
-            this.PnlMain.TabIndex = 69;
-            this.PnlMain.VerticalScrollbarBarColor = true;
-            this.PnlMain.VerticalScrollbarHighlightOnWheel = false;
-            this.PnlMain.VerticalScrollbarSize = 10;
             // 
             // col_user_name
             // 
@@ -212,6 +160,58 @@
             this.col_reset_password.ReadOnly = true;
             this.col_reset_password.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.col_reset_password.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // PagerSystemManage
+            // 
+            this.PagerSystemManage.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PagerSystemManage.Location = new System.Drawing.Point(10, 566);
+            this.PagerSystemManage.Name = "PagerSystemManage";
+            this.PagerSystemManage.NMax = 0;
+            this.PagerSystemManage.PageCount = 0;
+            this.PagerSystemManage.PageCurrent = 1;
+            this.PagerSystemManage.PageSize = 20;
+            this.PagerSystemManage.Size = new System.Drawing.Size(1180, 24);
+            this.PagerSystemManage.TabIndex = 68;
+            this.PagerSystemManage.EventPaging += new HM.Form_.EventPagingHandler(this.PagerSystemManage_EventPaging);
+            // 
+            // pnToolBar
+            // 
+            this.pnToolBar.Controls.Add(this.BtnAdd);
+            this.pnToolBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnToolBar.Location = new System.Drawing.Point(10, 10);
+            this.pnToolBar.Margin = new System.Windows.Forms.Padding(2);
+            this.pnToolBar.Name = "pnToolBar";
+            this.pnToolBar.Size = new System.Drawing.Size(1180, 51);
+            this.pnToolBar.TabIndex = 0;
+            // 
+            // BtnAdd
+            // 
+            this.BtnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnAdd.Location = new System.Drawing.Point(1041, 12);
+            this.BtnAdd.Name = "BtnAdd";
+            this.BtnAdd.Size = new System.Drawing.Size(121, 25);
+            this.BtnAdd.TabIndex = 110;
+            this.BtnAdd.Text = "新增登录用户";
+            this.BtnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
+            // 
+            // PnlMain
+            // 
+            this.PnlMain.Controls.Add(this.DgvSystemUser);
+            this.PnlMain.Controls.Add(this.pnToolBar);
+            this.PnlMain.Controls.Add(this.PagerSystemManage);
+            this.PnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PnlMain.HorizontalScrollbarBarColor = true;
+            this.PnlMain.HorizontalScrollbarHighlightOnWheel = false;
+            this.PnlMain.HorizontalScrollbarSize = 10;
+            this.PnlMain.Location = new System.Drawing.Point(0, 0);
+            this.PnlMain.Name = "PnlMain";
+            this.PnlMain.Padding = new System.Windows.Forms.Padding(10);
+            this.PnlMain.Size = new System.Drawing.Size(1200, 600);
+            this.PnlMain.TabIndex = 69;
+            this.PnlMain.VerticalScrollbarBarColor = true;
+            this.PnlMain.VerticalScrollbarHighlightOnWheel = false;
+            this.PnlMain.VerticalScrollbarSize = 10;
             // 
             // UcSystemUserManage
             // 

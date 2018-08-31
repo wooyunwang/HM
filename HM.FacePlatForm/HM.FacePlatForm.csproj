@@ -291,6 +291,12 @@
     <Compile Include="Forms\UcSystemUserManage.Designer.cs">
       <DependentUpon>UcSystemUserManage.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBase.Designer.cs">
+      <DependentUpon>FrmBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,6 +330,12 @@
       <DependentUpon>ScheduleJob.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="UcBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UcBase.Designer.cs">
+      <DependentUpon>UcBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\ImageDetailItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -554,6 +566,19 @@
     <Content Include="License-LGPL.txt" />
     <Content Include="MetroFramework.txt" />
     <Content Include="quartz_jobs.xml" />
+    <None Include="Resources\Banner_Teal.jpg" />
+    <None Include="Resources\Banner_Red.jpg" />
+    <None Include="Resources\Banner_Purple.jpg" />
+    <None Include="Resources\Banner_Pink.jpg" />
+    <None Include="Resources\Banner_Orange.jpg" />
+    <None Include="Resources\Banner_Magenta.jpg" />
+    <None Include="Resources\Banner_Lime.jpg" />
+    <None Include="Resources\Banner_Green.jpg" />
+    <None Include="Resources\Banner_Default.jpg" />
+    <None Include="Resources\Banner_Brown.jpg" />
+    <None Include="Resources\Banner_Blue.jpg" />
+    <None Include="Resources\Banner_Black.jpg" />
+    <None Include="Resources\Banner_Yellow.jpg" />
     <None Include="Resources\注册 hover.png" />
     <None Include="Resources\注册.png" />
     <None Include="Resources\原始图.png" />

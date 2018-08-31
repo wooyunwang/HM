@@ -12,6 +12,7 @@ using System.Threading;
 using HM.Form_;
 using System.Threading.Tasks;
 using System.IO;
+using System.Drawing;
 
 namespace HM.FacePlatform
 {
@@ -27,6 +28,11 @@ namespace HM.FacePlatform
             InitializeComponent();
             m_Tip = new VankeBalloonToolTip(this);
             dataCrypto = new DataCrypto();//加解密
+
+            btnExit.Style = Program._Style;
+            btnLogin.Style = Program._Style;
+            var name = $"Banner_{Program._Style}";
+            this.BackgroundImage = (Bitmap)Properties.Resources.ResourceManager.GetObject(name);
         }
 
         private void FrmLogin_Load(object sender, EventArgs e)

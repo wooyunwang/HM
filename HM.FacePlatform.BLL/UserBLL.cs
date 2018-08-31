@@ -128,6 +128,16 @@ namespace HM.FacePlatform.BLL
             return dal.GetUserWithRegister(user_uid, lstFaceId);
         }
 
+        /// <summary>
+        /// 获取相关楼栋下的用户（包含相关的人脸注册信息【排除已删除的】）
+        /// </summary>
+        /// <param name="lstBuildingCode"></param>
+        /// <returns></returns>
+        public List<User> GetUserWithRegisterForMapBuilding(IEnumerable<string> lstBuildingCode)
+        {
+            return dal.GetUserWithRegisterForMapBuilding(lstBuildingCode);
+        }
+
         //public bool IsExist(string type, int id, string value)
         //{
         //    try

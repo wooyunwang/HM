@@ -31,17 +31,17 @@ namespace HM.FacePlatform
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             this.HtcMain = new HM.Form_.HMTabControl();
             this.MtpUser = new System.Windows.Forms.TabPage();
             this.splitter1 = new System.Windows.Forms.Splitter();
@@ -81,15 +81,16 @@ namespace HM.FacePlatform
             this.btnWorkerSelect = new HM.Form_.HMTile();
             this.LblKey = new HM.Form_.HMLabel();
             this.PnlWorkerRight = new System.Windows.Forms.Panel();
-            this.TxtShow = new System.Windows.Forms.RichTextBox();
-            this.label3 = new HM.Form_.HMLabel();
+            this.PnlWorkerAction = new HM.Form_.HMPanel();
+            this.PnlBatchNote = new HM.Form_.HMPanel();
+            this.LblBatchNote = new System.Windows.Forms.Label();
             this.lbtnSelUrl = new System.Windows.Forms.LinkLabel();
-            this.labRegInfor = new HM.Form_.HMLabel();
+            this.btnAddWorker = new HM.Form_.HMTile();
             this.tbPicUrl = new HM.Form_.Old.TextBox.RTextBox();
+            this.pbLoadingIn = new System.Windows.Forms.PictureBox();
             this.label15 = new HM.Form_.HMLabel();
             this.btnRegS = new HM.Form_.HMTile();
-            this.pbLoadingIn = new System.Windows.Forms.PictureBox();
-            this.btnAddWorker = new HM.Form_.HMTile();
+            this.labRegInfor = new HM.Form_.HMLabel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -127,6 +128,8 @@ namespace HM.FacePlatform
             this.PnlWorkerCondition.SuspendLayout();
             this.GbxRegisteState.SuspendLayout();
             this.PnlWorkerRight.SuspendLayout();
+            this.PnlWorkerAction.SuspendLayout();
+            this.PnlBatchNote.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbLoadingIn)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,36 +177,36 @@ namespace HM.FacePlatform
             this.DgvHouse.AllowUserToAddRows = false;
             this.DgvHouse.AllowUserToDeleteRows = false;
             this.DgvHouse.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            this.DgvHouse.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
+            this.DgvHouse.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
             this.DgvHouse.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DgvHouse.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DgvHouse.BackgroundColor = System.Drawing.SystemColors.Window;
             this.DgvHouse.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DgvHouse.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.DgvHouse.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvHouse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvHouse.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.DgvHouse.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvHouse.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_house_name_,
             this.colUsersString,
             this.ColFamilyCount,
             this.ColGuestCount});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Wheat;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DgvHouse.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.Wheat;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.DarkSlateBlue;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DgvHouse.DefaultCellStyle = dataGridViewCellStyle17;
             this.DgvHouse.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DgvHouse.EnableHeadersVisualStyles = false;
             this.DgvHouse.GridColor = System.Drawing.SystemColors.GradientActiveCaption;
@@ -211,20 +214,20 @@ namespace HM.FacePlatform
             this.DgvHouse.Name = "DgvHouse";
             this.DgvHouse.ReadOnly = true;
             this.DgvHouse.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvHouse.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvHouse.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.DgvHouse.RowHeadersVisible = false;
             this.DgvHouse.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvHouse.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvHouse.RowsDefaultCellStyle = dataGridViewCellStyle19;
             this.DgvHouse.RowTemplate.Height = 50;
             this.DgvHouse.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvHouse.Size = new System.Drawing.Size(584, 378);
@@ -235,8 +238,8 @@ namespace HM.FacePlatform
             // col_house_name_
             // 
             this.col_house_name_.DataPropertyName = "house_name";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            this.col_house_name_.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            this.col_house_name_.DefaultCellStyle = dataGridViewCellStyle14;
             this.col_house_name_.FillWeight = 80F;
             this.col_house_name_.HeaderText = "房号";
             this.col_house_name_.MinimumWidth = 120;
@@ -254,8 +257,8 @@ namespace HM.FacePlatform
             // ColFamilyCount
             // 
             this.ColFamilyCount.DataPropertyName = "family_count";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColFamilyCount.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColFamilyCount.DefaultCellStyle = dataGridViewCellStyle15;
             this.ColFamilyCount.FillWeight = 20F;
             this.ColFamilyCount.HeaderText = "成员";
             this.ColFamilyCount.MinimumWidth = 80;
@@ -265,8 +268,8 @@ namespace HM.FacePlatform
             // ColGuestCount
             // 
             this.ColGuestCount.DataPropertyName = "guest_count";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColGuestCount.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColGuestCount.DefaultCellStyle = dataGridViewCellStyle16;
             this.ColGuestCount.FillWeight = 20F;
             this.ColGuestCount.HeaderText = "访客";
             this.ColGuestCount.MinimumWidth = 80;
@@ -628,55 +631,135 @@ namespace HM.FacePlatform
             // 
             // PnlWorkerRight
             // 
-            this.PnlWorkerRight.Controls.Add(this.TxtShow);
-            this.PnlWorkerRight.Controls.Add(this.label3);
-            this.PnlWorkerRight.Controls.Add(this.lbtnSelUrl);
+            this.PnlWorkerRight.Controls.Add(this.PnlWorkerAction);
             this.PnlWorkerRight.Controls.Add(this.labRegInfor);
-            this.PnlWorkerRight.Controls.Add(this.tbPicUrl);
-            this.PnlWorkerRight.Controls.Add(this.label15);
-            this.PnlWorkerRight.Controls.Add(this.btnRegS);
-            this.PnlWorkerRight.Controls.Add(this.pbLoadingIn);
-            this.PnlWorkerRight.Controls.Add(this.btnAddWorker);
             this.PnlWorkerRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.PnlWorkerRight.Location = new System.Drawing.Point(951, 3);
             this.PnlWorkerRight.Name = "PnlWorkerRight";
             this.PnlWorkerRight.Size = new System.Drawing.Size(263, 456);
             this.PnlWorkerRight.TabIndex = 66;
             // 
-            // TxtShow
+            // PnlWorkerAction
             // 
-            this.TxtShow.HideSelection = false;
-            this.TxtShow.Location = new System.Drawing.Point(16, 127);
-            this.TxtShow.Margin = new System.Windows.Forms.Padding(2);
-            this.TxtShow.Name = "TxtShow";
-            this.TxtShow.Size = new System.Drawing.Size(221, 81);
-            this.TxtShow.TabIndex = 113;
-            this.TxtShow.Text = "";
+            this.PnlWorkerAction.Controls.Add(this.PnlBatchNote);
+            this.PnlWorkerAction.Controls.Add(this.lbtnSelUrl);
+            this.PnlWorkerAction.Controls.Add(this.btnAddWorker);
+            this.PnlWorkerAction.Controls.Add(this.tbPicUrl);
+            this.PnlWorkerAction.Controls.Add(this.pbLoadingIn);
+            this.PnlWorkerAction.Controls.Add(this.label15);
+            this.PnlWorkerAction.Controls.Add(this.btnRegS);
+            this.PnlWorkerAction.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PnlWorkerAction.HorizontalScrollbarBarColor = true;
+            this.PnlWorkerAction.HorizontalScrollbarHighlightOnWheel = false;
+            this.PnlWorkerAction.HorizontalScrollbarSize = 10;
+            this.PnlWorkerAction.Location = new System.Drawing.Point(0, 0);
+            this.PnlWorkerAction.Name = "PnlWorkerAction";
+            this.PnlWorkerAction.Size = new System.Drawing.Size(263, 177);
+            this.PnlWorkerAction.TabIndex = 114;
+            this.PnlWorkerAction.VerticalScrollbarBarColor = true;
+            this.PnlWorkerAction.VerticalScrollbarHighlightOnWheel = false;
+            this.PnlWorkerAction.VerticalScrollbarSize = 10;
             // 
-            // label3
+            // PnlBatchNote
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(16, 221);
-            this.label3.MaximumSize = new System.Drawing.Size(210, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(641, 19);
-            this.label3.TabIndex = 112;
-            this.label3.Text = "只支持2 M 以内 jpg 格式照片；文件名按人员名称命名,多张照片必须加上下划线和数字，如“张三_1.jpg”";
+            this.PnlBatchNote.Controls.Add(this.LblBatchNote);
+            this.PnlBatchNote.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.PnlBatchNote.HorizontalScrollbarBarColor = true;
+            this.PnlBatchNote.HorizontalScrollbarHighlightOnWheel = false;
+            this.PnlBatchNote.HorizontalScrollbarSize = 10;
+            this.PnlBatchNote.Location = new System.Drawing.Point(0, 114);
+            this.PnlBatchNote.Name = "PnlBatchNote";
+            this.PnlBatchNote.Size = new System.Drawing.Size(263, 63);
+            this.PnlBatchNote.TabIndex = 113;
+            this.PnlBatchNote.VerticalScrollbarBarColor = true;
+            this.PnlBatchNote.VerticalScrollbarHighlightOnWheel = false;
+            this.PnlBatchNote.VerticalScrollbarSize = 10;
+            // 
+            // LblBatchNote
+            // 
+            this.LblBatchNote.BackColor = System.Drawing.Color.Transparent;
+            this.LblBatchNote.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LblBatchNote.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LblBatchNote.ForeColor = System.Drawing.Color.Black;
+            this.LblBatchNote.Location = new System.Drawing.Point(0, 0);
+            this.LblBatchNote.Name = "LblBatchNote";
+            this.LblBatchNote.Size = new System.Drawing.Size(263, 63);
+            this.LblBatchNote.TabIndex = 112;
+            this.LblBatchNote.Text = "只支持2 M 以内 jpg 格式照片；文件名按人员名称命名,多张照片必须加上下划线和数字，如“张三_1.jpg”";
             // 
             // lbtnSelUrl
             // 
             this.lbtnSelUrl.AutoSize = true;
             this.lbtnSelUrl.BackColor = System.Drawing.Color.Transparent;
-            this.lbtnSelUrl.Location = new System.Drawing.Point(222, 74);
+            this.lbtnSelUrl.Location = new System.Drawing.Point(221, 57);
             this.lbtnSelUrl.Name = "lbtnSelUrl";
             this.lbtnSelUrl.Size = new System.Drawing.Size(35, 12);
             this.lbtnSelUrl.TabIndex = 110;
             this.lbtnSelUrl.TabStop = true;
             this.lbtnSelUrl.Text = "选 择";
             this.lbtnSelUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbtnSelUrl_LinkClicked);
+            // 
+            // btnAddWorker
+            // 
+            this.btnAddWorker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.btnAddWorker.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnAddWorker.Location = new System.Drawing.Point(143, 13);
+            this.btnAddWorker.Name = "btnAddWorker";
+            this.btnAddWorker.Size = new System.Drawing.Size(112, 25);
+            this.btnAddWorker.TabIndex = 27;
+            this.btnAddWorker.Text = "新增工作人员";
+            this.btnAddWorker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnAddWorker.Click += new System.EventHandler(this.btnAddWorker_Click);
+            // 
+            // tbPicUrl
+            // 
+            this.tbPicUrl.BackColor = System.Drawing.SystemColors.Window;
+            this.tbPicUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbPicUrl.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.tbPicUrl.HotBackColor = System.Drawing.Color.White;
+            this.tbPicUrl.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            this.tbPicUrl.Location = new System.Drawing.Point(76, 51);
+            this.tbPicUrl.LostBackColor = System.Drawing.SystemColors.Window;
+            this.tbPicUrl.LostBorderColor = System.Drawing.Color.Transparent;
+            this.tbPicUrl.Name = "tbPicUrl";
+            this.tbPicUrl.ReadOnly = true;
+            this.tbPicUrl.Size = new System.Drawing.Size(141, 23);
+            this.tbPicUrl.TabIndex = 108;
+            // 
+            // pbLoadingIn
+            // 
+            this.pbLoadingIn.BackColor = System.Drawing.Color.Transparent;
+            this.pbLoadingIn.BackgroundImage = global::HM.FacePlatform.Properties.Resources.loading;
+            this.pbLoadingIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pbLoadingIn.Location = new System.Drawing.Point(113, 83);
+            this.pbLoadingIn.Name = "pbLoadingIn";
+            this.pbLoadingIn.Size = new System.Drawing.Size(24, 25);
+            this.pbLoadingIn.TabIndex = 66;
+            this.pbLoadingIn.TabStop = false;
+            this.pbLoadingIn.Visible = false;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(11, 53);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(68, 19);
+            this.label15.TabIndex = 107;
+            this.label15.Text = "照片目录:";
+            // 
+            // btnRegS
+            // 
+            this.btnRegS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
+            this.btnRegS.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnRegS.Location = new System.Drawing.Point(143, 83);
+            this.btnRegS.Name = "btnRegS";
+            this.btnRegS.Size = new System.Drawing.Size(112, 25);
+            this.btnRegS.TabIndex = 106;
+            this.btnRegS.Text = "批量注册";
+            this.btnRegS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnRegS.Click += new System.EventHandler(this.btnRegS_Click);
             // 
             // labRegInfor
             // 
@@ -688,68 +771,6 @@ namespace HM.FacePlatform
             this.labRegInfor.Name = "labRegInfor";
             this.labRegInfor.Size = new System.Drawing.Size(0, 0);
             this.labRegInfor.TabIndex = 109;
-            // 
-            // tbPicUrl
-            // 
-            this.tbPicUrl.BackColor = System.Drawing.SystemColors.Window;
-            this.tbPicUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbPicUrl.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.tbPicUrl.HotBackColor = System.Drawing.Color.White;
-            this.tbPicUrl.HotBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            this.tbPicUrl.Location = new System.Drawing.Point(78, 65);
-            this.tbPicUrl.LostBackColor = System.Drawing.SystemColors.Window;
-            this.tbPicUrl.LostBorderColor = System.Drawing.Color.Transparent;
-            this.tbPicUrl.Name = "tbPicUrl";
-            this.tbPicUrl.ReadOnly = true;
-            this.tbPicUrl.Size = new System.Drawing.Size(141, 23);
-            this.tbPicUrl.TabIndex = 108;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.ForeColor = System.Drawing.Color.Black;
-            this.label15.Location = new System.Drawing.Point(13, 67);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(68, 19);
-            this.label15.TabIndex = 107;
-            this.label15.Text = "照片目录:";
-            // 
-            // btnRegS
-            // 
-            this.btnRegS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
-            this.btnRegS.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnRegS.Location = new System.Drawing.Point(145, 97);
-            this.btnRegS.Name = "btnRegS";
-            this.btnRegS.Size = new System.Drawing.Size(112, 25);
-            this.btnRegS.TabIndex = 106;
-            this.btnRegS.Text = "批量注册";
-            this.btnRegS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnRegS.Click += new System.EventHandler(this.btnRegS_Click);
-            // 
-            // pbLoadingIn
-            // 
-            this.pbLoadingIn.BackColor = System.Drawing.Color.Transparent;
-            this.pbLoadingIn.BackgroundImage = global::HM.FacePlatform.Properties.Resources.loading;
-            this.pbLoadingIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pbLoadingIn.Location = new System.Drawing.Point(123, 259);
-            this.pbLoadingIn.Name = "pbLoadingIn";
-            this.pbLoadingIn.Size = new System.Drawing.Size(24, 25);
-            this.pbLoadingIn.TabIndex = 66;
-            this.pbLoadingIn.TabStop = false;
-            this.pbLoadingIn.Visible = false;
-            // 
-            // btnAddWorker
-            // 
-            this.btnAddWorker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(152)))), ((int)(((byte)(237)))));
-            this.btnAddWorker.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnAddWorker.Location = new System.Drawing.Point(145, 9);
-            this.btnAddWorker.Name = "btnAddWorker";
-            this.btnAddWorker.Size = new System.Drawing.Size(112, 25);
-            this.btnAddWorker.TabIndex = 27;
-            this.btnAddWorker.Text = "新增工作人员";
-            this.btnAddWorker.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnAddWorker.Click += new System.EventHandler(this.btnAddWorker_Click);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -782,8 +803,8 @@ namespace HM.FacePlatform
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.DataPropertyName = "cardCount";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridViewTextBoxColumn4.FillWeight = 74.86698F;
             this.dataGridViewTextBoxColumn4.HeaderText = "门禁卡";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
@@ -793,8 +814,8 @@ namespace HM.FacePlatform
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "familyCount";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridViewTextBoxColumn5.FillWeight = 61.44244F;
             this.dataGridViewTextBoxColumn5.HeaderText = "成员";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
@@ -804,8 +825,8 @@ namespace HM.FacePlatform
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "guestCount";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridViewTextBoxColumn6.FillWeight = 40.15079F;
             this.dataGridViewTextBoxColumn6.HeaderText = "访客";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
@@ -963,6 +984,9 @@ namespace HM.FacePlatform
             this.GbxRegisteState.PerformLayout();
             this.PnlWorkerRight.ResumeLayout(false);
             this.PnlWorkerRight.PerformLayout();
+            this.PnlWorkerAction.ResumeLayout(false);
+            this.PnlWorkerAction.PerformLayout();
+            this.PnlBatchNote.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbLoadingIn)).EndInit();
             this.ResumeLayout(false);
 
@@ -1032,13 +1056,14 @@ namespace HM.FacePlatform
         private HM.Form_.HMRadioButton radSelectYes;
         private HM.Form_.HMRadioButton radSelectAll;
         private HM.Form_.HMLabel labRegCount;
-        private HM.Form_.HMLabel label3;
-        private System.Windows.Forms.RichTextBox TxtShow;
+        private System.Windows.Forms.Label LblBatchNote;
         private System.Windows.Forms.GroupBox GbxRegisteState;
         private Form_.HMToggle TogTree;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_house_name_;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUsersString;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColFamilyCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColGuestCount;
+        private Form_.HMPanel PnlWorkerAction;
+        private Form_.HMPanel PnlBatchNote;
     }
 }

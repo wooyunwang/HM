@@ -199,8 +199,7 @@ namespace HM.FacePlatform
             {
                 _JobFrom.ShowMessage($"{ _showName }第{ job.retry_time }次注册人脸一体机【{mao.mao_name}】上【{ user.name }】的人脸注册信息【{ register.face_id }】！", MessageType.Information);
 
-                string fileName = Path.Combine(_PictureDirectory, register.photo_path);
-                ActionResult registerResult = Register(user, register, face, mao, fileName, false);
+                ActionResult registerResult = Register(user, register, face, mao, false);
 
                 if (registerResult.IsSuccess)
                 {

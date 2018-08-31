@@ -4,21 +4,19 @@ using System.IO;
 using System.Windows.Forms;
 using HM.FacePlatform.BLL;
 using HM.FacePlatform.Model;
+using HM.Form_;
 using HM.Utils_;
 
 namespace HM.FacePlatform.UserControls
 {
-    public partial class ImageDetailItem : UserControl
+    public partial class ImageDetailItem : HMUserControl
     {
-        #region 模板参数定义
-        public Action<ImageDetailItem> ActionComplete;
+        public Action<ImageDetailItem> DeleteImageAction;
 
         public Register _registerWithUser { get; set; }
 
         private Image _Photo = Properties.Resources.userPhoto;
 
-
-        #endregion
         public ImageDetailItem(Register registerWithUser)
         {
             this._registerWithUser = registerWithUser;
@@ -37,8 +35,9 @@ namespace HM.FacePlatform.UserControls
 
             if (!string.IsNullOrEmpty(_registerWithUser.photo_path)) picPhoto.ImageLocation = Path.Combine(FacePlatformCache.GetPictureDirectory(), _registerWithUser.photo_path);
 
-            this.labCreateTime.Text = _registerWithUser.create_time.ToString();
-            this.lblRegisterType.Text = EnumHelper.GetName(_registerWithUser.register_type) + " (" + EnumHelper.GetName(_registerWithUser.check_state) + ")";
+            this.LblCreateTime.Text = _registerWithUser.create_time.ToString("yyyy-MM-dd HH:mm:ss");
+            this.LblCheckType.Text = EnumHelper.GetName(_registerWithUser.check_state);
+            this.LblRegisterType.Text = EnumHelper.GetName(_registerWithUser.register_type);
         }
 
         private void ImageDetailItem_Paint(object sender, PaintEventArgs e)
@@ -48,10 +47,9 @@ namespace HM.FacePlatform.UserControls
 
         private void btnDeleteImage_Click(object sender, EventArgs e)
         {
-
-            if (ActionComplete != null)
+            if (DeleteImageAction != null)
             {
-                ActionComplete(this);
+                DeleteImageAction(this);
             }
         }
 

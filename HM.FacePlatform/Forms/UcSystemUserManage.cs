@@ -12,7 +12,7 @@ using HM.Form_;
 
 namespace HM.FacePlatform
 {
-    public partial class UcSystemUserManage : HMUserControl
+    public partial class UcSystemUserManage : UcBase
     {
         SystemUserBLL _systemUserBLL;
         DataCrypto dataCrypto;
@@ -30,9 +30,6 @@ namespace HM.FacePlatform
         private readonly string resetText = "重置";
 
         private readonly string defaultPassword = "123456";
-
-        private readonly int disableIndex = 3;
-        private readonly int resetIndex = 4;
 
         public UcSystemUserManage()
         {

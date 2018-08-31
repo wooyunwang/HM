@@ -16,7 +16,7 @@ using System.Collections;
 
 namespace HM.FacePlatform
 {
-    public partial class FrmMain : HMForm
+    public partial class FrmMain : FrmBase
     {
         /// <summary>
         /// 项目编码
@@ -48,12 +48,11 @@ namespace HM.FacePlatform
             InitializeComponent();
             //设置名称
             this.Text = FormHelper.GetAppName();
-            //设置主题
-            //this._Msm.Style = MetroFramework.MetroColorStyle.Green;
             //默认最大化
             this.WindowState = FormWindowState.Maximized;
             //选中第一项
             this.HtcMain.SelectedIndex = 0;
+            
         }
 
         private void FrmMain_Load(object sender, EventArgs e)

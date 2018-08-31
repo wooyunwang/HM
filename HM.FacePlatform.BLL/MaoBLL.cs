@@ -104,5 +104,14 @@ namespace HM.FacePlatform.BLL
         {
             return dal.GetForFaceSection(user_id);
         }
+        /// <summary>
+        /// 获得楼栋所映射的人脸一体机
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
+        public List<Mao> GetForFaceSectionByHouse(string house_code)
+        {
+            return dal.GetForFaceSectionByHouse(house_code);
+        }
     }
 }

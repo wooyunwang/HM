@@ -38,5 +38,31 @@ namespace HM.FacePlatform.DAL
 
             }
         }
+
+        /// <summary>
+        /// 获得楼栋所映射的人脸一体机
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
+        public List<Mao> GetForFaceSectionByHouse(string house_code)
+        {
+            using (FacePlatformDB db = new FacePlatformDB())
+            {
+                var query = from mb in db.MaoBuildings
+                            join q in db.UserHouses
+                            on mb.building_code equals q.House.building_code
+                            where mb.is_del != IsDelType.是
+                            && q.is_del != IsDelType.是
+                            && q.house_code == house_code
+                            select mb.Mao;
+
+#if DEBUG
+                string sql = query.ToString();
+#endif
+
+                return query.ToList();
+
+            }
+        }
     }
 }

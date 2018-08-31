@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace HM.Form_
 {
-    public class HMDataGridView : DataGridView
+    public class HMDataGridView : MetroDataGridViewBase
     {
         public HMDataGridView()
             : base()
@@ -23,10 +23,10 @@ namespace HM.Form_
 
         protected override void OnCreateControl()
         {
-            //统一设置，实际release此部分无效
 #if DEBUG
+            //统一设置，实际release此部分无效
+            this.ColumnHeadersDefaultCellStyle.BackColor = _styleManager.Style.ToColor();
             this.ColumnHeadersHeight = 36;
-            this.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 174, 219);
             this.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;//Raised
             this.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             this.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
@@ -48,6 +48,17 @@ namespace HM.Form_
 #endif
 
             base.OnCreateControl();
+        }
+
+        protected override void OnMetroStyleChanged(EventArgs e)
+        {
+            base.OnMetroStyleChanged(e);
+            UpdateBaseDataGridView();
+        }
+
+        void UpdateBaseDataGridView()
+        {
+            this.ColumnHeadersDefaultCellStyle.BackColor = _styleManager.Style.ToColor();
         }
 
         //protected override void OnRowPostPaint(DataGridViewRowPostPaintEventArgs e)

@@ -19,7 +19,7 @@ using System.Windows.Forms;
 
 namespace HM.FacePlatform
 {
-    public partial class UcDataBase : HMUserControl
+    public partial class UcDataBase : UcBase
     {
         VankeBalloonToolTip m_Tip;//提示
         MaoBuildingBLL _maoBuildingBLL;
@@ -28,6 +28,11 @@ namespace HM.FacePlatform
         MaoBLL _maoBLL;
         UserBLL _userBLL;
         Dictionary<int, FaceVersion> _dicVersionState = new Dictionary<int, FaceVersion>();
+
+        /// <summary>
+        /// 是否分块
+        /// </summary>
+        bool _IsFaceSection = Config_.GetBool("IsFaceSection") ?? false;
 
         public UcDataBase()
         {
@@ -46,6 +51,15 @@ namespace HM.FacePlatform
 
             DgvHouse.AutoGenerateColumns = false;
             DgvBuilding.AutoGenerateColumns = false;
+
+            if (!_IsFaceSection)
+            {
+                if (DgvMao.Columns.Contains("col_map_building"))
+                {
+                    DgvMao.Columns["col_map_building"].Visible = false;
+                }
+                DgvBuilding.Visible = false;
+            }
         }
 
         private void DataBase_Load(object sender, EventArgs e)
@@ -174,18 +188,21 @@ namespace HM.FacePlatform
         /// <param name="e"></param>
         private void DgvMao_SelectionChanged(object sender, EventArgs e)
         {
-            var hmDGV = sender as DataGridView;
-            if (hmDGV == null || DgvMao.SelectedRows.Count <= 0)
+            if (DgvBuilding.Visible)
             {
-                return;
-            }
-            else
-            {
-                int rowIndex = hmDGV.SelectedRows[0].Index;
-                var cells = hmDGV.Rows[rowIndex].Cells;
-                Mao mao = hmDGV.Rows[rowIndex].DataBoundItem as Mao;
-                _SelectedMaoID = mao.id;
-                BindBuilding(mao.id);
+                var hmDGV = sender as DataGridView;
+                if (hmDGV == null || DgvMao.SelectedRows.Count <= 0)
+                {
+                    return;
+                }
+                else
+                {
+                    int rowIndex = hmDGV.SelectedRows[0].Index;
+                    var cells = hmDGV.Rows[rowIndex].Cells;
+                    Mao mao = hmDGV.Rows[rowIndex].DataBoundItem as Mao;
+                    _SelectedMaoID = mao.id;
+                    BindBuilding(mao.id);
+                }
             }
         }
         /// <summary>

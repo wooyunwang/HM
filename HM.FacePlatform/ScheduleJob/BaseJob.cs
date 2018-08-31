@@ -8,8 +8,8 @@ using HM.Utils_;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HM.FacePlatform
 {
@@ -61,9 +61,16 @@ namespace HM.FacePlatform
             return Convert.ToDateTime("2000-01-01");
         }
 
-        protected ActionResult Register(User user, Register register, Face.Common_.Face face, Mao _mao, string fileName, bool isAddToMaoFailedJob = true)
+        protected ActionResult Register(User user, Register register, Face.Common_.Face face, Mao _mao, bool isAddToMaoFailedJob = true)
         {
             ActionResult actionResult = new ActionResult();
+            string fileName = Path.Combine(_PictureDirectory, register.photo_path);
+            if (!File.Exists(fileName))
+            {
+                actionResult.Add($"找不到用户【{user.name}】的人脸图片【{fileName}】");
+                return actionResult;
+            }
+
             var arChecking = face.Checking(register.face_id,
                                    RegisterType.手动注册,//客户端同步默认为手动注册
                                    Image_.ImageToBase64(fileName),
@@ -192,29 +199,33 @@ namespace HM.FacePlatform
                 string ip = itemMao.GetIP();
                 int port = itemMao.GetPort();
                 var itemFace = FaceFactory.CreateFace(ip, port, FaceVender.EyeCool);
-
-                ActionResult result = itemFace.FaceDel(user.people_id, register.face_id);
-                if (result.IsSuccess)
-                {
-                    _JobFrom.ShowMessage($"{ _showName } 从人脸一体机【{ itemMao.mao_name }】上删除人脸注册信息【{ register.face_id }】成功", MessageType.Success);
-                }
-                else
-                {
-                    _maoFailedJobBLL.AddOrUpdate(it => new
-                    {
-                        it.register_or_user_id,
-                        it.mao_id,
-                        it.job_type
-                    }, new MaoFailedJob
-                    {
-                        register_or_user_id = register.id,
-                        mao_id = itemMao.id,
-                        job_type = JobType.注册,
-                    });
-
-                    _JobFrom.ShowMessage($"{ _showName } 从人脸一体机【{ itemMao.mao_name }】上删除人脸注册信息【{ register.face_id }】失败(稍后将自动重试)：{result.ToAlertString()}", MessageType.Error);
-                }
+                Delete(user, register, itemMao, itemFace);
             });
+        }
+
+        protected void Delete(User user, Register register, Mao itemMao, Face.Common_.Face itemFace)
+        {
+            ActionResult result = itemFace.FaceDel(user.people_id, register.face_id);
+            if (result.IsSuccess)
+            {
+                _JobFrom.ShowMessage($"{ _showName } 从人脸一体机【{ itemMao.mao_name }】上删除人脸注册信息【{ register.face_id }】成功", MessageType.Success);
+            }
+            else
+            {
+                _maoFailedJobBLL.AddOrUpdate(it => new
+                {
+                    it.register_or_user_id,
+                    it.mao_id,
+                    it.job_type
+                }, new MaoFailedJob
+                {
+                    register_or_user_id = register.id,
+                    mao_id = itemMao.id,
+                    job_type = JobType.注册,
+                });
+
+                _JobFrom.ShowMessage($"{ _showName } 从人脸一体机【{ itemMao.mao_name }】上删除人脸注册信息【{ register.face_id }】失败(稍后将自动重试)：{result.ToAlertString()}", MessageType.Error);
+            }
         }
     }
 }

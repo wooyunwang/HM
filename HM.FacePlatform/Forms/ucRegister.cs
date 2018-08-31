@@ -21,7 +21,7 @@ using HM.DTO.FacePlatform;
 
 namespace HM.FacePlatform
 {
-    public partial class UcRegister : HMUserControl
+    public partial class UcRegister : UcBase
     {
         MaoBLL _maoBLL = new MaoBLL();
         MaoFailedJobBLL _maoFailedJobBLL = new MaoFailedJobBLL();
@@ -393,9 +393,9 @@ namespace HM.FacePlatform
                     }
                     else
                     {
-                        ucNoData u = new ucNoData();
-                        u.Note = "暂无用户数据";
-                        FlpUser.Controls.Add(u);
+                        ucNoData uc = new ucNoData();
+                        uc.Note = "暂无用户数据";
+                        FlpUser.Controls.Add(uc);
                     }
                 });
             }
@@ -606,231 +606,29 @@ namespace HM.FacePlatform
             DirectoryInfo dir = new DirectoryInfo(tbPicUrl.Text.Trim());
             if (dir.Exists)
             {
-                FileInfo[] fiList = dir.GetFiles();
-                if (fiList != null)
+                FileInfo[] arrFileInfo = dir.GetFiles();
+                if (arrFileInfo != null && arrFileInfo.Length > 0)
                 {
-                    if (fiList.Length > 0)
+                    FaceJobFrm faceJobFrm = new FaceJobFrm();
+                    var result = faceJobFrm.BasicCheck(house_code: _propertyHouseCode);
+                    if (result.IsSuccess)
                     {
-                        TxtShow.Text = string.Empty;//清空
-                        Thread t2 = new Thread(() =>
+                        faceJobFrm.RegisterPictures(result.Obj, arrFileInfo);
+                        var dr = faceJobFrm.ShowDialog();
+                        if (dr == DialogResult.OK)
                         {
-                            RegPicList(fiList);
-                        });
-                        t2.Start();
-                    }
-                    else
-                    {
-                        _Tip.ShowIt(tbPicUrl, "请选择包含照片文件的路径!");
-                    }
-                }
-            }
-
-        }
-
-        /// <summary>
-        /// 批量注册人脸
-        /// </summary>
-        /// <param name="fiList"></param>
-        void RegPicList(FileInfo[] files)
-        {
-            var result = _maoBLL.CheckMao();
-            if (result.IsSuccess)
-            {
-                var faces = result.Obj.Where(it => it.Value.Item1 == true)
-                    .Select(it => it.Value).Select(it => it.Item3).ToList();
-                RegPicList(faces, files);
-            }
-            else
-            {
-                var badMaos = result.Obj.Where(it => it.Value.Item1 == false)
-                    .Select(it => it.Value).Select(it => it.Item2);
-                foreach (var mao in badMaos)
-                {
-                    ShowMessage($"人脸一体机【{mao.mao_name}】IP【{mao.ip}】端口【{mao.port}】连接失败！", MessageType.Error);
-                }
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="faces"></param>
-        /// <param name="files"></param>
-        void RegPicList(List<Face.Common_.Face> faces, FileInfo[] files)
-        {
-            int defaultDays = Config_.GetInt("FaceEndTime") ?? 0;
-            DateTime endDate = Convert.ToDateTime(DateTime.Now.AddDays(defaultDays).ToString("yyyy-MM-dd 23:59:59"));
-
-            Face.Common_.Face face = faces[0];
-
-            foreach (var item in files)
-            {
-                try
-                {
-                    string fileExtension = Path.GetExtension(item.FullName);
-                    if (fileExtension.ToLower() != ".jpg")
-                    {
-                        ShowMessage("仅支持jpg格式图片", MessageType.Warning);
-                        continue; ;
-                    }
-
-                    if ((new FileInfo(item.FullName)).Length > FacePlatformCache.GetPictureMaxSize())
-                    {
-                        ShowMessage(item.FullName + "图片大小超过 " + FacePlatformCache.GetPictureMaxSize() + " M", MessageType.Warning);
-                    }
-
-                    string fileName = Path.GetFileNameWithoutExtension(item.FullName);
-                    string[] split = fileName.Split(new Char[] { '_' });
-                    if (split.Length > 0)
-                    {
-                        string name = split[0];
-                        string index = "1";
-                        if (split.Length > 1) index = split[1];
-                        var getWorkerResult = _userBLL.GetWorkerByName(name);
-                        if (getWorkerResult.IsSuccess)
-                        {
-                            var worker = getWorkerResult.Obj;
-
-                            ShowMessage("##开始注册：" + name + " " + index, MessageType.Information);
-
-                            string faceId = Key_.SequentialGuid();
-
-                            var result = face.Checking(faceId, RegisterType.手动注册, item.FullName);
-                            if (!result.IsSuccess)
-                            {
-                                ShowMessage(result.ToAlertString(), MessageType.Warning);
-                                continue;
-                            }
-
-                            if (!string.IsNullOrEmpty(result.Obj.face[0]?.face_id))
-                            {
-                                var resultMC = face.MatchCompare1(faceId, worker.user_houses.ToList()[0].User.registers.ToList()[0].face_id);
-                                if (!resultMC.IsSuccess)
-                                {
-                                    ShowMessage(result.ToAlertString(), MessageType.Warning);
-                                    continue;
-                                }
-                            }
-
-                            string savedPictureName = _registerBLL.FileSaveAs(item.FullName, FacePlatformCache.GetPictureDirectory());//保存图片到本地
-                            if (string.IsNullOrEmpty(savedPictureName))
-                            {
-                                ShowMessage("**图片保存失败，请稍后重试", MessageType.Error);
-                                continue;
-                            }
-
-                            faceId = Key_.SequentialGuid();//faceId需要重新生成
-
-                            Register _register = new Register
-                            {
-                                user_uid = worker.user_uid,
-                                face_id = faceId,
-                                photo_path = savedPictureName,
-                                register_type = RegisterType.手动注册,
-                                check_state = CheckType.审核通过,
-                            };
-                            var registerResult = _registerBLL.Add(_register);// 注册信息保存到数据库:register
-                            if (!registerResult.IsSuccess)
-                            {
-                                ShowMessage("**数据库异常，请稍后重试", MessageType.Error);
-                                continue;
-                            }
-                            else
-                            {
-                                _register = registerResult.Obj;
-                            }
-
-                            Parallel.ForEach(faces, faceItem =>
-                            {
-                                if (!faceItem.Equals(face))
-                                {
-                                    //var thisRegisterResult = face.Register(new Face.Common_.RegisterInput
-                                    //{
-                                    //    activeTime = endDate,
-                                    //    Birthday = worker.birthday,
-                                    //    CertificateType = Face.Common_.EyeCool.CertificateType.唯一标识,
-                                    //    cNO = "",
-                                    //    CRMId = worker.user_uid,
-                                    //    FaceId = faceId,
-                                    //    Name = worker.name,
-                                    //    PeopleId = worker.people_id,
-                                    //    Phone = worker.mobile,
-                                    //    ProjectCode = Program._Mainform._ProjectCode,
-                                    //    RegisterType = RegisterType.手动注册,
-                                    //    RoomNo = _propertyHouse.roomnumber,
-                                    //    Sex = worker.sex,
-                                    //    UserType = "物业管理"
-                                    //});
-
-                                    //if (!result.IsSuccess)
-                                    //{
-                                    //    ShowMessage("**" + faceItem.mao_name + "，注册失败(稍后将自动重试)：" + result.ToAlertString(), MessageType.Error);
-
-                                    //    MaoFailedJob job = new MaoFailedJob
-                                    //    {
-                                    //        register_or_user_id = _register.id,
-                                    //        mao_id = _mao.id,
-                                    //        job_type = JobType.注册,
-                                    //    };
-                                    //    _maoFailedJobBLL.AddOrUpdate(job);
-
-                                    //    continue;
-                                    //}
-                                    //else
-                                    //{
-                                    //    ShowMessage("**" + _mao.mao_name + "，注册成功", MessageType.Success);
-                                    //}
-
-                                    ////if(string.IsNullOrEmpty(user_register.face_id))
-                                    ////    user_register = _registerBLL.GetUserRegisterByUid(user_register.user_uid);
-                                }
-                            });
-                        }
-                        else
-                        {
-                            ShowMessage(getWorkerResult.ToAlertString(), MessageType.Error);
+                            tbPicUrl.Text = string.Empty;
+                            btnWorkerSelect_Click(btnWorkerSelect, null);
                         }
                     }
                 }
-                catch (System.Exception ex)
+                else
                 {
-                    HMMessageBox.Show(this, ex.Message);
-                };
+                    _Tip.ShowIt(tbPicUrl, "请选择包含照片文件的路径!");
+                }
             }
-
-            ////同步人脸数据
-            //ApiGetRegisterInVO getRegIn = new ApiGetRegisterInVO();
-            //getRegIn.createTime = DateTime.Now.AddMinutes(-3).ToString("yyyy-MM-dd HH:mm:ss");
-            //getRegIn.offTime = DateTime.Now.AddMinutes(3).ToString("yyyy-MM-dd HH:mm:ss");
-            //getRegIn.pid = MainForm.project_code;
-            //getRegIn.token = Guid.NewGuid().ToString();
-            //getRegIn.pageNumber = 1;
-            //getRegIn.pageSize = 50;
-
-            //faceBLL.LoadFaceRegData(getRegIn, MainForm.PhotoPath);//3
-
-            // 更新窗体数据
-            BindWorkers();
-            RegCount();
-
-            tbPicUrl.Text = string.Empty;
         }
         #endregion
-        public delegate void DGShowMsg(string x, MessageType type);
-        public void ShowMessage(string message, MessageType type)
-        {
-            //tbShow.ForeColor = MessageColor.GetColorByMessgaeType(type);
-
-            if (TxtShow.InvokeRequired)
-            {
-                DGShowMsg msgDelegate = ShowMessage;
-                Invoke(msgDelegate, new object[] { message, type });
-            }
-            else
-            {
-                //tbShow.AppendText(msg + "\r\n");
-                TxtShow.AppendText(message + "\r\n", MessageColor.GetColorByMessgaeType(type));
-            }
-        }
 
         void radSelectAll_CheckedChanged(object sender, EventArgs e)
         {

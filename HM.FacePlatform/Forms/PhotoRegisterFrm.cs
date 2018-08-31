@@ -19,7 +19,7 @@ using HM.FacePlatform.VO;
 namespace HM.FacePlatform.Forms
 {
     public delegate void ThreadDelegate();
-    public partial class PhotoRegisterFrm : HMForm
+    public partial class PhotoRegisterFrm : FrmBase
     {
         MaoFailedJobBLL _maoFailedJobBLL;
         RegisterBLL _registerBLL;
@@ -137,34 +137,38 @@ namespace HM.FacePlatform.Forms
                     {
                         return;
                     }
-
-                    Task.Run(() =>
+                    FaceJobFrm faceJobFrm = new FaceJobFrm();
+                    var result = faceJobFrm.BasicCheck(user_uid: this._user.user_uid);
+                    if (result.IsSuccess)
                     {
-                        Mao mao = FacePlatformCache.GetALL<Mao>().FirstOrDefault();
-                        foreach (var imagePath in lstCompressImage)
+                        Task.Run(() =>
                         {
-                            string faceId = Key_.SequentialGuid();
-                            Face.Common_.Face face = Face.Common_.FaceFactory.CreateFace(mao.GetIP(), mao.GetPort(), Face.Common_.FaceVender.EyeCool);
-                            ActionResult result = face.Checking2(faceId, RegisterType.手动注册, imagePath, "客户端选择图片");
-                            if (!result.IsSuccess)
+                            Mao mao = FacePlatformCache.GetALL<Mao>().FirstOrDefault();
+                            foreach (var imagePath in lstCompressImage)
                             {
-                                HMMessageBox.Show(this, result.ToAlertString());
-                                continue;
-                            }
-                            else
-                            {
-                                AddPhotoToList(new PicUrlAndFaceIDVO
+                                string faceId = Key_.SequentialGuid();
+                                Face.Common_.Face face = Face.Common_.FaceFactory.CreateFace(mao.GetIP(), mao.GetPort(), Face.Common_.FaceVender.EyeCool);
+                                ActionResult checkResult = face.Checking2(faceId, RegisterType.手动注册, imagePath, "客户端选择图片");
+                                if (!checkResult.IsSuccess)
                                 {
-                                    face_id = faceId,
-                                    image_path = imagePath,
-                                    mao_id = mao.id
-                                });
+                                    HMMessageBox.Show(this, checkResult.ToAlertString());
+                                    continue;
+                                }
+                                else
+                                {
+                                    AddPhotoToDic(new PicUrlAndFaceIDVO
+                                    {
+                                        face_id = faceId,
+                                        image_path = imagePath,
+                                        mao_id = mao.id
+                                    });
+                                }
                             }
-                        }
-                    }).ContinueWith((task) =>
-                    {
+                        }).ContinueWith((task) =>
+                        {
 
-                    });
+                        });
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -173,8 +177,11 @@ namespace HM.FacePlatform.Forms
                 }
             }
         }
-
-        private void AddPhotoToList(PicUrlAndFaceIDVO regPicUrlAndFaceID)//a2
+        /// <summary>
+        /// 将图片添加到字典
+        /// </summary>
+        /// <param name="regPicUrlAndFaceID"></param>
+        private void AddPhotoToDic(PicUrlAndFaceIDVO regPicUrlAndFaceID)
         {
             if (!File.Exists(regPicUrlAndFaceID.image_path))
             {
@@ -244,7 +251,7 @@ namespace HM.FacePlatform.Forms
             ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck(user_uid: _ucFamily._user.user_uid);
             if (checkResult.IsSuccess)
             {
-                faceJobFrm.Register(checkResult.Obj, _ucFamily, _dicPhoto, endDate, (lstPhotoUrlForRemove) =>
+                faceJobFrm.Register(checkResult.Obj, _ucFamily._user, _dicPhoto.Values.ToList(), endDate, (lstPhotoUrlForRemove) =>
                  {
                      foreach (string url in lstPhotoUrlForRemove)
                      {
@@ -269,15 +276,29 @@ namespace HM.FacePlatform.Forms
         /// </summary>
         private void FillRegistedList()
         {
+            ActionResult<List<Register>> result = _registerBLL.GetWithUser(_user.user_uid);
+
             this.UIThread(() =>
             {
-                pnRegisted.Controls.Clear();
-                IList<Register> registers = _registerBLL.Get(it => it.user_uid == _user.user_uid && it.is_del != IsDelType.是);
-                foreach (Register _register in registers)
+                FlpRegisted.Controls.Clear();
+                if (result.IsSuccess)
                 {
-                    ImageItem imageItem = new ImageItem(_register);
-                    pnRegisted.Controls.Add(imageItem);
-                    imageItem.DeleteImageAction = new Action<ImageItem>(DeleteRegistedImage);
+                    FlpRegisted.SuspendLayout();
+                    foreach (Register registerWithUser in result.Obj)
+                    {
+                        ImageItem imageItem = new ImageItem(registerWithUser);
+                        FlpRegisted.Controls.Add(imageItem);
+                        if (imageItem.isShowDelete)
+                        {
+                            imageItem.DeleteImageAction = new Action<ImageItem>(DeleteRegistedImage);
+                        }
+                    }
+                    FlpRegisted.ResumeLayout();
+                    FlpRegisted.PerformLayout();
+                }
+                else
+                {
+                    HMMessageBox.Show(this, result.ToAlertString());
                 }
             });
         }
@@ -294,7 +315,7 @@ namespace HM.FacePlatform.Forms
             ActionResult<MaoCheckResult> checkResult = faceJobFrm.BasicCheck(true);
             if (checkResult.IsSuccess)
             {
-                faceJobFrm.DeleteRegistedImage(checkResult.Obj, _user, imageItem, () =>
+                faceJobFrm.DeleteRegistedImage(checkResult.Obj, _user, imageItem._register, () =>
                 {
                     FillRegistedList();
                     _ucFamily.Init();
@@ -328,7 +349,7 @@ namespace HM.FacePlatform.Forms
                 {
                     image_path = filePath,
                 };
-                AddPhotoToList(picFace);
+                AddPhotoToDic(picFace);
             }
         }
         #endregion

@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             this.picPhoto = new System.Windows.Forms.PictureBox();
-            this.lblRegisterType = new System.Windows.Forms.Label();
-            this.labCreateTime = new System.Windows.Forms.Label();
+            this.LblRegisterType = new System.Windows.Forms.Label();
+            this.LblCreateTime = new System.Windows.Forms.Label();
             this.btnDeleteImage = new System.Windows.Forms.Button();
+            this.LblCheckType = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picPhoto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,33 +41,34 @@
             this.picPhoto.BackColor = System.Drawing.Color.White;
             this.picPhoto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPhoto.InitialImage = global::HM.FacePlatform.Properties.Resources.userPhoto;
-            this.picPhoto.Location = new System.Drawing.Point(45, 4);
-            this.picPhoto.Margin = new System.Windows.Forms.Padding(4);
+            this.picPhoto.Location = new System.Drawing.Point(37, 6);
             this.picPhoto.Name = "picPhoto";
-            this.picPhoto.Size = new System.Drawing.Size(206, 171);
+            this.picPhoto.Size = new System.Drawing.Size(111, 114);
             this.picPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picPhoto.TabIndex = 12;
             this.picPhoto.TabStop = false;
             // 
-            // lblRegisterType
+            // LblRegisterType
             // 
-            this.lblRegisterType.AutoSize = true;
-            this.lblRegisterType.Location = new System.Drawing.Point(53, 190);
-            this.lblRegisterType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblRegisterType.Name = "lblRegisterType";
-            this.lblRegisterType.Size = new System.Drawing.Size(80, 18);
-            this.lblRegisterType.TabIndex = 13;
-            this.lblRegisterType.Text = "注册类型";
+            this.LblRegisterType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblRegisterType.AutoSize = true;
+            this.LblRegisterType.Location = new System.Drawing.Point(23, 127);
+            this.LblRegisterType.Name = "LblRegisterType";
+            this.LblRegisterType.Size = new System.Drawing.Size(53, 12);
+            this.LblRegisterType.TabIndex = 13;
+            this.LblRegisterType.Text = "注册类型";
             // 
-            // labCreateTime
+            // LblCreateTime
             // 
-            this.labCreateTime.AutoSize = true;
-            this.labCreateTime.Location = new System.Drawing.Point(54, 224);
-            this.labCreateTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labCreateTime.Name = "labCreateTime";
-            this.labCreateTime.Size = new System.Drawing.Size(80, 18);
-            this.labCreateTime.TabIndex = 14;
-            this.labCreateTime.Text = "注册时间";
+            this.LblCreateTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblCreateTime.AutoSize = true;
+            this.LblCreateTime.Location = new System.Drawing.Point(23, 169);
+            this.LblCreateTime.Name = "LblCreateTime";
+            this.LblCreateTime.Size = new System.Drawing.Size(53, 12);
+            this.LblCreateTime.TabIndex = 14;
+            this.LblCreateTime.Text = "注册时间";
             // 
             // btnDeleteImage
             // 
@@ -74,24 +76,39 @@
             this.btnDeleteImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnDeleteImage.FlatAppearance.BorderSize = 0;
             this.btnDeleteImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteImage.Location = new System.Drawing.Point(220, 8);
+            this.btnDeleteImage.Location = new System.Drawing.Point(127, 9);
+            this.btnDeleteImage.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeleteImage.Name = "btnDeleteImage";
-            this.btnDeleteImage.Size = new System.Drawing.Size(25, 25);
+            this.btnDeleteImage.Size = new System.Drawing.Size(17, 17);
             this.btnDeleteImage.TabIndex = 15;
             this.btnDeleteImage.UseVisualStyleBackColor = true;
             this.btnDeleteImage.Click += new System.EventHandler(this.btnDeleteImage_Click);
             // 
+            // LblCheckType
+            // 
+            this.LblCheckType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblCheckType.AutoSize = true;
+            this.LblCheckType.Location = new System.Drawing.Point(23, 147);
+            this.LblCheckType.Name = "LblCheckType";
+            this.LblCheckType.Size = new System.Drawing.Size(53, 12);
+            this.LblCheckType.TabIndex = 16;
+            this.LblCheckType.Text = "审核状态";
+            // 
             // ImageDetailItem
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.BorderStyle = MetroFramework.Drawing.MetroBorderStyle.FixedSingle;
+            this.Controls.Add(this.LblCheckType);
             this.Controls.Add(this.btnDeleteImage);
-            this.Controls.Add(this.labCreateTime);
-            this.Controls.Add(this.lblRegisterType);
+            this.Controls.Add(this.LblCreateTime);
+            this.Controls.Add(this.LblRegisterType);
             this.Controls.Add(this.picPhoto);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ImageDetailItem";
-            this.Size = new System.Drawing.Size(292, 258);
+            this.Padding = new System.Windows.Forms.Padding(3);
+            this.Size = new System.Drawing.Size(182, 185);
             this.Load += new System.EventHandler(this.ImageDetailItem_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ImageDetailItem_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.picPhoto)).EndInit();
@@ -103,8 +120,9 @@
         #endregion
 
         public System.Windows.Forms.PictureBox picPhoto;
-        private System.Windows.Forms.Label lblRegisterType;
-        private System.Windows.Forms.Label labCreateTime;
+        private System.Windows.Forms.Label LblRegisterType;
+        private System.Windows.Forms.Label LblCreateTime;
         private System.Windows.Forms.Button btnDeleteImage;
+        private System.Windows.Forms.Label LblCheckType;
     }
 }

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace HM.FacePlatform.Forms
 {
-    public partial class AddOrUpdateSystemUser : HMForm
+    public partial class AddOrUpdateSystemUser : FrmBase
     {
         SystemUserBLL _systemUserBLL;
         VankeBalloonToolTip toolTip;

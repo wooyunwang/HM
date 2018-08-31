@@ -137,7 +137,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::HM.FacePlatform.Properties.Resources.原始图;
+            this.BackgroundImage = global::HM.FacePlatform.Properties.Resources.Banner_Default;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(523, 304);
             this.Controls.Add(this.btnExit);

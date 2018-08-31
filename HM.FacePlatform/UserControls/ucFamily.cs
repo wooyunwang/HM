@@ -14,7 +14,7 @@ using HM.Form_;
 
 namespace HM.FacePlatform.UserControls
 {
-    public partial class UcFamily : UserControl
+    public partial class UcFamily : HMUserControl
     {
         public Action<UcFamily> UpdateAction;
         public Action DeleteAction;

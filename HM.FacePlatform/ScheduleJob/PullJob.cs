@@ -269,8 +269,6 @@ namespace HM.FacePlatform
                         lstMao = _maos.Where(it => it.id != excluedMao.id);
                     }
 
-                    fileName = Path.Combine(_PictureDirectory, fileName);
-
                     Parallel.ForEach(lstMao, new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 }, (itemMao) =>
                     {
                         if (itemMao.id == excluedMao.id) return;
@@ -279,7 +277,7 @@ namespace HM.FacePlatform
                         var itemFace = FaceFactory.CreateFace(ip, port, FaceVender.EyeCool);
                         if (itemFace.VisualTelnet(ip, port))
                         {
-                            Register(user, register, itemFace, itemMao, fileName);
+                            Register(user, register, itemFace, itemMao);
                         }
                         else
                         {
@@ -325,8 +323,6 @@ namespace HM.FacePlatform
                 lstMao = _maos.Where(it => it.id != excluedMao.id);
             }
 
-            string fileName = Path.Combine(_PictureDirectory, register.photo_path);
-
             Parallel.ForEach(lstMao, new ParallelOptions { MaxDegreeOfParallelism = Config_.GetInt("MaxDegreeOfParallelism") ?? 2 }, (itemMao) =>
             {
                 if (itemMao.id == excluedMao.id) return;
@@ -335,7 +331,7 @@ namespace HM.FacePlatform
                 var itemFace = FaceFactory.CreateFace(ip, port, FaceVender.EyeCool);
                 if (itemFace.VisualTelnet(ip, port))
                 {
-                    Register(user, register, itemFace, itemMao, fileName);
+                    Register(user, register, itemFace, itemMao);
                 }
                 else
                 {

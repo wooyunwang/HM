@@ -4,6 +4,7 @@ using HM.Face.Common_;
 using HM.Face.Common_.EyeCool;
 using HM.FacePlatform.Model;
 using HM.Form_;
+using MetroFramework;
 using Microsoft.Owin.Hosting;
 using System;
 using System.Threading;
@@ -19,7 +20,7 @@ namespace HM.FacePlatform
         /// 已登陆账号信息
         /// </summary>
         public static SystemUser _Account = null;
-
+        public static MetroColorStyle _Style = MetroColorStyle.Default;
         /// <summary>
         /// 是否管理员
         /// </summary>
@@ -39,6 +40,8 @@ namespace HM.FacePlatform
         [STAThread]
         static void Main()
         {
+            _Style = (MetroColorStyle)new Random().Next(0, 13);
+
             FormHelper.SetAccess("Users", Application.StartupPath);
 
             //日志配置

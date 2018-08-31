@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace HM.FacePlatform
 {
-    public partial class UcCheck : HMUserControl
+    public partial class UcCheck : UcBase
     {
         /// <summary>
         /// 提示控件

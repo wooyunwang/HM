@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
 using HM.Enum_.FacePlatform;
 using HM.FacePlatform.BLL;
 using HM.FacePlatform.Model;
+using HM.Form_;
 
 namespace HM.FacePlatform.UserControls
 {
-    public partial class ucNoCheck : UserControl
+    public partial class ucNoCheck : HMUserControl
     {
         public Action<ucNoCheck> CheckAction;
 

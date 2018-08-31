@@ -18,7 +18,7 @@ using System.Collections.Generic;
 
 namespace HM.FacePlatform.BasicData
 {
-    public partial class FrmLoadBaseData : HMForm
+    public partial class FrmLoadBaseData : FrmBase
     {
         private BaseDataTypeE baseDataType;
         private UcDataBase _ucDataBase;

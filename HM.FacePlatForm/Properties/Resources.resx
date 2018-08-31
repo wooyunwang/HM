@@ -208,9 +208,6 @@
   <data name="_lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="原始图" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\原始图.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="基础数据" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\基础数据.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -243,5 +240,44 @@
   </data>
   <data name="统计_hover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\统计 hover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Black.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Blue.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Brown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Brown.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Default.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Green.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Lime" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Lime.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Magenta" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Magenta.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Orange.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Pink" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Pink.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Purple" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Purple.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Red.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Teal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Teal.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Banner_Yellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Banner_Yellow.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
